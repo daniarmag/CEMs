@@ -12,7 +12,7 @@ public class MySQLConnection
 	{
 		try 
 		{
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             System.out.println("Driver definition succeed");
         } catch (Exception ex) {
         	/* handle the error*/
@@ -24,11 +24,12 @@ public class MySQLConnection
             conn = DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","Daniel123456!");
             System.out.println("SQL connection succeed");
 
-     	} catch (SQLException ex) 
-     	    {/* handle any errors*/
-            System.out.println("SQLException: " + ex.getMessage());
+     	} 
+        catch (SQLException ex) 
+     	{/* handle any errors*/
+         	System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-            }
+        }
    	}
 }
