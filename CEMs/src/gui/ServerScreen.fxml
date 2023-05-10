@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerScreenController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ServerScreenController">
    <children>
       <Pane prefHeight="455.0" prefWidth="750.0" styleClass="background">
          <children>
@@ -21,7 +21,7 @@
                   <VBox prefHeight="100.0" prefWidth="250.0" />
                   <VBox prefHeight="96.0" prefWidth="250.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Server " textAlignment="CENTER" wrappingWidth="287.13671875" text.alignment="CENTER">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Server " textAlignment="CENTER" wrappingWidth="287.13671875">
                            <font>
                               <Font name="Times New Roman" size="55.0" />
                            </font>
@@ -127,4 +127,4 @@
          </children>
       </Pane>
    </children>
-</fx:root>
+</AnchorPane>
