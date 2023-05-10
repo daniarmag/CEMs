@@ -5,6 +5,7 @@ public class Test {
 	{
 		System.out.println("test");
 		System.out.println("check");
+		System.out.println("check 2");
 	}
 
 }
