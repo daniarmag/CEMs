@@ -21,7 +21,7 @@ public class MySQLConnection
         
         try 
         {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/cems?serverTimezone=IST","root","Daniel123456!");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/cems?serverTimezone=IST","root","Daniel123456!");
             System.out.println("SQL connection succeed");
 
      	} 
