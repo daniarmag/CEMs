@@ -90,7 +90,8 @@ public class ChatClient extends AbstractClient
 		try 
 		{
 			closeConnection();
-		} catch (IOException e){}
+		} 
+		catch (IOException e){}
 	}
 	
 }

@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import ocsf.server.*;
 
 public class EchoServer extends AbstractServer 
@@ -18,6 +21,8 @@ public class EchoServer extends AbstractServer
 	final public static int DEFAULT_PORT = 5555;
 	private static String username;
 	private static String password;
+    public static HashMap<ConnectionToClient, String> clientList = new HashMap<>();
+
 
 	// Constructors ****************************************************
 
@@ -44,6 +49,25 @@ public class EchoServer extends AbstractServer
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) 
 	{
 		System.out.println("Message received: " + msg + " from " + client);
+		String clientMsg = (String)msg;
+		try
+		{
+			if (clientMsg.equals("connected"))
+			{
+				clientList.put(client, "Connected");
+				client.sendToClient("Connected");
+			}
+			else if (clientMsg.equals("disconnected"))
+			{
+				clientList.put(client, "Disconnected");
+				client.sendToClient("Disonnected");
+			}
+			client.sendToClient("Response from server");
+		}
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
 	}
 
 	/**

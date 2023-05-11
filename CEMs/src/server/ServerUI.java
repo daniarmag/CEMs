@@ -4,11 +4,8 @@ import java.io.IOException;
 
 import gui.ServerScreenController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import server.EchoServer;
+
 
 public class ServerUI extends Application {
 	final public static int DEFAULT_PORT = 5555;

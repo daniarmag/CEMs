@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -21,8 +22,6 @@ import server.ServerUI;
 
 public class ServerScreenController implements Initializable 
 {
-	private static double xOffset = 0;
-    private static double yOffset = 0;
 	String dbName = "jdbc:mysql://localhost/cems?serverTimezone=IST",
 		   port = Integer.toString(ServerUI.DEFAULT_PORT),
 		   username, password;
@@ -36,6 +35,9 @@ public class ServerScreenController implements Initializable
 	@FXML
 	private Button exitBtn;
 
+    @FXML
+    private TableView<?> connectedTable;
+    
 	@FXML
 	private TextField textAreaPassword;
 
@@ -53,23 +55,11 @@ public class ServerScreenController implements Initializable
 
 	public void start(Stage primaryStage) throws Exception
 	{
-		//Remove default windows buttons.
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/gui/ServerScreen.fxml"));
 		Parent root = loader.load();
-			
-		//Next two lambda expressions are to allow window dragging with undecorated style mode.
-		root.setOnMousePressed(event -> {
-		    xOffset = primaryStage.getX() - event.getScreenX();
-		    yOffset = primaryStage.getY() - event.getScreenY();
-		});
-
-		root.setOnMouseDragged(event -> {
-		    primaryStage.setX(event.getScreenX() + xOffset);
-		    primaryStage.setY(event.getScreenY() + yOffset);
-		});
-		
+		WindowUtils.enableWindowDraggable(root, primaryStage);
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
@@ -82,9 +72,11 @@ public class ServerScreenController implements Initializable
 		try 
 		{
 			txtAreaIP.setText(InetAddress.getLocalHost().getHostAddress());
-		} catch (UnknownHostException e) {}
+		}
+		catch (UnknownHostException e) {}
 		txtAreaDbName.setText(dbName);
 		txtAreaPort.setText(port);
+		txtAreaUsername.setText("root");
 	}
 	
 	@FXML

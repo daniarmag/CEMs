@@ -12,45 +12,36 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="gui.LoginScreenController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HostSelectionScreenController">
    <children>
-      <Pane prefHeight="369.0" prefWidth="300.0">
+      <Pane prefHeight="281.0" prefWidth="390.0">
          <children>
-            <Text layoutX="21.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="122.13671875">
+            <Text layoutX="57.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address" wrappingWidth="122.13671875">
                <font>
                   <Font size="16.5" />
                </font>
             </Text>
-            <TextField id="txtLoginUsername" fx:id="txtLoginUsername" layoutX="161.0" layoutY="162.0" prefHeight="25.0" prefWidth="122.0" />
-            <Button id="loginBtn" fx:id="loginBtn" layoutX="110.0" layoutY="281.0" mnemonicParsing="false" onAction="#connect" prefHeight="40.0" prefWidth="81.0" style="-fx-background-radius: 10px;" text="Login" />
-            <Text layoutX="21.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="122.13671875">
-               <font>
-                  <Font size="16.5" />
-               </font>
-            </Text>
-            <TextField id="txtLoginPassword" fx:id="txtLoginPassword" layoutX="161.0" layoutY="211.0" prefHeight="25.0" prefWidth="122.0" />
-            <Text layoutX="36.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter username and password">
-               <font>
-                  <Font name="Times New Roman" size="19.0" />
-               </font>
-            </Text>
-            <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="85.0" prefWidth="300.0" style="-fx-background-color: #6140ef;">
+            <TextField id="txtServerIP" fx:id="txtServerIP" layoutX="195.0" layoutY="128.0" prefHeight="25.0" prefWidth="130.0" />
+            <Button id="connectToServerBtn" fx:id="connectToServerBtn" layoutX="128.0" layoutY="206.0" mnemonicParsing="false" onAction="#connect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Connect" />
+            <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="85.0" prefWidth="390.0" style="-fx-background-color: #6140ef;">
                <children>
-                  <VBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
-                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
+                  <VBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="50.0" />
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="290.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="206.13671875">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Connect to Server" textAlignment="CENTER" wrappingWidth="287.13671875">
                            <font>
-                              <Font name="Times New Roman" size="55.0" />
+                              <Font name="Times New Roman" size="36.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="30.0" top="10.0" />
                            </VBox.margin>
                         </Text>
                      </children>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
                   </VBox>
-                  <VBox alignment="TOP_RIGHT" maxWidth="-Infinity" prefHeight="85.0" prefWidth="29.0">
+                  <VBox alignment="TOP_RIGHT" maxWidth="-Infinity" prefHeight="85.0" prefWidth="50.0">
                      <children>
                         <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #6140ef;" textAlignment="CENTER">
                            <VBox.margin>
@@ -65,6 +56,9 @@
                            </graphic>
                         </Button>
                      </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>

@@ -95,7 +95,7 @@
                   <Insets left="20.0" top="30.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_RIGHT" layoutX="171.0" layoutY="96.0" prefHeight="223.0" prefWidth="113.0">
+            <VBox alignment="TOP_RIGHT" layoutX="157.0" layoutY="96.0" prefHeight="223.0" prefWidth="143.0">
                <children>
                   <TextField id="txtAreaIP" fx:id="txtAreaIP">
                      <VBox.margin>
@@ -117,14 +117,14 @@
                         <Insets top="17.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField id="textAreaPassword" fx:id="textAreaPassword">
+                  <TextField id="textAreaPassword" fx:id="textAreaPassword" prefHeight="25.0" prefWidth="129.0">
                      <VBox.margin>
                         <Insets top="17.0" />
                      </VBox.margin>
                   </TextField>
                </children>
             </VBox>
-            <TableView layoutX="375.0" layoutY="126.0" prefHeight="193.0" prefWidth="355.0">
+            <TableView id="connectedTable" fx:id="connectedTable" layoutX="375.0" layoutY="126.0" prefHeight="193.0" prefWidth="355.0">
               <columns>
                 <TableColumn prefWidth="109.0" text="IP" />
                 <TableColumn prefWidth="127.0" text="Host" />
