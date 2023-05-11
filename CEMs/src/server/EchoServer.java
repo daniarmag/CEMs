@@ -16,6 +16,8 @@ public class EchoServer extends AbstractServer
 	 * The default port to listen on.
 	 */
 	final public static int DEFAULT_PORT = 5555;
+	private static String username;
+	private static String password;
 
 	// Constructors ****************************************************
 
@@ -24,9 +26,11 @@ public class EchoServer extends AbstractServer
 	 *
 	 * @param port The port number to connect on.
 	 */
-	public EchoServer(int port) 
+	public EchoServer(int port, String username, String password) 
 	{
 		super(port);
+		this.password = password;
+		this.username = username;
 	}
 
 	// Instance methods ************************************************
@@ -49,7 +53,14 @@ public class EchoServer extends AbstractServer
 	protected void serverStarted() 
 	{
 		System.out.println("Server listening for connections on port " + getPort());
-		MySQLConnection.connectToDB();
+		try
+		{
+			MySQLConnection.connectToDB(username, password);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Connection failed!");
+		}
 	}
 
 	/**
@@ -81,7 +92,7 @@ public class EchoServer extends AbstractServer
 		{
 			port = DEFAULT_PORT; // Set port to 5555
 		}
-		EchoServer sv = new EchoServer(port);
+		EchoServer sv = new EchoServer(port, username, password);
 		try
 		{
 			sv.listen(); // Start listening for connections

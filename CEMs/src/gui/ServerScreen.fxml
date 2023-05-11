@@ -5,6 +5,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -16,7 +18,7 @@
    <children>
       <Pane prefHeight="455.0" prefWidth="750.0" styleClass="background">
          <children>
-            <HBox alignment="TOP_CENTER" layoutY="-1.0" prefHeight="97.0" prefWidth="750.0" style="-fx-background-color: #6140ef;">
+            <HBox alignment="TOP_CENTER" layoutY="-1.0" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #6140ef;">
                <children>
                   <VBox prefHeight="100.0" prefWidth="250.0" />
                   <VBox prefHeight="96.0" prefWidth="250.0">
@@ -33,10 +35,17 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="250.0">
                      <children>
-                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="45.0" prefWidth="47.0" text="X">
+                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #6140ef;" textAlignment="CENTER">
                            <VBox.margin>
-                              <Insets right="20.0" top="15.0" />
+                              <Insets right="25.0" top="25.0" />
                            </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/exitBtn.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                   </VBox>
@@ -122,8 +131,8 @@
                   <TableColumn prefWidth="126.0" text="Status" />
               </columns>
             </TableView>
-            <Button id="connectBtn" fx:id="connectBtn" layoutX="204.0" layoutY="380.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="103.0" text="Connect" />
-            <Button id="disconnectBtn" fx:id="disconnectBtn" layoutX="429.0" layoutY="380.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="103.0" text="Disconnect" />
+            <Button id="connectBtn" fx:id="connectBtn" layoutX="204.0" layoutY="380.0" mnemonicParsing="false" onAction="#connect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Connect" />
+            <Button id="disconnectBtn" fx:id="disconnectBtn" layoutX="429.0" layoutY="380.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Disconnect" />
          </children>
       </Pane>
    </children>

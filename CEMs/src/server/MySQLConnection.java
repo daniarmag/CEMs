@@ -8,7 +8,7 @@ public class MySQLConnection
 {
 	static Connection conn;
 	
-	public static void connectToDB() 
+	public static void connectToDB(String username, String password) 
 	{
 		try 
 		{
@@ -21,12 +21,13 @@ public class MySQLConnection
         
         try 
         {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/cems?serverTimezone=IST","root","Daniel123456!");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/cems?serverTimezone=IST", username, password);
             System.out.println("SQL connection succeed");
 
      	} 
         catch (SQLException ex) 
      	{/* handle any errors*/
+        
          	System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());

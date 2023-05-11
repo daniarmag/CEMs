@@ -1,5 +1,7 @@
 package server;
 
+import java.io.IOException;
+
 import gui.ServerScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,40 +12,49 @@ import server.EchoServer;
 
 public class ServerUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
+	static EchoServer es;
 
-	public static void main(String args[]) throws Exception
-	{
+	public static void main(String args[]) throws Exception {
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception 
-	{
+	public void start(Stage primaryStage) throws Exception {
 		ServerScreenController serverScreen = new ServerScreenController();
 		serverScreen.start(primaryStage);
 	}
 
-	public static void runServer(String p) 
-	{
+	public static void runServer(String p, String username, String password) {
 		int port = 0; // Port to listen on
-		try
-		{
+		try {
 			port = Integer.parseInt(p); // Set port to 5555
 
-		} catch (Throwable t) 
-		{
+		} catch (Throwable t) {
 			System.out.println("ERROR - Could not connect!");
 		}
 
-		EchoServer sv = new EchoServer(port);
+		es = new EchoServer(port, username, password);
 
-		try 
-		{
-			sv.listen(); // Start listening for connections
-		} catch (Exception ex)
-		{
+		try {
+			es.listen(); // Start listening for connections
+		} catch (Exception ex) {
 			System.out.println("ERROR - Could not listen for clients!");
 		}
 	}
-
+	
+	public static boolean closeServer() 
+	{
+		if (es != null) 
+		{
+			try 
+			{
+				es.close();
+			} catch (IOException e) 
+			{
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
 }
