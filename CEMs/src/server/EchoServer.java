@@ -62,6 +62,10 @@ public class EchoServer extends AbstractServer
 				clientList.put(client, "Disconnected");
 				client.sendToClient("Disonnected");
 			}
+			else if (clientMsg.equals("Update Question"))
+			{
+				//Implement logic later
+			}
 			client.sendToClient("Response from server");
 		}
         catch (IOException e) 

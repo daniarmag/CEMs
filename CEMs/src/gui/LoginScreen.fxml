@@ -12,8 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="gui.LoginScreenController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoginScreenController">
    <children>
       <Pane prefHeight="369.0" prefWidth="300.0">
          <children>
@@ -23,7 +22,7 @@
                </font>
             </Text>
             <TextField id="txtLoginUsername" fx:id="txtLoginUsername" layoutX="161.0" layoutY="162.0" prefHeight="25.0" prefWidth="122.0" />
-            <Button id="loginBtn" fx:id="loginBtn" layoutX="110.0" layoutY="281.0" mnemonicParsing="false" onAction="#connect" prefHeight="40.0" prefWidth="81.0" style="-fx-background-radius: 10px;" text="Login" />
+            <Button id="loginBtn" fx:id="loginBtn" layoutX="110.0" layoutY="281.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="81.0" style="-fx-background-radius: 10px;" text="Login" />
             <Text layoutX="21.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="122.13671875">
                <font>
                   <Font size="16.5" />
@@ -42,10 +41,10 @@
                      <children>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="206.13671875">
                            <font>
-                              <Font name="Times New Roman" size="55.0" />
+                              <Font name="Times New Roman" size="45.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="30.0" top="10.0" />
+                              <Insets left="30.0" top="17.0" />
                            </VBox.margin>
                         </Text>
                      </children>

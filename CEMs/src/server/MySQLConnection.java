@@ -3,6 +3,7 @@ package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class MySQLConnection 
 {
@@ -33,4 +34,16 @@ public class MySQLConnection
             System.out.println("VendorError: " + ex.getErrorCode());
         }
    	}
+	
+	public static void getTableQuestion(Connection con1)
+	{
+		Statement stmt;
+		try {
+			stmt = con1.createStatement();
+			stmt.executeUpdate("create table courses(num int, name VARCHAR(40), semestr VARCHAR(10));");
+			stmt.executeUpdate("load data local infile \"courses.txt\" into table courses");
+	 		
+		} catch (SQLException e) {	e.printStackTrace();}
+		 		
+	}
 }
