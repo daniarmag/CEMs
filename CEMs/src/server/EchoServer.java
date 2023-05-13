@@ -27,8 +27,6 @@ public class EchoServer extends AbstractServer
 	public static ServerScreenController serverScreenController;
 	
 	/**
-	 * Returns the ServerScreenController instance.
-	 *
 	 * @return The ServerScreenController instance.
 	 */
     public static ServerScreenController getServerScreenController() 
@@ -38,25 +36,21 @@ public class EchoServer extends AbstractServer
 
 	/**
 	 * Sets the correct instance of serverScreenController.
-	 * @param serverScreenController
+	 * 
+	 * @paramserverScreenController
 	 */
 	public static void setServerScreenController(ServerScreenController serverScreenController) 
 	{
 		EchoServer.serverScreenController = serverScreenController;
 	}
 
+	/**
+	 * @returns the list of clients.
+	 */
 	public static ObservableList<Client> getClientsInfoList() 
     {
 		return clientsInfoList;
 	}
-
-	public static void setClientsInfoList(ObservableList<Client> clientsInfoList) 
-	{
-		EchoServer.clientsInfoList = clientsInfoList;
-	}
-
-	
-
 
 	// Constructors ****************************************************
 
@@ -75,11 +69,19 @@ public class EchoServer extends AbstractServer
 	// Instance methods ************************************************
 
 	
+	/**
+	 * Updates the clientsInfoList with the connection status of a client.
+	 *
+	 * @param client The ConnectionToClient object representing the client connection.
+	 * @param status The status of the client connection.
+	 */
 	static void updateclientsInfoList(ConnectionToClient client, String status) 
 	{
+		//Update existing client's status.
 	    for (Client existingClient : clientsInfoList) 
 	        {
 	            try {
+	            	//Check if the existing client's IP matches the client's IP.
 	                if (existingClient.getIp().equals(client.getInetAddress().getHostAddress())) 
 	                {
 	                    existingClient.setStatus(status);
@@ -94,6 +96,7 @@ public class EchoServer extends AbstractServer
 
 	        try 
 	        {
+	        	//Get the IP and hostname of the client.
 	            String clientIP = client.getInetAddress().getHostAddress();
 	            String clientHostName = client.getInetAddress().getHostName();
 	            Client newClient = new Client(clientIP, clientHostName, status);
@@ -103,7 +106,6 @@ public class EchoServer extends AbstractServer
 	        {
 	            System.out.println("Client not found!");
 	        }
-	    
 	}
 	
 	/**
@@ -117,6 +119,7 @@ public class EchoServer extends AbstractServer
 		System.out.println("Message received: " + msg + " from " + client);
 		try
 		{
+			//When the client is connected.
 			if (msg.toString().equals("connected"))
 			{
 				updateclientsInfoList(client, "Connected");
@@ -124,16 +127,20 @@ public class EchoServer extends AbstractServer
 				client.sendToClient("Connected");
 			}
 			
+			//When the client is disconnected.
 			else if (msg.toString().equals("disconnected"))
 			{
 				updateclientsInfoList(client, "Disconnected");
 				client.sendToClient("Disonnected");
 			}
+			
+			//When client enters the question updating screen.
 			else if (msg.toString().equals("Load questions"))
 			{
 				client.sendToClient(MySQLConnection.loadQuestions());
 			}
 
+			//When client updates the question table.
 			else if (msg.toString().startsWith("[entities.Question"))
 			{
 				MySQLConnection.saveQuestionToDB((ArrayList<Question>)msg);
@@ -172,8 +179,7 @@ public class EchoServer extends AbstractServer
 	 * This method is responsible for the creation of the server instance (there is
 	 * no UI in this phase).
 	 *
-	 * @param args[0] The port number to listen on. Defaults to 5555 if no argument
-	 *                is entered.
+	 * @param args[0] The port number to listen on. Defaults to 5555 if no argument is entered.
 	 */
 	public static void main(String[] args)
 	{
@@ -196,4 +202,4 @@ public class EchoServer extends AbstractServer
 		}
 	}
 }
-//End of EchoServer class
+

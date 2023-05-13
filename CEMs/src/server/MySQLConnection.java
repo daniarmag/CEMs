@@ -59,7 +59,7 @@ public class MySQLConnection
 		{
 			try
 			{
-				// lOading all the questions from the table
+				//lOading all the questions from the table
 				ResultSet rs = conn.createStatement().executeQuery("Select * FROM question");
 				while (rs.next()) 
 				{
