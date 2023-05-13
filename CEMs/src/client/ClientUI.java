@@ -19,6 +19,7 @@ public class ClientUI extends Application
 	public void start(Stage primaryStage) throws Exception 
 	{
 		chat = new ClientController("localhost", 5555);
+		//Starting window of client-side.
 		HostSelectionScreenController clientScreen = new HostSelectionScreenController();
 		clientScreen.start(primaryStage);
 	}
