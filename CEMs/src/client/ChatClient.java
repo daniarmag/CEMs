@@ -3,6 +3,7 @@ package client;
 import ocsf.client.*;
 import common.ChatIF;
 import entities.Question;
+import gui.HostSelectionScreenController;
 import gui.QuestionBankController;
 
 import java.io.*;
@@ -21,6 +22,7 @@ public class ChatClient extends AbstractClient
 	final public static int DEFAULT_PORT = 5555;
 	public static boolean awaitResponse = false;
 	public static QuestionBankController questionBankController;
+	public static HostSelectionScreenController hostSelectionScreenController;
 	
 	 public static QuestionBankController getQuestionBankController() 
 	 {
@@ -30,6 +32,11 @@ public class ChatClient extends AbstractClient
 	 public static void setQuestionBankController(QuestionBankController controller)
 	 {
 		 questionBankController = controller;
+	 }
+	 
+	 public static void setHostSelectionScreenController(HostSelectionScreenController controller)
+	 {
+		 hostSelectionScreenController = controller;
 	 }
 
 	// Constructors ****************************************************
@@ -69,6 +76,11 @@ public class ChatClient extends AbstractClient
                 questionBankController.updateQuestionTable();
             }
 		}
+		if (msg.toString().equals("IP Confirmed"))
+		{
+			hostSelectionScreenController.isSameIp = true;
+		}
+			
 	}
 
 	/**

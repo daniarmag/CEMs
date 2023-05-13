@@ -50,7 +50,7 @@ public class ServerScreenController implements Initializable
     private Circle onCircle;
 
     @FXML
-    private TableView<Client> connectedTable;
+    private TableView<Client> connectedTable  = new TableView<Client>();
     
     @FXML
     private TableColumn<Client, String> hostCol;
@@ -150,7 +150,6 @@ public class ServerScreenController implements Initializable
 	/*Initializes the table.*/
 	public void initializeTable() 
 	{
-		connectedTable = new TableView<Client>();
 		disconnectBtn.setDisable(true);
 		onCircle.setFill(Color.TRANSPARENT);
         ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));

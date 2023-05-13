@@ -1,10 +1,12 @@
 package server;
  
 import java.io.*;
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 import entities.Client;
 import entities.Question;
+import gui.HostSelectionScreenController;
 import gui.ServerScreenController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +27,14 @@ public class EchoServer extends AbstractServer
 	private static String password;
 	static ObservableList<Client> clientsInfoList = FXCollections.observableArrayList();
 	public static ServerScreenController serverScreenController;
+	public static HostSelectionScreenController hostSelectionScreenController;
 	
+	
+
+	public static void setHostSelectionScreenController(HostSelectionScreenController hostSelectionScreenController) {
+		EchoServer.hostSelectionScreenController = hostSelectionScreenController;
+	}
+
 	/**
 	 * @return The ServerScreenController instance.
 	 */
@@ -127,6 +136,15 @@ public class EchoServer extends AbstractServer
 				client.sendToClient("Connected");
 			}
 			
+			else if(msg.toString().startsWith("CheckIp"))
+			{
+				String s = (String)msg;
+				String[] sArr = s.split("\\s+", 2);
+				if (sArr[1].equals(InetAddress.getLocalHost().getHostAddress()))
+				{
+					client.sendToClient("IP Confirmed");				
+				}
+			}
 			//When the client is disconnected.
 			else if (msg.toString().equals("disconnected"))
 			{
