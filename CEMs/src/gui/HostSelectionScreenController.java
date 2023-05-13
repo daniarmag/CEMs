@@ -55,7 +55,7 @@ public class HostSelectionScreenController implements Initializable
     	else
     	{	
     		ClientUI.chat.accept(IP);
-    		if(!IP.equals("localhost"))
+    		if(!IP.equals("localhost") && !IP.equals("127.0.0.1"))
     		{
     			JOptionPane.showMessageDialog(null, "Wrong IP!", "Connect to Server", JOptionPane.INFORMATION_MESSAGE);
     		}

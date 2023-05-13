@@ -10,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ocsf.server.*;
 
+/**
+ * The EchoServer class represents a server that handles client connections and message communication.
+ */
 public class EchoServer extends AbstractServer 
 {
 	// Class variables *************************************************
@@ -23,11 +26,20 @@ public class EchoServer extends AbstractServer
 	static ObservableList<Client> clientsInfoList = FXCollections.observableArrayList();
 	public static ServerScreenController serverScreenController;
 	
+	/**
+	 * Returns the ServerScreenController instance.
+	 *
+	 * @return The ServerScreenController instance.
+	 */
     public static ServerScreenController getServerScreenController() 
     {
 		return serverScreenController;
 	}
 
+	/**
+	 * Sets the correct instance of serverScreenController.
+	 * @param serverScreenController
+	 */
 	public static void setServerScreenController(ServerScreenController serverScreenController) 
 	{
 		EchoServer.serverScreenController = serverScreenController;
