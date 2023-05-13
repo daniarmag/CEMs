@@ -51,7 +51,7 @@ public class ServerScreenController implements Initializable
     private Circle onCircle;
 
     @FXML
-    private TableView<Client> connectedTable = new TableView<Client>();
+    private TableView<Client> connectedTable;
     
     @FXML
     private TableColumn<Client, String> hostCol;
@@ -109,6 +109,7 @@ public class ServerScreenController implements Initializable
 		initializeTable();
 	}
 	
+	/*Connects to the server.*/
 	@FXML
 	void connect(ActionEvent event) 
 	{
@@ -128,6 +129,7 @@ public class ServerScreenController implements Initializable
 	    
 	}
 	
+	/*Disconnects from the server.*/
 	@FXML
 	void disconnect(ActionEvent event) throws Exception
 	{
@@ -138,6 +140,7 @@ public class ServerScreenController implements Initializable
 		disconnectBtn.setDisable(true);
 	}
 	
+	/*Exits the GUI window.*/
 	@FXML
 	void exit(ActionEvent event) throws Exception
 	{
@@ -145,8 +148,10 @@ public class ServerScreenController implements Initializable
 		System.exit(0);
 	}
 	
+	/*Initializes the table.*/
 	public void initializeTable() 
 	{
+		connectedTable = new TableView<Client>();
 		disconnectBtn.setDisable(true);
 		onCircle.setFill(Color.TRANSPARENT);
         ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));
@@ -156,6 +161,7 @@ public class ServerScreenController implements Initializable
         connectedTable.setItems(clientObservableList);
     }
 	
+	/*Updates the table with the current list of clients.*/
 	public void clientConnected()
 	{
 	    connectedTable.setItems(EchoServer.getClientsInfoList());

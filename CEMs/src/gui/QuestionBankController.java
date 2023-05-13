@@ -55,16 +55,18 @@ public class QuestionBankController implements Initializable
     	this.qArr = qArr;
     }
     
+    /*Updates the DB with the new question info.*/
     @FXML
     void update(ActionEvent event) throws IOException 
     {
         ObservableList<Question> updatedQuestions = FXCollections.observableArrayList(questionTable.getItems());
         qArr.clear();
         qArr.addAll(updatedQuestions);
+        //Passing the array-list as an object to the server, which will handle the update.
         ClientUI.chat.accept(qArr);
     }
 
-
+    /*Disconnects from the server and closes GUI window.*/
 	@FXML
 	void exit(ActionEvent event) 
 	{
@@ -73,6 +75,7 @@ public class QuestionBankController implements Initializable
     	System.exit(0);
 	}
 
+	/*Sets the columns of the table to be editable.*/
 	private void editableCols() 
 	{
 	    qnumTable.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -88,9 +91,7 @@ public class QuestionBankController implements Initializable
 	    questionTable.setEditable(true);
 	}
 
-
-
-	
+	/*Sets the question table with the values that are currently in the qArr.*/
 	public void updateQuestionTable() 
 	{
         idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -108,8 +109,7 @@ public class QuestionBankController implements Initializable
 	{
 		ChatClient.setQuestionBankController(this);
 		editableCols();
-		ClientUI.chat.accept("Load questions");
-		
+		ClientUI.chat.accept("Load questions");	
 	}
 
 }
