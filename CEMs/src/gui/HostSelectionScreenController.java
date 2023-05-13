@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
+/*A GUI for when the client needs to enter the host IP */
 public class HostSelectionScreenController implements Initializable 
 {
 

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/*A GUI for the login screen.*/
 public class LoginScreenController 
 {
 
@@ -27,6 +28,7 @@ public class LoginScreenController
     @FXML
     private TextField txtLoginUsername;
 
+    /*Logs the user into the system and opens the next screen.*/
     @FXML
     void Login(ActionEvent event) throws IOException 
     {
@@ -43,6 +45,7 @@ public class LoginScreenController
     	primaryStage.show();		
     }
 
+    /*disconnects from the server and exits from the GUI. */
     @FXML
     void exit(ActionEvent event) 
     {
