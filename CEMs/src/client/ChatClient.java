@@ -1,7 +1,6 @@
 package client;
 
 import ocsf.client.*;
-import client.*;
 import common.ChatIF;
 import entities.Question;
 import gui.QuestionBankController;

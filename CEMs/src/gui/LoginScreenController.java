@@ -1,10 +1,6 @@
 package gui;
 
 import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
-import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
