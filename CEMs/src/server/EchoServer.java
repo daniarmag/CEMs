@@ -136,6 +136,7 @@ public class EchoServer extends AbstractServer
 				client.sendToClient("Connected");
 			}
 			
+			//Checking client the input of client IP.
 			else if(msg.toString().startsWith("CheckIp"))
 			{
 				String s = (String)msg;

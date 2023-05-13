@@ -25,7 +25,6 @@ import server.EchoServer;
 public class HostSelectionScreenController implements Initializable {
 
 	public boolean isSameIp = false;
-	public static HostSelectionScreenController instance;
 	@FXML
 	private Button connectToServerBtn;
 
@@ -40,11 +39,6 @@ public class HostSelectionScreenController implements Initializable {
 	 */
 	private String getIP() {
 		return txtServerIP.getText();
-	}
-	
-	public HostSelectionScreenController()
-	{
-		instance = this;
 	}
 
 	/**
@@ -103,10 +97,6 @@ public class HostSelectionScreenController implements Initializable {
 		}
 	}
 
-	public static HostSelectionScreenController getInstance()
-	{
-		return instance;
-	}
 	/**
 	 * Handles the exit button click event.
 	 *
