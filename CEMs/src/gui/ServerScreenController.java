@@ -34,7 +34,6 @@ public class ServerScreenController implements Initializable
 		   port = Integer.toString(ServerUI.DEFAULT_PORT),
 		   username, password;
 	
-	
 	@FXML
 	private Button connectBtn;
 

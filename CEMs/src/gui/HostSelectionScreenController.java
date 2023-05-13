@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 /*A GUI for when the client needs to enter the host IP */
 public class HostSelectionScreenController implements Initializable 
 {
-
     @FXML
     private Button connectToServerBtn;
 
@@ -92,7 +91,6 @@ public class HostSelectionScreenController implements Initializable
     			primaryStage.setScene(scene);
     			primaryStage.show();	
     		}
-    		
     	}	
     }
     
@@ -119,8 +117,4 @@ public class HostSelectionScreenController implements Initializable
 	{
 		txtServerIP.setText("localhost");
 	}
-    
-  
-	
-
 }
