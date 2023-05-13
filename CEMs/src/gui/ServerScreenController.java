@@ -101,7 +101,9 @@ public class ServerScreenController implements Initializable
 		}
 		catch (UnknownHostException e) {}
 		txtAreaDbName.setText(dbName);
+		txtAreaDbName.setEditable(false);
 		txtAreaPort.setText(port);
+		txtAreaPort.setEditable(false);
 		txtAreaUsername.setText("root");
 		textAreaPassword.setText("Daniel123456!");
 		initializeTable();
