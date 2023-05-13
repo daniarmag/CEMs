@@ -28,11 +28,20 @@ public class HostSelectionScreenController implements Initializable
     @FXML
     private TextField txtServerIP;
 
+    /**
+     * @return The IP address entered in the text field as a string.
+     */
     private String getIP() 
     {
   		return txtServerIP.getText();
   	}
   	
+    /**
+     * Initializes the JavaFX controller during application startup.
+     *
+     * @param primaryStage The primary stage of the application.
+     * @throws Exception If an exception occurs during initialization.
+     */
     public void start(Stage primaryStage) throws Exception
     {	
     	FXMLLoader loader = new FXMLLoader();
@@ -45,11 +54,18 @@ public class HostSelectionScreenController implements Initializable
 		primaryStage.show();	   
 	}
     
+    /**
+     * Handles the connect button click event.
+     *
+     * @param event The action event triggered by the connect button.
+     * @throws IOException If an I/O exception occurs.
+     */
     @FXML
     void connect(ActionEvent event) throws IOException 
     {
     	FXMLLoader loader = new FXMLLoader();
     	String IP = getIP().trim();
+    	// A case for invalid IP
     	if(IP.isEmpty())
     		JOptionPane.showMessageDialog(null, "You must enter server IP!", "Connect to Server", JOptionPane.INFORMATION_MESSAGE);
     	else
@@ -61,8 +77,11 @@ public class HostSelectionScreenController implements Initializable
     		}
     		else
     		{
+    			//notify ClientUI that a successful connection has been established.
     			ClientUI.chat.accept("connected");
+    	        // Hide the current window
     			((Node)event.getSource()).getScene().getWindow().hide();
+    	        // Create a new stage for the login screen
     			Stage primaryStage = new Stage();
     			loader.setLocation(getClass().getResource("/gui/LoginScreen.fxml"));
     			Parent root = loader.load();
@@ -75,6 +94,12 @@ public class HostSelectionScreenController implements Initializable
     		
     	}	
     }
+    
+    /**
+     * Handles the exit button click event.
+     *
+     * @param event The action event triggered by the exit button.
+     */
 
     @FXML
     void exit(ActionEvent event) 
@@ -82,6 +107,12 @@ public class HostSelectionScreenController implements Initializable
     	System.exit(0);	
     }
 
+    /**
+     * Initializes the controller during application startup.
+     *
+     * @param location  The location used to resolve relative paths.
+     * @param resources The resources used to localize the root object.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
