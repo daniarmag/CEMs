@@ -126,9 +126,9 @@
             </VBox>
             <TableView id="connectedTable" fx:id="connectedTable" layoutX="375.0" layoutY="126.0" prefHeight="193.0" prefWidth="355.0">
               <columns>
-                <TableColumn prefWidth="109.0" text="IP" />
-                <TableColumn prefWidth="127.0" text="Host" />
-                  <TableColumn prefWidth="126.0" text="Status" />
+                <TableColumn fx:id="ipCol" prefWidth="109.0" text="IP" />
+                <TableColumn fx:id="hostCol" prefWidth="127.0" text="Host" />
+                  <TableColumn fx:id="statusCol" prefWidth="126.0" text="Status" />
               </columns>
             </TableView>
             <Button id="connectBtn" fx:id="connectBtn" layoutX="204.0" layoutY="380.0" mnemonicParsing="false" onAction="#connect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Connect" />

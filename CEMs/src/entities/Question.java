@@ -1,22 +1,30 @@
 package entities;
 
-public class Question 
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Question implements Serializable
 {
 	public String id;
 	public String subject;
+	public String courseName;
 	public String questionText;
-	public String correctAnswer;
+	public Integer questionNumber;
 	public String authorName;
-	public String[] answers;
+	public String correctAnswer = "";
+	public String[] answers = new String[4];
 	
-	public Question(String id, String subject, String questionText, String[] answers, String correctAnswer, String authorName) 
+	public Question(String id, String subject, String courseName, String questionText,
+			        Integer questionNumber, String authorName) 
 	{
 		this.id = id;
 		this.subject = subject;
+		this.courseName = courseName;
 		this.questionText = questionText;
-		this.answers = answers;
-		this.correctAnswer = correctAnswer;
+		this.questionNumber = questionNumber;
 		this.authorName = authorName;
+		//this.correctAnswer = correctAnswer;
+		//this.answers = answers;
 	}
 	
 	public String getId() 
@@ -28,10 +36,20 @@ public class Question
 	{
 		return subject;
 	}
+	
+	public String getCourseName() 
+	{
+		return courseName;
+	}
 
 	public String getQuestionText() 
 	{
 		return questionText;
+	}
+	
+	public Integer getQuestionNumber()
+	{
+		return questionNumber;
 	}
 
 	public String getCorrectAnswer() 
@@ -58,10 +76,20 @@ public class Question
 	{
 		this.subject = subject;
 	}
+	
+	public void setCourseName(String courseName) 
+	{
+		this.courseName = courseName;
+	}
 
 	public void setQuestionText(String questionText) 
 	{
 		this.questionText = questionText;
+	}
+	
+	public void setQuestionNumber(Integer questionNumber) 
+	{
+		this.questionNumber = questionNumber;
 	}
 
 	public void setCorrectAnswer(String correctAnswer)

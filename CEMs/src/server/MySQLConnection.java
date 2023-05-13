@@ -2,8 +2,12 @@ package server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import entities.Question;
 
 public class MySQLConnection 
 {
@@ -35,15 +39,47 @@ public class MySQLConnection
         }
    	}
 	
-	public static void getTableQuestion(Connection con1)
+	public static ArrayList<Question> loadQuestions()
 	{
-		Statement stmt;
-		try {
-			stmt = con1.createStatement();
-			stmt.executeUpdate("create table courses(num int, name VARCHAR(40), semestr VARCHAR(10));");
-			stmt.executeUpdate("load data local infile \"courses.txt\" into table courses");
-	 		
-		} catch (SQLException e) {	e.printStackTrace();}
-		 		
+		ArrayList<Question> qArr = new ArrayList<Question>();
+		if (conn != null) 
+		{
+			try
+			{
+				ResultSet rs = conn.createStatement().executeQuery("Select * FROM question");
+				while (rs.next()) 
+				{
+					Question q = new Question(rs.getString("id"), rs.getString("subject"),
+					rs.getString("course_name"), rs.getString("question_text"), rs.getInt("question_number"),
+					rs.getString("lecturer"));
+					qArr.add(q);
+				}
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		return qArr;
 	}
+	
+	public static void saveQuestionToDB(ArrayList<Question> arr) 
+	{
+	    try 
+	    {
+	        PreparedStatement ps = conn.prepareStatement("UPDATE question SET question_text = ?, question_number = ? WHERE id = ?");
+	        for (Question question : arr) 
+	        {
+	            ps.setString(1, question.questionText);
+	            ps.setInt(2, question.questionNumber);
+	            ps.setString(3, question.getId());
+	            ps.executeUpdate();
+	        }
+	    } 
+	    catch (SQLException e)
+	    {
+	        e.printStackTrace();
+	    }
+	}
+
 }

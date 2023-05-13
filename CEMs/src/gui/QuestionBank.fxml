@@ -51,7 +51,7 @@
                   </VBox>
                </children>
             </HBox>
-            <TableView layoutX="52.0" layoutY="122.0" prefHeight="259.0" prefWidth="647.0">
+            <TableView id="questionTable" fx:id="questionTable" layoutX="52.0" layoutY="122.0" prefHeight="259.0" prefWidth="647.0">
               <columns>
                 <TableColumn id="idTable" fx:id="idTable" prefWidth="75.0" text="ID" />
                 <TableColumn id="subjectTable" fx:id="subjectTable" prefWidth="75.0" text="Subject" />

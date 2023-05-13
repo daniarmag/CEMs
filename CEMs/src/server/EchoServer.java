@@ -1,14 +1,13 @@
 package server;
  
 import java.io.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 
+import entities.Client;
+import entities.Question;
+import gui.ServerScreenController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import ocsf.server.*;
 
 public class EchoServer extends AbstractServer 
@@ -21,7 +20,30 @@ public class EchoServer extends AbstractServer
 	final public static int DEFAULT_PORT = 5555;
 	private static String username;
 	private static String password;
-    public static HashMap<ConnectionToClient, String> clientList = new HashMap<>();
+	static ObservableList<Client> clientsInfoList = FXCollections.observableArrayList();
+	public static ServerScreenController serverScreenController;
+	
+    public static ServerScreenController getServerScreenController() 
+    {
+		return serverScreenController;
+	}
+
+	public static void setServerScreenController(ServerScreenController serverScreenController) 
+	{
+		EchoServer.serverScreenController = serverScreenController;
+	}
+
+	public static ObservableList<Client> getClientsInfoList() 
+    {
+		return clientsInfoList;
+	}
+
+	public static void setClientsInfoList(ObservableList<Client> clientsInfoList) 
+	{
+		EchoServer.clientsInfoList = clientsInfoList;
+	}
+
+	
 
 
 	// Constructors ****************************************************
@@ -40,6 +62,38 @@ public class EchoServer extends AbstractServer
 
 	// Instance methods ************************************************
 
+	
+	static void updateclientsInfoList(ConnectionToClient client, String status) 
+	{
+	    for (Client existingClient : clientsInfoList) 
+	        {
+	            try {
+	                if (existingClient.getIp().equals(client.getInetAddress().getHostAddress())) 
+	                {
+	                    existingClient.setStatus(status);
+	                    clientsInfoList.remove(existingClient);
+	                    break;
+	                }
+	            } 
+	            catch (NullPointerException ex) {
+	                System.out.println("Client not found!");
+	            }
+	        }
+
+	        try 
+	        {
+	            String clientIP = client.getInetAddress().getHostAddress();
+	            String clientHostName = client.getInetAddress().getHostName();
+	            Client newClient = new Client(clientIP, clientHostName, status);
+	            clientsInfoList.add(newClient);
+	        } 
+	        catch (NullPointerException ex) 
+	        {
+	            System.out.println("Client not found!");
+	        }
+	    
+	}
+	
 	/**
 	 * This method handles any messages received from the client.
 	 *
@@ -49,22 +103,29 @@ public class EchoServer extends AbstractServer
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) 
 	{
 		System.out.println("Message received: " + msg + " from " + client);
-		String clientMsg = (String)msg;
 		try
 		{
-			if (clientMsg.equals("connected"))
+			if (msg.toString().equals("connected"))
 			{
-				clientList.put(client, "Connected");
+				updateclientsInfoList(client, "Connected");
+				serverScreenController.clientConnected();
 				client.sendToClient("Connected");
 			}
-			else if (clientMsg.equals("disconnected"))
+			
+			else if (msg.toString().equals("disconnected"))
 			{
-				clientList.put(client, "Disconnected");
+				updateclientsInfoList(client, "Disconnected");
 				client.sendToClient("Disonnected");
 			}
-			else if (clientMsg.equals("Update Question"))
+			else if (msg.toString().equals("Load questions"))
 			{
-				//Implement logic later
+				client.sendToClient(MySQLConnection.loadQuestions());
+			}
+
+			else if (msg.toString().startsWith("[entities.Question"))
+			{
+				MySQLConnection.saveQuestionToDB((ArrayList<Question>)msg);
+				this.sendToAllClients("Question updated");
 			}
 			client.sendToClient("Response from server");
 		}
@@ -72,6 +133,7 @@ public class EchoServer extends AbstractServer
         {
             e.printStackTrace();
         }
+		
 	}
 
 	/**

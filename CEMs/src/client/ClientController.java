@@ -1,7 +1,10 @@
 package client;
 
 import java.io.*;
+
+
 import common.ChatIF;
+
 
 /**
  * This class constructs the UI for a chat client. It implements the chat
@@ -54,9 +57,9 @@ public class ClientController implements ChatIF
 	 * This method waits for input from the console. Once it is received, it sends
 	 * it to the client's message handler.
 	 */
-	public void accept(String str) 
+	public void accept(Object msg) 
 	{
-		client.handleMessageFromClientUI(str);
+		client.handleMessageFromClientUI(msg);
 	}
 
 	/**

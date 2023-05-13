@@ -3,7 +3,11 @@ package client;
 import ocsf.client.*;
 import client.*;
 import common.ChatIF;
+import entities.Question;
+import gui.QuestionBankController;
+
 import java.io.*;
+import java.util.ArrayList;
 
 public class ChatClient extends AbstractClient
 {
@@ -17,6 +21,17 @@ public class ChatClient extends AbstractClient
 	ChatIF clientUI;
 	final public static int DEFAULT_PORT = 5555;
 	public static boolean awaitResponse = false;
+	public static QuestionBankController questionBankController;
+	
+	 public static QuestionBankController getQuestionBankController() 
+	 {
+		 return questionBankController;
+	 }
+	 
+	 public static void setQuestionBankController(QuestionBankController controller)
+	 {
+		 questionBankController = controller;
+	 }
 
 	// Constructors ****************************************************
 
@@ -46,6 +61,15 @@ public class ChatClient extends AbstractClient
 		System.out.println("--> handleMessageFromServer");
 		awaitResponse = false;
 		System.out.println(msg.toString());
+		if (msg instanceof ArrayList)
+		{
+			ArrayList<Question> arr = (ArrayList<Question>) msg;
+            if (questionBankController != null) 
+            {
+                questionBankController.setArr(arr);
+                questionBankController.updateQuestionTable();
+            }
+		}
 	}
 
 	/**
@@ -54,13 +78,13 @@ public class ChatClient extends AbstractClient
 	 * @param message The message from the UI.
 	 */
 
-	public void handleMessageFromClientUI(String message) 
+	public void handleMessageFromClientUI(Object msg) 
 	{
 		try 
 		{
 			openConnection();// in order to send more than one message
 			awaitResponse = true;
-			sendToServer(message);
+			sendToServer(msg);
 			// wait for response
 			while (awaitResponse)
 			{
