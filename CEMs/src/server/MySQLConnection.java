@@ -13,6 +13,12 @@ public class MySQLConnection
 {
 	static Connection conn;
 	
+	/**
+	 * Establishing a connection to a MySQL database
+	 * @param username of database
+	 * @param password of database
+	 * @return
+	 */
 	public static boolean connectToDB(String username, String password) 
 	{
 		try 
@@ -42,6 +48,10 @@ public class MySQLConnection
         }
    	}
 	
+	/**
+	 * This method, loadQuestions, retrieves a list of questions from a database table
+	 * @return an ArrayList of Question objects
+	 */
 	public static ArrayList<Question> loadQuestions()
 	{
 		ArrayList<Question> qArr = new ArrayList<Question>();
@@ -49,6 +59,7 @@ public class MySQLConnection
 		{
 			try
 			{
+				// lOading all the questions from the table
 				ResultSet rs = conn.createStatement().executeQuery("Select * FROM question");
 				while (rs.next()) 
 				{
@@ -66,6 +77,10 @@ public class MySQLConnection
 		return qArr;
 	}
 	
+	/**
+	 * This method is responsible for updating question text and question number records in the database. 
+	 * @param arr represents the updated question data.
+	 */
 	public static void saveQuestionToDB(ArrayList<Question> arr) 
 	{
 	    try 
