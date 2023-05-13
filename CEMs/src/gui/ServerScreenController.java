@@ -27,7 +27,7 @@ import javafx.event.ActionEvent;
 import server.EchoServer;
 import server.ServerUI;
 
-
+/*A GUI for server area.*/
 public class ServerScreenController implements Initializable 
 {
 	String dbName = "jdbc:mysql://localhost/cems?serverTimezone=IST",

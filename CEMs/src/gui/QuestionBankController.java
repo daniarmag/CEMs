@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 
+/*A GUI for the question bank*/
 public class QuestionBankController implements Initializable
 {
 	ArrayList<Question> qArr = new ArrayList<Question>();
