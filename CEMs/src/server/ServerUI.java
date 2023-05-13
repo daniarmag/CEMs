@@ -1,7 +1,6 @@
 package server;
 
 import java.io.IOException;
-
 import gui.ServerScreenController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -21,24 +20,30 @@ public class ServerUI extends Application {
 		serverScreen.start(primaryStage);
 	}
 
-	public static void runServer(String p, String username, String password) {
-		int port = 0; // Port to listen on
-		try {
-			port = Integer.parseInt(p); // Set port to 5555
-
-		} catch (Throwable t) {
-			System.out.println("ERROR - Could not connect!");
-		}
-
-		es = new EchoServer(port, username, password);
-
-		try {
-			es.listen(); // Start listening for connections
-		} catch (Exception ex) {
-			System.out.println("ERROR - Could not listen for clients!");
-		}
+	public static boolean runServer(String p, String username, String password) {
+	    int port = 0; // Port to listen on
+	    try {
+	        port = Integer.parseInt(p); 
+	    } catch (Throwable t) {
+	        System.out.println("ERROR - Could not connect!");
+	        return false;
+	    }
+	    if(MySQLConnection.connectToDB(username, password))
+	    {
+	    	 es = new EchoServer(port, username, password);
+	 	    try 
+	 	    {
+	 	        es.listen(); 
+	 	        return true;
+	 	    } catch (Exception ex) 
+	 	    {
+	 	        System.out.println("ERROR - Could not listen for clients!");
+	 	        return false;
+	 	    }
+	    }
+	    return false;
 	}
-	
+
 	public static boolean closeServer() 
 	{
 		if (es != null) 

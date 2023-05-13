@@ -13,7 +13,7 @@ public class MySQLConnection
 {
 	static Connection conn;
 	
-	public static void connectToDB(String username, String password) 
+	public static boolean connectToDB(String username, String password) 
 	{
 		try 
 		{
@@ -22,12 +22,14 @@ public class MySQLConnection
         } catch (Exception ex) {
         	/* handle the error*/
         	 System.out.println("Driver definition failed");
+        	 return false;
         	 }
         
         try 
         {
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/cems?serverTimezone=IST", username, password);
             System.out.println("SQL connection succeed");
+            return true;
 
      	} 
         catch (SQLException ex) 
@@ -36,6 +38,7 @@ public class MySQLConnection
          	System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
+            return false;
         }
    	}
 	

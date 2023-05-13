@@ -143,14 +143,6 @@ public class EchoServer extends AbstractServer
 	protected void serverStarted() 
 	{
 		System.out.println("Server listening for connections on port " + getPort());
-		try
-		{
-			MySQLConnection.connectToDB(username, password);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Connection failed!");
-		}
 	}
 
 	/**
