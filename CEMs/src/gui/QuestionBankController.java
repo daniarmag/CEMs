@@ -108,7 +108,7 @@ public class QuestionBankController implements Initializable
         questionTable.setItems(questionObservableList);
     }
 	
-	/*Initializes the GUI with the questions from the database. */
+	/*Initializes the GUI with the questions from the database.*/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
