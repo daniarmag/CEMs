@@ -3,12 +3,8 @@ package gui;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
-import client.ClientUI;
 import entities.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -100,7 +96,6 @@ public class ServerScreenController implements Initializable
 		}
 		catch (UnknownHostException e) {}
 		txtAreaDbName.setText(dbName);
-		txtAreaDbName.setEditable(false);
 		txtAreaPort.setText(port);
 		txtAreaPort.setEditable(false);
 		txtAreaUsername.setText("root");
@@ -114,8 +109,9 @@ public class ServerScreenController implements Initializable
 	{
 		username = txtAreaUsername.getText().trim();
 	    password = textAreaPassword.getText().trim();
+	    dbName = txtAreaDbName.getText().trim();
 	    boolean connectionSuccessful;
-		connectionSuccessful = ServerUI.runServer(port, username, password);
+		connectionSuccessful = ServerUI.runServer(port, dbName, username, password);
 	    if (connectionSuccessful)
 	    {
 	        offCircle.setFill(Color.TRANSPARENT);

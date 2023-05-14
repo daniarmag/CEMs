@@ -26,7 +26,7 @@ public class ServerUI extends Application {
 		serverScreen.start(primaryStage);
 	}
 
-	public static boolean runServer(String p, String username, String password) {
+	public static boolean runServer(String p, String URL, String username, String password) {
 	    int port = 0; // Port to listen on
 	    try {
 	        port = Integer.parseInt(p); 
@@ -34,7 +34,7 @@ public class ServerUI extends Application {
 	        System.out.println("ERROR - Could not connect!");
 	        return false;
 	    }
-	    if(MySQLConnection.connectToDB(username, password))
+	    if(MySQLConnection.connectToDB(URL, username, password))
 	    {
 	    	 es = new EchoServer(port, username, password);
 	 	    try 

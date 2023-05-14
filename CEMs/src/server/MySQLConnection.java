@@ -19,7 +19,7 @@ public class MySQLConnection
 	 * @param password of database
 	 * @return
 	 */
-	public static boolean connectToDB(String username, String password) 
+	public static boolean connectToDB(String URL, String username, String password) 
 	{
 		try 
 		{
@@ -33,7 +33,7 @@ public class MySQLConnection
         
         try 
         {
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/cems?serverTimezone=IST", username, password);
+            conn = DriverManager.getConnection(URL, username, password);
             System.out.println("SQL connection succeed");
             return true;
 

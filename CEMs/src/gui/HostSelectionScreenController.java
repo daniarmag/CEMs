@@ -24,7 +24,6 @@ import server.EchoServer;
 /*A GUI for when the client needs to enter the host IP */
 public class HostSelectionScreenController implements Initializable {
 
-	public boolean isSameIp = false;
 	public static int DEFAULT_PORT = 5555;
 	@FXML
 	private Button connectToServerBtn;
