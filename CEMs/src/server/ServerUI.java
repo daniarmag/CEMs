@@ -10,6 +10,12 @@ public class ServerUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
 	static EchoServer es;
 
+	public static EchoServer getEs() 
+	{
+		return es;
+	}
+
+
 	public static void main(String args[]) throws Exception {
 		launch(args);
 	}
@@ -37,6 +43,7 @@ public class ServerUI extends Application {
 	 	        return true;
 	 	    } catch (Exception ex) 
 	 	    {
+	 	    	ex.printStackTrace();
 	 	        System.out.println("ERROR - Could not listen for clients!");
 	 	        return false;
 	 	    }

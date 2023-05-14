@@ -79,9 +79,12 @@ public class QuestionBankController implements Initializable
 	/*Sets the columns of the table to be editable.*/
 	private void editableCols() 
 	{
+		//Set the cell factory for the qnumTable column to use TextFieldTableCell with an IntegerStringConverter.
 	    qnumTable.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+	    //Set the onEditCommit event for qnumTable column.
 	    qnumTable.setOnEditCommit(e -> {
 	        Question question = e.getTableView().getItems().get(e.getTablePosition().getRow());
+	        //Update the question number with the new value entered in the cell.
 	        question.setQuestionNumber(e.getNewValue());
 	        });
 	    qtextTable.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -105,6 +108,7 @@ public class QuestionBankController implements Initializable
         questionTable.setItems(questionObservableList);
     }
 	
+	/*Initializes the GUI with the questions from the database. */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{

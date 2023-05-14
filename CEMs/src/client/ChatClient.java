@@ -9,6 +9,8 @@ import gui.QuestionBankController;
 import java.io.*;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class ChatClient extends AbstractClient
 {
 	
@@ -67,6 +69,7 @@ public class ChatClient extends AbstractClient
 		System.out.println("--> handleMessageFromServer");
 		awaitResponse = false;
 		System.out.println(msg.toString());
+		//Load the question from the database
 		if (msg instanceof ArrayList)
 		{
 			ArrayList<Question> arr = (ArrayList<Question>) msg;
@@ -76,9 +79,11 @@ public class ChatClient extends AbstractClient
                 questionBankController.updateQuestionTable();
             }
 		}
-		if (msg.toString().equals("IP Confirmed"))
+		//Disconnect all clients when the server is disconnected.
+		if (msg.toString().equals("Abort"))
 		{
-			hostSelectionScreenController.isSameIp = true;
+			JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
 		}
 			
 	}

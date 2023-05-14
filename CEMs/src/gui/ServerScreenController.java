@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import client.ClientUI;
 import entities.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,10 +77,8 @@ public class ServerScreenController implements Initializable
 	@FXML
 	private TextField txtAreaUsername;
 
-
 	public void start(Stage primaryStage) throws Exception
 	{
-
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/gui/ServerScreen.fxml"));
 		Parent root = loader.load();
@@ -91,6 +90,7 @@ public class ServerScreenController implements Initializable
 		primaryStage.show();
 	}
 
+	/*Initializing the GUI with the table.*/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
@@ -132,12 +132,15 @@ public class ServerScreenController implements Initializable
 	@FXML
 	void disconnect(ActionEvent event) throws Exception
 	{
+		connectedTable.getItems().clear();
+		ServerUI.getEs().sendToAllClients("Abort");
 		ServerUI.closeServer();
 		onCircle.setFill(Color.TRANSPARENT);
 		offCircle.setFill(Color.rgb(255, 96, 92));
 		connectBtn.setDisable(false);
 		disconnectBtn.setDisable(true);
 	}
+	
 	
 	/*Exits the GUI window.*/
 	@FXML

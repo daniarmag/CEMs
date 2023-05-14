@@ -31,7 +31,7 @@ public class ClientController implements ChatIF
 	/**
 	 * The instance of the client that created this ConsoleChat.
 	 */
-	private ChatClient client;
+	ChatClient client;
 
 	// Constructors ****************************************************
 

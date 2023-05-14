@@ -25,6 +25,7 @@ import server.EchoServer;
 public class HostSelectionScreenController implements Initializable {
 
 	public boolean isSameIp = false;
+	public static int DEFAULT_PORT = 5555;
 	@FXML
 	private Button connectToServerBtn;
 
@@ -66,16 +67,18 @@ public class HostSelectionScreenController implements Initializable {
 	 * @throws IOException If an I/O exception occurs.
 	 */
 	@FXML
-	void connect(ActionEvent event) throws IOException {
+	void connect(ActionEvent event) throws IOException 
+	{
 		FXMLLoader loader = new FXMLLoader();
 		String IP = getIP().trim();
 		// A case for invalid IP
 		if (IP.isEmpty())
 			JOptionPane.showMessageDialog(null, "You must enter server IP!", "Connect to Server",
 					JOptionPane.INFORMATION_MESSAGE);
-		else {
-			ClientUI.chat.accept("CheckIp " + getIP());
-			if(isSameIp || getIP().equals("localhost") || getIP().equals("127.0.0.1"))
+		else 
+		{
+			//Server IP is correct AND server is running.
+			if(ClientUI.connect(IP, DEFAULT_PORT))
 			{
 				// notify ClientUI that a successful connection has been established.
 				ClientUI.chat.accept("connected");
@@ -91,9 +94,15 @@ public class HostSelectionScreenController implements Initializable {
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			}
+			//Wrong IP OR server is not running.
 			else
-				JOptionPane.showMessageDialog(null, "Wrong IP!", "Connect to Server",
+			{
+				JOptionPane.showMessageDialog(null, "Couldn't connect to server.", "Connect to Server",
 						JOptionPane.INFORMATION_MESSAGE);
+				System.exit(0);
+			}
+				
+			
 		}
 	}
 
