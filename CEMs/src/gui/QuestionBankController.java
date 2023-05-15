@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import client.ChatClient;
 import client.ClientUI;
 import entities.Question;
@@ -65,6 +67,7 @@ public class QuestionBankController implements Initializable
         qArr.addAll(updatedQuestions);
         //Passing the array-list as an object to the server, which will handle the update.
         ClientUI.chat.accept(qArr);
+        JOptionPane.showMessageDialog(null, "Question table updated!", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /*Disconnects from the server and closes GUI window.*/
