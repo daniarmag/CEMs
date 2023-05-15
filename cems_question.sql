@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: cems
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,7 +27,7 @@ CREATE TABLE `question` (
   `subject` varchar(255) DEFAULT NULL,
   `course_name` varchar(255) DEFAULT NULL,
   `question_text` text,
-  `question_number` int(11) DEFAULT NULL,
+  `question_number` int DEFAULT NULL,
   `lecturer` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -39,7 +39,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES ('1','nothing','nothinnnn','no?',1,'yes'),('2','maybe','abcde','maybe?',2,'maybe');
+INSERT INTO `question` VALUES ('123','notmath','notalgebra','dasdasdasdadadadsdadadadada',2,'notDaniel'),('1234','math','algebra','ffff',1,'Daniel');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-14 11:31:13
+-- Dump completed on 2023-05-15 14:21:31
