@@ -30,6 +30,7 @@ public class ServerScreenController implements Initializable
 	String dbName = "jdbc:mysql://localhost/cems?serverTimezone=IST",
 		   port = Integer.toString(ServerUI.DEFAULT_PORT),
 		   username, password;
+	public static int clientCnt = 0;
 	
 	@FXML
 	private Button connectBtn;
@@ -99,7 +100,6 @@ public class ServerScreenController implements Initializable
 		txtAreaPort.setText(port);
 		txtAreaPort.setEditable(false);
 		txtAreaUsername.setText("root");
-		textAreaPassword.setText("Daniel123456!");
 		initializeTable();
 	}
 	
@@ -110,18 +110,22 @@ public class ServerScreenController implements Initializable
 		username = txtAreaUsername.getText().trim();
 	    password = textAreaPassword.getText().trim();
 	    dbName = txtAreaDbName.getText().trim();
-	    boolean connectionSuccessful;
-		connectionSuccessful = ServerUI.runServer(port, dbName, username, password);
-	    if (connectionSuccessful)
-	    {
-	        offCircle.setFill(Color.TRANSPARENT);
-	        onCircle.setFill(Color.rgb(0, 202, 78));
-	        connectBtn.setDisable(true);
-	        disconnectBtn.setDisable(false);
-	    } 
-	    else 
-	    	JOptionPane.showMessageDialog(null, "Incorrect username or password. Please try again.", "Server Password", JOptionPane.INFORMATION_MESSAGE);
-	    
+	    if (username.isEmpty() || password.isEmpty() || dbName.isEmpty())
+	    	JOptionPane.showMessageDialog(null, "You must fill all the fields!", "Server Area", JOptionPane.INFORMATION_MESSAGE);
+	    else
+	    { 	
+		    boolean connectionSuccessful;
+			connectionSuccessful = ServerUI.runServer(port, dbName, username, password);
+		    if (connectionSuccessful)
+		    {
+		        offCircle.setFill(Color.TRANSPARENT);
+		        onCircle.setFill(Color.rgb(0, 202, 78));
+		        connectBtn.setDisable(true);
+		        disconnectBtn.setDisable(false);
+		    } 
+		    else 
+		    	JOptionPane.showMessageDialog(null, "Incorrect username or password. Please try again.", "Server Area", JOptionPane.INFORMATION_MESSAGE);
+	    }
 	}
 	
 	/*Disconnects from the server.*/
@@ -129,7 +133,10 @@ public class ServerScreenController implements Initializable
 	void disconnect(ActionEvent event) throws Exception
 	{
 		connectedTable.getItems().clear();
-		ServerUI.getEs().sendToAllClients("Abort");
+		try 
+		{
+			ServerUI.getEs().sendToAllClients("Abort");
+		} catch (Exception e) {}
 		ServerUI.closeServer();
 		onCircle.setFill(Color.TRANSPARENT);
 		offCircle.setFill(Color.rgb(255, 96, 92));
