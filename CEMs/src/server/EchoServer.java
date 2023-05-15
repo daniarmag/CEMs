@@ -1,9 +1,7 @@
 package server;
  
 import java.io.*;
-import java.net.InetAddress;
 import java.util.ArrayList;
-
 import entities.Client;
 import entities.Question;
 import gui.HostSelectionScreenController;
