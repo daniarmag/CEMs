@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -58,9 +60,6 @@ public class ServerScreenController implements Initializable
 
     @FXML
     private TableColumn<Client, String> statusCol;
-    
-	@FXML
-	private TextField textAreaPassword;
 
 	@FXML
 	private TextField txtAreaDbName;
@@ -73,6 +72,15 @@ public class ServerScreenController implements Initializable
 
 	@FXML
 	private TextField txtAreaUsername;
+	
+    @FXML
+    private TextField passwordTextField;
+	
+	@FXML
+	private PasswordField passwordField;
+	
+    @FXML
+    private CheckBox togglePassword;
 
 	public void start(Stage primaryStage) throws Exception
 	{
@@ -108,9 +116,9 @@ public class ServerScreenController implements Initializable
 	void connect(ActionEvent event) 
 	{
 		username = txtAreaUsername.getText().trim();
-	    password = textAreaPassword.getText().trim();
+	    password = passwordReturn();
 	    dbName = txtAreaDbName.getText().trim();
-	    if (username.isEmpty() || password.isEmpty() || dbName.isEmpty())
+	    if (username.isEmpty() || password.isEmpty()|| dbName.isEmpty())
 	    	JOptionPane.showMessageDialog(null, "You must fill all the fields!", "Server Area", JOptionPane.INFORMATION_MESSAGE);
 	    else
 	    { 	
@@ -126,6 +134,39 @@ public class ServerScreenController implements Initializable
 		    else 
 		    	JOptionPane.showMessageDialog(null, "Incorrect username or password. Please try again.", "Server Area", JOptionPane.INFORMATION_MESSAGE);
 	    }
+	}
+	
+	/**
+	 * Method that handles the checkbox of password visibility
+	 * 
+	 * @param event
+	 */
+	@FXML
+	void showPass(ActionEvent event)
+	{
+		boolean isSelected = togglePassword.isSelected();
+		if (isSelected) 
+		{
+			passwordField.setVisible(false);
+			passwordTextField.setText(passwordField.getText());
+			passwordTextField.setVisible(true);
+			passwordField.setText(passwordTextField.getText());
+		} 
+		else 
+		{
+			passwordTextField.setVisible(false);
+			passwordField.setText(passwordTextField.getText());
+			passwordField.setVisible(true);
+			passwordTextField.setText(passwordField.getText());
+		}
+	}
+	
+	/**
+	 * @return the updated password from text field or password field.
+	 */
+	String passwordReturn()
+	{
+		return togglePassword.isSelected() ? passwordTextField.getText().trim() : passwordField.getText().trim();
 	}
 	
 	/*Disconnects from the server.*/
