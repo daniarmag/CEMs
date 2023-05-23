@@ -116,7 +116,7 @@ public class ServerScreenController implements Initializable
 	void connect(ActionEvent event) 
 	{
 		username = txtAreaUsername.getText().trim();
-	    password = passwordReturn();
+	    password = getPassword();
 	    dbName = txtAreaDbName.getText().trim();
 	    if (username.isEmpty() || password.isEmpty()|| dbName.isEmpty())
 	    	JOptionPane.showMessageDialog(null, "You must fill all the fields!", "Server Area", JOptionPane.INFORMATION_MESSAGE);
@@ -150,21 +150,19 @@ public class ServerScreenController implements Initializable
 			passwordField.setVisible(false);
 			passwordTextField.setText(passwordField.getText());
 			passwordTextField.setVisible(true);
-			passwordField.setText(passwordTextField.getText());
 		} 
 		else 
 		{
 			passwordTextField.setVisible(false);
 			passwordField.setText(passwordTextField.getText());
 			passwordField.setVisible(true);
-			passwordTextField.setText(passwordField.getText());
 		}
 	}
 	
 	/**
 	 * @return the updated password from text field or password field.
 	 */
-	String passwordReturn()
+	String getPassword()
 	{
 		return togglePassword.isSelected() ? passwordTextField.getText().trim() : passwordField.getText().trim();
 	}

@@ -16,19 +16,19 @@
    <children>
       <Pane prefHeight="369.0" prefWidth="300.0">
          <children>
-            <Text layoutX="21.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="122.13671875">
+            <Text layoutX="36.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="122.13671875">
                <font>
                   <Font size="16.5" />
                </font>
             </Text>
-            <TextField id="txtLoginUsername" fx:id="txtLoginUsername" layoutX="161.0" layoutY="162.0" prefHeight="25.0" prefWidth="122.0" />
+            <TextField id="txtLoginUsername" fx:id="txtLoginUsername" layoutX="141.0" layoutY="162.0" prefHeight="25.0" prefWidth="122.0" />
             <Button id="loginBtn" fx:id="loginBtn" layoutX="110.0" layoutY="281.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="81.0" style="-fx-background-radius: 10px;" text="Login" />
-            <Text layoutX="21.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="122.13671875">
+            <Text layoutX="36.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="122.13671875">
                <font>
                   <Font size="16.5" />
                </font>
             </Text>
-            <TextField id="txtLoginPassword" fx:id="txtLoginPassword" layoutX="161.0" layoutY="211.0" prefHeight="25.0" prefWidth="122.0" />
+            <TextField id="txtLoginPassword" fx:id="txtLoginPassword" layoutX="141.0" layoutY="211.0" prefHeight="25.0" prefWidth="122.0" />
             <Text layoutX="36.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter username and password">
                <font>
                   <Font name="Times New Roman" size="19.0" />
@@ -58,7 +58,7 @@
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/exitBtn.png"/>
+                                    <Image url="@../images/exitBtn.png" />
                                  </image>
                               </ImageView>
                            </graphic>
