@@ -195,6 +195,8 @@ public class ServerScreenController implements Initializable
 	/*Initializes the table.*/
 	public void initializeTable() 
 	{
+		passwordField.setText("123456");
+		passwordTextField.setText("123456");
 		disconnectBtn.setDisable(true);
 		onCircle.setFill(Color.TRANSPARENT);
         ipCol.setCellValueFactory(new PropertyValueFactory<>("ip"));

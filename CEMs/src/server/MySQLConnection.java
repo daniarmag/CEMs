@@ -6,7 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import entities.Professor;
 import entities.Question;
+import entities.Student;
+import entities.User;
 
 public class MySQLConnection 
 {
@@ -54,24 +58,21 @@ public class MySQLConnection
 	public static ArrayList<Question> loadQuestions()
 	{
 		ArrayList<Question> qArr = new ArrayList<Question>();
-		if (conn != null) 
+	    try
 		{
-			try
+	    	//lOading all the questions from the table
+			ResultSet rs = conn.createStatement().executeQuery("Select * FROM question");
+			while (rs.next()) 
 			{
-				//lOading all the questions from the table
-				ResultSet rs = conn.createStatement().executeQuery("Select * FROM question");
-				while (rs.next()) 
-				{
-					Question q = new Question(rs.getString("id"), rs.getString("subject"),
-					rs.getString("course_name"), rs.getString("question_text"), rs.getInt("question_number"),
-					rs.getString("lecturer"));
-					qArr.add(q);
-				}
-			} 
-			catch (SQLException e) 
-			{
-				e.printStackTrace();
+				Question q = new Question(rs.getString("id"), rs.getString("subject"),
+				rs.getString("course_name"), rs.getString("question_text"), rs.getInt("question_number"),
+				rs.getString("lecturer"));
+				qArr.add(q);
 			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
 		}
 		return qArr;
 	}
@@ -97,6 +98,44 @@ public class MySQLConnection
 	    {
 	        e.printStackTrace();
 	    }
+	}
+	
+	public static User verifyLogin(ArrayList<String> loginInfo)
+	{
+		String username = loginInfo.get(0);
+		String password = loginInfo.get(1);
+		User newUser = null;
+		//lOading all the questions from the table
+		try
+		{
+			
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+			
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) 
+			{
+				
+				String user_id = rs.getString("user_id");
+				String first_name = rs.getString("first_name");
+				String last_name = rs.getString("last_name");
+				String email = rs.getString("email");
+				String role = rs.getString("role");
+				switch(role)
+				{
+					case "student":
+						newUser = new Student(user_id, first_name, last_name, email, username, password, null);
+					case "professor":
+						newUser = new Professor(user_id, first_name, last_name, email, username, password, null);
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return newUser;
 	}
 
 }

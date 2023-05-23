@@ -125,11 +125,8 @@ public class HostSelectionScreenController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ChatClient.setHostSelectionScreenController(this);
-		try {
-			txtServerIP.setText(InetAddress.getLocalHost().getHostAddress());
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//txtServerIP.setText(InetAddress.getLocalHost().getHostAddress());
+		txtServerIP.setText("localhost");
+	
 	}
 }

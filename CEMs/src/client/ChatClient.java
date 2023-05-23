@@ -3,7 +3,9 @@ package client;
 import ocsf.client.*;
 import common.ChatIF;
 import entities.Question;
+import entities.User;
 import gui.HostSelectionScreenController;
+import gui.LoginScreenController;
 import gui.QuestionBankController;
 
 import java.io.*;
@@ -25,10 +27,16 @@ public class ChatClient extends AbstractClient
 	public static boolean awaitResponse = false;
 	public static QuestionBankController questionBankController;
 	public static HostSelectionScreenController hostSelectionScreenController;
+	public static LoginScreenController loginScreenController;
 	
 	 public static QuestionBankController getQuestionBankController() 
 	 {
 		 return questionBankController;
+	 }
+	 
+	 public static void setLoginScreenController(LoginScreenController controller)
+	 {
+		 loginScreenController = controller;
 	 }
 	 
 	 public static void setQuestionBankController(QuestionBankController controller)
@@ -79,8 +87,16 @@ public class ChatClient extends AbstractClient
                 questionBankController.updateQuestionTable();
             }
 		}
+		else if (msg.toString().equals("Incorrect login"))
+		{
+			JOptionPane.showMessageDialog(null, "Incorrect useranme or password.", "Login", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if (msg instanceof User)
+		{
+			loginScreenController.setFlag(true);
+		}
 		//Disconnect all clients when the server is disconnected.
-		if (msg.toString().equals("Abort"))
+		else if (msg.toString().equals("Abort"))
 		{
 			JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);
