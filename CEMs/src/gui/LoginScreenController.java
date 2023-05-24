@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Controller.StubController;
 import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -21,8 +22,8 @@ import javafx.stage.Stage;
 /*A GUI for the login screen.*/
 public class LoginScreenController implements Initializable 
 {
-	
-	boolean flag = false; 
+	public static Object sem=new Object();
+	public static boolean flag = false; 
 	
     @FXML
     private Button exitBtn;
@@ -63,24 +64,41 @@ public class LoginScreenController implements Initializable
     @FXML
     void Login(ActionEvent event) throws IOException 
     {
-    	FXMLLoader loader = new FXMLLoader();
+    	//FXMLLoader loader = new FXMLLoader();
     	ArrayList<String> info =  new ArrayList<>();
     	info.add(txtLoginUsername.getText().trim());
     	info.add(txtLoginPassword.getText().trim());
-    	ClientUI.chat.accept(info);
-    	if (flag)
+    	//ClientUI.chat.accept(info);
+    	StubController.TestAccept(info);
+    	if (!flag)
     	{
         	((Node)event.getSource()).getScene().getWindow().hide();
-        	Stage primaryStage = new Stage();
-        	loader.setLocation(getClass().getResource("/gui/ProfessorScreen.fxml"));
-        	Parent root = loader.load();
-        	WindowUtils.enableWindowDraggable(root, primaryStage);
-        	Scene scene = new Scene(root);
-        	primaryStage.setTitle("Login");
-        	primaryStage.setScene(scene);
-        	primaryStage.show();
+        	
     	}
+    
+    	synchronized(sem){
+    	while(!flag) {
+    		try {
+				sem.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}}
+    	openProffesorScreen(); 
     }
+    
+
+	public void openProffesorScreen() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		Stage primaryStage = new Stage();
+		loader.setLocation(getClass().getResource("/gui/ProfessorScreen.fxml"));
+		Parent root = loader.load();
+		WindowUtils.enableWindowDraggable(root, primaryStage);
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("Login");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
 
     /*disconnects from the server and exits from the GUI. */
     @FXML
@@ -102,4 +120,6 @@ public class LoginScreenController implements Initializable
 		this.flag = flag;
 	}
 
+	
+	
 }

@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import entities.Client;
 import entities.Question;
-import entities.User;
 import gui.HostSelectionScreenController;
 import gui.ServerScreenController;
 import javafx.collections.FXCollections;
@@ -27,6 +26,7 @@ public class EchoServer extends AbstractServer
 	static ObservableList<Client> clientsInfoList = FXCollections.observableArrayList();
 	public static ServerScreenController serverScreenController;
 	public static HostSelectionScreenController hostSelectionScreenController;
+	
 	
 
 	public static void setHostSelectionScreenController(HostSelectionScreenController hostSelectionScreenController) {
@@ -123,6 +123,8 @@ public class EchoServer extends AbstractServer
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) 
 	{
+		
+		
 		System.out.println("Message received: " + msg + " from " + client);
 		try
 		{
@@ -152,18 +154,6 @@ public class EchoServer extends AbstractServer
 			{
 				MySQLConnection.saveQuestionToDB((ArrayList<Question>)msg);
 				this.sendToAllClients("Question updated");
-			}
-			
-			else if (msg instanceof ArrayList)
-			{
-				User user = MySQLConnection.verifyLogin((ArrayList<String>)msg);
-				if (user == null)
-					client.sendToClient("Incorrect login");
-				else
-				{
-					client.sendToClient(user);
-				}
-				
 			}
 			client.sendToClient("Response from server");
 		}
