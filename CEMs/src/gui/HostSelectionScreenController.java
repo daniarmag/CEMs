@@ -74,9 +74,7 @@ public class HostSelectionScreenController implements Initializable {
 			{
 				// notify ClientUI that a successful connection has been established.
 				ClientUI.chat.accept("connected");
-				// Hide the current window
 				((Node) event.getSource()).getScene().getWindow().hide();
-				// Create a new stage for the login screen
 				WindowUtils.createNewStage("/gui/LoginScreen.fxml", null, "Login").show();
 			}
 			//Wrong IP OR server is not running.
@@ -86,8 +84,6 @@ public class HostSelectionScreenController implements Initializable {
 						JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 			}
-				
-			
 		}
 	}
 

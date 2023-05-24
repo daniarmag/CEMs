@@ -34,25 +34,6 @@ public class LoginScreenController implements Initializable
 
     @FXML
     private TextField txtLoginUsername;
-
-    /*
-    /////USE IN DIFFRERENT SCREEN
-    @FXML
-    void Login(ActionEvent event) throws IOException 
-    {
-    	FXMLLoader loader = new FXMLLoader();
-    	ClientUI.chat.accept("connected");
-    	((Node)event.getSource()).getScene().getWindow().hide();
-    	Stage primaryStage = new Stage();
-    	loader.setLocation(getClass().getResource("/gui/QuestionBank.fxml"));
-    	Parent root = loader.load();
-    	WindowUtils.enableWindowDraggable(root, primaryStage);
-    	Scene scene = new Scene(root);
-    	primaryStage.setTitle("Question Bank");
-    	primaryStage.setScene(scene);
-    	primaryStage.show();		
-    }
-    */
     
     /**
      * Logs the user into the system and opens the next screen. 

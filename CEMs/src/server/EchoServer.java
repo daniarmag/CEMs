@@ -133,12 +133,7 @@ public class EchoServer extends AbstractServer
 			if (msg.toString().equals("connected"))
 			{
 				updateclientsInfoList(client, "Connected");
-				try {
-				serverScreenController.clientConnected();}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
+				serverScreenController.clientConnected();
 				client.sendToClient("Connected");
 			}
 			
