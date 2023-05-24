@@ -5,6 +5,7 @@ package entities;
  * @author Daniel
  *
  */
+@SuppressWarnings("serial")
 public class Professor extends User
 {
 

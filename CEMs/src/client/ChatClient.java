@@ -2,17 +2,9 @@ package client;
 
 import ocsf.client.*;
 import common.ChatIF;
-import entities.Question;
-import entities.User;
-import gui.HostSelectionScreenController;
-import gui.LoginScreenController;
-import gui.ProfessorScreenController;
 import gui.QuestionBankController;
-
+import message.ClientMessageHandler;
 import java.io.*;
-import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
 
 public class ChatClient extends AbstractClient
 {
@@ -27,27 +19,15 @@ public class ChatClient extends AbstractClient
 	final public static int DEFAULT_PORT = 5555;
 	public static boolean awaitResponse = false;
 	public static QuestionBankController questionBankController;
-	public static HostSelectionScreenController hostSelectionScreenController;
-	public static LoginScreenController loginScreenController;
 	
 	 public static QuestionBankController getQuestionBankController() 
 	 {
 		 return questionBankController;
 	 }
 	 
-	 public static void setLoginScreenController(LoginScreenController controller)
-	 {
-		 loginScreenController = controller;
-	 }
-	 
 	 public static void setQuestionBankController(QuestionBankController controller)
 	 {
 		 questionBankController = controller;
-	 }
-	 
-	 public static void setHostSelectionScreenController(HostSelectionScreenController controller)
-	 {
-		 hostSelectionScreenController = controller;
 	 }
 
 	// Constructors ****************************************************
@@ -77,38 +57,7 @@ public class ChatClient extends AbstractClient
 	{
 		System.out.println("--> handleMessageFromServer");
 		awaitResponse = false;
-		System.out.println(msg.toString());
-		//Load the question from the database
-		if (msg instanceof ArrayList)
-		{
-			ArrayList<Question> arr = (ArrayList<Question>) msg;
-            if (questionBankController != null) 
-            {
-                questionBankController.setArr(arr);
-                questionBankController.updateQuestionTable();
-            }
-		}
-		else if (msg.toString().equals("Incorrect login"))
-		{
-			JOptionPane.showMessageDialog(null, "Incorrect useranme or password.", "Login", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else if (msg instanceof User)
-		{
-			try {
-				LoginScreenController.hideCurrentScene();
-				ProfessorScreenController.start();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		//Disconnect all clients when the server is disconnected.
-		else if (msg.toString().equals("Abort"))
-		{
-			JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
-			System.exit(0);
-		}
-			
+		ClientMessageHandler.messageHandler(msg);
 	}
 
 	/**

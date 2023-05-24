@@ -1,14 +1,12 @@
 package gui;
 
 import java.io.IOException;
-
 import client.ClientUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+
 
 public class ProfessorScreenController {
 
@@ -37,7 +35,7 @@ public class ProfessorScreenController {
 			{
 				try 
 			    {
-					WindowUtils.createNewStage("/gui/ProfessorScreen.fxml", null, "Professor screen").show();
+					WindowUtils.createNewStage("/gui/ProfessorScreen.fxml", "Professor screen").show();
 				} catch (IOException e) {} 
 			}
 		});

@@ -22,6 +22,7 @@ public class MySQLConnection
 	 * @param password of database
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static boolean connectToDB(String URL, String username, String password) 
 	{
 		try 
@@ -102,15 +103,13 @@ public class MySQLConnection
 	
 	public static User verifyLogin(ArrayList<String> loginInfo)
 	{
-		String username = loginInfo.get(0);
-		String password = loginInfo.get(1);
+		String username = loginInfo.get(1);
+		String password = loginInfo.get(2);
 		User newUser = null;
 		//lOading all the questions from the table
 		try
 		{
-			
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
-			
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();

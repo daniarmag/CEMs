@@ -1,9 +1,7 @@
 package gui;
 
 import java.io.IOException;
-
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,19 +14,15 @@ public class WindowUtils
 {
     /**
      * Enables the dragging functionality for a window.
-     *
      * @param node         The Node representing the window content.
      * @param primaryStage The primary Stage of the window.
      */
-    public static Stage createNewStage(String fxmlFilePath, String cssFilePath, String title) throws IOException 
+    public static Stage createNewStage(String fxmlFilePath, String title) throws IOException 
     {
     	final double[] xOffset = new double[1];
         final double[] yOffset = new double[1];
         Parent root = FXMLLoader.load(WindowUtils.class.getResource(fxmlFilePath));
         Scene scene = new Scene(root);
-        if (cssFilePath != null) {
-            scene.getStylesheets().add(WindowUtils.class.getResource(cssFilePath).toExternalForm());
-        }
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.setTitle(title);

@@ -1,0 +1,87 @@
+package message;
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import client.ChatClient;
+import entities.Question;
+import entities.User;
+import gui.LoginScreenController;
+import gui.ProfessorScreenController;
+
+
+public class ClientMessageHandler
+{
+	@SuppressWarnings({ "unchecked", "incomplete-switch" })
+	public static void messageHandler(Object msg)
+	{
+		 MessageType message = getType(msg);
+	        if (message == null) 
+	        	return;
+	        switch (message)
+	        {
+	        	case STRING:
+	        		stringMessageHandler((String)msg);
+	        		break;
+	        	case QUESTION_ARRAY_LIST:
+	        		questionArrayListMessageHandler((ArrayList<Question>)msg);
+	        		break;
+	        	case USER:
+	        		userMessageHandler((User)msg);
+	        		break;
+	        }
+	}
+	
+	public static MessageType getType(Object msg) 
+	{
+	    if (msg instanceof String) 
+	        return MessageType.STRING;
+		else if (msg instanceof ArrayList) 
+		{
+	    	ArrayList<?> arrayList = (ArrayList<?>) msg;
+	        if (!arrayList.isEmpty()) 
+	        {
+	        	Object firstElement = arrayList.get(0);
+	        	if (firstElement instanceof String) 
+	                return MessageType.STRING_ARRAY_LIST;
+	            else if (firstElement instanceof Question) 
+	                return MessageType.QUESTION_ARRAY_LIST;
+	        }
+		}
+		else if (msg instanceof User)
+			return MessageType.USER;
+	    return null;
+	}
+	
+	 public static void stringMessageHandler(String message) 
+	 {
+		 switch(message)
+		 {
+		 	case "incorrect login":
+		 		JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.INFORMATION_MESSAGE);
+		 		break;
+		 	case "abort":
+		 		JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
+				System.exit(0);
+				break;
+		 }
+	 }
+
+	 
+	 public static void questionArrayListMessageHandler(ArrayList<Question> arrayList) 
+	 {
+		 if (ChatClient.questionBankController != null) 
+         {
+			 ChatClient.questionBankController.setArr(arrayList);
+			 ChatClient.questionBankController.updateQuestionTable();
+         }
+	 }
+	 
+	 public static void userMessageHandler(User user)
+	 {
+		 try 
+		 {
+			 LoginScreenController.hideCurrentScene();
+		   	 ProfessorScreenController.start();
+		 }catch (Exception e){}
+	 }
+}

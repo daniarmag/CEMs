@@ -1,26 +1,18 @@
 package gui;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
-
-import client.ChatClient;
 import client.ClientUI;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import server.EchoServer;
+
 
 /*A GUI for when the client needs to enter the host IP */
 public class HostSelectionScreenController implements Initializable {
@@ -50,7 +42,7 @@ public class HostSelectionScreenController implements Initializable {
 	 */
 	public void start(Stage primaryStage) throws Exception 
 	{
-		WindowUtils.createNewStage("/gui/HostSelectionScreen.fxml", null, "Server Connection").show(); // Creates and shows the login screen stage
+		WindowUtils.createNewStage("/gui/HostSelectionScreen.fxml", "Server Connection").show(); // Creates and shows the login screen stage
 	}
 
 	/**
@@ -75,7 +67,7 @@ public class HostSelectionScreenController implements Initializable {
 				// notify ClientUI that a successful connection has been established.
 				ClientUI.chat.accept("connected");
 				((Node) event.getSource()).getScene().getWindow().hide();
-				WindowUtils.createNewStage("/gui/LoginScreen.fxml", null, "Login").show();
+				WindowUtils.createNewStage("/gui/LoginScreen.fxml", "Login").show();
 			}
 			//Wrong IP OR server is not running.
 			else
@@ -105,10 +97,9 @@ public class HostSelectionScreenController implements Initializable {
 	 * @param resources The resources used to localize the root object.
 	 */
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		ChatClient.setHostSelectionScreenController(this);
+	public void initialize(URL location, ResourceBundle resources) 
+	{
 		//txtServerIP.setText(InetAddress.getLocalHost().getHostAddress());
 		txtServerIP.setText("localhost");
-	
 	}
 }

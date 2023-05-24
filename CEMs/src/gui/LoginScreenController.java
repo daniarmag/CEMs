@@ -1,25 +1,18 @@
 package gui;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-import client.ChatClient;
 import client.ClientUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+
 
 /*A GUI for the login screen.*/
-public class LoginScreenController implements Initializable 
+public class LoginScreenController
 {
 	private static ActionEvent e;
 	
@@ -45,6 +38,7 @@ public class LoginScreenController implements Initializable
     {
     	//FXMLLoader loader = new FXMLLoader();
     	ArrayList<String> info =  new ArrayList<>();
+    	info.add("LoggedIn");
     	info.add(txtLoginUsername.getText().trim());
     	info.add(txtLoginPassword.getText().trim());
     	e = event;
@@ -59,7 +53,7 @@ public class LoginScreenController implements Initializable
 	        @Override
 	        public void run() 
 	        {
-	            ((Node) e.getSource()).getScene().getWindow().hide(); // Hides the primary window
+	            ((Node)e.getSource()).getScene().getWindow().hide(); // Hides the primary window
 	        }
 	    });
 	}
@@ -72,10 +66,4 @@ public class LoginScreenController implements Initializable
     	ClientUI.chat.quit();
     	System.exit(0);
     }
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) 
-	{
-		ChatClient.setLoginScreenController(this);
-	}
 }

@@ -7,10 +7,7 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import entities.Client;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -84,7 +81,7 @@ public class ServerScreenController implements Initializable
 
 	public void start(Stage primaryStage) throws Exception
 	{
-		WindowUtils.createNewStage("/gui/ServerScreen.fxml", null, "Server").show(); // Creates and shows the login screen stage
+		WindowUtils.createNewStage("/gui/ServerScreen.fxml", "Server").show(); // Creates and shows the login screen stage
 	}
 
 	/*Initializing the GUI with the table.*/
@@ -167,7 +164,7 @@ public class ServerScreenController implements Initializable
 		connectedTable.getItems().clear();
 		try 
 		{
-			ServerUI.getEs().sendToAllClients("Abort");
+			ServerUI.getEs().sendToAllClients("abort");
 		} catch (Exception e) {}
 		ServerUI.closeServer();
 		onCircle.setFill(Color.TRANSPARENT);

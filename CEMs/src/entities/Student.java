@@ -5,6 +5,7 @@ package entities;
  * @author Daniel
  *
  */
+@SuppressWarnings("serial")
 public class Student extends User
 {
 

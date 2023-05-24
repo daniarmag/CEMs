@@ -117,7 +117,7 @@ public class QuestionBankController implements Initializable
 	{
 		ChatClient.setQuestionBankController(this);
 		editableCols();
-		ClientUI.chat.accept("Load questions");	
+		ClientUI.chat.accept("load questions");	
 	}
 
 }
