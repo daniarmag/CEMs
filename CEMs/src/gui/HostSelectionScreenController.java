@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import client.ChatClient;
 import client.ClientUI;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,16 +48,9 @@ public class HostSelectionScreenController implements Initializable {
 	 * @param primaryStage The primary stage of the application.
 	 * @throws Exception If an exception occurs during initialization.
 	 */
-	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/gui/HostSelectionScreen.fxml"));
-		Parent root = loader.load();
-		WindowUtils.enableWindowDraggable(root, primaryStage);
-		EchoServer.setHostSelectionScreenController(this);
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Server Connection");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	public void start(Stage primaryStage) throws Exception 
+	{
+		WindowUtils.createNewStage("/gui/HostSelectionScreen.fxml", null, "Server Connection").show(); // Creates and shows the login screen stage
 	}
 
 	/**
@@ -68,7 +62,6 @@ public class HostSelectionScreenController implements Initializable {
 	@FXML
 	void connect(ActionEvent event) throws IOException 
 	{
-		FXMLLoader loader = new FXMLLoader();
 		String IP = getIP().trim();
 		// A case for invalid IP
 		if (IP.isEmpty())
@@ -84,14 +77,7 @@ public class HostSelectionScreenController implements Initializable {
 				// Hide the current window
 				((Node) event.getSource()).getScene().getWindow().hide();
 				// Create a new stage for the login screen
-				Stage primaryStage = new Stage();
-				loader.setLocation(getClass().getResource("/gui/LoginScreen.fxml"));
-				Parent root = loader.load();
-				WindowUtils.enableWindowDraggable(root, primaryStage);
-				Scene scene = new Scene(root);
-				primaryStage.setTitle("Login");
-				primaryStage.setScene(scene);
-				primaryStage.show();
+				WindowUtils.createNewStage("/gui/LoginScreen.fxml", null, "Login").show();
 			}
 			//Wrong IP OR server is not running.
 			else

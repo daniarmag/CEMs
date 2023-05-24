@@ -6,6 +6,7 @@ import entities.Question;
 import entities.User;
 import gui.HostSelectionScreenController;
 import gui.LoginScreenController;
+import gui.ProfessorScreenController;
 import gui.QuestionBankController;
 
 import java.io.*;
@@ -93,7 +94,13 @@ public class ChatClient extends AbstractClient
 		}
 		else if (msg instanceof User)
 		{
-			loginScreenController.setFlag(true);
+			try {
+				LoginScreenController.hideCurrentScene();
+				ProfessorScreenController.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//Disconnect all clients when the server is disconnected.
 		else if (msg.toString().equals("Abort"))

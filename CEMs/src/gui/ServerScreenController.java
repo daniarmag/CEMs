@@ -84,21 +84,14 @@ public class ServerScreenController implements Initializable
 
 	public void start(Stage primaryStage) throws Exception
 	{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/gui/ServerScreen.fxml"));
-		Parent root = loader.load();
-		WindowUtils.enableWindowDraggable(root, primaryStage);
-		Scene scene = new Scene(root);
-		EchoServer.setServerScreenController(this);
-		primaryStage.setTitle("Server");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		WindowUtils.createNewStage("/gui/ServerScreen.fxml", null, "Server").show(); // Creates and shows the login screen stage
 	}
 
 	/*Initializing the GUI with the table.*/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
+		EchoServer.setServerScreenController(this);
 		try 
 		{
 			txtAreaIP.setText(InetAddress.getLocalHost().getHostAddress());

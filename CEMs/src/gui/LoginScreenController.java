@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import Controller.StubController;
 import client.ChatClient;
 import client.ClientUI;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +21,7 @@ import javafx.stage.Stage;
 /*A GUI for the login screen.*/
 public class LoginScreenController implements Initializable 
 {
-	public static Object sem=new Object();
-	public static boolean flag = false; 
+	private static ActionEvent e;
 	
     @FXML
     private Button exitBtn;
@@ -68,36 +66,21 @@ public class LoginScreenController implements Initializable
     	ArrayList<String> info =  new ArrayList<>();
     	info.add(txtLoginUsername.getText().trim());
     	info.add(txtLoginPassword.getText().trim());
-    	//ClientUI.chat.accept(info);
-    	StubController.TestAccept(info);
-    	if (!flag)
-    	{
-        	((Node)event.getSource()).getScene().getWindow().hide();
-        	
-    	}
-    
-    	synchronized(sem){
-    	while(!flag) {
-    		try {
-				sem.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}}}
-    	openProffesorScreen(); 
+    	e = event;
+    	ClientUI.chat.accept(info);
+    	
     }
     
-
-	public void openProffesorScreen() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		Stage primaryStage = new Stage();
-		loader.setLocation(getClass().getResource("/gui/ProfessorScreen.fxml"));
-		Parent root = loader.load();
-		WindowUtils.enableWindowDraggable(root, primaryStage);
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    public static void hideCurrentScene() throws Exception 
+    {
+	    Platform.runLater(new Runnable() 
+	    {
+	        @Override
+	        public void run() 
+	        {
+	            ((Node) e.getSource()).getScene().getWindow().hide(); // Hides the primary window
+	        }
+	    });
 	}
 
     /*disconnects from the server and exits from the GUI. */
@@ -114,12 +97,4 @@ public class LoginScreenController implements Initializable
 	{
 		ChatClient.setLoginScreenController(this);
 	}
-	
-	public void setFlag(boolean flag)
-	{
-		this.flag = flag;
-	}
-
-	
-	
 }
