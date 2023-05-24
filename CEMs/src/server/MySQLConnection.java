@@ -101,6 +101,11 @@ public class MySQLConnection
 	    }
 	}
 	
+	/**
+	 * Verifies user info for login.
+	 * @param loginInfo
+	 * @return user object or null.
+	 */
 	public static User verifyLogin(ArrayList<String> loginInfo)
 	{
 		String username = loginInfo.get(1);
