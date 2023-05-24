@@ -111,14 +111,13 @@ public class EchoServer extends AbstractServer
 	
 	/**
 	 * This method handles any messages received from the client.
-	 *
 	 * @param msg    The message received from the client.
 	 * @param client The connection from which the message originated.
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) 
 	{
 		System.out.println("Message received: " + msg + " from " + client);
-		ServerMessageHandler.messageHandler(msg, client); // handle the message from the server in different class
+		ServerMessageHandler.messageHandler(msg, client);
 	}
 
 	/**

@@ -50,7 +50,6 @@ public class ChatClient extends AbstractClient
 
 	/**
 	 * This method handles all data that comes in from the server.
-	 *
 	 * @param msg The message from the server.
 	 */
 	public void handleMessageFromServer(Object msg) 
