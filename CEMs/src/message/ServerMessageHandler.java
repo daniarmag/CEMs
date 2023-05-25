@@ -75,11 +75,14 @@ public class ServerMessageHandler
 					EchoServer.updateclientsInfoList(client, "Connected");
 					EchoServer.serverScreenController.clientConnected();
 					client.sendToClient("Connected");
+					break;
 				case "disconnected":
 					EchoServer.updateclientsInfoList(client, "Disconnected");
 					client.sendToClient("Disonnected");
+					break;
 				case "load questions":
 					client.sendToClient(MySQLConnection.loadQuestions());
+					break;
 			}
 		} catch (IOException e) {}
 	}
