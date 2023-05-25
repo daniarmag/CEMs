@@ -1,15 +1,22 @@
 package gui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import client.ClientUI;
+import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 
 
-public class ProfessorScreenController {
-
+public class ProfessorScreenController implements Initializable 
+{
+	public static User u;
     @FXML
     private Button createExamBtn;
 
@@ -19,6 +26,9 @@ public class ProfessorScreenController {
 	@FXML
 	private Button exitBtn;
 	
+    @FXML
+    private Text welcomeText;
+	
 	
 	/**
 	 * Initializes the JavaFX controller during application startup.
@@ -26,8 +36,9 @@ public class ProfessorScreenController {
 	 * @param primaryStage The primary stage of the application.
 	 * @throws Exception If an exception occurs during initialization.
 	 */
-	public static void start() throws Exception 
+	public static void start(User user) throws Exception 
 	{
+		u = user;
 		Platform.runLater(new Runnable() 
 		{
 			@Override
@@ -51,4 +62,11 @@ public class ProfessorScreenController {
     	ClientUI.chat.quit();
     	System.exit(0);
     }
+
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		welcomeText.setText("Welcome back " + u.getFirst_name());
+	}
 }

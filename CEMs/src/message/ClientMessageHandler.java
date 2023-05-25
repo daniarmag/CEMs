@@ -100,7 +100,7 @@ public class ClientMessageHandler
 		try 
 		{
 			LoginScreenController.hideCurrentScene();
-			ProfessorScreenController.start();
+			ProfessorScreenController.start(user);
 		} catch (Exception e) {}
 	}
 }

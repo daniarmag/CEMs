@@ -103,7 +103,6 @@ public class ServerMessageHandler
 						client.sendToClient("incorrect login");
 				    else 
 						client.sendToClient(user);
-					
 				}
 			}
 		} catch (IOException e) {}

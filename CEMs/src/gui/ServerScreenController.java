@@ -81,7 +81,7 @@ public class ServerScreenController implements Initializable
 
 	public void start(Stage primaryStage) throws Exception
 	{
-		WindowUtils.createNewStage("/gui/ServerScreen.fxml", "Server").show(); // Creates and shows the login screen stage
+		WindowUtils.createNewStage("/gui/ServerScreen.fxml", "Server").show();
 	}
 
 	/*Initializing the GUI with the table.*/

@@ -42,7 +42,7 @@ public class HostSelectionScreenController implements Initializable {
 	 */
 	public void start(Stage primaryStage) throws Exception 
 	{
-		WindowUtils.createNewStage("/gui/HostSelectionScreen.fxml", "Server Connection").show(); // Creates and shows the login screen stage
+		WindowUtils.createNewStage("/gui/HostSelectionScreen.fxml", "Server Connection").show(); 
 	}
 
 	/**

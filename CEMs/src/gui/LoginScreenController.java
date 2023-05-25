@@ -53,7 +53,7 @@ public class LoginScreenController
 	        @Override
 	        public void run() 
 	        {
-	            ((Node)e.getSource()).getScene().getWindow().hide(); // Hides the primary window
+	            ((Node)e.getSource()).getScene().getWindow().hide();
 	        }
 	    });
 	}
