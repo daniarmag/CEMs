@@ -75,6 +75,9 @@ public class ClientMessageHandler
 				JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected",JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 				break;
+			case "already logged":
+				JOptionPane.showMessageDialog(null, "Client is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
+				break;
 		}
 	}
 

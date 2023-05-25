@@ -120,25 +120,34 @@ public class MySQLConnection
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) 
 			{
-				
 				String user_id = rs.getString("user_id");
 				String first_name = rs.getString("first_name");
 				String last_name = rs.getString("last_name");
 				String email = rs.getString("email");
 				String role = rs.getString("role");
-				switch(role)
+				int isLogged = rs.getInt("isLogged");
+				if (isLogged == 0)
 				{
-					case "student":
-						newUser = new Student(user_id, first_name, last_name, email, username, password, null);
-					case "professor":
-						newUser = new Professor(user_id, first_name, last_name, email, username, password, null);
+					PreparedStatement ps = conn.prepareStatement("UPDATE users SET isLogged = 1 WHERE user_id = ?");
+					ps.setString(1, user_id);
+					ps.executeUpdate();
+					switch(role)
+					{
+						case "student":
+							newUser = new Student(user_id, first_name, last_name, email, username, password, null);
+							break;
+						case "professor":
+							newUser = new Professor(user_id, first_name, last_name, email, username, password, null);
+							break;
+					}
+				}
+				else 
+				{
+					return new User("logged", null, null, null, null, null, null);
 				}
 			}
 		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
+		catch (SQLException e){}
 		return newUser;
 	}
 

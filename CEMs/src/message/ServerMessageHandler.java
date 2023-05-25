@@ -101,8 +101,10 @@ public class ServerMessageHandler
 					User user = MySQLConnection.verifyLogin(arrayList);
 					if (user == null) 
 						client.sendToClient("incorrect login");
-				    else 
-						client.sendToClient(user);
+				    else if (user.getUser_id().equals("logged"))
+						client.sendToClient("already logged");
+				    else
+				    	client.sendToClient(user);
 				}
 			}
 		} catch (IOException e) {}

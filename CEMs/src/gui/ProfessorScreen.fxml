@@ -21,7 +21,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
@@ -49,17 +49,17 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="349.0" layoutY="341.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Check results">
+      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="341.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Check results">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="349.0" layoutY="415.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Activate Exam">
+      <Button fx:id="activateExamBtn" alignment="CENTER" layoutX="349.0" layoutY="415.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Activate Exam">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="349.0" layoutY="492.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="View reports">
+      <Button fx:id="viewReportBtn" alignment="CENTER" layoutX="349.0" layoutY="492.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="View reports">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>

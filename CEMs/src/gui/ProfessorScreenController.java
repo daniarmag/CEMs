@@ -17,15 +17,28 @@ import javafx.scene.text.Text;
 public class ProfessorScreenController implements Initializable 
 {
 	public static User u;
+	
+	@FXML
+    private Button activateExamBtn;
+
+    @FXML
+    private Button checkResBtn;
+
     @FXML
     private Button createExamBtn;
 
     @FXML
     private Button createQstBtn;
-    
-	@FXML
-	private Button exitBtn;
-	
+
+    @FXML
+    private Button exitBtn;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private Button viewReportBtn;
+
     @FXML
     private Text welcomeText;
 	
@@ -61,6 +74,12 @@ public class ProfessorScreenController implements Initializable
     	ClientUI.chat.accept("disconnected");
     	ClientUI.chat.quit();
     	System.exit(0);
+    }
+    
+    @FXML
+    void logout(ActionEvent event)
+    {
+    	
     }
 
 
