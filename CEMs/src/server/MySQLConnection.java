@@ -150,5 +150,16 @@ public class MySQLConnection
 		catch (SQLException e){}
 		return newUser;
 	}
+	
+	public static void logout(String id)
+	{
+		try
+		{
+			PreparedStatement ps = conn.prepareStatement("UPDATE users SET isLogged = 0 WHERE user_id = ?");
+			ps.setString(1, id);
+			ps.executeUpdate();
+		}
+		catch(SQLException e){}
+	}
 
 }

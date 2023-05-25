@@ -99,8 +99,7 @@ public class ServerMessageHandler
 		{
 			switch (messageType) 
 			{
-				case "LoggedIn": 
-				{
+				case "login": 				
 					User user = MySQLConnection.verifyLogin(arrayList);
 					if (user == null) 
 						client.sendToClient("incorrect login");
@@ -108,7 +107,11 @@ public class ServerMessageHandler
 						client.sendToClient("already logged");
 				    else
 				    	client.sendToClient(user);
-				}
+					break;
+				case "logout":
+					MySQLConnection.logout(arrayList.get(1));
+					client.sendToClient("logged out");
+					break;
 			}
 		} catch (IOException e) {}
 	}

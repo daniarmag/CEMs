@@ -26,7 +26,7 @@
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets right="70.0" top="320.0" />
+                  <Insets top="310.0" />
                </VBox.margin>
             </Button>
          </children>
@@ -39,7 +39,7 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="createQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Create a question">
+      <Button fx:id="createQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#createQuestion" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Create a question">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>

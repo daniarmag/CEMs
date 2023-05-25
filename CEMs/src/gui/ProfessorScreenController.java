@@ -1,15 +1,14 @@
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import client.ClientUI;
+import control.UserController;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
@@ -45,9 +44,9 @@ public class ProfessorScreenController implements Initializable
 	
 	/**
 	 * Initializes the JavaFX controller during application startup.
-	 *
 	 * @param primaryStage The primary stage of the application.
-	 * @throws Exception If an exception occurs during initialization.
+	 * @param user
+	 * @throws Exception
 	 */
 	public static void start(User user) throws Exception 
 	{
@@ -57,31 +56,36 @@ public class ProfessorScreenController implements Initializable
 			@Override
 			public void run() 
 			{
-				try 
-			    {
-					WindowUtils.createNewStage("/gui/ProfessorScreen.fxml", "Professor screen").show();
-				} catch (IOException e) {} 
+				ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show();
 			}
 		});
 	}
 	
 	
 	/*Exits the GUI window.*/
-	   /*disconnects from the server and exits from the GUI. */
+	/*disconnects from the server and exits from the GUI. */
     @FXML
     void exit(ActionEvent event) 
     {
-    	ClientUI.chat.accept("disconnected");
-    	ClientUI.chat.quit();
-    	System.exit(0);
+    	UserController.userExit(u);
     }
     
     @FXML
     void logout(ActionEvent event)
     {
-    	
+    	((Node) event.getSource()).getScene().getWindow().hide();
+		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
+		UserController.logoutUser(u);
     }
 
+    @FXML
+    void createQuestion(ActionEvent event)
+    {
+    	((Node) event.getSource()).getScene().getWindow().hide();
+    	try {
+			CreateQuestionScreenController.start(u);
+		} catch (Exception e) {}
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 

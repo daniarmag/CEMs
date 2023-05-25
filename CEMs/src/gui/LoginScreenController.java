@@ -38,7 +38,7 @@ public class LoginScreenController
     {
     	//FXMLLoader loader = new FXMLLoader();
     	ArrayList<String> info =  new ArrayList<>();
-    	info.add("LoggedIn");
+    	info.add("login");
     	info.add(txtLoginUsername.getText().trim());
     	info.add(txtLoginPassword.getText().trim());
     	e = event;

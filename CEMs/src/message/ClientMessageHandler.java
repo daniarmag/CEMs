@@ -76,7 +76,7 @@ public class ClientMessageHandler
 				System.exit(0);
 				break;
 			case "already logged":
-				JOptionPane.showMessageDialog(null, "Client is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "User is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
 				break;
 		}
 	}

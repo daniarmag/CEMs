@@ -30,7 +30,8 @@ public class HostSelectionScreenController implements Initializable {
 	/**
 	 * @return The IP address entered in the text field as a string.
 	 */
-	private String getIP() {
+	private String getIP() 
+	{
 		return txtServerIP.getText();
 	}
 
@@ -42,7 +43,7 @@ public class HostSelectionScreenController implements Initializable {
 	 */
 	public void start(Stage primaryStage) throws Exception 
 	{
-		WindowUtils.createNewStage("/gui/HostSelectionScreen.fxml", "Server Connection").show(); 
+		ScreenUtils.createNewStage("/gui/HostSelectionScreen.fxml").show(); 
 	}
 
 	/**
@@ -67,7 +68,7 @@ public class HostSelectionScreenController implements Initializable {
 				// notify ClientUI that a successful connection has been established.
 				ClientUI.chat.accept("connected");
 				((Node) event.getSource()).getScene().getWindow().hide();
-				WindowUtils.createNewStage("/gui/LoginScreen.fxml", "Login").show();
+				ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 			}
 			//Wrong IP OR server is not running.
 			else
