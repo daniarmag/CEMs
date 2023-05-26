@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import client.ClientUI;
+import control.UserController;
+import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -67,7 +69,9 @@ public class HostSelectionScreenController implements Initializable {
 			{
 				// notify ClientUI that a successful connection has been established.
 				ClientUI.chat.accept("connected");
-				((Node) event.getSource()).getScene().getWindow().hide();
+//				((Node) event.getSource()).getScene().getWindow().hide();
+				
+				UserController.Hide(event);
 				ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 			}
 			//Wrong IP OR server is not running.

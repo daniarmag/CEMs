@@ -3,6 +3,9 @@ package control;
 import java.util.ArrayList;
 import client.ClientUI;
 import entities.User;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 
 public class UserController 
 {
@@ -29,4 +32,14 @@ public class UserController
     	ClientUI.chat.quit();
     	System.exit(0);
 	}
+	
+	public static void Hide(ActionEvent e)
+	{
+		  
+		  Platform.runLater(()->((Node)e.getSource()).getScene().getWindow().hide());
+		  
+	}
+	
+	
+	
 }

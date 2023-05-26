@@ -48,18 +48,13 @@ public class ProfessorScreenController implements Initializable
 	 * @param user
 	 * @throws Exception
 	 */
-	public static void start(User user) throws Exception 
+	public void start(User user) throws Exception 
 	{
 		u = user;
-		Platform.runLater(new Runnable() 
-		{
-			@Override
-			public void run() 
-			{
-				ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show();
-			}
-		});
+		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show());
+		
 	}
+	
 	
 	
 	/*Exits the GUI window.*/
@@ -73,7 +68,8 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void logout(ActionEvent event)
     {
-    	((Node) event.getSource()).getScene().getWindow().hide();
+//    	((Node) event.getSource()).getScene().getWindow().hide();
+    	UserController.Hide(event);
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
     }
@@ -81,7 +77,8 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void createQuestion(ActionEvent event)
     {
-    	((Node) event.getSource()).getScene().getWindow().hide();
+//    	((Node) event.getSource()).getScene().getWindow().hide();
+    	UserController.Hide(event);
     	try {
 			CreateQuestionScreenController.start(u);
 		} catch (Exception e) {}

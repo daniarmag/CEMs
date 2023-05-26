@@ -12,6 +12,11 @@ import gui.ProfessorScreenController;
 
 public class ClientMessageHandler 
 {
+	
+
+	static ProfessorScreenController proffesorcontrolle;
+	static {proffesorcontrolle=new ProfessorScreenController();}
+	
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
@@ -97,10 +102,13 @@ public class ClientMessageHandler
 		{
 			case "professor subjects": 
 				arrayList.remove(0);
-				CreateQuestionScreenController.setSubjects(arrayList);
+				//CreateQuestionScreenController.setSubjects(arrayList);
 		}
 
 	}
+	
+	
+	
 
 	/**
 	 * Handles client messages that are an array list with Question elements.
@@ -124,7 +132,7 @@ public class ClientMessageHandler
 		try 
 		{
 			LoginScreenController.hideCurrentScene();
-			ProfessorScreenController.start(user);
+			proffesorcontrolle.start(user);
 		} catch (Exception e) {}
 	}
 }

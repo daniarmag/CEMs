@@ -3,12 +3,13 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 import client.ClientUI;
-import javafx.application.Platform;
+import control.UserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 
 /*A GUI for the login screen.*/
@@ -48,14 +49,11 @@ public class LoginScreenController
     
     public static void hideCurrentScene() throws Exception 
     {
-	    Platform.runLater(new Runnable() 
-	    {
-	        @Override
-	        public void run() 
-	        {
-	            ((Node)e.getSource()).getScene().getWindow().hide();
-	        }
-	    });
+    	try {
+    	UserController.Hide(e);}
+    	catch(Exception e)
+    	{e.printStackTrace();
+    	}
 	}
 
     /*disconnects from the server and exits from the GUI. */
@@ -66,4 +64,7 @@ public class LoginScreenController
     	ClientUI.chat.quit();
     	System.exit(0);
     }
+    
+   
+    
 }
