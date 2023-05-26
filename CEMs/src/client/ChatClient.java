@@ -19,16 +19,11 @@ public class ChatClient extends AbstractClient
 	final public static int DEFAULT_PORT = 5555;
 	public static boolean awaitResponse = false;
 	public static QuestionBankController questionBankController;
-	
-	 public static QuestionBankController getQuestionBankController() 
-	 {
-		 return questionBankController;
-	 }
 	 
-	 public static void setQuestionBankController(QuestionBankController controller)
-	 {
-		 questionBankController = controller;
-	 }
+	public static void setQuestionBankController(QuestionBankController controller)
+	{
+		questionBankController = controller;
+	}
 
 	// Constructors ****************************************************
 

@@ -161,5 +161,31 @@ public class MySQLConnection
 		}
 		catch(SQLException e){}
 	}
+	
+	public static ArrayList<String> getProfessorSubjects(String id)
+	{
+		ArrayList<String> answer = new ArrayList<String>();
+		answer.add("professor subjects");
+		try
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM professor_subject WHERE professor_id = ?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) 
+			{
+				String subject_id = rs.getString("subject_id");
+				PreparedStatement tempPs = conn.prepareStatement("SELECT * FROM subject WHERE subject_id = ?");
+				tempPs.setString(1, subject_id);
+				ResultSet tempRs = tempPs.executeQuery();
+				while (tempRs.next())
+				{
+					String subject_name = tempRs.getString("subject_name");
+					answer.add(subject_id + " - " + subject_name);
+				}
+			}
+		}
+		catch(SQLException e){e.printStackTrace();}
+		return answer;
+	}
 
 }

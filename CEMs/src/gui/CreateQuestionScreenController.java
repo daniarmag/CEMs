@@ -1,9 +1,15 @@
 package gui;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import client.ClientUI;
 import control.UserController;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -11,11 +17,12 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
-public class CreateQuestionScreenController
+public class CreateQuestionScreenController implements Initializable 
 {
 	public static User u;
+	
+	public static ArrayList<String> subjectsArr;
 	
 	@FXML
 	private TextField aAnswerText;
@@ -48,9 +55,6 @@ public class CreateQuestionScreenController
 	private Button goBackBtn;
 
 	@FXML
-	private Text questionNumberText;
-
-	@FXML
 	private TextArea questionTextArea;
 
 	@FXML
@@ -59,6 +63,11 @@ public class CreateQuestionScreenController
 	@FXML
 	private Button submitBtn;
 
+	public static void setSubjects(ArrayList<String> subjects)
+	{
+		subjectsArr = subjects;
+	}
+	
 	@FXML
 	void goBack(ActionEvent event) 
 	{
@@ -83,5 +92,14 @@ public class CreateQuestionScreenController
 	public void exit(ActionEvent event)
 	{
 		UserController.userExit(u);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		ArrayList<String> request = new ArrayList<String>();
+		request.add("find professor subjects");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);
 	}
 }

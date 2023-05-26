@@ -5,8 +5,10 @@ import javax.swing.JOptionPane;
 import client.ChatClient;
 import entities.Question;
 import entities.User;
+import gui.CreateQuestionScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
+
 
 public class ClientMessageHandler 
 {
@@ -28,6 +30,8 @@ public class ClientMessageHandler
 			case QUESTION_ARRAY_LIST:
 				questionArrayListMessageHandler((ArrayList<Question>) msg);
 				break;
+			case STRING_ARRAY_LIST:
+				stringArrayListMessageHandler((ArrayList<String>)msg);
 			case USER:
 				userMessageHandler((User) msg);
 				break;
@@ -79,6 +83,23 @@ public class ClientMessageHandler
 				JOptionPane.showMessageDialog(null, "User is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
 				break;
 		}
+	}
+	
+	/**
+	 * Handles server messages that are an array list with String elements.
+	 * @param arrayList
+	 * @param client
+	 */
+	public static void stringArrayListMessageHandler(ArrayList<String> arrayList) 
+	{
+		String messageType = arrayList.get(0);
+		switch (messageType) 
+		{
+			case "professor subjects": 
+				arrayList.remove(0);
+				CreateQuestionScreenController.setSubjects(arrayList);
+		}
+
 	}
 
 	/**

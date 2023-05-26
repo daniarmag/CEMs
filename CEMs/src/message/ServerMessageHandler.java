@@ -108,10 +108,14 @@ public class ServerMessageHandler
 				    else
 				    	client.sendToClient(user);
 					break;
+					
 				case "logout":
 					MySQLConnection.logout(arrayList.get(1));
 					client.sendToClient("logged out");
 					break;
+					
+				case "find professor subjects":
+					client.sendToClient(MySQLConnection.getProfessorSubjects(arrayList.get(1)));
 			}
 		} catch (IOException e) {}
 	}

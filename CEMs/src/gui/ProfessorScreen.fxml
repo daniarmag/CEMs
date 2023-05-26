@@ -34,7 +34,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Text id="profTitle" fx:id="welcomeText" layoutX="288.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back Almog!" textAlignment="CENTER">
+      <Text id="profTitle" fx:id="welcomeText" layoutX="288.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back !" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
