@@ -76,12 +76,18 @@ public class ServerMessageHandler
 					EchoServer.serverScreenController.clientConnected();
 					client.sendToClient("Connected");
 					break;
+					
 				case "disconnected":
 					EchoServer.updateclientsInfoList(client, "Disconnected");
 					client.sendToClient("Disonnected");
 					break;
+					
 				case "load questions":
 					client.sendToClient(MySQLConnection.loadQuestions());
+					break;
+					
+				case "get amount of questions":
+					client.sendToClient(MySQLConnection.getAmountOfQuestions());
 					break;
 			}
 		} catch (IOException e) {}
@@ -116,6 +122,7 @@ public class ServerMessageHandler
 					
 				case "find professor subjects":
 					client.sendToClient(MySQLConnection.getProfessorSubjects(arrayList.get(1)));
+					break;
 			}
 		} catch (IOException e) {}
 	}

@@ -12,16 +12,20 @@ import gui.ProfessorScreenController;
 
 public class ClientMessageHandler 
 {
+	static ProfessorScreenController proffesorController;
+	static CreateQuestionScreenController createQuestionScreenController;
+	static {proffesorController = new ProfessorScreenController();}
 	
-
-	static ProfessorScreenController proffesorcontrolle;
-	static {proffesorcontrolle=new ProfessorScreenController();}
+	public static void setCreateQuestionScreenController(CreateQuestionScreenController controller)
+	{
+		createQuestionScreenController = controller;
+	}
 	
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
 	 */
-	@SuppressWarnings({ "unchecked", "incomplete-switch" })
+	@SuppressWarnings("unchecked")
 	public static void messageHandler(Object msg) 
 	{
 		MessageType message = getType(msg);
@@ -102,7 +106,13 @@ public class ClientMessageHandler
 		{
 			case "professor subjects": 
 				arrayList.remove(0);
-				//CreateQuestionScreenController.setSubjects(arrayList);
+				createQuestionScreenController.setSubjects(arrayList);
+				break;
+				
+			case "amount of questions":
+				int test = Integer.parseInt(arrayList.get(1)) + 2;
+				System.out.println(arrayList.get(1));
+				createQuestionScreenController.setQuestionNumber(Integer.parseInt(arrayList.get(1)));
 		}
 
 	}
@@ -132,7 +142,8 @@ public class ClientMessageHandler
 		try 
 		{
 			LoginScreenController.hideCurrentScene();
-			proffesorcontrolle.start(user);
-		} catch (Exception e) {}
+			proffesorController.start(user);
+		} 
+		catch (Exception e) {}
 	}
 }

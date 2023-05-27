@@ -35,11 +35,6 @@ public class UserController
 	
 	public static void Hide(ActionEvent e)
 	{
-		  
-		  Platform.runLater(()->((Node)e.getSource()).getScene().getWindow().hide());
-		  
-	}
-	
-	
-	
+		  Platform.runLater(()->((Node)e.getSource()).getScene().getWindow().hide());	  
+	}	
 }

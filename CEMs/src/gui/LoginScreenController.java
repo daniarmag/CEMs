@@ -49,11 +49,11 @@ public class LoginScreenController
     
     public static void hideCurrentScene() throws Exception 
     {
-    	try {
-    	UserController.Hide(e);}
-    	catch(Exception e)
-    	{e.printStackTrace();
+    	try 
+    	{
+    		UserController.Hide(e);
     	}
+    	catch(Exception e){}
 	}
 
     /*disconnects from the server and exits from the GUI. */

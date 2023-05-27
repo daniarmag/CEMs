@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Represents the questions in the system.
@@ -168,5 +169,11 @@ public class Question implements Serializable
 	{
 		this.answers = answers;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", subject=" + subject + ", questionText=" + questionText + ", questionNumber="
+				+ questionNumber + ", authorName=" + authorName + ", correctAnswer=" + correctAnswer + ", answers="
+				+ Arrays.toString(answers) + "]";
+	}
 }

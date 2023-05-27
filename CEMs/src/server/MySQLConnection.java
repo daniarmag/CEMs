@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.cj.xdevapi.Statement;
+
 import entities.Professor;
 import entities.Question;
 import entities.Student;
@@ -183,6 +185,44 @@ public class MySQLConnection
 					answer.add(subject_id + " - " + subject_name);
 				}
 			}
+		}
+		catch(SQLException e){e.printStackTrace();}
+		return answer;
+	}
+	
+	public static ArrayList<String> getSubjectCourses(String id)
+	{
+		ArrayList<String> answer = new ArrayList<String>();
+		answer.add("subject courses");
+		try
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT course_id, course_name FROM course WHERE course_subject_id = ?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) 
+			{
+				String course_id = rs.getString("course_id");
+				String course_name = rs.getString("course_name");
+				answer.add(course_id + " - " + course_name);
+			}
+		}
+		catch(SQLException e){e.printStackTrace();}
+		return answer;
+	}
+	
+	public static ArrayList<String> getAmountOfQuestions()
+	{
+		ArrayList<String> answer = new ArrayList<String>();
+		answer.add("amount of questions");
+		try 
+		{
+			ResultSet rs = conn.createStatement().executeQuery("SELECT MAX(question_number) FROM question");
+			while (rs.next())
+			{
+				Integer maxQuestion = rs.getInt("MAX(question_number)");
+				answer.add(maxQuestion.toString());
+			}
+				
 		}
 		catch(SQLException e){e.printStackTrace();}
 		return answer;

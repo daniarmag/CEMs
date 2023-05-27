@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import message.ClientMessageHandler;
 
 
 public class ProfessorScreenController implements Initializable 
@@ -52,7 +53,6 @@ public class ProfessorScreenController implements Initializable
 	{
 		u = user;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show());
-		
 	}
 	
 	
