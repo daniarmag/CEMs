@@ -25,7 +25,7 @@ public class ClientMessageHandler
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "incomplete-switch" })
 	public static void messageHandler(Object msg) 
 	{
 		MessageType message = getType(msg);
@@ -91,6 +91,9 @@ public class ClientMessageHandler
 			case "already logged":
 				JOptionPane.showMessageDialog(null, "User is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
 				break;
+			case "question added":
+				JOptionPane.showMessageDialog(null, "Question successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				break;
 		}
 	}
 	
@@ -110,15 +113,10 @@ public class ClientMessageHandler
 				break;
 				
 			case "amount of questions":
-				int test = Integer.parseInt(arrayList.get(1)) + 2;
-				System.out.println(arrayList.get(1));
-				createQuestionScreenController.setQuestionNumber(Integer.parseInt(arrayList.get(1)));
+				createQuestionScreenController.setQuestionNumber(1 + Integer.parseInt(arrayList.get(1)));
+				break;
 		}
-
 	}
-	
-	
-	
 
 	/**
 	 * Handles client messages that are an array list with Question elements.

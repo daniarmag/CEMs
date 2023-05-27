@@ -8,11 +8,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import message.ClientMessageHandler;
-
 
 public class ProfessorScreenController implements Initializable 
 {

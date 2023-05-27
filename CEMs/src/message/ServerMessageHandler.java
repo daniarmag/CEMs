@@ -33,6 +33,9 @@ public class ServerMessageHandler
 			case QUESTION_ARRAY_LIST:
 				questionArrayListMessageHandler((ArrayList<Question>) msg, client);
 				break;
+			case QUESTION:
+				questionMessageHandler((Question)msg, client);
+				break;
 		}
 	}
 
@@ -45,6 +48,8 @@ public class ServerMessageHandler
 	{
 		if (msg instanceof String)
 			return MessageType.STRING;
+		if (msg instanceof Question)
+			return MessageType.QUESTION;
 		else if (msg instanceof ArrayList)
 		{
 			ArrayList<?> arrayList = (ArrayList<?>) msg;
@@ -138,7 +143,22 @@ public class ServerMessageHandler
 		try 
 		{
 			MySQLConnection.saveQuestionToDB(arrayList);
-			client.sendToClient("Question updated");
+			client.sendToClient("question updated");
+		} catch (IOException e) {}
+	}
+	
+	
+	/**
+	 * Handles client messages of type Question.
+	 * @param question
+	 * @param client 
+	 */
+	public static void questionMessageHandler(Question question, ConnectionToClient client) 
+	{
+		try 
+		{
+			MySQLConnection.addQuestionToDB(question);
+			client.sendToClient("question added");
 		} catch (IOException e) {}
 	}
 }

@@ -6,9 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import com.mysql.cj.xdevapi.Statement;
-
 import entities.Professor;
 import entities.Question;
 import entities.Student;
@@ -64,13 +61,13 @@ public class MySQLConnection
 	    try
 		{
 	    	//lOading all the questions from the table
-			ResultSet rs = conn.createStatement().executeQuery("Select * FROM question");
+			ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM question");
 			while (rs.next()) 
 			{
-				Question q = new Question(rs.getString("id"), rs.getString("subject"),
+			/*	Question q = new Question(rs.getString("id"), rs.getString("subject"),
 				rs.getString("course_name"), rs.getString("question_text"), rs.getInt("question_number"),
-				rs.getString("lecturer"));
-				qArr.add(q);
+				rs.getString("lecturer"), null, null);
+				qArr.add(q);*/
 			}
 		} 
 		catch (SQLException e) 
@@ -101,6 +98,35 @@ public class MySQLConnection
 	    {
 	        e.printStackTrace();
 	    }
+	}
+	
+	/**
+	 * This method is responsible for adding a question to the database. 
+	 * @param question represents the updated question data.
+	 */
+	public static void addQuestionToDB(Question question) 
+	{
+	    try 
+	    {
+	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO question (question_number, id, "
+										    			+ "subject_id, question_text, professor_first_name,"
+										    			+ " professor_last_name, correct_answer, answer1,"
+										    			+ " answer2, answer3, answer4) "
+										    			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	       ps.setInt(1, question.getQuestionNumber());
+	       ps.setString(2, question.getId());
+	       ps.setString(3, question.getSubject());
+	       ps.setString(4, question.getQuestionText());
+	       ps.setString(5, question.getProfessorFirstName());
+	       ps.setString(6, question.getProfessorLastName());
+	       ps.setString(7, question.getCorrectAnswer());
+	       ps.setString(8, question.getAnswers()[0]);
+	       ps.setString(9, question.getAnswers()[1]);
+	       ps.setString(10, question.getAnswers()[2]);
+	       ps.setString(11, question.getAnswers()[3]);
+	       ps.executeUpdate();
+	    } 
+	    catch (SQLException e){}
 	}
 	
 	/**
@@ -227,5 +253,4 @@ public class MySQLConnection
 		catch(SQLException e){e.printStackTrace();}
 		return answer;
 	}
-
 }

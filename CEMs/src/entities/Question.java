@@ -1,14 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 /**
  * Represents the questions in the system.
  *
  */
 @SuppressWarnings("serial")
-
 public class Question implements Serializable
 {
 	public String id;
@@ -16,32 +14,25 @@ public class Question implements Serializable
 	public String courseName;
 	public String questionText;
 	public Integer questionNumber;
-	public String authorName;
-	public String correctAnswer = "";
-	public String[] answers = new String[4];
+	public String professorFirstName;
+	public String professorLastName;
+	public String correctAnswer;
+	public String[] answers;
 	
-	 /**
-     * Constructor for creating a Question object.
-     *
-     * @param id             The ID of the question.
-     * @param subject        The subject of the question.
-     * @param courseName     The name of the course.
-     * @param questionText   The text of the question.
-     * @param questionNumber The number of the question.
-     * @param authorName     The name of the author.
-     */
-	public Question(String id, String subject, String courseName, String questionText,
-			        Integer questionNumber, String authorName) 
+	public Question(Integer questionNumber, String id, String subject, String questionText, 
+				    String professorFirstName,String professorLastName, String correctAnswer, String[] answers)
 	{
+		super();
 		this.id = id;
 		this.subject = subject;
-		this.courseName = courseName;
 		this.questionText = questionText;
 		this.questionNumber = questionNumber;
-		this.authorName = authorName;
-		//this.correctAnswer = correctAnswer;
-		//this.answers = answers;
+		this.professorFirstName = professorFirstName;
+		this.professorLastName = professorLastName;
+		this.correctAnswer = correctAnswer;
+		this.answers = answers;
 	}
+	
 	/**
      * @return The ID of the question.
      */
@@ -90,9 +81,16 @@ public class Question implements Serializable
 	/**
 	 * @return The name of the author.
 	 */
-	public String getAuthorName()
+	public String getProfessorFirstName()
 	{
-		return authorName;
+		return professorFirstName;
+	}
+	/**
+	 * @return The name of the author.
+	 */
+	public String getProfessorLastName()
+	{
+		return professorLastName;
 	}
 	/**
 	 * @return The answers.
@@ -157,9 +155,17 @@ public class Question implements Serializable
 	/**
 	 * @param authorName
 	 */
-	public void setAuthorName(String authorName) 
+	public void setProfessorFirstName(String professorFirstName) 
 	{
-		this.authorName = authorName;
+		this.professorFirstName = professorFirstName;
+	}
+	
+	/**
+	 * @param authorName
+	 */
+	public void setProfessorLastName(String professorLastName) 
+	{
+		this.professorLastName = professorLastName;
 	}
 	
 	/**
@@ -170,10 +176,5 @@ public class Question implements Serializable
 		this.answers = answers;
 	}
 	
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", subject=" + subject + ", questionText=" + questionText + ", questionNumber="
-				+ questionNumber + ", authorName=" + authorName + ", correctAnswer=" + correctAnswer + ", answers="
-				+ Arrays.toString(answers) + "]";
-	}
+
 }
