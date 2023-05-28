@@ -15,7 +15,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionBankScreenController">
    <children>
-      <Pane prefHeight="477.0" prefWidth="750.0">
+      <Pane prefHeight="477.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Button id="updateBtn" fx:id="updateBtn" layoutX="55.0" layoutY="404.0" mnemonicParsing="false" onAction="#update" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Edit Question" />
             <HBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
