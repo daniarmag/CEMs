@@ -200,6 +200,7 @@ public class CreateQuestionScreenController implements Initializable
 	                 cAnswerText.getText().isEmpty() || dAnswerText.getText().isEmpty(), 
 	                 "All answer options are required.");
 	    errorMap.put(questionTextArea.getText().isEmpty(), "Question is required.");
+	    errorMap.put(courseListview.getSelectionModel().getSelectedItems().isEmpty(), "Course(s) is required");
 	    errorMap.put(subjectMenu.getText().isEmpty(), "Subject is required.");
 	    return errorMap;
 	}

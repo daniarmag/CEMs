@@ -75,7 +75,6 @@ public class MySQLConnection
 				rs.getString("professor_id"), rs.getString("correct_answer"), 
 				new String[]{rs.getString("answer1"), rs.getString("answer2"), rs.getString("answer3"), rs.getString("answer4")});
 				q.setCourse(rs.getString("course_id") + " - " + rs.getString("course_name"));
-				System.out.println(q.toString());
 				qArr.add(q);
 			}
 		} 
