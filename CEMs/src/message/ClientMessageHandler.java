@@ -2,19 +2,24 @@ package message;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import client.ChatClient;
 import entities.Question;
 import entities.User;
 import gui.CreateQuestionScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
-
+import gui.QuestionBankScreenController;
 
 public class ClientMessageHandler 
 {
 	static ProfessorScreenController proffesorController;
 	static CreateQuestionScreenController createQuestionScreenController;
+    static QuestionBankScreenController questionBankScreenController;
 	static {proffesorController = new ProfessorScreenController();}
+	
+	public static void setQuestionBankController(QuestionBankScreenController controller)
+	{
+		questionBankScreenController = controller;
+	}
 	
 	public static void setCreateQuestionScreenController(CreateQuestionScreenController controller)
 	{
@@ -115,6 +120,10 @@ public class ClientMessageHandler
 			case "amount of questions":
 				createQuestionScreenController.setQuestionNumber(1 + Integer.parseInt(arrayList.get(1)));
 				break;
+				
+			case "subject courses":
+				arrayList.remove(0);
+				createQuestionScreenController.setCourses(arrayList);
 		}
 	}
 
@@ -124,11 +133,8 @@ public class ClientMessageHandler
 	 */
 	public static void questionArrayListMessageHandler(ArrayList<Question> arrayList) 
 	{
-		if (ChatClient.questionBankController != null) 
-		{
-			ChatClient.questionBankController.setArr(arrayList);
-			ChatClient.questionBankController.updateQuestionTable();
-		}
+		questionBankScreenController.setArr(arrayList);
+		questionBankScreenController.updateQuestionTable();
 	}
 
 	/**

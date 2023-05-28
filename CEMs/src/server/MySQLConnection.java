@@ -55,25 +55,31 @@ public class MySQLConnection
 	 * This method, loadQuestions, retrieves a list of questions from a database table
 	 * @return an ArrayList of Question objects
 	 */
-	public static ArrayList<Question> loadQuestions()
+	public static ArrayList<Question> loadProfessorQuestions(String id)
 	{
 		ArrayList<Question> qArr = new ArrayList<Question>();
 	    try
 		{
-	    	//lOading all the questions from the table
-			ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM question");
+	    	//loading all the questions from the table
+	    	PreparedStatement ps = conn.prepareStatement("SELECT q.*, qc.course_id, c.course_name "
+										    		   + "FROM question q "
+										    		   + "JOIN question_course qc ON q.id = qc.question_id "
+										    		   + "JOIN course c ON qc.course_id = c.course_id "
+										    		   + "WHERE q.professor_id = ?");
+		    ps.setString(1, id);
+		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
 			{
-			/*	Question q = new Question(rs.getString("id"), rs.getString("subject"),
-				rs.getString("course_name"), rs.getString("question_text"), rs.getInt("question_number"),
-				rs.getString("lecturer"), null, null);
-				qArr.add(q);*/
+				Question q = new Question(rs.getInt("question_number"), rs.getString("id"),
+				rs.getString("subject_id"), rs.getString("question_text"), rs.getString("professor_full_name"),
+				rs.getString("professor_id"), rs.getString("correct_answer"), 
+				new String[]{rs.getString("answer1"), rs.getString("answer2"), rs.getString("answer3"), rs.getString("answer4")});
+				q.setCourse(rs.getString("course_id") + " - " + rs.getString("course_name"));
+				System.out.println(q.toString());
+				qArr.add(q);
 			}
 		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
+		catch (SQLException e) {e.printStackTrace();}
 		return qArr;
 	}
 	
@@ -109,16 +115,15 @@ public class MySQLConnection
 	    try 
 	    {
 	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO question (question_number, id, "
-										    			+ "subject_id, question_text, professor_first_name,"
-										    			+ " professor_last_name, correct_answer, answer1,"
-										    			+ " answer2, answer3, answer4) "
+										    			+ "subject_id, question_text, professor_full_name, professor_id, "
+										    			+ "correct_answer, answer1, answer2, answer3, answer4) "
 										    			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 	       ps.setInt(1, question.getQuestionNumber());
 	       ps.setString(2, question.getId());
 	       ps.setString(3, question.getSubject());
 	       ps.setString(4, question.getQuestionText());
-	       ps.setString(5, question.getProfessorFirstName());
-	       ps.setString(6, question.getProfessorLastName());
+	       ps.setString(5, question.getAuthor());
+	       ps.setString(6, question.getProfessorId());
 	       ps.setString(7, question.getCorrectAnswer());
 	       ps.setString(8, question.getAnswers()[0]);
 	       ps.setString(9, question.getAnswers()[1]);
@@ -126,7 +131,7 @@ public class MySQLConnection
 	       ps.setString(11, question.getAnswers()[3]);
 	       ps.executeUpdate();
 	    } 
-	    catch (SQLException e){}
+	    catch (SQLException e){e.printStackTrace();}
 	}
 	
 	/**
@@ -252,5 +257,23 @@ public class MySQLConnection
 		}
 		catch(SQLException e){e.printStackTrace();}
 		return answer;
+	}
+	
+	public static void addQuestionCourses(ArrayList<String> courses)
+	{
+		String question_id = courses.get(0);
+		courses.remove(0);
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO question_course (question_id, course_id) VALUES (?, ?)");
+			for (String s : courses)
+			{
+				ps.setString(1, question_id);
+				String[] tempStr = s.split("\\s+");
+				ps.setString(2, tempStr[0]);
+				ps.executeUpdate();
+			}
+		}
+		catch(SQLException e){e.printStackTrace();}
 	}
 }

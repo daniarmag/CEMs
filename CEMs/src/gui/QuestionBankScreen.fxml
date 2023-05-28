@@ -13,14 +13,28 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionBankController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionBankScreenController">
    <children>
       <Pane prefHeight="477.0" prefWidth="750.0">
          <children>
-            <Button id="updateBtn" fx:id="updateBtn" layoutX="55.0" layoutY="404.0" mnemonicParsing="false" onAction="#update" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Update" />
-            <HBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #6140ef;">
+            <Button id="updateBtn" fx:id="updateBtn" layoutX="55.0" layoutY="404.0" mnemonicParsing="false" onAction="#update" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Edit Question" />
+            <HBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="250.0" />
+                  <VBox prefHeight="100.0" prefWidth="250.0">
+                     <children>
+                        <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0">
+                                 <image>
+                                    <Image url="@../images/Back%20Logo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets left="25.0" top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children></VBox>
                   <VBox prefHeight="96.0" prefWidth="250.0">
                      <children>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Question Bank" textAlignment="CENTER" wrappingWidth="337.13671875">
@@ -35,7 +49,7 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="250.0">
                      <children>
-                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #6140ef;" textAlignment="CENTER">
+                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets right="25.0" top="25.0" />
                            </VBox.margin>
@@ -53,14 +67,15 @@
             </HBox>
             <TableView id="questionTable" fx:id="questionTable" layoutX="52.0" layoutY="122.0" prefHeight="259.0" prefWidth="647.0">
               <columns>
+                  <TableColumn id="qnumTable" fx:id="qnumTable" prefWidth="134.0" text="Question Number" />
                 <TableColumn id="idTable" fx:id="idTable" prefWidth="75.0" text="ID" />
                 <TableColumn id="subjectTable" fx:id="subjectTable" prefWidth="75.0" text="Subject" />
-                  <TableColumn id="cnameTable" fx:id="cnameTable" prefWidth="115.0" text="Course Name" />
                   <TableColumn id="qtextTable" fx:id="qtextTable" prefWidth="128.0" text="Question Text" />
-                  <TableColumn id="qnumTable" fx:id="qnumTable" prefWidth="134.0" text="Question Number" />
                   <TableColumn id="authorTable" fx:id="authorTable" prefWidth="119.0" text="Author" />
+                  <TableColumn id="cnameTable" fx:id="cnameTable" prefWidth="115.0" text="Course" />
               </columns>
             </TableView>
+            <Button id="updateBtn" fx:id="addQstnBtn" layoutX="191.0" layoutY="404.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Add Question" />
          </children>
       </Pane>
    </children>

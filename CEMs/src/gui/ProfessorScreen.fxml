@@ -39,7 +39,7 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="createQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#createQuestion" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Create a question">
+      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Manage questions">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>

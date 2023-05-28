@@ -25,7 +25,7 @@ public class ProfessorScreenController implements Initializable
     private Button createExamBtn;
 
     @FXML
-    private Button createQstBtn;
+    private Button manageQstBtn;
 
     @FXML
     private Button exitBtn;
@@ -65,20 +65,19 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void logout(ActionEvent event)
     {
-//    	((Node) event.getSource()).getScene().getWindow().hide();
     	UserController.Hide(event);
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
     }
 
     @FXML
-    void createQuestion(ActionEvent event)
+    void manageQuestions(ActionEvent event)
     {
-//    	((Node) event.getSource()).getScene().getWindow().hide();
     	UserController.Hide(event);
-    	try {
-			CreateQuestionScreenController.start(u);
-		} catch (Exception e) {}
+    	try 
+    	{
+			QuestionBankScreenController.start(u);
+		} catch (Exception e) {e.printStackTrace();}
     }
 
 	@Override

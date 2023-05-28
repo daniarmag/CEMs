@@ -2,7 +2,6 @@ package client;
 
 import ocsf.client.*;
 import common.ChatIF;
-import gui.QuestionBankController;
 import message.ClientMessageHandler;
 import java.io.*;
 
@@ -18,12 +17,7 @@ public class ChatClient extends AbstractClient
 	ChatIF clientUI;
 	final public static int DEFAULT_PORT = 5555;
 	public static boolean awaitResponse = false;
-	public static QuestionBankController questionBankController;
-	 
-	public static void setQuestionBankController(QuestionBankController controller)
-	{
-		questionBankController = controller;
-	}
+	
 
 	// Constructors ****************************************************
 

@@ -9,13 +9,16 @@ import client.ClientUI;
 import control.UserController;
 import entities.Question;
 import entities.User;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -27,8 +30,8 @@ public class CreateQuestionScreenController implements Initializable
 	
 	Question newQuestion = new Question(null, null, null, null, null, null, null, null);
 	
-    ArrayList<String> subjectsArr;
-	
+    ArrayList<String> subjectsArr, coursesArr;
+    
 	@FXML
 	private TextField aAnswerText;
 
@@ -65,6 +68,14 @@ public class CreateQuestionScreenController implements Initializable
 	@FXML
 	private Button submitBtn;
 
+    @FXML
+    private ListView<String> courseListview;
+
+	public void setQuestionNumber(int number)
+	{
+		newQuestion.setQuestionNumber(number);
+	}
+	
 	public void setSubjects(ArrayList<String> subjects)
 	{
 		  subjectsArr = subjects;
@@ -75,24 +86,34 @@ public class CreateQuestionScreenController implements Initializable
 			  subjectMenu.getItems().add(m);
 		  }
 	}
-	
-	public void setQuestionNumber(int number)
-	{
-		newQuestion.setQuestionNumber(number);
-	}
+
 	
 	public void selectSubject(MenuItem m)
 	{
+		courseListview.getItems().clear();
 		String selected = m.getText();
 		subjectMenu.setText(selected);
+		String[] subjectId = selected.split("\\s+");
+		ArrayList<String> request = new ArrayList<String>();
+		request.add("get subject courses");
+		request.add(subjectId[0]);
+		ClientUI.chat.accept(request);
 	}
 	
+	public void setCourses(ArrayList<String> courses) 
+	{
+		Platform.runLater(() -> 
+		{
+	        courseListview.getItems().clear();
+	        courseListview.getItems().addAll(courses);
+	    });
+	}
+
 	@FXML
 	void goBack(ActionEvent event) 
 	{
-		
 		UserController.Hide(event);
-		ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show();
+		ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show();
 	}
 
 	/**
@@ -118,18 +139,24 @@ public class CreateQuestionScreenController implements Initializable
 		    return;
 		}
 		ClientUI.chat.accept("get amount of questions");
-		String[] subject = subjectMenu.getText().split("\\s+");
+		String[] subjectId = subjectMenu.getText().split("\\s+");
 		String[] answers = {aAnswerText.getText(), bAnswerText.getText(), 
 							cAnswerText.getText(), dAnswerText.getText()};
-		newQuestion.setSubject(subject[0]);
+		newQuestion.setSubject(subjectId[0]);
 		newQuestion.setAnswers(answers);
-		newQuestion.setId(subject[0] + newQuestion.getQuestionNumber());
+		newQuestion.setId(subjectId[0] + newQuestion.getQuestionNumber());
 		newQuestion.setQuestionText(questionTextArea.getText());
-		newQuestion.setProfessorFirstName(u.getFirst_name());
-		newQuestion.setProfessorLastName(u.getLast_name());
+		newQuestion.setAuthor(u.getFirst_name() + " " + u.getLast_name());
+		newQuestion.setProfessorId(u.getUser_id());
 		HashMap <Boolean, String> answerMap = createAnswerMap(answers);
 		newQuestion.setCorrectAnswer(answerMap.get(true));
-		ClientUI.chat.accept(newQuestion);
+	    ClientUI.chat.accept(newQuestion);
+	    ArrayList<String> request = new ArrayList<>();
+	    request.add("update question courses");
+	    request.add(newQuestion.id);
+	    request.addAll(courseListview.getSelectionModel().getSelectedItems());
+	    ClientUI.chat.accept(request);
+		
 	}
 	
 	@FXML
@@ -142,6 +169,7 @@ public class CreateQuestionScreenController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		ClientMessageHandler.setCreateQuestionScreenController(this);
+		courseListview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		ToggleGroup toggleGroup = new ToggleGroup();
 	    aRadio.setToggleGroup(toggleGroup);
 	    bRadio.setToggleGroup(toggleGroup);
@@ -175,5 +203,4 @@ public class CreateQuestionScreenController implements Initializable
 	    errorMap.put(subjectMenu.getText().isEmpty(), "Subject is required.");
 	    return errorMap;
 	}
-
 }

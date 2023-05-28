@@ -87,10 +87,6 @@ public class ServerMessageHandler
 					client.sendToClient("Disonnected");
 					break;
 					
-				case "load questions":
-					client.sendToClient(MySQLConnection.loadQuestions());
-					break;
-					
 				case "get amount of questions":
 					client.sendToClient(MySQLConnection.getAmountOfQuestions());
 					break;
@@ -127,6 +123,20 @@ public class ServerMessageHandler
 					
 				case "find professor subjects":
 					client.sendToClient(MySQLConnection.getProfessorSubjects(arrayList.get(1)));
+					break;
+					
+				case "load professor questions":
+					client.sendToClient(MySQLConnection.loadProfessorQuestions(arrayList.get(1)));
+					break;
+					
+				case "get subject courses":
+					client.sendToClient(MySQLConnection.getSubjectCourses(arrayList.get(1)));
+					break;
+				
+				case "update question courses":
+					arrayList.remove(0);
+					MySQLConnection.addQuestionCourses(arrayList);
+					client.sendToClient("updated question courses");
 					break;
 			}
 		} catch (IOException e) {}

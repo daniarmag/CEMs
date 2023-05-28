@@ -9,26 +9,27 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Question implements Serializable
 {
+	public String course = "";
 	public String id;
 	public String subject;
-	public String courseName;
 	public String questionText;
 	public Integer questionNumber;
-	public String professorFirstName;
-	public String professorLastName;
+	public String author;
+	public String professorId;
 	public String correctAnswer;
 	public String[] answers;
 	
 	public Question(Integer questionNumber, String id, String subject, String questionText, 
-				    String professorFirstName,String professorLastName, String correctAnswer, String[] answers)
+				    String author, String professorId,
+				    String correctAnswer, String[] answers)
 	{
 		super();
 		this.id = id;
 		this.subject = subject;
 		this.questionText = questionText;
 		this.questionNumber = questionNumber;
-		this.professorFirstName = professorFirstName;
-		this.professorLastName = professorLastName;
+		this.author = author;
+		this.professorId = professorId;
 		this.correctAnswer = correctAnswer;
 		this.answers = answers;
 	}
@@ -52,7 +53,7 @@ public class Question implements Serializable
      */
 	public String getCourseName() 
 	{
-		return courseName;
+		return course;
 	}
 
 	/**
@@ -81,17 +82,11 @@ public class Question implements Serializable
 	/**
 	 * @return The name of the author.
 	 */
-	public String getProfessorFirstName()
+	public String getAuthor()
 	{
-		return professorFirstName;
+		return author;
 	}
-	/**
-	 * @return The name of the author.
-	 */
-	public String getProfessorLastName()
-	{
-		return professorLastName;
-	}
+
 	/**
 	 * @return The answers.
 	 */
@@ -99,6 +94,31 @@ public class Question implements Serializable
 	{
 		return answers;
 	}
+	
+	/**
+	 * @return professor id.
+	 */
+	public String getProfessorId()
+	{
+		return professorId;
+	}
+	
+    /**
+     * @return question course.
+     */
+    public String getCourse() 
+    {
+        return course;
+    }
+
+	/**
+	 * @param professorId
+	 */
+	public void setProfessorId(String professorId) 
+	{
+		this.professorId = professorId;
+	}
+	
 	/**
      * Sets the ID of the question.
      *
@@ -123,9 +143,9 @@ public class Question implements Serializable
      *
      * @param courseName The name of the course.
      */
-	public void setCourseName(String courseName) 
+	public void setCourse(String course) 
 	{
-		this.courseName = courseName;
+		this.course = course;
 	}
 
 	/**
@@ -155,17 +175,9 @@ public class Question implements Serializable
 	/**
 	 * @param authorName
 	 */
-	public void setProfessorFirstName(String professorFirstName) 
+	public void setAuthor(String author) 
 	{
-		this.professorFirstName = professorFirstName;
-	}
-	
-	/**
-	 * @param authorName
-	 */
-	public void setProfessorLastName(String professorLastName) 
-	{
-		this.professorLastName = professorLastName;
+		this.author = author;
 	}
 	
 	/**
@@ -175,6 +187,4 @@ public class Question implements Serializable
 	{
 		this.answers = answers;
 	}
-	
-
 }
