@@ -18,6 +18,7 @@ public class EchoServer extends AbstractServer
 	/**
 	 * The default port to listen on.
 	 */
+	private static EchoServer server=null;
 	final public static int DEFAULT_PORT = 5555;
 	static ObservableList<Client> clientsInfoList = FXCollections.observableArrayList();
 	public static ServerScreenController serverScreenController;
@@ -62,7 +63,7 @@ public class EchoServer extends AbstractServer
 	 *
 	 * @param port The port number to connect on.
 	 */
-	public EchoServer(int port) 
+	private EchoServer(int port) 
 	{
 		super(port);
 	}
@@ -136,6 +137,12 @@ public class EchoServer extends AbstractServer
 	protected void serverStopped() 
 	{
 		System.out.println("Server has stopped listening for connections.");
+	}
+
+	public static EchoServer getInstance(int port) {
+		if(server==null)
+			return new EchoServer(port);
+		return server;
 	}
 
 

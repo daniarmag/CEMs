@@ -36,7 +36,7 @@ public class ServerUI extends Application {
 	    }
 	    if(MySQLConnection.connectToDB(URL, username, password))
 	    {
-	    	 es = new EchoServer(port);
+	    	 es = EchoServer.getInstance(port);
 	 	    try 
 	 	    {
 	 	        es.listen(); 
