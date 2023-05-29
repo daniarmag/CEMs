@@ -156,6 +156,7 @@ public class CreateQuestionScreenController implements Initializable
 	    request.add(newQuestion.id);
 	    request.addAll(courseListview.getSelectionModel().getSelectedItems());
 	    ClientUI.chat.accept(request);
+	    goBack(event);
 		
 	}
 	
