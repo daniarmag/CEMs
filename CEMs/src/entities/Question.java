@@ -13,13 +13,13 @@ public class Question implements Serializable
 	public String id;
 	public String subject;
 	public String questionText;
-	public Integer questionNumber;
+	public String questionNumber;
 	public String author;
 	public String professorId;
 	public String correctAnswer;
 	public String[] answers;
 	
-	public Question(Integer questionNumber, String id, String subject, String questionText, 
+	public Question(String questionNumber, String id, String subject, String questionText, 
 				    String author, String professorId,
 				    String correctAnswer, String[] answers)
 	{
@@ -68,7 +68,7 @@ public class Question implements Serializable
 	 * @return The number of the question.
 
 	 */
-	public Integer getQuestionNumber()
+	public String getQuestionNumber()
 	{
 		return questionNumber;
 	}
@@ -159,7 +159,7 @@ public class Question implements Serializable
 	/**
 	 * @param questionNumber
 	 */
-	public void setQuestionNumber(Integer questionNumber) 
+	public void setQuestionNumber(String questionNumber) 
 	{
 		this.questionNumber = questionNumber;
 	}

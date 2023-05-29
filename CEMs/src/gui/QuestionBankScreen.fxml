@@ -67,12 +67,11 @@
             </HBox>
             <TableView id="questionTable" fx:id="questionTable" layoutX="52.0" layoutY="122.0" prefHeight="259.0" prefWidth="647.0">
               <columns>
-                  <TableColumn id="qnumTable" fx:id="qnumTable" prefWidth="134.0" text="Question Number" />
-                <TableColumn id="idTable" fx:id="idTable" prefWidth="75.0" text="ID" />
-                <TableColumn id="subjectTable" fx:id="subjectTable" prefWidth="75.0" text="Subject" />
-                  <TableColumn id="qtextTable" fx:id="qtextTable" prefWidth="128.0" text="Question Text" />
-                  <TableColumn id="authorTable" fx:id="authorTable" prefWidth="119.0" text="Author" />
-                  <TableColumn id="cnameTable" fx:id="cnameTable" prefWidth="115.0" text="Course" />
+                  <TableColumn id="qnumTable" fx:id="qnumTable" prefWidth="119.0" text="Question Number" />
+                <TableColumn id="idTable" fx:id="idTable" prefWidth="59.0" text="ID" />
+                <TableColumn id="subjectTable" fx:id="subjectTable" prefWidth="112.0" text="Subject" />
+                  <TableColumn id="qtextTable" fx:id="qtextTable" prefWidth="244.0" text="Question Text" />
+                  <TableColumn id="authorTable" fx:id="authorTable" prefWidth="112.0" text="Author" />
               </columns>
             </TableView>
             <Button id="updateBtn" fx:id="addQstnBtn" layoutX="191.0" layoutY="404.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Add Question" />

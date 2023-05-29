@@ -71,9 +71,11 @@ public class CreateQuestionScreenController implements Initializable
     @FXML
     private ListView<String> courseListview;
 
-	public void setQuestionNumber(int number)
+	public void setQuestionNumber(String number)
 	{
-		newQuestion.setQuestionNumber(number);
+		number = Integer.toString(Integer.parseInt(number) + 1);
+		String newQuestionNum = String.format("%03d", Integer.parseInt(number));
+		newQuestion.setQuestionNumber(newQuestionNum);
 	}
 	
 	public void setSubjects(ArrayList<String> subjects)
@@ -157,7 +159,6 @@ public class CreateQuestionScreenController implements Initializable
 	    request.addAll(courseListview.getSelectionModel().getSelectedItems());
 	    ClientUI.chat.accept(request);
 	    goBack(event);
-		
 	}
 	
 	@FXML

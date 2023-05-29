@@ -23,7 +23,7 @@
             </Text>
             <TextField id="txtServerIP" fx:id="txtServerIP" layoutX="195.0" layoutY="128.0" prefHeight="25.0" prefWidth="130.0" />
             <Button id="connectToServerBtn" fx:id="connectToServerBtn" layoutX="128.0" layoutY="206.0" mnemonicParsing="false" onAction="#connect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Connect" />
-            <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="85.0" prefWidth="390.0" style="-fx-background-color: #6140ef;">
+            <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="85.0" prefWidth="390.0" style="-fx-background-color: #30BECC;">
                <children>
                   <VBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="50.0" />
                   <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="290.0">
@@ -43,14 +43,14 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" maxWidth="-Infinity" prefHeight="85.0" prefWidth="50.0">
                      <children>
-                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #6140ef;" textAlignment="CENTER">
+                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets right="25.0" top="25.0" />
                            </VBox.margin>
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/exitBtn.png"/>
+                                    <Image url="@../images/exitBtn.png" />
                                  </image>
                               </ImageView>
                            </graphic>

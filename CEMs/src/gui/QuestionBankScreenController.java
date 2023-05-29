@@ -41,13 +41,10 @@ public class QuestionBankScreenController implements Initializable
     private TableColumn<Question, String> authorTable;
 
     @FXML
-    private TableColumn<Question, String> cnameTable;;
-
-    @FXML
     private TableColumn<Question, String> idTable;
 
     @FXML
-    private TableColumn<Question, Integer> qnumTable;
+    private TableColumn<Question, String> qnumTable;
 
     @FXML
     private TableColumn<Question, String> qtextTable;
@@ -112,7 +109,6 @@ public class QuestionBankScreenController implements Initializable
 	    qnumTable.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
 	    qtextTable.setCellValueFactory(new PropertyValueFactory<>("questionText"));
 	    authorTable.setCellValueFactory(new PropertyValueFactory<>("author"));
-	    cnameTable.setCellValueFactory(new PropertyValueFactory<>("course"));
 	    subjectTable.setCellValueFactory(new PropertyValueFactory<>("subject"));
 	    ObservableList<Question> questionObservableList = FXCollections.observableArrayList(qArr);
 	    questionTable.setItems(questionObservableList);

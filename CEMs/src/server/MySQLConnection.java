@@ -79,20 +79,15 @@ public class MySQLConnection
 	    try
 		{
 	    	//loading all the questions from the table
-	    	PreparedStatement ps = conn.prepareStatement("SELECT q.*, qc.course_id, c.course_name "
-										    		   + "FROM question q "
-										    		   + "JOIN question_course qc ON q.id = qc.question_id "
-										    		   + "JOIN course c ON qc.course_id = c.course_id "
-										    		   + "WHERE q.professor_id = ?");
+	    	PreparedStatement ps = conn.prepareStatement("SELECT * FROM question WHERE professor_id = ?");
 		    ps.setString(1, id);
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
 			{
-				Question q = new Question(rs.getInt("question_number"), rs.getString("id"),
+				Question q = new Question(rs.getString("question_number"), rs.getString("id"),
 				rs.getString("subject_id"), rs.getString("question_text"), rs.getString("professor_full_name"),
 				rs.getString("professor_id"), rs.getString("correct_answer"), 
 				new String[]{rs.getString("answer1"), rs.getString("answer2"), rs.getString("answer3"), rs.getString("answer4")});
-				q.setCourse(rs.getString("course_id") + " - " + rs.getString("course_name"));
 				qArr.add(q);
 			}
 		} 
@@ -112,7 +107,7 @@ public class MySQLConnection
 	        for (Question question : arr) 
 	        {
 	            ps.setString(1, question.questionText);
-	            ps.setInt(2, question.questionNumber);
+	            ps.setString(2, question.questionNumber);
 	            ps.setString(3, question.getId());
 	            ps.executeUpdate();
 	        }
@@ -135,7 +130,7 @@ public class MySQLConnection
 										    			+ "subject_id, question_text, professor_full_name, professor_id, "
 										    			+ "correct_answer, answer1, answer2, answer3, answer4) "
 										    			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-	       ps.setInt(1, question.getQuestionNumber());
+	       ps.setString(1, question.getQuestionNumber());
 	       ps.setString(2, question.getId());
 	       ps.setString(3, question.getSubject());
 	       ps.setString(4, question.getQuestionText());
@@ -267,8 +262,8 @@ public class MySQLConnection
 			ResultSet rs = conn.createStatement().executeQuery("SELECT MAX(question_number) FROM question");
 			while (rs.next())
 			{
-				Integer maxQuestion = rs.getInt("MAX(question_number)");
-				answer.add(maxQuestion.toString());
+				String maxQuestion = rs.getString("MAX(question_number)");
+				answer.add(maxQuestion);
 			}
 				
 		}

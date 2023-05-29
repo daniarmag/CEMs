@@ -1,9 +1,6 @@
 package message;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 import javax.swing.JOptionPane;
 import entities.Question;
 import entities.User;
@@ -121,7 +118,7 @@ public class ClientMessageHandler
 				break;
 				
 			case "amount of questions":
-				createQuestionScreenController.setQuestionNumber(1 + Integer.parseInt(arrayList.get(1)));
+				createQuestionScreenController.setQuestionNumber(arrayList.get(1));
 				break;
 				
 			case "subject courses":
