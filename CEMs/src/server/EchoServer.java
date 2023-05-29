@@ -141,7 +141,7 @@ public class EchoServer extends AbstractServer
 
 	public static EchoServer getInstance(int port) {
 		if(server==null)
-			return new EchoServer(port);
+			server=new EchoServer(port);
 		return server;
 	}
 
