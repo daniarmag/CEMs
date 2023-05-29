@@ -14,6 +14,24 @@ import entities.User;
 public class MySQLConnection 
 {
 	static Connection conn;
+	static MySQLConnection mySqlController=null;
+	
+	
+	
+	/**
+	 * private constructor for Singleton DP
+	 */
+	private MySQLConnection() {	
+	}
+	
+	/**
+	 * @return
+	 */
+	public static MySQLConnection getInstance() {
+		if(mySqlController==null)
+			mySqlController=new MySQLConnection();
+		return mySqlController;
+	}
 	
 	/**
 	 * Establishing a connection to a MySQL database
@@ -22,7 +40,7 @@ public class MySQLConnection
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
-	public static boolean connectToDB(String URL, String username, String password) 
+	public  boolean connectToDB(String URL, String username, String password) 
 	{
 		try 
 		{

@@ -1,6 +1,8 @@
 package server;
 
 import java.io.IOException;
+
+
 import gui.ServerScreenController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -9,7 +11,8 @@ import javafx.stage.Stage;
 public class ServerUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
 	static EchoServer es;
-
+	static MySQLConnection sqlController=MySQLConnection.getInstance();
+	
 	public static EchoServer getEs() 
 	{
 		return es;
@@ -34,7 +37,7 @@ public class ServerUI extends Application {
 	        System.out.println("ERROR - Could not connect!");
 	        return false;
 	    }
-	    if(MySQLConnection.connectToDB(URL, username, password))
+	    if(sqlController.connectToDB(URL, username, password))
 	    {
 	    	 es = EchoServer.getInstance(port);
 	 	    try 

@@ -1,6 +1,9 @@
 package message;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
 import javax.swing.JOptionPane;
 import entities.Question;
 import entities.User;
