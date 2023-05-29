@@ -2,11 +2,11 @@ package server;
  
 import entities.Client;
 import gui.HostSelectionScreenController;
-import gui.ServerScreenController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import message.ServerMessageHandler;
 import ocsf.server.*;
+import serverGui.ServerScreenController;
 
 /**
  * The EchoServer class represents a server that handles client connections and message communication.

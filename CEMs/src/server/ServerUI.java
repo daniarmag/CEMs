@@ -2,10 +2,9 @@ package server;
 
 import java.io.IOException;
 
-
-import gui.ServerScreenController;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import serverGui.ServerScreenController;
 
 
 public class ServerUI extends Application {

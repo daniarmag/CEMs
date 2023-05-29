@@ -1,5 +1,5 @@
-package gui;
-
+package serverGui;
+import serverGui.ScreenUtils;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -81,7 +81,7 @@ public class ServerScreenController implements Initializable
 
 	public void start(Stage primaryStage) throws Exception
 	{
-		ScreenUtils.createNewStage("/gui/ServerScreen.fxml").show();
+		ScreenUtils.createNewStage("/serverGui/ServerScreen.fxml").show();
 	}
 
 	/*Initializing the GUI with the table.*/
