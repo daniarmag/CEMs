@@ -22,7 +22,7 @@
    <children>
       <Pane prefHeight="465.0" prefWidth="750.0" styleClass="background">
          <children>
-            <HBox alignment="TOP_CENTER" layoutY="-1.0" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #6140ef;">
+            <HBox alignment="TOP_CENTER" layoutY="-1.0" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
                <children>
                   <VBox prefHeight="100.0" prefWidth="250.0" />
                   <VBox prefHeight="96.0" prefWidth="250.0">
@@ -39,7 +39,7 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="250.0">
                      <children>
-                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #6140ef;" textAlignment="CENTER">
+                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets right="25.0" top="25.0" />
                            </VBox.margin>
