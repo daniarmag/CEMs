@@ -13,12 +13,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 
 public class EditQuestionScreenController implements Initializable
 {
 	public static User u;
 	
-	
+	public static Question editQuestion;
 	
     @FXML
     private TextField aAnswerText;
@@ -55,6 +57,9 @@ public class EditQuestionScreenController implements Initializable
 
     @FXML
     private Button submitBtn;
+    
+    @FXML
+    private Text questionIdText;
 
 	/**
 	 * Initializes the JavaFX controller during application startup.
@@ -65,7 +70,7 @@ public class EditQuestionScreenController implements Initializable
 	 */
 	public static void start(User user, Question question) throws Exception 
 	{
-		
+		editQuestion = question;
 		u = user;
 		ScreenUtils.createNewStage("/gui/EditQuestionScreen.fxml").show();
 	}
@@ -91,7 +96,17 @@ public class EditQuestionScreenController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-
+		ToggleGroup toggleGroup = new ToggleGroup();
+	    aRadio.setToggleGroup(toggleGroup);
+	    bRadio.setToggleGroup(toggleGroup);
+	    cRadio.setToggleGroup(toggleGroup);
+	    dRadio.setToggleGroup(toggleGroup);
+		questionTextArea.setText(editQuestion.getQuestionText());
+		questionIdText.setText("Edit question " + editQuestion.getId());
+		aAnswerText.setText(editQuestion.getAnswers()[0]);
+		bAnswerText.setText(editQuestion.getAnswers()[1]);
+		cAnswerText.setText(editQuestion.getAnswers()[2]);
+		dAnswerText.setText(editQuestion.getAnswers()[3]);
 	}
 
 }

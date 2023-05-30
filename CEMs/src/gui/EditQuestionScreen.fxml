@@ -41,7 +41,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Text id="profTitle" layoutX="294.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit question 12345" textAlignment="CENTER" wrappingWidth="373.744140625">
+      <Text id="profTitle" fx:id="questionIdText" layoutX="294.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit question x" textAlignment="CENTER" wrappingWidth="373.744140625">
          <font>
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
