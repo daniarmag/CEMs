@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import server.EchoServer;
+import server.MySQLConnection;
 import server.ServerUI;
 
 /*A GUI for server area.*/
@@ -30,6 +31,8 @@ public class ServerScreenController implements Initializable
 		   port = Integer.toString(ServerUI.DEFAULT_PORT),
 		   username, password;
 	public static int clientCnt = 0;
+	
+	boolean connected = false;
 	
 	@FXML
 	private Button connectBtn;
@@ -105,6 +108,7 @@ public class ServerScreenController implements Initializable
 	@FXML
 	void connect(ActionEvent event) 
 	{
+		connected = true;
 		username = txtAreaUsername.getText().trim();
 	    password = getPassword();
 	    dbName = txtAreaDbName.getText().trim();
@@ -171,6 +175,8 @@ public class ServerScreenController implements Initializable
 		offCircle.setFill(Color.rgb(255, 96, 92));
 		connectBtn.setDisable(false);
 		disconnectBtn.setDisable(true);
+		if(connected)MySQLConnection.logoutAllUsers();
+		connected = false;
 	}
 	
 	

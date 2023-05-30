@@ -17,7 +17,7 @@
    <children>
       <Pane prefHeight="477.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <Button id="updateBtn" fx:id="updateBtn" layoutX="55.0" layoutY="404.0" mnemonicParsing="false" onAction="#update" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Edit Question" />
+            <Button id="updateBtn" fx:id="updateBtn" layoutX="324.0" layoutY="404.0" mnemonicParsing="false" onAction="#editQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Edit Question" />
             <HBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
                <children>
                   <VBox prefHeight="100.0" prefWidth="250.0">
@@ -74,7 +74,8 @@
                   <TableColumn id="authorTable" fx:id="authorTable" prefWidth="112.0" text="Author" />
               </columns>
             </TableView>
-            <Button id="updateBtn" fx:id="addQstnBtn" layoutX="191.0" layoutY="404.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Add Question" />
+            <Button id="updateBtn" fx:id="addQstnBtn" layoutX="52.0" layoutY="404.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Add Question" />
+            <Button id="updateBtn" fx:id="updateBtn1" layoutX="596.0" layoutY="404.0" mnemonicParsing="false" onAction="#deleteQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Delete Question" />
          </children>
       </Pane>
    </children>

@@ -74,14 +74,21 @@ public class QuestionBankScreenController implements Initializable
     
     /*Updates the DB with the new question info.*/
     @FXML
-    void update(ActionEvent event) throws IOException 
+    void editQuestion(ActionEvent event) throws IOException 
     {
-        ObservableList<Question> updatedQuestions = FXCollections.observableArrayList(questionTable.getItems());
-        qArr.clear();
-        qArr.addAll(updatedQuestions);
-        //Passing the array-list as an object to the server, which will handle the update.
-        ClientUI.chat.accept(qArr);
-        JOptionPane.showMessageDialog(null, "Question table updated!", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
+    	Question selectedQuestion = questionTable.getSelectionModel().getSelectedItem();
+        
+        if (selectedQuestion != null) 
+        {
+        	UserController.hide(event);
+        	try 
+        	{
+    			EditQuestionScreenController.start(u, selectedQuestion);
+    		} catch (Exception e) {}
+        } 
+        else 
+            JOptionPane.showMessageDialog(null, "Select a question to edit.", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
+
     }
     
     /*Adds the DB with the new question info.*/
@@ -93,6 +100,24 @@ public class QuestionBankScreenController implements Initializable
     	{
 			CreateQuestionScreenController.start(u);
 		} catch (Exception e) {}
+    }
+    
+    /*Deleted the question from the DB.*/
+    @FXML
+    void deleteQuestion(ActionEvent event) throws IOException 
+    {
+	Question selectedQuestion = questionTable.getSelectionModel().getSelectedItem();
+        
+        if (selectedQuestion != null) 
+        {
+        	ArrayList<String> request = new ArrayList<String>();
+    		request.add("delete question");
+    		request.add(selectedQuestion.getId());
+    		ClientUI.chat.accept(request);
+    		questionTable.getItems().remove(selectedQuestion);
+        } 
+        else 
+            JOptionPane.showMessageDialog(null, "Select a question to delete.", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /*Disconnects from the server and closes GUI window.*/

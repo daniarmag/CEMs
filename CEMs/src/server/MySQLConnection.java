@@ -3,6 +3,7 @@ package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -99,23 +100,22 @@ public class MySQLConnection
 	 * This method is responsible for updating question text and question number records in the database. 
 	 * @param arr represents the updated question data.
 	 */
-	public static void saveQuestionToDB(ArrayList<Question> arr) 
+	public static void editQuestionInDb(ArrayList<String> arr) 
 	{
 	    try 
 	    {
-	        PreparedStatement ps = conn.prepareStatement("UPDATE question SET question_text = ?, question_number = ? WHERE id = ?");
-	        for (Question question : arr) 
-	        {
-	            ps.setString(1, question.questionText);
-	            ps.setString(2, question.questionNumber);
-	            ps.setString(3, question.getId());
-	            ps.executeUpdate();
-	        }
+	        PreparedStatement ps = conn.prepareStatement("UPDATE question SET question_text = ?, correct_answer = ?, "
+	        									       + "answer1 = ?, answer2 = ?, answer3 = ?, answer4 = ? WHERE id = ?");
+	        ps.setString(1, arr.get(1));
+	        ps.setString(2, arr.get(2));
+	        ps.setString(3, arr.get(3));
+	        ps.setString(4, arr.get(4));
+	        ps.setString(5, arr.get(5));
+	        ps.setString(6, arr.get(6));
+	        ps.setString(7, arr.get(0));
+	        ps.executeUpdate();
 	    } 
-	    catch (SQLException e)
-	    {
-	        e.printStackTrace();
-	    }
+	    catch (SQLException e) {e.printStackTrace();}
 	}
 	
 	/**
@@ -285,6 +285,28 @@ public class MySQLConnection
 				ps.setString(2, tempStr[0]);
 				ps.executeUpdate();
 			}
+		}
+		catch(SQLException e){e.printStackTrace();}
+	}
+	
+	public static void logoutAllUsers()
+	{
+		try 
+		{
+			Statement st = conn.createStatement();
+			st.executeUpdate("UPDATE users SET isLogged = 0");
+		}
+		catch(SQLException e){e.printStackTrace();}
+	}
+
+	public static void deleteQuestionFromDb(String string) 
+	{
+		
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM question WHERE id = ?");
+			ps.setString(1, string);
+			ps.executeUpdate();
 		}
 		catch(SQLException e){e.printStackTrace();}
 	}

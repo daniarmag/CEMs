@@ -30,9 +30,6 @@ public class ServerMessageHandler
 			case STRING_ARRAY_LIST:
 				stringArrayListMessageHandler((ArrayList<String>) msg, client);
 				break;
-			case QUESTION_ARRAY_LIST:
-				questionArrayListMessageHandler((ArrayList<Question>) msg, client);
-				break;
 			case QUESTION:
 				questionMessageHandler((Question)msg, client);
 				break;
@@ -138,25 +135,20 @@ public class ServerMessageHandler
 					MySQLConnection.addQuestionCourses(arrayList);
 					client.sendToClient("updated question courses");
 					break;
+				
+				case "update question":
+					arrayList.remove(0);
+					MySQLConnection.editQuestionInDb(arrayList);
+					client.sendToClient("updated question");
+					break;
+					
+				case "delete question":
+					MySQLConnection.deleteQuestionFromDb(arrayList.get(1));
+					client.sendToClient("deleted question");
+					break;
 			}
 		} catch (IOException e) {}
 	}
-
-	/**
-	 * Handles client messages that are an array list with Question elements.
-	 * 
-	 * @param arrayList
-	 * @param client
-	 */
-	public static void questionArrayListMessageHandler(ArrayList<Question> arrayList, ConnectionToClient client) 
-	{
-		try 
-		{
-			MySQLConnection.saveQuestionToDB(arrayList);
-			client.sendToClient("question updated");
-		} catch (IOException e) {}
-	}
-	
 	
 	/**
 	 * Handles client messages of type Question.

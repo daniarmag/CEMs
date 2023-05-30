@@ -99,6 +99,12 @@ public class ClientMessageHandler
 			case "question added":
 				JOptionPane.showMessageDialog(null, "Question successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
+			case "updated question":
+				JOptionPane.showMessageDialog(null, "Question successfully edited.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				break;
+			case "deleted question":
+				JOptionPane.showMessageDialog(null, "Question successfully deleted.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				break;
 		}
 	}
 	
