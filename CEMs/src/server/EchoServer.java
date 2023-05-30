@@ -63,7 +63,7 @@ public class EchoServer extends AbstractServer
 	 *
 	 * @param port The port number to connect on.
 	 */
-	private EchoServer(int port) 
+	public EchoServer(int port) 
 	{
 		super(port);
 	}
@@ -139,15 +139,7 @@ public class EchoServer extends AbstractServer
 		System.out.println("Server has stopped listening for connections.");
 	}
 
-	/**
-	 * @param port
-	 * @return
-	 */
-	public static EchoServer getInstance(int port) {
-		if(server==null)
-			server=new EchoServer(port);
-		return server;
-	}
+	
 
 
 }

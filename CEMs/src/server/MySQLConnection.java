@@ -15,7 +15,7 @@ import entities.User;
 public class MySQLConnection 
 {
 	static Connection conn;
-	static MySQLConnection mySqlController=null;
+	public static MySQLConnection mySqlController=null;
 	
 	
 	
@@ -30,7 +30,10 @@ public class MySQLConnection
 	 */
 	public static MySQLConnection getInstance() {
 		if(mySqlController==null)
+			synchronized(MySQLConnection.class) {
+				if(mySqlController==null)
 			mySqlController=new MySQLConnection();
+			}
 		return mySqlController;
 	}
 	

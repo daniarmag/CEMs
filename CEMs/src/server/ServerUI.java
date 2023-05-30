@@ -38,7 +38,7 @@ public class ServerUI extends Application {
 	    }
 	    if(sqlController.connectToDB(URL, username, password))
 	    {
-	    	 es = EchoServer.getInstance(port);
+	    	 es = new EchoServer(port);
 	 	    try 
 	 	    {
 	 	        es.listen(); 
