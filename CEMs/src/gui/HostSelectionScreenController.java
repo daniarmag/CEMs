@@ -65,11 +65,9 @@ public class HostSelectionScreenController implements Initializable {
 			//Server IP is correct AND server is running.
 			if(ClientUI.connect(IP, DEFAULT_PORT))
 			{
-				// notify ClientUI that a successful connection has been established.
-				ClientUI.chat.accept("connected");
-//				((Node) event.getSource()).getScene().getWindow().hide();
-				
-				UserController.Hide(event);
+				//notify ClientUI that a successful connection has been established.
+				ClientUI.chat.accept("connected");		
+				UserController.hide(event);
 				ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 			}
 			//Wrong IP OR server is not running.

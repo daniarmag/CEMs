@@ -114,8 +114,7 @@ public class CreateQuestionScreenController implements Initializable
 	@FXML
 	void goBack(ActionEvent event) 
 	{
-		UserController.Hide(event);
-		ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show();
+		UserController.goBack(event, "/gui/QuestionBankScreen.fxml");
 	}
 
 	/**

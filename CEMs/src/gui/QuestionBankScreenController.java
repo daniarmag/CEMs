@@ -88,7 +88,7 @@ public class QuestionBankScreenController implements Initializable
     @FXML
     void addQuestion(ActionEvent event) throws IOException 
     {
-    	UserController.Hide(event);
+    	UserController.hide(event);
     	try 
     	{
 			CreateQuestionScreenController.start(u);
@@ -116,10 +116,8 @@ public class QuestionBankScreenController implements Initializable
 	
 	@FXML
 	void goBack(ActionEvent event) 
-	{
-		
-		UserController.Hide(event);
-		ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show();
+	{	
+		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
 	}
 	
 	/*Initializes the GUI with the questions from the database.*/

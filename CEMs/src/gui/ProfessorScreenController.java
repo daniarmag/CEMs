@@ -65,7 +65,7 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void logout(ActionEvent event)
     {
-    	UserController.Hide(event);
+    	UserController.hide(event);
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
     }
@@ -73,7 +73,7 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void manageQuestions(ActionEvent event)
     {
-    	UserController.Hide(event);
+    	UserController.hide(event);
     	try 
     	{
 			QuestionBankScreenController.start(u);

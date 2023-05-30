@@ -17,14 +17,14 @@ public class ScreenUtils
      * @param node         The Node representing the window content.
      * @param primaryStage The primary Stage of the window.
      */
-    public static Stage createNewStage(String fxmlFilePath) 
+    public static Stage createNewStage(String path) 
     {
     	final double[] xOffset = new double[1];
         final double[] yOffset = new double[1];
         Stage primaryStage = new Stage();
         try
         {
-	        Parent root = FXMLLoader.load(ScreenUtils.class.getResource(fxmlFilePath));
+	        Parent root = FXMLLoader.load(ScreenUtils.class.getResource(path));
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.setResizable(false);

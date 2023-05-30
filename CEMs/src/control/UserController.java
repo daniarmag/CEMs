@@ -3,6 +3,7 @@ package control;
 import java.util.ArrayList;
 import client.ClientUI;
 import entities.User;
+import gui.ScreenUtils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -33,8 +34,14 @@ public class UserController
     	System.exit(0);
 	}
 	
-	public static void Hide(ActionEvent e)
+	public static void hide(ActionEvent e)
 	{
-		  Platform.runLater(()->((Node)e.getSource()).getScene().getWindow().hide());	  
+		Platform.runLater(()->((Node)e.getSource()).getScene().getWindow().hide());	  
 	}	
+	
+	public static void goBack(ActionEvent e, String screen)
+	{
+		hide(e);
+		ScreenUtils.createNewStage(screen).show();	  
+	}
 }

@@ -49,7 +49,7 @@ public class LoginScreenController
     {
     	try 
     	{
-    		UserController.Hide(e);
+    		UserController.hide(e);
     	}
     	catch(Exception e){}
 	}
