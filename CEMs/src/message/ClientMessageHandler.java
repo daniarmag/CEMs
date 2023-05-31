@@ -158,7 +158,7 @@ public class ClientMessageHandler
 		try 
 		{
 			LoginScreenController.hideCurrentScene();
-			if(user.getRole()=="professoer")
+			if(user.getRole()=="professor")
 				professorController.start(user);
 			else if(user.getRole()=="student")
 				studentController.start(user);
