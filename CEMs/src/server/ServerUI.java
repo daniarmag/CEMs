@@ -32,6 +32,7 @@ public class ServerUI extends Application {
 	    int port = 0; // Port to listen on
 	    try {
 	    	sqlController=MySQLController.getInstance();
+	    
 	        port = Integer.parseInt(p); 
 	    } catch (Throwable t) {
 	        System.out.println("ERROR - Could not connect!");

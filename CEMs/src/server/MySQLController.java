@@ -20,7 +20,7 @@ import entities.User;
 public class MySQLController 
 {
 	static Connection conn;
-	public static MySQLController mySqlController=null;
+	private static volatile MySQLController INSTANCE;
 	
 	
 	
@@ -34,12 +34,12 @@ public class MySQLController
 	 * @return
 	 */
 	public static MySQLController getInstance() {
-		if(mySqlController==null)
+		if(INSTANCE==null)
 			synchronized(MySQLController.class) {
-				if(mySqlController==null)
-			mySqlController=new MySQLController();
+				if(INSTANCE==null)
+			INSTANCE=new MySQLController();
 			}
-		return mySqlController;
+		return INSTANCE;
 	}
 	
 	/**
