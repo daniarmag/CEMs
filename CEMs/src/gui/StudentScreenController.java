@@ -55,16 +55,6 @@ public class StudentScreenController implements Initializable {
 		UserController.logoutUser(u);
 	}
 
-	@FXML
-	void manageQuestions(ActionEvent event) {
-		UserController.hide(event);
-		try {
-			QuestionBankScreenController.start(u);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		welcomeText.setText("Welcome back " + u.getFirst_name());

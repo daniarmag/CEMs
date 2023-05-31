@@ -7,14 +7,20 @@ import entities.User;
 import gui.CreateQuestionScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
+import gui.StudentScreenController;
 import gui.QuestionBankScreenController;
 
 public class ClientMessageHandler 
 {
-	static ProfessorScreenController proffesorController;
+	static StudentScreenController studentController;
+	static ProfessorScreenController professorController;
 	static CreateQuestionScreenController createQuestionScreenController;
     static QuestionBankScreenController questionBankScreenController;
-	static {proffesorController = new ProfessorScreenController();}
+	static {
+		//proffesorController = new ProfessorScreenController();
+		studentController = new StudentScreenController();
+		professorController = new ProfessorScreenController();
+	}
 	
 	public static void setQuestionBankController(QuestionBankScreenController controller)
 	{
@@ -152,7 +158,10 @@ public class ClientMessageHandler
 		try 
 		{
 			LoginScreenController.hideCurrentScene();
-			proffesorController.start(user);
+			if(user.getRole()=="professoer")
+				professorController.start(user);
+			else if(user.getRole()=="student")
+				studentController.start(user);
 		} 
 		catch (Exception e) {}
 	}
