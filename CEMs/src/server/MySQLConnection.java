@@ -1,6 +1,8 @@
 package server;
 
-import java.sql.Connection;
+import java.awt.Desktop;
+import java.io.File;
+import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -71,7 +73,30 @@ public class MySQLConnection
             System.out.println("VendorError: " + ex.getErrorCode());
             return false;
         }
+        
+        
    	}
+	
+	//this method should sent the path of the exam to the client
+	//another method is to sent the file itself ( if kipped in the DB as Blob)
+	// notice that this is only a prototype for the function but those are the
+	//function needed /
+	private void openBLOB() throws SQLException {
+		Statement st=conn.createStatement();
+		ResultSet r=st.executeQuery("SELECT q.exam_path FROM  physical_exam as q");
+		try {
+		while(r.next()) {
+			String path=r.getString(1);
+			File file=new File(path);
+			  try {
+			    	Desktop desktop= Desktop.getDesktop();	
+			    	desktop.open(file);
+			    }catch(Exception e) {
+			    	e.printStackTrace();
+			    }
+		}}catch(SQLException e) {e.printStackTrace();}
+	}
+	
 	
 	/**
 	 * This method, loadQuestions, retrieves a list of questions from a database table
@@ -313,4 +338,5 @@ public class MySQLConnection
 		}
 		catch(SQLException e){e.printStackTrace();}
 	}
+	
 }
