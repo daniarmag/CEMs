@@ -158,10 +158,17 @@ public class ClientMessageHandler
 		try 
 		{
 			LoginScreenController.hideCurrentScene();
+<<<<<<< Upstream, based on branch 'master' of https://github.com/daniarmag/G9Repo
 			if(user.getRole()=="professor")
+=======
+			if(user.getRole().equals("professor"))
+>>>>>>> dc26aa9 student screen is working
 				professorController.start(user);
-			else if(user.getRole()=="student")
+			else if(user.getRole().equals("student"))
+			{
+				System.out.println("check");
 				studentController.start(user);
+			}
 		} 
 		catch (Exception e) {}
 	}
