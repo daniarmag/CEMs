@@ -161,12 +161,11 @@ public class ClientMessageHandler
 			switch(user.getRole())
 			{
 			case "professor":
-				System.out.println("test");
 				professorController.start(user);
-			break;
+				break;
 			case "student":
 				studentController.start(user);
-			break;
+				break;
 			}
 		} 
 		catch (Exception e) {e.printStackTrace();}

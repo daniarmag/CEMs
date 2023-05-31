@@ -251,10 +251,10 @@ public class MySQLController
 					switch(role)
 					{
 						case "student":
-							newUser = new Student(user_id, first_name, last_name, email, username, password, null);
+							newUser = new Student(user_id, first_name, last_name, email, username, password, "student");
 							break;
 						case "professor":
-							newUser = new Professor(user_id, first_name, last_name, email, username, password, null);
+							newUser = new Professor(user_id, first_name, last_name, email, username, password, "professor");
 							break;
 					}
 				}
