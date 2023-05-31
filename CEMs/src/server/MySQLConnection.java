@@ -2,6 +2,8 @@ package server;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +11,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import entities.Professor;
 import entities.Question;
 import entities.Student;
@@ -45,12 +48,11 @@ public class MySQLConnection
 	 * @param password of database
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public  boolean connectToDB(String URL, String username, String password) 
 	{
 		try 
 		{
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
             System.out.println("Driver definition succeed");
         } catch (Exception ex) {
         	/* handle the error*/
@@ -63,7 +65,7 @@ public class MySQLConnection
             conn = DriverManager.getConnection(URL, username, password);
             System.out.println("SQL connection succeed");
             return true;
-
+            
      	} 
         catch (SQLException ex) 
      	{/* handle any errors*/
@@ -78,23 +80,65 @@ public class MySQLConnection
    	}
 	
 	//this method should sent the path of the exam to the client
-	//another method is to sent the file itself ( if kipped in the DB as Blob)
+		// notice that this is only a prototype for the function but those are the
+		//function needed /
+		@SuppressWarnings("unused")
+		private void openBLOB() throws SQLException {
+			Statement st=conn.createStatement();
+			ResultSet r=st.executeQuery("SELECT q.exam_path FROM  physical_exam as q");
+			try {
+			while(r.next()) {
+				String path=r.getString(1);
+				File file=new File(path);
+				  try {
+				    	Desktop desktop= Desktop.getDesktop();	
+				    	desktop.open(file);
+				    	
+				    }catch(Exception e) {
+				    	e.printStackTrace();
+				    }
+			}}catch(SQLException e) {e.printStackTrace();}
+		}
+	
+	//this method  a Blob
 	// notice that this is only a prototype for the function but those are the
 	//function needed /
-	private void openBLOB() throws SQLException {
+	@SuppressWarnings("unused")
+	private void openBLOB2() throws SQLException {
 		Statement st=conn.createStatement();
-		ResultSet r=st.executeQuery("SELECT q.exam_path FROM  physical_exam as q");
+		ResultSet r=st.executeQuery("SELECT q.physical_exam FROM  physical_exam as q");
 		try {
+			Blob blob=null;
 		while(r.next()) {
-			String path=r.getString(1);
-			File file=new File(path);
+			 	blob = r.getBlob(1);
+		}
+			byte[] bufferout = null;
+
+			bufferout = blob.getBytes(1, (int)blob.length());
+			File output = null;
+			String outputFileName = "C:\\Test\\output.docx";
+			try {
+				output = new File(outputFileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			FileOutputStream fos = null;
+			try {
+				fos = new FileOutputStream(output);
+				fos.write(bufferout);
+				fos.close();
+				fos.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+            
 			  try {
 			    	Desktop desktop= Desktop.getDesktop();	
-			    	desktop.open(file);
+			    	desktop.open(output);
 			    }catch(Exception e) {
 			    	e.printStackTrace();
 			    }
-		}}catch(SQLException e) {e.printStackTrace();}
+		}catch(SQLException e) {e.printStackTrace();}
 	}
 	
 	
