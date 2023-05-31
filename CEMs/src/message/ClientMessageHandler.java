@@ -158,11 +158,17 @@ public class ClientMessageHandler
 		try 
 		{
 			LoginScreenController.hideCurrentScene();
-			if(user.getRole()=="professor")
+			switch(user.getRole())
+			{
+			case "professor":
+				System.out.println("test");
 				professorController.start(user);
-			else if(user.getRole()=="student")
+			break;
+			case "student":
 				studentController.start(user);
+			break;
+			}
 		} 
-		catch (Exception e) {}
+		catch (Exception e) {e.printStackTrace();}
 	}
 }
