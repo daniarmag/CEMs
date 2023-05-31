@@ -7,10 +7,13 @@ import entities.Question;
 import entities.User;
 import ocsf.server.ConnectionToClient;
 import server.EchoServer;
-import server.MySQLConnection;
+import server.MySQLController;
 
 public class ServerMessageHandler 
 {
+	static private MySQLController sqlController=MySQLController.getInstance(); 
+	
+	
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
@@ -85,7 +88,7 @@ public class ServerMessageHandler
 					break;
 					
 				case "get amount of questions":
-					client.sendToClient(MySQLConnection.getAmountOfQuestions());
+					client.sendToClient(sqlController.getAmountOfQuestions());
 					break;
 			}
 		} catch (IOException e) {}
@@ -104,7 +107,7 @@ public class ServerMessageHandler
 			switch (messageType) 
 			{
 				case "login": 				
-					User user = MySQLConnection.verifyLogin(arrayList);
+					User user = sqlController.verifyLogin(arrayList);
 					if (user == null) 
 						client.sendToClient("incorrect login");
 				    else if (user.getUser_id().equals("logged"))
@@ -114,36 +117,36 @@ public class ServerMessageHandler
 					break;
 					
 				case "logout":
-					MySQLConnection.logout(arrayList.get(1));
+					sqlController.logout(arrayList.get(1));
 					client.sendToClient("logged out");
 					break;
 					
 				case "find professor subjects":
-					client.sendToClient(MySQLConnection.getProfessorSubjects(arrayList.get(1)));
+					client.sendToClient(sqlController.getProfessorSubjects(arrayList.get(1)));
 					break;
 					
 				case "load professor questions":
-					client.sendToClient(MySQLConnection.loadProfessorQuestions(arrayList.get(1)));
+					client.sendToClient(sqlController.loadProfessorQuestions(arrayList.get(1)));
 					break;
 					
 				case "get subject courses":
-					client.sendToClient(MySQLConnection.getSubjectCourses(arrayList.get(1)));
+					client.sendToClient(sqlController.getSubjectCourses(arrayList.get(1)));
 					break;
 				
 				case "update question courses":
 					arrayList.remove(0);
-					MySQLConnection.addQuestionCourses(arrayList);
+					sqlController.addQuestionCourses(arrayList);
 					client.sendToClient("updated question courses");
 					break;
 				
 				case "update question":
 					arrayList.remove(0);
-					MySQLConnection.editQuestionInDb(arrayList);
+					sqlController.editQuestionInDb(arrayList);
 					client.sendToClient("updated question");
 					break;
 					
 				case "delete question":
-					MySQLConnection.deleteQuestionFromDb(arrayList.get(1));
+					sqlController.deleteQuestionFromDb(arrayList.get(1));
 					client.sendToClient("deleted question");
 					break;
 			}
@@ -159,7 +162,7 @@ public class ServerMessageHandler
 	{
 		try 
 		{
-			MySQLConnection.addQuestionToDB(question);
+			sqlController.addQuestionToDB(question);
 			client.sendToClient("question added");
 		} catch (IOException e) {}
 	}

@@ -17,27 +17,27 @@ import entities.Question;
 import entities.Student;
 import entities.User;
 
-public class MySQLConnection 
+public class MySQLController 
 {
 	static Connection conn;
-	public static MySQLConnection mySqlController=null;
+	public static MySQLController mySqlController=null;
 	
 	
 	
 	/**
 	 * private constructor for Singleton DP
 	 */
-	private MySQLConnection() {	
+	private MySQLController() {	
 	}
 	
 	/**
 	 * @return
 	 */
-	public static MySQLConnection getInstance() {
+	public static MySQLController getInstance() {
 		if(mySqlController==null)
-			synchronized(MySQLConnection.class) {
+			synchronized(MySQLController.class) {
 				if(mySqlController==null)
-			mySqlController=new MySQLConnection();
+			mySqlController=new MySQLController();
 			}
 		return mySqlController;
 	}
@@ -146,7 +146,7 @@ public class MySQLConnection
 	 * This method, loadQuestions, retrieves a list of questions from a database table
 	 * @return an ArrayList of Question objects
 	 */
-	public static ArrayList<Question> loadProfessorQuestions(String id)
+	public  ArrayList<Question> loadProfessorQuestions(String id)
 	{
 		ArrayList<Question> qArr = new ArrayList<Question>();
 	    try
@@ -172,7 +172,7 @@ public class MySQLConnection
 	 * This method is responsible for updating question text and question number records in the database. 
 	 * @param arr represents the updated question data.
 	 */
-	public static void editQuestionInDb(ArrayList<String> arr) 
+	public void editQuestionInDb(ArrayList<String> arr) 
 	{
 	    try 
 	    {
@@ -194,7 +194,7 @@ public class MySQLConnection
 	 * This method is responsible for adding a question to the database. 
 	 * @param question represents the updated question data.
 	 */
-	public static void addQuestionToDB(Question question) 
+	public void addQuestionToDB(Question question) 
 	{
 	    try 
 	    {
@@ -223,7 +223,7 @@ public class MySQLConnection
 	 * @param loginInfo
 	 * @return user object or null.
 	 */
-	public static User verifyLogin(ArrayList<String> loginInfo)
+	public  User verifyLogin(ArrayList<String> loginInfo)
 	{
 		String username = loginInfo.get(1);
 		String password = loginInfo.get(2);
@@ -268,7 +268,7 @@ public class MySQLConnection
 		return newUser;
 	}
 	
-	public static void logout(String id)
+	public  void logout(String id)
 	{
 		try
 		{
@@ -279,7 +279,7 @@ public class MySQLConnection
 		catch(SQLException e){}
 	}
 	
-	public static ArrayList<String> getProfessorSubjects(String id)
+	public  ArrayList<String> getProfessorSubjects(String id)
 	{
 		ArrayList<String> answer = new ArrayList<String>();
 		answer.add("professor subjects");
@@ -305,7 +305,7 @@ public class MySQLConnection
 		return answer;
 	}
 	
-	public static ArrayList<String> getSubjectCourses(String id)
+	public  ArrayList<String> getSubjectCourses(String id)
 	{
 		ArrayList<String> answer = new ArrayList<String>();
 		answer.add("subject courses");
@@ -325,7 +325,7 @@ public class MySQLConnection
 		return answer;
 	}
 	
-	public static ArrayList<String> getAmountOfQuestions()
+	public ArrayList<String> getAmountOfQuestions()
 	{
 		ArrayList<String> answer = new ArrayList<String>();
 		answer.add("amount of questions");
@@ -343,7 +343,7 @@ public class MySQLConnection
 		return answer;
 	}
 	
-	public static void addQuestionCourses(ArrayList<String> courses)
+	public  void addQuestionCourses(ArrayList<String> courses)
 	{
 		String question_id = courses.get(0);
 		courses.remove(0);
@@ -361,7 +361,7 @@ public class MySQLConnection
 		catch(SQLException e){e.printStackTrace();}
 	}
 	
-	public static void logoutAllUsers()
+	public  void logoutAllUsers()
 	{
 		try 
 		{
@@ -371,7 +371,7 @@ public class MySQLConnection
 		catch(SQLException e){e.printStackTrace();}
 	}
 
-	public static void deleteQuestionFromDb(String string) 
+	public  void deleteQuestionFromDb(String string) 
 	{
 		
 		try 

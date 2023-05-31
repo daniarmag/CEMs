@@ -18,7 +18,6 @@ public class EchoServer extends AbstractServer
 	/**
 	 * The default port to listen on.
 	 */
-	private static EchoServer server=null;
 	final public static int DEFAULT_PORT = 5555;
 	static ObservableList<Client> clientsInfoList = FXCollections.observableArrayList();
 	public static ServerScreenController serverScreenController;

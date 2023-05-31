@@ -10,7 +10,7 @@ import serverGui.ServerScreenController;
 public class ServerUI extends Application {
 	final public static int DEFAULT_PORT = 5555;
 	static EchoServer es;
-	static MySQLConnection sqlController;
+	static MySQLController sqlController;
 	
 	public static EchoServer getEs() 
 	{
@@ -31,7 +31,7 @@ public class ServerUI extends Application {
 	public static boolean runServer(String p, String URL, String username, String password) {
 	    int port = 0; // Port to listen on
 	    try {
-	    	sqlController=MySQLConnection.getInstance();
+	    	sqlController=MySQLController.getInstance();
 	        port = Integer.parseInt(p); 
 	    } catch (Throwable t) {
 	        System.out.println("ERROR - Could not connect!");
