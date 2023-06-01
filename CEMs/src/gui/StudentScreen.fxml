@@ -39,7 +39,7 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="takeExamBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Take an exam">
+      <Button fx:id="takeExamBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#takeExamBtn" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Take an exam">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>

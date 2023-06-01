@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import client.ClientUI;
 import control.UserController;
 import entities.User;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,7 +41,11 @@ public class StudentExamScreenController implements Initializable
 
     @FXML
     private TableView<?> questionTable;
-
+    
+    public static void start(User user) throws Exception {
+		u = user;
+		Platform.runLater(() -> ScreenUtils.createNewStage("/gui/StudentExamScreen.fxml").show());
+	}
     @FXML
     void enterExam(ActionEvent event) {
 
@@ -60,10 +65,10 @@ public class StudentExamScreenController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientMessageHandler.setStudentExamController(this);
 		ArrayList<String> request = new ArrayList<String>();
-		request.add("load student exams");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);	
-		
+//		request.add("load student exams");
+//		request.add(u.getUser_id());
+//		ClientUI.chat.accept(request);	
+//		
 	}
 
 }

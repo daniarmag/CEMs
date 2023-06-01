@@ -28,6 +28,8 @@ public class StudentScreenController implements Initializable {
 
 	@FXML
 	private Text welcomeText;
+	
+	
 
 	/**
 	 * Initializes the JavaFX controller during application startup.
@@ -54,6 +56,15 @@ public class StudentScreenController implements Initializable {
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
 	}
+	
+	  @FXML
+	    void takeExamBtn(ActionEvent event) {
+		  UserController.hide(event);
+	    	try 
+	    	{
+	    		StudentExamScreenController.start(u);
+			} catch (Exception e) {}
+	    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
