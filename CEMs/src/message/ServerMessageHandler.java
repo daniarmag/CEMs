@@ -108,6 +108,7 @@ public class ServerMessageHandler
 			{
 				case "login": 				
 					User user = sqlController.verifyLogin(arrayList);
+					System.out.println(user.getRole());
 					if (user == null) 
 						client.sendToClient("incorrect login");
 				    else if (user.getUser_id().equals("logged"))

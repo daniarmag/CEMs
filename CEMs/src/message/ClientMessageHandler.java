@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import entities.Question;
 import entities.User;
 import gui.CreateQuestionScreenController;
+import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
@@ -20,9 +21,11 @@ public class ClientMessageHandler
 	static CreateQuestionScreenController createQuestionScreenController;
     static QuestionBankScreenController questionBankScreenController;
     static StudentExamScreenController studentExamScreenController;
+    static HeadOfDepScreenController headOfScreenController;
 	static {
 		studentController = new StudentScreenController();
 		professorController = new ProfessorScreenController();
+		headOfScreenController=new HeadOfDepScreenController();
 	}
 	
 	public static void setQuestionBankController(QuestionBankScreenController controller)
@@ -167,7 +170,11 @@ public class ClientMessageHandler
 			case "student":
 				studentController.start(user);
 				break;
+			case "head":
+				headOfScreenController.start(user);			
+				break;
 			}
+				
 		} 
 		catch (Exception e) {e.printStackTrace();}
 	}

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Question;
 import entities.Student;
@@ -279,6 +280,9 @@ public class MySQLController
 						case "professor":
 							newUser = new Professor(user_id, first_name, last_name, email, username, password, "professor");
 							break;
+						case "head":
+							newUser = new HeadOfDepartment(user_id,first_name,last_name,email,user_id,password,"head");
+						
 					}
 				}
 				else 
@@ -287,7 +291,7 @@ public class MySQLController
 				}
 			}
 		}
-		catch (SQLException e){}
+		catch (SQLException e){e.printStackTrace();}
 		return newUser;
 	}
 	

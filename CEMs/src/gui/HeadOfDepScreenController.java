@@ -1,12 +1,14 @@
 package gui;
 
+import entities.User;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 public class HeadOfDepScreenController {
-
+	static User u;
     @FXML
     private Text Alert;
 
@@ -37,6 +39,11 @@ public class HeadOfDepScreenController {
     void logout(ActionEvent event) {
 
     }
+
+	public void start(User user) {
+		u = user;
+		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
+	}
 
 }
 
