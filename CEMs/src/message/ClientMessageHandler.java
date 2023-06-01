@@ -1,6 +1,8 @@
 package message;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 import javax.swing.JOptionPane;
 import entities.Question;
 import entities.User;
@@ -55,6 +57,8 @@ public class ClientMessageHandler
 			case USER:
 				userMessageHandler((User) msg);
 				break;
+			case MAP:
+				mapMessageHandler((Map<String, ArrayList<String>>) msg);
 		}
 	}
 
@@ -79,6 +83,8 @@ public class ClientMessageHandler
 					return MessageType.QUESTION_ARRAY_LIST;
 			}
 		} 
+		else if (msg instanceof Map)
+			return MessageType.MAP;
 		else if (msg instanceof User)
 			return MessageType.USER;
 		return null;
@@ -123,19 +129,10 @@ public class ClientMessageHandler
 	{
 		String messageType = arrayList.get(0);
 		switch (messageType) 
-		{
-			case "professor subjects": 
-				arrayList.remove(0);
-				createQuestionScreenController.setSubjects(arrayList);
-				break;
-				
+		{	
 			case "amount of questions":
 				createQuestionScreenController.setQuestionNumber(arrayList.get(1));
 				break;
-				
-			case "subject courses":
-				arrayList.remove(0);
-				createQuestionScreenController.setCourses(arrayList);
 		}
 	}
 
@@ -169,5 +166,10 @@ public class ClientMessageHandler
 			}
 		} 
 		catch (Exception e) {e.printStackTrace();}
+	}
+	
+	public static void mapMessageHandler(Map<String, ArrayList<String>> map)
+	{
+		professorController.setTeachingMap(map);
 	}
 }

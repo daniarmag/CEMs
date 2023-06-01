@@ -6,6 +6,7 @@ package message;
  */
 public enum MessageType 
 {
+	MAP,
 	USER,
     STRING,
     STRING_ARRAY_LIST,

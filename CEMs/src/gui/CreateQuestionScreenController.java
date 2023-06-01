@@ -3,13 +3,13 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import client.ClientUI;
 import control.UserController;
 import entities.Question;
 import entities.User;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,6 +31,8 @@ public class CreateQuestionScreenController implements Initializable
 	Question newQuestion = new Question(null, null, null, null, null, null, null, null);
 	
     ArrayList<String> subjectsArr, coursesArr;
+    
+    public static Map<String, ArrayList<String>> teachingMap;
     
 	@FXML
 	private TextField aAnswerText;
@@ -78,37 +80,13 @@ public class CreateQuestionScreenController implements Initializable
 		newQuestion.setQuestionNumber(newQuestionNum);
 	}
 	
-	public void setSubjects(ArrayList<String> subjects)
-	{
-		  subjectsArr = subjects;
-		  for (String s : subjectsArr)
-		  {
-			  MenuItem m = new MenuItem(s);
-			  m.setOnAction(e -> selectSubject((MenuItem)e.getSource()));
-			  subjectMenu.getItems().add(m);
-		  }
-	}
-
-	
 	public void selectSubject(MenuItem m)
 	{
 		courseListview.getItems().clear();
 		String selected = m.getText();
 		subjectMenu.setText(selected);
-		String[] subjectId = selected.split("\\s+");
-		ArrayList<String> request = new ArrayList<String>();
-		request.add("get subject courses");
-		request.add(subjectId[0]);
-		ClientUI.chat.accept(request);
-	}
-	
-	public void setCourses(ArrayList<String> courses) 
-	{
-		Platform.runLater(() -> 
-		{
-	        courseListview.getItems().clear();
-	        courseListview.getItems().addAll(courses);
-	    });
+		ArrayList<String> selectedValues = teachingMap.get(selected);
+		courseListview.getItems().addAll(selectedValues);
 	}
 
 	@FXML
@@ -122,11 +100,13 @@ public class CreateQuestionScreenController implements Initializable
 	 * 
 	 * @param primaryStage The primary stage of the application.
 	 * @param user
+	 * @param teachingMap 
 	 * @throws Exception
 	 */
-	public static void start(User user) throws Exception 
+	public static void start(User user, Map<String, ArrayList<String>> map) throws Exception 
 	{
 		u = user;
+		teachingMap =  map;
 		ScreenUtils.createNewStage("/gui/CreateQuestionScreen.fxml").show();
 	}
 	
@@ -176,10 +156,12 @@ public class CreateQuestionScreenController implements Initializable
 	    bRadio.setToggleGroup(toggleGroup);
 	    cRadio.setToggleGroup(toggleGroup);
 	    dRadio.setToggleGroup(toggleGroup);
-		ArrayList<String> request = new ArrayList<String>();
-		request.add("find professor subjects");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);	
+	    for (String s : teachingMap.keySet())
+		{
+	    	MenuItem m = new MenuItem(s);
+			m.setOnAction(e -> selectSubject((MenuItem)e.getSource()));
+			subjectMenu.getItems().add(m);
+		}
 	}
 	
 	private HashMap<Boolean, String> createAnswerMap(String[] answers) 

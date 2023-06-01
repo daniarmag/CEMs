@@ -121,16 +121,8 @@ public class ServerMessageHandler
 					client.sendToClient("logged out");
 					break;
 					
-				case "find professor subjects":
-					client.sendToClient(sqlController.getProfessorSubjects(arrayList.get(1)));
-					break;
-					
 				case "load professor questions":
 					client.sendToClient(sqlController.loadProfessorQuestions(arrayList.get(1)));
-					break;
-					
-				case "get subject courses":
-					client.sendToClient(sqlController.getSubjectCourses(arrayList.get(1)));
 					break;
 				
 				case "update question courses":
@@ -148,6 +140,10 @@ public class ServerMessageHandler
 				case "delete question":
 					sqlController.deleteQuestionFromDb(arrayList.get(1));
 					client.sendToClient("deleted question");
+					break;
+					
+				case "load teaching map":
+					client.sendToClient(sqlController.getProfessorSubjectsAndCourses(arrayList.get(1)));
 					break;
 			}
 		} catch (IOException e) {}

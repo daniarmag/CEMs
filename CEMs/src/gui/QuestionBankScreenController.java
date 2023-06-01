@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import client.ClientUI;
@@ -25,6 +26,8 @@ import message.ClientMessageHandler;
 public class QuestionBankScreenController implements Initializable
 {
 	ArrayList<Question> qArr = new ArrayList<Question>();
+	
+	public static Map<String, ArrayList<String>> teachingMap;
 	
 	public static User u;
 	
@@ -64,11 +67,13 @@ public class QuestionBankScreenController implements Initializable
 	 * Initializes the JavaFX controller during application startup.
 	 * @param primaryStage The primary stage of the application.
 	 * @param user
+     * @param teachingMap 
 	 * @throws Exception
 	 */
-	public static void start(User user) throws Exception 
+	public static void start(User user, Map<String, ArrayList<String>> map) throws Exception 
 	{
 		u = user;
+		teachingMap = map;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show());
 	}
     
@@ -98,7 +103,7 @@ public class QuestionBankScreenController implements Initializable
     	UserController.hide(event);
     	try 
     	{
-			CreateQuestionScreenController.start(u);
+			CreateQuestionScreenController.start(u, teachingMap);
 		} catch (Exception e) {}
     }
     

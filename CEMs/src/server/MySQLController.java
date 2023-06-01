@@ -11,6 +11,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import entities.Professor;
 import entities.Question;
@@ -198,10 +200,10 @@ public class MySQLController
 	{
 	    try 
 	    {
-	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO question (question_number, id, "
-										    			+ "subject_id, question_text, professor_full_name, professor_id, "
-										    			+ "correct_answer, answer1, answer2, answer3, answer4) "
-										    			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO question (question_number, id, " +
+										    			  "subject_id, question_text, professor_full_name, professor_id, " +
+										    			  "correct_answer, answer1, answer2, answer3, answer4) " +
+										    			  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 	       ps.setString(1, question.getQuestionNumber());
 	       ps.setString(2, question.getId());
 	       ps.setString(3, question.getSubject());
@@ -279,52 +281,6 @@ public class MySQLController
 		catch(SQLException e){}
 	}
 	
-	public  ArrayList<String> getProfessorSubjects(String id)
-	{
-		ArrayList<String> answer = new ArrayList<String>();
-		answer.add("professor subjects");
-		try
-		{
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM professor_subject WHERE professor_id = ?");
-			ps.setString(1, id);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) 
-			{
-				String subject_id = rs.getString("subject_id");
-				PreparedStatement tempPs = conn.prepareStatement("SELECT * FROM subject WHERE subject_id = ?");
-				tempPs.setString(1, subject_id);
-				ResultSet tempRs = tempPs.executeQuery();
-				while (tempRs.next())
-				{
-					String subject_name = tempRs.getString("subject_name");
-					answer.add(subject_id + " - " + subject_name);
-				}
-			}
-		}
-		catch(SQLException e){e.printStackTrace();}
-		return answer;
-	}
-	
-	public  ArrayList<String> getSubjectCourses(String id)
-	{
-		ArrayList<String> answer = new ArrayList<String>();
-		answer.add("subject courses");
-		try
-		{
-			PreparedStatement ps = conn.prepareStatement("SELECT course_id, course_name FROM course WHERE course_subject_id = ?");
-			ps.setString(1, id);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) 
-			{
-				String course_id = rs.getString("course_id");
-				String course_name = rs.getString("course_name");
-				answer.add(course_id + " - " + course_name);
-			}
-		}
-		catch(SQLException e){e.printStackTrace();}
-		return answer;
-	}
-	
 	public ArrayList<String> getAmountOfQuestions()
 	{
 		ArrayList<String> answer = new ArrayList<String>();
@@ -382,5 +338,37 @@ public class MySQLController
 		}
 		catch(SQLException e){e.printStackTrace();}
 	}
+	
+	public  Map<String, ArrayList<String>> getProfessorSubjectsAndCourses(String id) 
+	{
+	    Map<String, ArrayList<String>> resultMap = new HashMap<>();
+	    try 
+	    {
+	        PreparedStatement ps = conn.prepareStatement( "SELECT subject.subject_id, subject.subject_name, course.course_id, course.course_name " +
+	        											  "FROM professor_subject " +
+	        											  "JOIN subject ON professor_subject.subject_id = subject.subject_id " +
+	        											  "JOIN course ON subject.subject_id = course.course_subject_id " +
+	        											  "WHERE professor_subject.professor_id = ?");
+	        ps.setString(1, id);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            String subject_id = rs.getString("subject_id");
+	            String subject_name = rs.getString("subject_name");
+	            String course_id = rs.getString("course_id");
+	            String course_name = rs.getString("course_name");
+	            String subject = subject_name + " - " + subject_id;
+	            if (resultMap.containsKey(subject)) 
+	                resultMap.get(subject).add(course_id + " - " + course_name);
+	             else 
+	            {
+	                ArrayList<String> courses = new ArrayList<>();
+	                courses.add(course_id + " - " + course_name);
+	                resultMap.put(subject, courses);
+	            }
+	        }
+	    } catch (SQLException e) { e.printStackTrace();}
+	    return resultMap;
+	}
+
 	
 }

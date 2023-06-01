@@ -1,7 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import client.ClientUI;
 import control.UserController;
 import entities.User;
 import javafx.application.Platform;
@@ -14,6 +18,8 @@ import javafx.scene.text.Text;
 public class ProfessorScreenController implements Initializable 
 {
 	public static User u;
+	
+	public static Map<String, ArrayList<String>> teachingMap;
 	
 	@FXML
     private Button activateExamBtn;
@@ -52,7 +58,10 @@ public class ProfessorScreenController implements Initializable
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show());
 	}
 	
-	
+	public void setTeachingMap(Map<String, ArrayList<String>> map)
+	{
+		teachingMap = map;
+	}
 	
 	/*Exits the GUI window.*/
 	/*disconnects from the server and exits from the GUI. */
@@ -76,7 +85,17 @@ public class ProfessorScreenController implements Initializable
     	UserController.hide(event);
     	try 
     	{
-			QuestionBankScreenController.start(u);
+			QuestionBankScreenController.start(u, teachingMap);
+		} catch (Exception e) {e.printStackTrace();}
+    }
+    
+    @FXML
+    void createExam(ActionEvent event)
+    {
+    	UserController.hide(event);
+    	try 
+    	{
+    		ExamCreationFirstController.start(u, teachingMap);
 		} catch (Exception e) {e.printStackTrace();}
     }
 
@@ -84,5 +103,9 @@ public class ProfessorScreenController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		welcomeText.setText("Welcome back " + u.getFirst_name());
+		ArrayList<String> request = new ArrayList<String>();
+		request.add("load teaching map");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);	
 	}
 }
