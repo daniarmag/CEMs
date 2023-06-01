@@ -11,6 +11,7 @@ import gui.LoginScreenController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.QuestionBankScreenController;
+import gui.StudentExamScreenController;
 
 public class ClientMessageHandler 
 {
@@ -18,8 +19,8 @@ public class ClientMessageHandler
 	static ProfessorScreenController professorController;
 	static CreateQuestionScreenController createQuestionScreenController;
     static QuestionBankScreenController questionBankScreenController;
+    static StudentExamScreenController studentExamScreenController;
 	static {
-		//proffesorController = new ProfessorScreenController();
 		studentController = new StudentScreenController();
 		professorController = new ProfessorScreenController();
 	}
@@ -33,7 +34,10 @@ public class ClientMessageHandler
 	{
 		createQuestionScreenController = controller;
 	}
-	
+	public static void setStudentExamController(StudentExamScreenController controller)
+	{
+		studentExamScreenController = controller;
+	}
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
