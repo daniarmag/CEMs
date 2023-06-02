@@ -69,7 +69,7 @@ public class MySQLController
         {
             conn = DriverManager.getConnection(URL, username, password);
             System.out.println("SQL connection succeed");
-            openBLOB2();
+           // openBLOB2();
             return true;
             
      	} 
