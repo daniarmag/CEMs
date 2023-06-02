@@ -145,6 +145,11 @@ public class ServerMessageHandler
 				case "load teaching map":
 					client.sendToClient(sqlController.getProfessorSubjectsAndCourses(arrayList.get(1)));
 					break;
+				
+				case "load student exams":
+				//client.sendToClient(sqlController.loadStudentExams(arrayList.get(1)));
+
+				break;
 			}
 		} catch (IOException e) {}
 	}

@@ -64,32 +64,22 @@
                   </VBox>
                </children>
             </HBox>
-            <TableView id="questionTable" fx:id="questionTable" layoutX="52.0" layoutY="122.0" prefHeight="259.0" prefWidth="387.0">
+            <TableView id="questionTable" fx:id="questionTable" layoutX="105.0" layoutY="121.0" prefHeight="259.0" prefWidth="539.0">
               <columns>
                   <TableColumn id="exumTable" fx:id="qnumTable" prefWidth="90.66665649414062" text="Exam Number" />
                 <TableColumn id="idTable" fx:id="idTable" prefWidth="79.33334350585938" text="ID" />
                   <TableColumn id="courseTable" fx:id="qtextTable" prefWidth="130.6666259765625" text="Course" />
                   <TableColumn id="typeTable" prefWidth="86.0" text="Type" />
+                  <TableColumn id="dateTable" prefWidth="75.0" text="Date" />
+                  <TableColumn prefWidth="75.0" text="Active" />
               </columns>
             </TableView>
             <Button id="enterBtn" fx:id="addQstnBtn" layoutX="324.0" layoutY="401.0" mnemonicParsing="false" onAction="#enterExam" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Enter" />
-            <Text layoutX="201.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Today's exams" textAlignment="CENTER" wrappingWidth="89.66665649414062">
+            <Text layoutX="330.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Today's exams" textAlignment="CENTER" wrappingWidth="89.66665649414062">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="570.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Future Exams" textAlignment="CENTER">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <TableView layoutX="497.0" layoutY="122.0" prefHeight="259.0" prefWidth="228.0">
-              <columns>
-                <TableColumn id="fIdTable" prefWidth="75.0" text="ID" />
-                <TableColumn id="fCourseTable" prefWidth="75.0" text="Course" />
-                  <TableColumn id="dateTable" prefWidth="75.0" text="Date" />
-              </columns>
-            </TableView>
          </children>
       </Pane>
    </children>

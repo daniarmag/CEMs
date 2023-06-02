@@ -170,6 +170,27 @@ public class MySQLController
 		return qArr;
 	}
 	
+	public  ArrayList<Question> loadStudentExams(String id)
+	{
+		ArrayList<Question> qArr = new ArrayList<Question>();
+	    try
+		{
+	    	//loading all the  student's exams from the table
+			PreparedStatement ps = conn.prepareStatement
+							("SELECT exam.exam_number, exam.exam_id, course.course_name, exam.exam_type "
+							+ "FROM student_course" + "JOIN exam ON exam.course_id = student_course.course_id"
+							+ "JOIN course ON exam.course_id = course.course_id" + "WHERE student_id = ?");
+		    ps.setString(1, id);
+		    ResultSet rs = ps.executeQuery();
+//			while (rs.next()) TBD
+//			{
+//				Exam e = new Exam();
+//			}
+		} 
+		catch (SQLException e) {e.printStackTrace();}
+		return qArr;
+	}
+	
 	/**
 	 * This method is responsible for updating question text and question number records in the database. 
 	 * @param arr represents the updated question data.

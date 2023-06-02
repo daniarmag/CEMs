@@ -65,10 +65,10 @@ public class StudentExamScreenController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientMessageHandler.setStudentExamController(this);
 		ArrayList<String> request = new ArrayList<String>();
-//		request.add("load student exams");
-//		request.add(u.getUser_id());
-//		ClientUI.chat.accept(request);	
-//		
+		request.add("load student exams");
+		request.add(u.getUser_id());
+		//ClientUI.chat.accept(request);	
+		
 	}
 
 }
