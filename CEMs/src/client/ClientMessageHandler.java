@@ -1,11 +1,11 @@
-package message;
+package client;
 
 import java.util.ArrayList;
 import java.util.Map;
-
 import javax.swing.JOptionPane;
 import entities.Question;
 import entities.User;
+import enums.MessageType;
 import gui.CreateQuestionScreenController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;

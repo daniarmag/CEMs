@@ -1,13 +1,12 @@
-package message;
+package server;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import entities.Question;
 import entities.User;
+import enums.MessageType;
 import ocsf.server.ConnectionToClient;
-import server.EchoServer;
-import server.MySQLController;
 
 public class ServerMessageHandler 
 {

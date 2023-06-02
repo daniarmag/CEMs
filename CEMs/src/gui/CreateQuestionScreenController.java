@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+
+import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.Question;
@@ -22,7 +24,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import message.ClientMessageHandler;
 
 public class CreateQuestionScreenController implements Initializable 
 {

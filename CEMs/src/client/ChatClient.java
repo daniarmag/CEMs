@@ -2,7 +2,7 @@ package client;
 
 import ocsf.client.*;
 import common.ChatIF;
-import message.ClientMessageHandler;
+
 import java.io.*;
 
 public class ChatClient extends AbstractClient

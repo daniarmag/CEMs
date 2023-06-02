@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+
+import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.Question;
@@ -20,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import message.ClientMessageHandler;
 
 /*A GUI for the question bank*/
 public class QuestionBankScreenController implements Initializable
