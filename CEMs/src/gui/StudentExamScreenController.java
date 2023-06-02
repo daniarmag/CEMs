@@ -3,7 +3,6 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import client.ClientUI;
 import control.UserController;
 import entities.User;
