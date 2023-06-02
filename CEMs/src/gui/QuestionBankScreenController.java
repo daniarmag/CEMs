@@ -26,7 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 /*A GUI for the question bank*/
 public class QuestionBankScreenController implements Initializable
 {
-	ArrayList<Question> qArr = new ArrayList<Question>();
+	public ArrayList<Question> qArr = new ArrayList<Question>();
 	
 	public static Map<String, ArrayList<String>> teachingMap;
 	

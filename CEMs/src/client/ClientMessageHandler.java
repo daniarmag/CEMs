@@ -7,6 +7,7 @@ import entities.Question;
 import entities.User;
 import enums.MessageType;
 import gui.CreateQuestionScreenController;
+import gui.ExamCreationFirstController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
@@ -19,13 +20,15 @@ public class ClientMessageHandler
 	static StudentScreenController studentController;
 	static ProfessorScreenController professorController;
 	static CreateQuestionScreenController createQuestionScreenController;
+	static ExamCreationFirstController examCreationFirstController;
     static QuestionBankScreenController questionBankScreenController;
     static StudentExamScreenController studentExamScreenController;
     static HeadOfDepScreenController headOfScreenController;
 	static {
 		studentController = new StudentScreenController();
 		professorController = new ProfessorScreenController();
-		headOfScreenController=new HeadOfDepScreenController();
+		headOfScreenController = new HeadOfDepScreenController();
+		examCreationFirstController = new ExamCreationFirstController();
 	}
 	
 	public static void setQuestionBankController(QuestionBankScreenController controller)
@@ -139,6 +142,10 @@ public class ClientMessageHandler
 		{	
 			case "amount of questions":
 				createQuestionScreenController.setQuestionNumber(arrayList.get(1));
+				break;
+			case "course questions":
+				arrayList.remove(0);
+				examCreationFirstController.setArr(arrayList);
 				break;
 		}
 	}

@@ -87,10 +87,10 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </MenuButton>
-      <TableView layoutX="249.0" layoutY="216.0" prefHeight="300.0" prefWidth="465.0">
+      <TableView fx:id="questionTable" layoutX="249.0" layoutY="243.0" prefHeight="273.0" prefWidth="465.0">
         <columns>
-          <TableColumn prefWidth="129.0" style="-fx-background-color: #30BECC;" text="Question ID" />
-          <TableColumn prefWidth="334.0" style="-fx-background-color: #30BECC;" text="Question" />
+          <TableColumn fx:id="tableViewQusetionId" prefWidth="129.0" text="Question ID" />
+          <TableColumn fx:id="tableViewQusetionText" prefWidth="334.0" text="Question " />
         </columns>
       </TableView>
       <ImageView fitHeight="60.0" fitWidth="280.0" layoutX="208.0" layoutY="21.0">

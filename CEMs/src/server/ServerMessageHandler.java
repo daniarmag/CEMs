@@ -107,7 +107,6 @@ public class ServerMessageHandler
 			{
 				case "login": 				
 					User user = sqlController.verifyLogin(arrayList);
-					System.out.println(user.getRole());
 					if (user == null) 
 						client.sendToClient("incorrect login");
 				    else if (user.getUser_id().equals("logged"))
@@ -147,8 +146,7 @@ public class ServerMessageHandler
 					break;
 				
 				case "load course questions":
-					arrayList.remove(0);
-					client.sendToClient(sqlController.loadCourseQuestions(messageType));
+					client.sendToClient(sqlController.loadCourseQuestions(arrayList.get(1)));
 					break;
 				/*case "load student exams":
 				//client.sendToClient(sqlController.loadStudentExams(arrayList.get(1)))

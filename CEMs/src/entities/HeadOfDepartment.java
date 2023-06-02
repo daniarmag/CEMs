@@ -1,5 +1,6 @@
 package entities;
 
+@SuppressWarnings("serial")
 public class HeadOfDepartment extends User {
 
 	public HeadOfDepartment(String user_id, String first_name, String last_name, String email, String username,
