@@ -65,6 +65,15 @@ public class StudentScreenController implements Initializable {
 	    		StudentExamScreenController.start(u);
 			} catch (Exception e) {}
 	    }
+	  
+	  @FXML
+	    void gradesAndCopiesBtn(ActionEvent event) {
+		  UserController.hide(event);
+	    	try 
+	    	{
+	    		StudentExamGradesController.start(u);
+			} catch (Exception e) {}
+	    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

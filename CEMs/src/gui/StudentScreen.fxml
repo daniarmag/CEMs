@@ -44,7 +44,7 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="gradesAndCopiesBtn" alignment="CENTER" layoutX="349.0" layoutY="265.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Grades and copies">
+      <Button fx:id="gradesAndCopiesBtn" alignment="CENTER" layoutX="349.0" layoutY="265.0" mnemonicParsing="false" onAction="#gradesAndCopiesBtn" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Grades and copies">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
