@@ -74,6 +74,7 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void logout(ActionEvent event)
     {
+    	//needs to be chaned here and for student//- talk to matan
     	UserController.hide(event);
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
