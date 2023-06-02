@@ -1,5 +1,6 @@
 package gui;
 
+import control.UserController;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -29,15 +30,20 @@ public class HeadOfDepScreenController {
 
     @FXML
     private Text welcomeText;
-
+    
+	/*Exits the GUI window.*/
+	/*disconnects from the server and exits from the GUI. */
     @FXML
     void exit(ActionEvent event) {
-
+    	UserController.userExit(u);
     }
 
     @FXML
     void logout(ActionEvent event) {
-
+    	UserController.hide(event);
+		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
+		//UserController.logoutUser(u,event,path);
+		UserController.logoutUser(u);
     }
 
 	public void start(User user) {

@@ -20,6 +20,7 @@ public class UserController
 		logoutUser.add("logout");
 		logoutUser.add(user.getUser_id());
 		ClientUI.chat.accept(logoutUser);
+		
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,15 +23,16 @@ import entities.User;
 
 public class MySQLController 
 {
+	
 	static Connection conn;
 	private static volatile MySQLController INSTANCE;
-	
+
 	
 	
 	/**
-	 * private constructor for Singleton DP
+	 * private constructor for Singleton DB
 	 */
-	private MySQLController() {	
+	private MySQLController() {
 	}
 	
 	/**
@@ -67,6 +69,7 @@ public class MySQLController
         {
             conn = DriverManager.getConnection(URL, username, password);
             System.out.println("SQL connection succeed");
+            openBLOB2();
             return true;
             
      	} 
@@ -82,13 +85,41 @@ public class MySQLController
         
    	}
 	
+	
+	/**
+	 * @param file
+	 * method in construction DO NOT touch ;)
+	 */
+	private void SendingFileToDataBase(File file) {
+		String sql = "INSERT INTO your_table (file_data) VALUES (?)";
+		byte[] fileBytes;
+		try (PreparedStatement statement = conn.prepareStatement(sql);) {
+
+			try {
+				fileBytes = Files.readAllBytes(file.toPath());
+				statement.setBytes(1, fileBytes);
+				statement.executeUpdate();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println("File sent to database successfully.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	//this method should sent the path of the exam to the client
 		// notice that this is only a prototype for the function but those are the
 		//function needed /
 		@SuppressWarnings("unused")
 		private void openBLOB() throws SQLException {
 			Statement st=conn.createStatement();
-			ResultSet r=st.executeQuery("SELECT q.exam_path FROM  physical_exam as q");
+			ResultSet r=st.executeQuery("SELECT q.physical_exam FROM physical_exam as q WHERE idphysical_exam=\"cdc\"");
+			//ResultSet r=st.executeQuery("SELECT q.exam_path FROM  physical_exam as q");
 			try {
 			while(r.next()) {
 				String path=r.getString(1);
@@ -119,7 +150,7 @@ public class MySQLController
 
 			bufferout = blob.getBytes(1, (int)blob.length());
 			File output = null;
-			String outputFileName = "C:\\Test\\output.docx";
+			String outputFileName = "C:\\Test\\output.txt";
 			try {
 				output = new File(outputFileName);
 			} catch (Exception e) {
@@ -170,6 +201,8 @@ public class MySQLController
 		catch (SQLException e) {e.printStackTrace();}
 		return qArr;
 	}
+	
+	
 	
 	public  ArrayList<Question> loadStudentExams(String id)
 	{
