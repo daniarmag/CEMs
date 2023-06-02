@@ -1,18 +1,13 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 /**
  * This class represents a professor-user
  * @author Daniel
  *
  */
 @SuppressWarnings("serial")
-public class Professor<T,E> extends User
+public class Professor extends User
 {
-	
-	private Map<T, E> teachingMap;
 
 	/**
 	 * @param user_id
@@ -27,15 +22,5 @@ public class Professor<T,E> extends User
 	{
 		super(user_id, first_name, last_name, email, username, password, "professor");
 	}
-	
-	
-	public Map< ?,? > getMap() {
-		return teachingMap;
-		
-	}
-	
-@SuppressWarnings("unchecked")
-public void setMap(Map<String,ArrayList<String>> map) {
-	teachingMap= (Map<T, E>) map;
-}
+
 }

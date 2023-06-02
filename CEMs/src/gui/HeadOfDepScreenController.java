@@ -1,20 +1,14 @@
 package gui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import control.UserController;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-public class HeadOfDepScreenController
-{
-	static examController ex=new examController();
+public class HeadOfDepScreenController {
 	static User u;
     @FXML
     private Text Alert;
@@ -47,19 +41,15 @@ public class HeadOfDepScreenController
     @FXML
     void logout(ActionEvent event) {
     	UserController.hide(event);
-    	
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		//UserController.logoutUser(u,event,path);
 		UserController.logoutUser(u);
-	
-	}
-
-    
+    }
 
 	public void start(User user) {
 		u = user;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
 	}
+
 }
-	
 

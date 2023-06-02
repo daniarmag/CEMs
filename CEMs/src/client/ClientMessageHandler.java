@@ -12,7 +12,6 @@ import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
-import gui.examController;
 import gui.QuestionBankScreenController;
 import gui.StudentExamScreenController;
 
@@ -181,7 +180,8 @@ public class ClientMessageHandler
 			case "head":
 				headOfScreenController.start(user);			
 				break;
-			}	
+			}
+				
 		} 
 		catch (Exception e) {e.printStackTrace();}
 	}

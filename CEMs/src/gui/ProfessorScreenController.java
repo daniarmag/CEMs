@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import client.ClientUI;
 import control.UserController;
-import entities.Professor;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -18,8 +17,9 @@ import javafx.scene.text.Text;
 
 public class ProfessorScreenController implements Initializable 
 {
-	public static Professor u;
+	public static User u;
 	
+	public static Map<String, ArrayList<String>> teachingMap;
 	
 	@FXML
     private Button activateExamBtn;
@@ -54,13 +54,13 @@ public class ProfessorScreenController implements Initializable
 	 */
 	public void start(User user) throws Exception 
 	{
-		u = (Professor)user;
+		u = user;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show());
 	}
 	
 	public void setTeachingMap(Map<String, ArrayList<String>> map)
 	{
-		u.setMap(map);
+		teachingMap = map;
 	}
 	
 	/*Exits the GUI window.*/
@@ -83,11 +83,10 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void manageQuestions(ActionEvent event)
     {
-    	
     	UserController.hide(event);
     	try 
     	{
-			QuestionBankScreenController.start(u, u.getMap());
+			QuestionBankScreenController.start(u, teachingMap);
 		} catch (Exception e) {e.printStackTrace();}
     }
     
@@ -97,7 +96,7 @@ public class ProfessorScreenController implements Initializable
     	UserController.hide(event);
     	try 
     	{
-    		ExamCreationFirstController.start(u, u.getMap());
+    		ExamCreationFirstController.start(u, teachingMap);
 		} catch (Exception e) {e.printStackTrace();}
     }
 

@@ -56,11 +56,10 @@ public class ExamCreationFirstController implements Initializable
      * @param teachingMap2 
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
-	public static void start(User user, Map<?, ?> map) throws Exception 
+	public static void start(User user, Map<String, ArrayList<String>> map) throws Exception 
 	{
 		u = user;
-		teachingMap = (Map<String, ArrayList<String>>) map;
+		teachingMap = map;
 		ScreenUtils.createNewStage("/gui/ExamCreationFirst.fxml").show();
 	}
 	
