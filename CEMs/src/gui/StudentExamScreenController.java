@@ -3,6 +3,8 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.User;
@@ -13,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import message.ClientMessageHandler;
 
 public class StudentExamScreenController implements Initializable
 {

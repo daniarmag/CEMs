@@ -4,7 +4,6 @@ import entities.Client;
 import gui.HostSelectionScreenController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import message.ServerMessageHandler;
 import ocsf.server.*;
 import serverGui.ServerScreenController;
 
