@@ -449,6 +449,7 @@ public class MySQLController
 		        answer.add(fullRow);
 			}
 		} catch (SQLException e) { e.printStackTrace();}
+		System.out.println(answer);
 		 return answer;
 	}
 }
