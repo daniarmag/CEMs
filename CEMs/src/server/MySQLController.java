@@ -364,7 +364,7 @@ public class MySQLController
 		catch(SQLException e){e.printStackTrace();}
 	}
 	
-	public  Map<String, ArrayList<String>> getProfessorSubjectsAndCourses(String id) 
+	public Map<String, ArrayList<String>> getProfessorSubjectsAndCourses(String id) 
 	{
 	    Map<String, ArrayList<String>> resultMap = new HashMap<>();
 	    try 
@@ -376,12 +376,13 @@ public class MySQLController
 	        											  "WHERE professor_subject.professor_id = ?");
 	        ps.setString(1, id);
 	        ResultSet rs = ps.executeQuery();
-	        while (rs.next()) {
+	        while (rs.next())
+	        {
 	            String subject_id = rs.getString("subject_id");
 	            String subject_name = rs.getString("subject_name");
 	            String course_id = rs.getString("course_id");
 	            String course_name = rs.getString("course_name");
-	            String subject = subject_name + " - " + subject_id;
+	            String subject = subject_id + " - " + subject_name;
 	            if (resultMap.containsKey(subject)) 
 	                resultMap.get(subject).add(course_id + " - " + course_name);
 	             else 
@@ -394,6 +395,27 @@ public class MySQLController
 	    } catch (SQLException e) { e.printStackTrace();}
 	    return resultMap;
 	}
-
 	
+	public ArrayList<String> loadCourseQuestions (String id)
+	{
+		ArrayList<String> answer = new ArrayList<String>();
+		answer.add("course questions");
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT qc.question_id, q.question_text " +
+														 "FROM question_course qc " +
+														 "JOIN question q ON qc.question_id = q.id " +
+														 "WHERE qc.course_id = ?");
+			ps.setString(1, id);
+		    ResultSet rs = ps.executeQuery();
+		    while (rs.next())
+		    {
+		    	String question_id = rs.getString("question_id");
+		        String question_text = rs.getString("question_text"); 
+		        String fullRow = question_id + " - " + question_text;
+		        answer.add(fullRow);
+			}
+		} catch (SQLException e) { e.printStackTrace();}
+		 return answer;
+	}
 }

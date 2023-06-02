@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="621.0" prefWidth="789.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamCreationFirstController">
+<AnchorPane prefHeight="621.0" prefWidth="737.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamCreationFirstController">
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
@@ -72,26 +72,25 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </MenuButton>
-      <Button layoutX="695.0" layoutY="551.0" mnemonicParsing="false" style="-fx-background-color: #30BECC;" text="Next">
+      <Button layoutX="647.0" layoutY="550.0" mnemonicParsing="false" style="-fx-background-color: #30BECC;" text="Next">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Text layoutX="542.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course:" wrappingWidth="66.0166015625">
+      <Text layoutX="497.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course:" wrappingWidth="66.0166015625">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
-      <MenuButton fx:id="courseMenu" layoutX="609.0" layoutY="165.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0">
+      <MenuButton fx:id="courseMenu" layoutX="564.0" layoutY="165.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </MenuButton>
-      <TableView layoutX="249.0" layoutY="216.0" prefHeight="300.0" prefWidth="510.0">
+      <TableView layoutX="249.0" layoutY="216.0" prefHeight="300.0" prefWidth="465.0">
         <columns>
-          <TableColumn prefWidth="91.0" style="-fx-background-color: #30BECC;" text="Question ID" />
-          <TableColumn prefWidth="372.0" style="-fx-background-color: #30BECC;" text="Question" />
-            <TableColumn prefWidth="46.0" style="-fx-background-color: #30BECC;" text="Add" />
+          <TableColumn prefWidth="129.0" style="-fx-background-color: #30BECC;" text="Question ID" />
+          <TableColumn prefWidth="334.0" style="-fx-background-color: #30BECC;" text="Question" />
         </columns>
       </TableView>
       <ImageView fitHeight="60.0" fitWidth="280.0" layoutX="208.0" layoutY="21.0">
@@ -99,7 +98,7 @@
             <Image url="@../images/ExamMenuLogo.png" />
          </image>
       </ImageView>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="744.0" layoutY="21.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="696.0" layoutY="21.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>

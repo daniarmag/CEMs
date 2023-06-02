@@ -50,14 +50,25 @@ public class ExamCreationFirstController implements Initializable
 	public void selectSubject(MenuItem m)
 	{
 		courseMenu.getItems().clear();
-		String selected = m.getText();
-		subjectMenu.setText(selected);
-		ArrayList<String> selectedValues = teachingMap.get(selected);
+		String selectedSubject = m.getText();
+		subjectMenu.setText(selectedSubject);
+		ArrayList<String> selectedValues = teachingMap.get(selectedSubject);
 		for (String s : selectedValues)
 		{
 			MenuItem mi = new MenuItem(s);
+			mi.setOnAction(e -> selectCourse((MenuItem)e.getSource()));
 			courseMenu.getItems().add(mi);
 		}
+	}
+	
+	public void selectCourse(MenuItem m)
+	{
+		courseMenu.getItems().clear();
+		String selectedSubject = m.getText();
+		courseMenu.setText(selectedSubject);
+		ArrayList<String> request = new ArrayList<String>();
+		request.add("load course questions");
+		
 	}
 	
     @FXML
