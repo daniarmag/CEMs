@@ -14,6 +14,11 @@ public class HeadOfDepartment extends User {
 		return studentarr;
 	}
 	
+	/**
+	 * @author czmat
+	 * @param arr
+	 * method for loading all the student in the data base -- data that only HeadOfDep have access to
+	 */
 	public void setArrStudent(ArrayList<?> arr) {
 		studentarr.clear();
 		HeadOfDepartment.studentarr=arr;

@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 
 public class HeadOfDepScreenController
 {
-	private statisticsChoseScreenController statisticsScreen;
+	private static statisticsChoseScreenController statisticsScreen=new statisticsChoseScreenController();
 	//static examController ex=new examController();
 	static HeadOfDepartment u;
     @FXML
@@ -59,10 +59,12 @@ public class HeadOfDepScreenController
 	}
 
     
+    /** navigate to a screen where the user can chose which statistics he wants
+     * @param event
+     */
     @FXML
     void openStatistics(ActionEvent event) {
     	UserController.hide(event);
-    	statisticsScreen=new statisticsChoseScreenController();
     	statisticsScreen.start(u);
     	
     	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
+import control.guiMainController;
 import entities.HeadOfDepartment;
 import entities.Question;
 import entities.Student;
@@ -31,13 +32,15 @@ public class ClientMessageHandler
     static HeadOfDepScreenController headOfScreenController;
     static examController examcontroller;
     static statisticsChoseScreenController statisticsScreen;
+    ///Check check check dont use 
+    //static guiMainController guiController;
 	static {
+		//guiController =new guiMainController();
 		studentController = new StudentScreenController();
 		professorController = new ProfessorScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
 		examCreationFirstController = new ExamCreationFirstController();
 		examcontroller=new examController();
-		
 	}
 	
 	public static void setStatisticsChooseScreen(statisticsChoseScreenController controller)
@@ -82,10 +85,11 @@ public class ClientMessageHandler
 				userMessageHandler((User) msg);
 				break;
 			case MAP:
-				mapMessageHandler((Map<String, ArrayList<String>>) msg);
+				mapMessageHandler((Map<?,?>) msg);
 			case STUDENT_ARRAY_LIST:
 				headOfScreenController.setStudentArr((ArrayList<?>)msg);
 				statisticsScreen.showData("student");
+				//guiController.statisticScreenData();
 				break;
 		}
 	}
@@ -206,7 +210,7 @@ public class ClientMessageHandler
 		catch (Exception e) {e.printStackTrace();}
 	}
 	
-	public static void mapMessageHandler(Map<String, ArrayList<String>> map)
+	public static void mapMessageHandler(Map<?, ?> map)
 	{
 		professorController.setTeachingMap(map);
 	}

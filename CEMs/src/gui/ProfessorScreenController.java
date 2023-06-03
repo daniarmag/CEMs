@@ -58,7 +58,7 @@ public class ProfessorScreenController implements Initializable
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show());
 	}
 	
-	public void setTeachingMap(Map<String, ArrayList<String>> map)
+	public void setTeachingMap(Map<?,?> map)
 	{
 		u.setMap(map);
 	}

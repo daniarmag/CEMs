@@ -15,6 +15,7 @@ import java.util.function.Function;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
+import control.guiMainController;
 import entities.HeadOfDepartment;
 import entities.Question;
 import entities.Student;
@@ -53,15 +54,15 @@ public class statisticsChoseScreenController implements Initializable{
 
 	@FXML
 	private Button searchBtn;
-	private ClientMessageHandler handler;
-
 	@FXML
 	private Button studentChoose;
 
 	@FXML
 	private TableView<Student> tableInfo;
+	@SuppressWarnings("rawtypes")
 	private static Map<String,Consumer> functionMap;
 	@SuppressWarnings("unchecked")
+	
 	
 	public void showData(String navigateToFunctoin) {
 		
@@ -70,8 +71,13 @@ public class statisticsChoseScreenController implements Initializable{
 
 	}
 
+	/**
+	 * this method will be activate from functionMap 
+	 * loading all the student in the tableView 
+	 */
+	@SuppressWarnings("unchecked")
 	public void LoadStudentIntable() {
-		array=(ArrayList<Student>) user.getAllStudent();
+		array=(ArrayList<Student>)user.getAllStudent();
 		col1.setCellValueFactory(new PropertyValueFactory<>("user_id"));
 		col2.setCellValueFactory(new PropertyValueFactory<>("first_name"));
 	    for ( Student q : array)
@@ -83,9 +89,7 @@ public class statisticsChoseScreenController implements Initializable{
 	public void start(User u) {
 		user=(HeadOfDepartment)u;
 		Platform.runLater(() -> ScreenUtils.createNewStage("/gui/headStatisticsChoose.fxml").show());
-		requsetMap.put("Choose professor", "Get all professors");
-		requsetMap.put("choose student", "Get all students");
-		requsetMap.put("Choose course","Get all courses");
+		
 	}	
 
 	@FXML
@@ -95,6 +99,10 @@ public class statisticsChoseScreenController implements Initializable{
 	}
 	
 	
+	/**
+	 * @param event
+	 * Going to server to ask for data from the DB according to the button 
+	 */
 	@FXML
 	void loadData(ActionEvent event) {
 		
@@ -103,24 +111,24 @@ public class statisticsChoseScreenController implements Initializable{
 		
 	}
 
+	/**
+	 *initializing 
+	 *functionMap is a map between a string and a function that will run
+	 *requestMap will go to the server with the proper query
+	 *@author czmat
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	System.out.println(tableInfo.hashCode());
-	ClientMessageHandler.setStatisticsChooseScreen(this);
+	//ClientMessageHandler.setStatisticsChooseScreen(this);
+	guiMainController.setStatisticsChooseScreen(this);
 	functionMap =new HashMap<>();
 	functionMap.put("student",(e)->LoadStudentIntable());
 	
+	requsetMap.put("Choose professor", "Get all professors");
+	requsetMap.put("choose student", "Get all students");
+	requsetMap.put("Choose course","Get all courses");
 	}
-	
-
-
-
-
-
-
-	
-	
-	
 	
 	
 }

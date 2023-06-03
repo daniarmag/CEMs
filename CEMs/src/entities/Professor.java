@@ -12,7 +12,7 @@ import java.util.Map;
 public class Professor<T,E> extends User
 {
 	
-	private Map<T, E> teachingMap;
+	private Map<T, E> teachingMap;//map to navigate between two types - our use is coue - subject but can be any type
 
 	/**
 	 * @param user_id
@@ -35,7 +35,7 @@ public class Professor<T,E> extends User
 	}
 	
 @SuppressWarnings("unchecked")
-public void setMap(Map<String,ArrayList<String>> map) {
+public void setMap(Map<?,?> map) {
 	teachingMap= (Map<T, E>) map;
 }
 }
