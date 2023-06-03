@@ -49,7 +49,7 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="331.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Statistics ">
+      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="331.0" mnemonicParsing="false" onAction="#openStatistics" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Statistics ">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>

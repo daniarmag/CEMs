@@ -23,6 +23,7 @@
                </content>
             </ScrollPane>
             <Button fx:id="start" layoutX="627.0" layoutY="52.0" mnemonicParsing="false" onAction="#init" text="Button" />
+            <Button fx:id="showAnswer" layoutX="56.0" layoutY="55.0" mnemonicParsing="false" onAction="#show" text="Show" />
          </children>
       </Pane>
    </children>

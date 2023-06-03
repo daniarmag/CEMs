@@ -3,7 +3,10 @@ package client;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
+
+import entities.HeadOfDepartment;
 import entities.Question;
+import entities.Student;
 import entities.User;
 import enums.MessageType;
 import gui.CreateQuestionScreenController;
@@ -13,6 +16,7 @@ import gui.LoginScreenController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.examController;
+import gui.statisticsChoseScreenController;
 import gui.QuestionBankScreenController;
 import gui.StudentExamScreenController;
 
@@ -25,11 +29,15 @@ public class ClientMessageHandler
     static QuestionBankScreenController questionBankScreenController;
     static StudentExamScreenController studentExamScreenController;
     static HeadOfDepScreenController headOfScreenController;
+    static examController examcontroller;
+    static statisticsChoseScreenController statisticsScreen;
 	static {
 		studentController = new StudentScreenController();
 		professorController = new ProfessorScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
 		examCreationFirstController = new ExamCreationFirstController();
+		examcontroller=new examController();
+		statisticsScreen =new statisticsChoseScreenController();
 	}
 	
 	public static void setQuestionBankController(QuestionBankScreenController controller)
@@ -70,6 +78,10 @@ public class ClientMessageHandler
 				break;
 			case MAP:
 				mapMessageHandler((Map<String, ArrayList<String>>) msg);
+			case STUDENT_ARRAY_LIST:
+				//headOfScreenController.setStudentArr((ArrayList<?>)msg);
+				statisticsScreen.showData((ArrayList<Student>)msg);
+				break;
 		}
 	}
 
@@ -92,6 +104,8 @@ public class ClientMessageHandler
 					return MessageType.STRING_ARRAY_LIST;
 				else if (firstElement instanceof Question)
 					return MessageType.QUESTION_ARRAY_LIST;
+				else if (firstElement instanceof Student)
+					return MessageType.STUDENT_ARRAY_LIST;
 			}
 		} 
 		else if (msg instanceof Map)
@@ -180,6 +194,7 @@ public class ClientMessageHandler
 				break;
 			case "head":
 				headOfScreenController.start(user);			
+				//examcontroller.start();
 				break;
 			}	
 		} 
@@ -190,4 +205,10 @@ public class ClientMessageHandler
 	{
 		professorController.setTeachingMap(map);
 	}
+	
+	
+	public static void openstatisticsScreen(User u) {
+		statisticsScreen.start(u);
+	}
+	
 }

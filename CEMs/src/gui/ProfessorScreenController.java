@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 
 public class ProfessorScreenController implements Initializable 
 {
-	public static Professor u;
+	public static Professor<?, ?> u;
 	
 	
 	@FXML
@@ -54,7 +54,7 @@ public class ProfessorScreenController implements Initializable
 	 */
 	public void start(User user) throws Exception 
 	{
-		u = (Professor)user;
+		u = (Professor<?, ?>)user;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show());
 	}
 	

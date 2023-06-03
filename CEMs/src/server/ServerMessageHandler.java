@@ -89,7 +89,12 @@ public class ServerMessageHandler
 				case "get amount of questions":
 					client.sendToClient(sqlController.getAmountOfQuestions());
 					break;
+					
+				case "Get all students":			
+					client.sendToClient(sqlController.getAllStudents());
+					break;
 			}
+			
 		} catch (IOException e) {}
 	}
 

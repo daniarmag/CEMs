@@ -452,4 +452,24 @@ public class MySQLController
 		System.out.println(answer);
 		return answer;
 	}
+	
+	public ArrayList<?> getAllStudents(){
+		try {
+			ArrayList<Student> arrayS=new ArrayList<>();
+			Statement st = conn.createStatement();
+			ResultSet rs =st.executeQuery("SELECT * FROM users WHERE role=\"student\"");
+			while(rs.next()) {
+				arrayS.add(new Student(rs.getString(1), rs.getString(2), 
+						rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), null));
+			}
+			return arrayS;
+			
+		}catch(Exception e) {e.printStackTrace();}
+		
+		
+		
+		return null;
+	}
+	
+	
 }

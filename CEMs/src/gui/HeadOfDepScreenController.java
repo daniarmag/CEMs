@@ -1,9 +1,13 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import client.ClientMessageHandler;
 import control.UserController;
+import entities.HeadOfDepartment;
+import entities.Student;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,8 +18,9 @@ import javafx.scene.text.Text;
 
 public class HeadOfDepScreenController
 {
-	static examController ex=new examController();
-	static User u;
+	static statisticsChoseScreenController statisticController=new statisticsChoseScreenController();
+	//static examController ex=new examController();
+	static HeadOfDepartment u;
     @FXML
     private Text Alert;
 
@@ -51,14 +56,27 @@ public class HeadOfDepScreenController
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		//UserController.logoutUser(u,event,path);
 		UserController.logoutUser(u);
-	
 	}
 
     
+    @FXML
+    void openStatistics(ActionEvent event) {
+    	UserController.hide(event);
+    	
+    	ClientMessageHandler.openstatisticsScreen(u);
+    	
+    }
+    
+    
 
 	public void start(User user) {
-		u = user;
+		u = (HeadOfDepartment) user;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
+	}
+
+	public void setStudentArr(ArrayList<?> msg) {
+			u.setArrStudent(msg);
+			//statisticController.showData(msg);
 	}
 }
 	

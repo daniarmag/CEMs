@@ -105,8 +105,16 @@ public class ExamCreationFirstController implements Initializable
 	        String[] splitted = q.split("-");
 	        String questionId = splitted[0].trim();
 	        String questionText = splitted[1].trim();
-	        questionTable.getItems().addAll(new Question(null, questionId, null, questionText, null, null, null, null));
+	        Question ques=new Question(null, questionId, null, questionText, null, null, null, null);
+	        questionTable.getItems().addAll(ques);
+	      
 	    }
+//	    
+//	    for (Question item : questionTable.getItems()) {
+//	        if (item.getId().equals("02002")) {
+//	        	questionTable.getSelectionModel().select(item);
+//	        	questionTable.scrollTo(item);
+//	            break;}}
 	}
 	
     @FXML
