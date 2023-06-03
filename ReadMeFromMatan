@@ -1,11 +1,6 @@
-I commitied without proper message therefore- 
+
 openBlob - is a method that is in the sqlContoller to handel exam file in case it is a path to local file
 openBlob2 - is a method to send file as Blob and all its content than open a new file to keep the Blob and then open it. 
 use those method 
 
-------
-another commit 
 
-
-all the sqlController ( the name was SQL connection) now is singleton,
- there is no static method each one that wants to get to the database create instance of sqlController . 
