@@ -37,7 +37,12 @@ public class ClientMessageHandler
 		headOfScreenController = new HeadOfDepScreenController();
 		examCreationFirstController = new ExamCreationFirstController();
 		examcontroller=new examController();
-		statisticsScreen =new statisticsChoseScreenController();
+		
+	}
+	
+	public static void setStatisticsChooseScreen(statisticsChoseScreenController controller)
+	{
+		statisticsScreen = controller;
 	}
 	
 	public static void setQuestionBankController(QuestionBankScreenController controller)
@@ -79,8 +84,8 @@ public class ClientMessageHandler
 			case MAP:
 				mapMessageHandler((Map<String, ArrayList<String>>) msg);
 			case STUDENT_ARRAY_LIST:
-				//headOfScreenController.setStudentArr((ArrayList<?>)msg);
-				statisticsScreen.showData((ArrayList<Student>)msg);
+				headOfScreenController.setStudentArr((ArrayList<?>)msg);
+				statisticsScreen.showData("student");
 				break;
 		}
 	}
@@ -207,8 +212,5 @@ public class ClientMessageHandler
 	}
 	
 	
-	public static void openstatisticsScreen(User u) {
-		statisticsScreen.start(u);
-	}
 	
 }

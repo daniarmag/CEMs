@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 
 public class HeadOfDepScreenController
 {
-	static statisticsChoseScreenController statisticController=new statisticsChoseScreenController();
+	private statisticsChoseScreenController statisticsScreen;
 	//static examController ex=new examController();
 	static HeadOfDepartment u;
     @FXML
@@ -62,8 +62,9 @@ public class HeadOfDepScreenController
     @FXML
     void openStatistics(ActionEvent event) {
     	UserController.hide(event);
+    	statisticsScreen=new statisticsChoseScreenController();
+    	statisticsScreen.start(u);
     	
-    	ClientMessageHandler.openstatisticsScreen(u);
     	
     }
     
