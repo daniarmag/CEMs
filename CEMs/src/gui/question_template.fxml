@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.examController">
+   <children>
+      <TextArea layoutX="17.0" layoutY="123.0" prefHeight="223.0" prefWidth="602.0" />
+      <HBox layoutX="63.0" layoutY="364.0" prefHeight="123.0" prefWidth="477.0">
+         <children>
+            <RadioButton mnemonicParsing="false" prefHeight="0.0" prefWidth="77.0" text="RadioButton" />
+            <RadioButton mnemonicParsing="false" text="RadioButton" />
+            <RadioButton mnemonicParsing="false" text="RadioButton" />
+            <RadioButton mnemonicParsing="false" text="RadioButton" />
+         </children>
+      </HBox>
+      <Text layoutX="253.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="181.13671875" />
+   </children>
+</Pane>

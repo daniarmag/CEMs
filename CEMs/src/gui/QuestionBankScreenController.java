@@ -71,10 +71,11 @@ public class QuestionBankScreenController implements Initializable
      * @param teachingMap 
 	 * @throws Exception
 	 */
-	public static void start(User user, Map<String, ArrayList<String>> map) throws Exception 
+	@SuppressWarnings("unchecked")
+	public static void start(User user, Map<?, ?> map) throws Exception 
 	{
 		u = user;
-		teachingMap = map;
+		teachingMap = (Map<String, ArrayList<String>>) map;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show());
 	}
     
