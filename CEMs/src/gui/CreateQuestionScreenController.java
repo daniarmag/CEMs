@@ -141,12 +141,21 @@ public class CreateQuestionScreenController implements Initializable
 	    goBack(event);
 	}
 	
+	/**
+	 * Exits from client GUI - disconnectes from DB aswell.
+	 * @param event
+	 */
 	@FXML
 	public void exit(ActionEvent event)
 	{
 		UserController.userExit(u);
 	}
 
+	/**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
@@ -165,6 +174,10 @@ public class CreateQuestionScreenController implements Initializable
 		}
 	}
 	
+	/**
+	 * @param answers
+	 * @return an answer map, where the only true key is the selected radio
+	 */
 	private HashMap<Boolean, String> createAnswerMap(String[] answers) 
 	{
 	    HashMap<Boolean, String> answerMap = new HashMap<>();
@@ -175,6 +188,9 @@ public class CreateQuestionScreenController implements Initializable
 	    return answerMap;
 	}
 	
+	/**
+	 * @return a map with all kinds of error messages
+	 */
 	private HashMap<Boolean, String> createErrorMap() 
 	{
 	    HashMap<Boolean, String> errorMap = new HashMap<>();

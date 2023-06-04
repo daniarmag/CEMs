@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
+import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.Question;
@@ -106,32 +107,57 @@ public class ExamCreationFirstController implements Initializable
 	        String questionId = splitted[0].trim();
 	        String questionText = splitted[1].trim();
 	        Question ques=new Question(null, questionId, null, questionText, null, null, null, null);
+	        ques.setSubject(subjectMenu.getText().split("\\s+")[0].trim());
+	        ques.setCourse(courseMenu.getText().split("\\s+")[0].trim());
 	        questionTable.getItems().addAll(ques);
-	      
 	    }
-//	    
-//	    for (Question item : questionTable.getItems()) {
-//	        if (item.getId().equals("02002")) {
-//	        	questionTable.getSelectionModel().select(item);
-//	        	questionTable.scrollTo(item);
-//	            break;}}
 	}
-	
+	/**
+	 * 
+	 * Exits from client GUI - disconnectes from DB aswell.
+	 * @param event
+	 */
     @FXML
     void exit(ActionEvent event)
     {
     	UserController.userExit(u);
     }
+    
+    /**
+     * Moves on to next exam creation screen.
+     * @param event
+     */
+    @FXML
+    void next(ActionEvent event)
+    {
+    	UserController.hide(event);
+    	try 
+    	{
+    		ArrayList<Question> info = new ArrayList<>();
+    		info.addAll(questionTable.getSelectionModel().getSelectedItems());
+			ExamCreationSecondController.start(u, info);
+		} catch (Exception e) {e.printStackTrace();}
+    }
 
+    /**
+	 * Goes back to professor main screen.
+	 * @param event
+	 */
     @FXML
     void goBack(ActionEvent event) 
     {
     	UserController.goBack(event, "/gui/ProfessorScreen.fxml");
     }
 
+    /**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{  
+		ClientMessageHandler.setExamCreationFirstController(this);
 		questionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		for (String s : teachingMap.keySet())
 		{

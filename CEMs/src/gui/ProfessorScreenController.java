@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.Professor;
@@ -19,7 +20,6 @@ import javafx.scene.text.Text;
 public class ProfessorScreenController implements Initializable 
 {
 	public static Professor<?, ?> u;
-	
 	
 	@FXML
     private Button activateExamBtn;
@@ -104,6 +104,7 @@ public class ProfessorScreenController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
+		ClientMessageHandler.setProfessorController(this);
 		welcomeText.setText("Welcome back " + u.getFirst_name());
 		ArrayList<String> request = new ArrayList<String>();
 		request.add("load teaching map");

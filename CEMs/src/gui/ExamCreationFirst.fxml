@@ -72,7 +72,7 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </MenuButton>
-      <Button layoutX="647.0" layoutY="550.0" mnemonicParsing="false" style="-fx-background-color: #30BECC;" text="Next">
+      <Button layoutX="647.0" layoutY="550.0" mnemonicParsing="false" onAction="#next" style="-fx-background-color: #30BECC;" text="Next">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>

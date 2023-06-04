@@ -21,6 +21,10 @@ import entities.Question;
 import entities.Student;
 import entities.User;
 
+/**
+ * @author Daniel
+ *
+ */
 public class MySQLController 
 {
 	
@@ -328,6 +332,10 @@ public class MySQLController
 		return newUser;
 	}
 	
+	/**
+	 * This method sets a certain user's logged status to 0.
+	 * @param id
+	 */
 	public  void logout(String id)
 	{
 		try
@@ -339,6 +347,9 @@ public class MySQLController
 		catch(SQLException e){}
 	}
 	
+	/**
+	 * @return amount of exams in data base.
+	 */
 	public ArrayList<String> getAmountOfQuestions()
 	{
 		ArrayList<String> answer = new ArrayList<String>();
@@ -357,6 +368,11 @@ public class MySQLController
 		return answer;
 	}
 	
+	/**
+	 * this method adds the courses that were assigned to a question and adds it to 
+	 * question_course table in DB.
+	 * @param courses
+	 */
 	public  void addQuestionCourses(ArrayList<String> courses)
 	{
 		String question_id = courses.get(0);
@@ -375,6 +391,9 @@ public class MySQLController
 		catch(SQLException e){e.printStackTrace();}
 	}
 	
+	/**
+	 * this method sets isLogged to ALL users to 0 when the server disconnects.
+	 */
 	public  void logoutAllUsers()
 	{
 		try 
@@ -385,9 +404,12 @@ public class MySQLController
 		catch(SQLException e){e.printStackTrace();}
 	}
 
+	/**
+	 * this method deleted a question with the given ID.
+	 * @param string
+	 */
 	public  void deleteQuestionFromDb(String string) 
 	{
-		
 		try 
 		{
 			PreparedStatement ps = conn.prepareStatement("DELETE FROM question WHERE id = ?");
@@ -397,6 +419,12 @@ public class MySQLController
 		catch(SQLException e){e.printStackTrace();}
 	}
 	
+	
+	/**
+	 * @param id
+	 * @return map with subject that are assigned to the professor as keys 
+	 * and the values are the courses of each subject.
+	 */
 	public Map<String, ArrayList<String>> getProfessorSubjectsAndCourses(String id) 
 	{
 	    Map<String, ArrayList<String>> resultMap = new HashMap<>();
@@ -429,6 +457,10 @@ public class MySQLController
 	    return resultMap;
 	}
 	
+	/**
+	 * @param id
+	 * @return the courses that are assigned to a question with the given ID
+	 */
 	public ArrayList<String> loadCourseQuestions (String id)
 	{
 		ArrayList<String> answer = new ArrayList<String>();
@@ -449,7 +481,6 @@ public class MySQLController
 		        answer.add(fullRow);
 			}
 		} catch (SQLException e) { e.printStackTrace();}
-		System.out.println(answer);
 		return answer;
 	}
 	
@@ -470,6 +501,49 @@ public class MySQLController
 		
 		return null;
 	}
+
+	/**
+	 * @return amount of exams in data base.
+	 */
+	public ArrayList<String> getAmountOfExams() 
+	{
+		ArrayList<String> answer = new ArrayList<String>();
+		answer.add("amount of exams");
+		try 
+		{
+			//By getting the max number, we get the latest exam number so we can increment it when creating a new one.
+			ResultSet rs = conn.createStatement().executeQuery("SELECT MAX(exam_number) FROM exam");
+			while (rs.next())
+			{
+				String maxExam = rs.getString("MAX(exam_number)");
+				answer.add(maxExam);
+			}
+				
+		}
+		catch(SQLException e){e.printStackTrace();}
+		return answer;
+	}
 	
+	/**
+	 * this method adds the question that were assigned to an exam and adds it to 
+	 * exam_question table in DB.
+	 * @param courses
+	 */
+	public void addExamQuestions(ArrayList<String> questionInExams)
+	{
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO exam_question (exam_id, question_id, score) VALUES (?, ?, ?)");
+			for (String s : questionInExams)
+			{
+				String[] splitted = s.split("\\s+");
+				ps.setString(1, splitted[0]);;
+				ps.setString(2, splitted[1]);
+				ps.setString(3, splitted[2]);
+				ps.executeUpdate();
+			}
+		}
+		catch(SQLException e){e.printStackTrace();}
+	}
 	
 }

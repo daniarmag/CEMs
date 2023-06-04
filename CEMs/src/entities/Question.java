@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 /**
  * Represents the questions in the system.
- *
  */
 @SuppressWarnings("serial")
 public class Question implements Serializable
 {
 	public String course = "";
+	public String score = "";
 	public String id;
 	public String subject;
 	public String questionText;
@@ -19,6 +19,16 @@ public class Question implements Serializable
 	public String correctAnswer;
 	public String[] answers;
 	
+	/**
+	 * @param questionNumber
+	 * @param id
+	 * @param subject
+	 * @param questionText
+	 * @param author
+	 * @param professorId
+	 * @param correctAnswer
+	 * @param answers
+	 */
 	public Question(String questionNumber, String id, String subject, String questionText, 
 				    String author, String professorId,
 				    String correctAnswer, String[] answers)
@@ -111,6 +121,21 @@ public class Question implements Serializable
         return course;
     }
 
+	/**
+	 * @return the score
+	 */
+	public String getScore() 
+	{
+		return score;
+	}
+
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(String score) 
+	{
+		this.score = score;
+	}
 	/**
 	 * @param professorId
 	 */

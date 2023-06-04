@@ -90,6 +90,10 @@ public class ServerMessageHandler
 					client.sendToClient(sqlController.getAmountOfQuestions());
 					break;
 					
+				case "get amount of exams":
+					client.sendToClient(sqlController.getAmountOfExams());
+					break;
+					
 				case "Get all students":			
 					client.sendToClient(sqlController.getAllStudents());
 					break;

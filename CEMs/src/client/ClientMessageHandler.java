@@ -3,15 +3,13 @@ package client;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
-
-import control.guiMainController;
-import entities.HeadOfDepartment;
 import entities.Question;
 import entities.Student;
 import entities.User;
 import enums.MessageType;
 import gui.CreateQuestionScreenController;
 import gui.ExamCreationFirstController;
+import gui.ExamCreationSecondController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
@@ -27,6 +25,7 @@ public class ClientMessageHandler
 	static ProfessorScreenController professorController;
 	static CreateQuestionScreenController createQuestionScreenController;
 	static ExamCreationFirstController examCreationFirstController;
+	static ExamCreationSecondController examCreationSecondController;
     static QuestionBankScreenController questionBankScreenController;
     static StudentExamScreenController studentExamScreenController;
     static HeadOfDepScreenController headOfScreenController;
@@ -37,12 +36,36 @@ public class ClientMessageHandler
 	static {
 		//guiController =new guiMainController();
 		studentController = new StudentScreenController();
-		professorController = new ProfessorScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
-		examCreationFirstController = new ExamCreationFirstController();
 		examcontroller=new examController();
+		professorController = new ProfessorScreenController();
+	}
+
+	/**
+	 * @param examCreationFirstController the examCreationFirstController to set
+	 */
+	public static void setExamCreationFirstController(ExamCreationFirstController controller) 
+	{
+		examCreationFirstController = controller;
 	}
 	
+	/**
+	 * @param examCreationFirstController the examCreationFirstController to set
+	 */
+	public static void setExamCreationSecondController(ExamCreationSecondController controller) 
+	{
+		examCreationSecondController = controller;
+	}
+
+	/**
+	 * @param professorController the professorController to set
+	 */
+	public static void setProfessorController(ProfessorScreenController controller) 
+	{
+		professorController = controller;
+	}
+
+
 	public static void setStatisticsChooseScreen(statisticsChoseScreenController controller)
 	{
 		statisticsScreen = controller;
@@ -86,6 +109,7 @@ public class ClientMessageHandler
 				break;
 			case MAP:
 				mapMessageHandler((Map<?,?>) msg);
+				break;
 			case STUDENT_ARRAY_LIST:
 				headOfScreenController.setStudentArr((ArrayList<?>)msg);
 				statisticsScreen.showData("student");
@@ -167,6 +191,11 @@ public class ClientMessageHandler
 			case "amount of questions":
 				createQuestionScreenController.setQuestionNumber(arrayList.get(1));
 				break;
+				
+			case "amount of exams":
+				examCreationSecondController.setExamNumber(arrayList.get(1));
+				break;
+				
 			case "course questions":
 				arrayList.remove(0);
 				examCreationFirstController.setArr(arrayList);

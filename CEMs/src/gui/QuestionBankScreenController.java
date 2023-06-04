@@ -153,7 +153,11 @@ public class QuestionBankScreenController implements Initializable
 		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
 	}
 	
-	/*Initializes the GUI with the questions from the database.*/
+	/**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
