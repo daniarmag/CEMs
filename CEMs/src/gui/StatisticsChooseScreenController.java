@@ -1,39 +1,29 @@
 package gui;
 
-
-
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-import java.util.function.Function;
-
-import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import control.guiMainController;
 import entities.HeadOfDepartment;
-import entities.Question;
 import entities.Student;
 import entities.User;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
-public class statisticsChoseScreenController implements Initializable{
+public class StatisticsChooseScreenController implements Initializable{
 
 	private static HeadOfDepartment user;
 	private static Map<String,String> requsetMap=new HashMap<>();;

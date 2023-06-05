@@ -1,24 +1,18 @@
 package gui;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import client.ClientMessageHandler;
 import control.UserController;
 import entities.HeadOfDepartment;
-import entities.Student;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 public class HeadOfDepScreenController
 {
-	private static statisticsChoseScreenController statisticsScreen=new statisticsChoseScreenController();
+	private static StatisticsChooseScreenController statisticsScreen=new StatisticsChooseScreenController();
 	//static examController ex=new examController();
 	static HeadOfDepartment u;
     @FXML

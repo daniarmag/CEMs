@@ -1,15 +1,15 @@
 package control;
 
-import gui.statisticsChoseScreenController;
+import gui.StatisticsChooseScreenController;
 
 //this class is a test class please don't use it unless it is  for checking 
 ///##########################////
 public class guiMainController {
 	
 	
-	static statisticsChoseScreenController statisticsScreen;
+	static StatisticsChooseScreenController statisticsScreen;
 	
-	public static void setStatisticsChooseScreen(statisticsChoseScreenController controller)
+	public static void setStatisticsChooseScreen(StatisticsChooseScreenController controller)
 	{
 		statisticsScreen = controller;
 	}

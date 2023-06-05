@@ -15,7 +15,7 @@ import gui.LoginScreenController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.examController;
-import gui.statisticsChoseScreenController;
+import gui.StatisticsChooseScreenController;
 import gui.QuestionBankScreenController;
 import gui.StudentExamScreenController;
 
@@ -30,7 +30,7 @@ public class ClientMessageHandler
     static StudentExamScreenController studentExamScreenController;
     static HeadOfDepScreenController headOfScreenController;
     static examController examcontroller;
-    static statisticsChoseScreenController statisticsScreen;
+    static StatisticsChooseScreenController statisticsScreen;
     ///Check check check dont use 
     //static guiMainController guiController;
 	static {
@@ -66,7 +66,7 @@ public class ClientMessageHandler
 	}
 
 
-	public static void setStatisticsChooseScreen(statisticsChoseScreenController controller)
+	public static void setStatisticsChooseScreen(StatisticsChooseScreenController controller)
 	{
 		statisticsScreen = controller;
 	}
