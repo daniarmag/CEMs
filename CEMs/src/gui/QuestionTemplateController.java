@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 
-public class question_templateController {
+public class QuestionTemplateController {
 
     @FXML
     private RadioButton answer1;

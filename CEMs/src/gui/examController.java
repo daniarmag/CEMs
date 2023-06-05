@@ -24,7 +24,7 @@ public class examController
     @FXML 
     private Button start;
     
-    private ArrayList<question_templateController> ansarry;
+    private ArrayList<QuestionTemplateController> ansarry;
     
    
     public void start() throws  Exception{
@@ -60,7 +60,7 @@ public class examController
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/question_template.fxml"));
                 Node questionComponent = loader.load();//this line must be before line @@@
-                question_templateController contorller =loader.getController();//@@@
+                QuestionTemplateController contorller =loader.getController();//@@@
                 System.out.println(contorller.hashCode());
                 ansarry.add(contorller);
                 
