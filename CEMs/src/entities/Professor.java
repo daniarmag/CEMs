@@ -1,18 +1,18 @@
 package entities;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 /**
  * This class represents a professor-user
+ * 
  * @author Daniel
  *
  */
 @SuppressWarnings("serial")
-public class Professor<T,E> extends User
-{
-	
-	private Map<T, E> teachingMap;//map to navigate between two types - our use is coue - subject but can be any type
+public class Professor<T, E> extends User {
+
+	private Map<T, E> teachingMap;// map to navigate between two types - our use is coue - subject but can be any
+									// type
 
 	/**
 	 * @param user_id
@@ -23,19 +23,24 @@ public class Professor<T,E> extends User
 	 * @param password
 	 * @param role
 	 */
-	public Professor(String user_id, String first_name, String last_name, String email, String username, String password, String role)
-	{
+	public Professor(String user_id, String first_name, String last_name, String email, String username,
+			String password, String role) {
 		super(user_id, first_name, last_name, email, username, password, "professor");
 	}
-	
-	
-	public Map< ?,? > getMap() {
+
+	/**
+	 * @return map
+	 */
+	public Map<?, ?> getMap() {
 		return teachingMap;
-		
+
 	}
-	
-@SuppressWarnings("unchecked")
-public void setMap(Map<?,?> map) {
-	teachingMap= (Map<T, E>) map;
-}
+
+	/**
+	 * @param map
+	 */
+	@SuppressWarnings("unchecked")
+	public void setMap(Map<?, ?> map) {
+		teachingMap = (Map<T, E>) map;
+	}
 }

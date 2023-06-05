@@ -7,7 +7,7 @@ import entities.Question;
 import entities.Student;
 import entities.User;
 import enums.MessageType;
-import gui.CreateQuestionScreenController;
+import gui.QuestionCreationScreenController;
 import gui.ExamCreationFirstController;
 import gui.ExamCreationSecondController;
 import gui.HeadOfDepScreenController;
@@ -23,7 +23,7 @@ public class ClientMessageHandler
 {
 	static StudentScreenController studentController;
 	static ProfessorScreenController professorController;
-	static CreateQuestionScreenController createQuestionScreenController;
+	static QuestionCreationScreenController questionCreationScreenController;
 	static ExamCreationFirstController examCreationFirstController;
 	static ExamCreationSecondController examCreationSecondController;
     static QuestionBankScreenController questionBankScreenController;
@@ -76,9 +76,9 @@ public class ClientMessageHandler
 		questionBankScreenController = controller;
 	}
 	
-	public static void setCreateQuestionScreenController(CreateQuestionScreenController controller)
+	public static void setCreateQuestionScreenController(QuestionCreationScreenController controller)
 	{
-		createQuestionScreenController = controller;
+		questionCreationScreenController = controller;
 	}
 	public static void setStudentExamController(StudentExamScreenController controller)
 	{
@@ -169,6 +169,9 @@ public class ClientMessageHandler
 			case "question added":
 				JOptionPane.showMessageDialog(null, "Question successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
+			case "added exam and questions":
+				JOptionPane.showMessageDialog(null, "Exam successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				break;
 			case "updated question":
 				JOptionPane.showMessageDialog(null, "Question successfully edited.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
@@ -189,7 +192,7 @@ public class ClientMessageHandler
 		switch (messageType) 
 		{	
 			case "amount of questions":
-				createQuestionScreenController.setQuestionNumber(arrayList.get(1));
+				questionCreationScreenController.setQuestionNumber(arrayList.get(1));
 				break;
 				
 			case "amount of exams":

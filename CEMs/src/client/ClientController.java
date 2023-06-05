@@ -73,6 +73,9 @@ public class ClientController implements ChatIF
 		System.out.println("> " + message);
 	}
 	
+	/**
+	 * quit
+	 */
 	public void quit()
 	{
 		client.quit();

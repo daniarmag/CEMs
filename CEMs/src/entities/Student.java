@@ -23,6 +23,9 @@ public class Student extends User
 		super(user_id, first_name, last_name, email, username, password, "student");
 	}
 
+	/**
+	 @return string representation of the class
+	 */
 	@Override
 	public String toString() {
 		return "Student [getUser_id()=" + getUser_id() + ", getFirst_name()=" + getFirst_name() + ", getLast_name()="
@@ -30,9 +33,4 @@ public class Student extends User
 				+ ", getPassword()=" + getPassword() + ", getRole()=" + getRole() + ", getClass()=" + getClass()
 				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	
-	
-
 }

@@ -82,12 +82,21 @@ public class ServerScreenController implements Initializable
     @FXML
     private CheckBox togglePassword;
 
+	/**
+	 * Initializes the JavaFX controller during application startup.
+	 * @param primaryStage The primary stage of the application.
+	 * @throws Exception
+	 */
 	public void start(Stage primaryStage) throws Exception
 	{
 		ScreenUtils.createNewStage("/serverGui/ServerScreen.fxml").show();
 	}
 
-	/*Initializing the GUI with the table.*/
+    /**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
@@ -104,7 +113,21 @@ public class ServerScreenController implements Initializable
 		initializeTable();
 	}
 	
-	/*Connects to the server.*/
+	/**
+	 * Exits from client GUI - disconnectes from DB aswell.
+	 * @param event
+	 */
+	@FXML
+	void exit(ActionEvent event) throws Exception
+	{
+		disconnect(event);
+		System.exit(0);
+	}
+	
+	/**
+	 * Connects to the server.
+	 * @param event
+	 */
 	@FXML
 	void connect(ActionEvent event) 
 	{
@@ -131,8 +154,29 @@ public class ServerScreenController implements Initializable
 	}
 	
 	/**
+	 * Disconnects from the server.
+	 * @param event
+	 * @throws Exception
+	 */
+	@FXML
+	void disconnect(ActionEvent event) throws Exception
+	{
+		connectedTable.getItems().clear();
+		try 
+		{
+			ServerUI.getEs().sendToAllClients("abort");
+		} catch (Exception e) {}
+		ServerUI.closeServer();
+		onCircle.setFill(Color.TRANSPARENT);
+		offCircle.setFill(Color.rgb(255, 96, 92));
+		connectBtn.setDisable(false);
+		disconnectBtn.setDisable(true);
+		if(connected)sqlController.logoutAllUsers();
+		connected = false;
+	}
+	
+	/**
 	 * Method that handles the checkbox of password visibility
-	 * 
 	 * @param event
 	 */
 	@FXML
@@ -161,34 +205,9 @@ public class ServerScreenController implements Initializable
 		return togglePassword.isSelected() ? passwordTextField.getText().trim() : passwordField.getText().trim();
 	}
 	
-	/*Disconnects from the server.*/
-	@FXML
-	void disconnect(ActionEvent event) throws Exception
-	{
-		connectedTable.getItems().clear();
-		try 
-		{
-			ServerUI.getEs().sendToAllClients("abort");
-		} catch (Exception e) {}
-		ServerUI.closeServer();
-		onCircle.setFill(Color.TRANSPARENT);
-		offCircle.setFill(Color.rgb(255, 96, 92));
-		connectBtn.setDisable(false);
-		disconnectBtn.setDisable(true);
-		if(connected)sqlController.logoutAllUsers();
-		connected = false;
-	}
-	
-	
-	/*Exits the GUI window.*/
-	@FXML
-	void exit(ActionEvent event) throws Exception
-	{
-		disconnect(event);
-		System.exit(0);
-	}
-	
-	/*Initializes the table.*/
+	/*
+	 * Initializes the table.
+	 */
 	public void initializeTable() 
 	{
 		sqlController=MySQLController.getInstance();
@@ -203,7 +222,9 @@ public class ServerScreenController implements Initializable
         connectedTable.setItems(clientObservableList);
     }
 	
-	/*Updates the table with the current list of clients.*/
+	/*
+	 * Updates the table with the current list of clients.
+	 */
 	public void clientConnected()
 	{
 	    connectedTable.setItems(EchoServer.getClientsInfoList());

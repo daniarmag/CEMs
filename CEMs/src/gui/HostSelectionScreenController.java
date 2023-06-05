@@ -13,10 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
 /*A GUI for when the client needs to enter the host IP */
-public class HostSelectionScreenController implements Initializable {
-
+public class HostSelectionScreenController implements Initializable 
+{
 	public static int DEFAULT_PORT = 5555;
 	@FXML
 	private Button connectToServerBtn;
@@ -28,27 +27,40 @@ public class HostSelectionScreenController implements Initializable {
 	private TextField txtServerIP;
 
 	/**
-	 * @return The IP address entered in the text field as a string.
-	 */
-	private String getIP() 
-	{
-		return txtServerIP.getText();
-	}
-
-	/**
 	 * Initializes the JavaFX controller during application startup.
-	 *
-	 * @param primaryStage The primary stage of the application.
-	 * @throws Exception If an exception occurs during initialization.
+	 * @param primaryStage
+	 * @throws Exception
 	 */
 	public void start(Stage primaryStage) throws Exception 
 	{
 		ScreenUtils.createNewStage("/gui/HostSelectionScreen.fxml").show(); 
 	}
-
+	
+	/**
+	 * Initializes the controller during application startup.
+	 * @param location  The location used to resolve relative paths.
+	 * @param resources The resources used to localize the root object.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		//txtServerIP.setText(InetAddress.getLocalHost().getHostAddress());
+		txtServerIP.setText("localhost");
+	}
+	
+	/**
+	 * Handles the exit button click event.
+	 * @param event The action event triggered by the exit button.
+	 */
+	
+	@FXML
+	void exit(ActionEvent event) 
+	{
+		System.exit(0);
+	}
+	
 	/**
 	 * Handles the connect button click event.
-	 *
 	 * @param event The action event triggered by the connect button.
 	 * @throws IOException If an I/O exception occurs.
 	 */
@@ -79,28 +91,12 @@ public class HostSelectionScreenController implements Initializable {
 			}
 		}
 	}
-
-	/**
-	 * Handles the exit button click event.
-	 *
-	 * @param event The action event triggered by the exit button.
-	 */
 	
-	@FXML
-	void exit(ActionEvent event) {
-		System.exit(0);
-	}
-
 	/**
-	 * Initializes the controller during application startup.
-	 *
-	 * @param location  The location used to resolve relative paths.
-	 * @param resources The resources used to localize the root object.
+	 * @return The IP address entered in the text field as a string.
 	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources) 
+	private String getIP() 
 	{
-		//txtServerIP.setText(InetAddress.getLocalHost().getHostAddress());
-		txtServerIP.setText("localhost");
+		return txtServerIP.getText();
 	}
 }

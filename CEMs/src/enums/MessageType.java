@@ -7,6 +7,7 @@ package enums;
 public enum MessageType 
 {
 	MAP,
+	EXAM,
 	USER,
     STRING,
     STRING_ARRAY_LIST,

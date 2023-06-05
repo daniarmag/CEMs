@@ -12,23 +12,45 @@ public class ServerUI extends Application {
 	static EchoServer es;
 	static MySQLController sqlController;
 	
+	/**
+	 * @return instance of es
+	 */
 	public static EchoServer getEs() 
 	{
 		return es;
 	}
 
 
-	public static void main(String args[]) throws Exception {
+	/**
+	 * @param args
+	 * @throws Exception
+	 */
+	public static void main(String args[]) throws Exception 
+	{
 		launch(args);
 	}
 
+	/**
+	 * Initializes the JavaFX controller during application startup.
+	 * @param primaryStage The primary stage of the application.
+	 * @throws Exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		ServerScreenController serverScreen = new ServerScreenController();
 		serverScreen.start(primaryStage);
 	}
 
-	public static boolean runServer(String p, String URL, String username, String password) {
+	/**
+	 * Starting the server.
+	 * @param p
+	 * @param URL
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public static boolean runServer(String p, String URL, String username, String password)
+	{
 	    int port = 0; // Port to listen on
 	    try {
 	    	sqlController=MySQLController.getInstance();
@@ -55,6 +77,9 @@ public class ServerUI extends Application {
 	    return false;
 	}
 
+	/**
+	 * @return bool for whether the server was closed successfully.
+	 */
 	public static boolean closeServer() 
 	{
 		if (es != null) 

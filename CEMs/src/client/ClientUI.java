@@ -13,11 +13,20 @@ public class ClientUI extends Application
 {
 	public static ClientController chat;
 
+	/**
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String args[]) throws Exception 
 	{
 		launch(args);
 	} 
 
+	/**
+	 * Initializes the JavaFX controller during application startup.
+	 * @param primaryStage The primary stage of the application.
+	 * @throws Exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
@@ -25,8 +34,14 @@ public class ClientUI extends Application
 		HostSelectionScreenController clientScreen = new HostSelectionScreenController();
 		clientScreen.start(primaryStage);
 	}
-	
-	/*Initializing an instance of a client.*/
+
+	/**
+	 * Initializing an instance of a client.
+	 * @param host
+	 * @param port
+	 * @return
+	 * @throws IOException
+	 */
 	public static boolean connect(String host, int port) throws IOException
 	{
 		chat = new ClientController(host, port);

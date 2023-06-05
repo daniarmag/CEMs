@@ -24,6 +24,9 @@ public class EchoServer extends AbstractServer
 	
 	
 
+	/**
+	 * @param hostSelectionScreenController
+	 */
 	public static void setHostSelectionScreenController(HostSelectionScreenController hostSelectionScreenController) {
 		EchoServer.hostSelectionScreenController = hostSelectionScreenController;
 	}

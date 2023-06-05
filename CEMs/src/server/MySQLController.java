@@ -13,8 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+import entities.Exam;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Question;
@@ -427,7 +429,7 @@ public class MySQLController
 	 */
 	public Map<String, ArrayList<String>> getProfessorSubjectsAndCourses(String id) 
 	{
-	    Map<String, ArrayList<String>> resultMap = new HashMap<>();
+	    Map<String, ArrayList<String>> resultMap = new LinkedHashMap<>();
 	    try 
 	    {
 	        PreparedStatement ps = conn.prepareStatement( "SELECT subject.subject_id, subject.subject_name, course.course_id, course.course_name " +
@@ -537,13 +539,42 @@ public class MySQLController
 			for (String s : questionInExams)
 			{
 				String[] splitted = s.split("\\s+");
-				ps.setString(1, splitted[0]);;
+				ps.setString(1, splitted[0]);
 				ps.setString(2, splitted[1]);
 				ps.setString(3, splitted[2]);
 				ps.executeUpdate();
 			}
 		}
 		catch(SQLException e){e.printStackTrace();}
+	}
+
+	/**
+	 * Adds a new exam to the DB.
+	 * @param exam
+	 */
+	public void addExamToDB(Exam exam) 
+	{
+		 try 
+		    {
+		    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam (exam_number, subject_id, course_id, " +
+											    			  "exam_id, num_questions, time, examinees_notes, professor_notes, " +
+											    			  "professor_full_name, professor_id, password, isActive) " +
+											    			  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+		       ps.setString(1, exam.getExam_number());
+		       ps.setString(2, exam.getSubject_id());
+		       ps.setString(3, exam.getCourse_id());
+		       ps.setString(4, exam.getExam_id());
+		       ps.setInt(5, exam.getNum_questions());
+		       ps.setInt(6, exam.getTime());
+		       ps.setString(7, exam.getExaminees_notes());
+		       ps.setString(8, exam.getProfessor_notes());
+		       ps.setString(9, exam.getProfessor_full_name());
+		       ps.setString(10, exam.getProfessor_id());
+		       ps.setString(11, exam.getPassword());
+		       ps.setInt(12, exam.getIsActive());
+		       ps.executeUpdate();
+		    } 
+		    catch (SQLException e){e.printStackTrace();}
 	}
 	
 }

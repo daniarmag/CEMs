@@ -21,7 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
-public class EditQuestionScreenController implements Initializable
+/*A GUI for editing questions.*/
+public class QuestionEditScreenController implements Initializable
 {
 	public static User u;
 	
@@ -68,9 +69,8 @@ public class EditQuestionScreenController implements Initializable
 
 	/**
 	 * Initializes the JavaFX controller during application startup.
-	 * 
-	 * @param primaryStage The primary stage of the application.
 	 * @param user
+	 * @param question
 	 * @throws Exception
 	 */
 	public static void start(User user, Question question) throws Exception 
@@ -79,19 +79,57 @@ public class EditQuestionScreenController implements Initializable
 		u = user;
 		ScreenUtils.createNewStage("/gui/EditQuestionScreen.fxml").show();
 	}
+
+    /**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		ToggleGroup toggleGroup = new ToggleGroup();
+	    aRadio.setToggleGroup(toggleGroup);
+	    bRadio.setToggleGroup(toggleGroup);
+	    cRadio.setToggleGroup(toggleGroup);
+	    dRadio.setToggleGroup(toggleGroup);
+		questionTextArea.setText(editQuestion.getQuestionText());
+		questionIdText.setText("Edit question " + editQuestion.getId());
+		aAnswerText.setText(editQuestion.getAnswers()[0]);
+		bAnswerText.setText(editQuestion.getAnswers()[1]);
+		cAnswerText.setText(editQuestion.getAnswers()[2]);
+		dAnswerText.setText(editQuestion.getAnswers()[3]);
+		int i;
+		for (i = 0; i < editQuestion.getAnswers().length; i++) 
+		    if (editQuestion.getAnswers()[i].equals(editQuestion.correctAnswer)) 
+		    	break;
+		toggleGroup.getToggles().get(i).setSelected(true);
+	}
 	
+	/**
+	 * Exits from client GUI - disconnectes from DB aswell.
+	 * @param event
+	 */
     @FXML
     void exit(ActionEvent event)
     {
     	UserController.userExit(u);
     }
-
+    
+    /**
+	 * Goes back to QuestionBankScreen.
+	 * @param event
+	 */
     @FXML
     void goBack(ActionEvent event) 
     {
     	UserController.goBack(event, "/gui/QuestionBankScreen.fxml");
     }
 
+    /**
+	 * A method that submits the question to the DB if no errors occurred.
+	 * @param event
+	 */
     @FXML
     void submit(ActionEvent event) 
     {
@@ -117,26 +155,12 @@ public class EditQuestionScreenController implements Initializable
 	    goBack(event);
     }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) 
-	{
-		ToggleGroup toggleGroup = new ToggleGroup();
-	    aRadio.setToggleGroup(toggleGroup);
-	    bRadio.setToggleGroup(toggleGroup);
-	    cRadio.setToggleGroup(toggleGroup);
-	    dRadio.setToggleGroup(toggleGroup);
-		questionTextArea.setText(editQuestion.getQuestionText());
-		questionIdText.setText("Edit question " + editQuestion.getId());
-		aAnswerText.setText(editQuestion.getAnswers()[0]);
-		bAnswerText.setText(editQuestion.getAnswers()[1]);
-		cAnswerText.setText(editQuestion.getAnswers()[2]);
-		dAnswerText.setText(editQuestion.getAnswers()[3]);
-		int i;
-		for (i = 0; i < editQuestion.getAnswers().length; i++) 
-		    if (editQuestion.getAnswers()[i].equals(editQuestion.correctAnswer)) 
-		    	break;
-		toggleGroup.getToggles().get(i).setSelected(true);
-	}
+
+	
+	/**
+	 * @param answers
+	 * @return an answer map, where the only true key is the selected radio
+	 */
 	private HashMap<Boolean, String> createAnswerMap(String[] answers) 
 	{
 	    HashMap<Boolean, String> answerMap = new HashMap<>();
@@ -147,6 +171,9 @@ public class EditQuestionScreenController implements Initializable
 	    return answerMap;
 	}
 	
+	/**
+	 * @return a map with all kinds of error messages
+	 */
 	private HashMap<Boolean, String> createErrorMap() 
 	{
 	    HashMap<Boolean, String> errorMap = new HashMap<>();

@@ -59,19 +59,12 @@ public class QuestionBankScreenController implements Initializable
     @FXML
     private TableView<Question> questionTable = new TableView<Question>();
     
-    public void setArr (ArrayList<Question> qArr)
-    {
-    	this.qArr = qArr;
-    }
-    
     /**
 	 * Initializes the JavaFX controller during application startup.
-	 * @param primaryStage The primary stage of the application.
 	 * @param user
-     * @param teachingMap 
+	 * @param map
 	 * @throws Exception
 	 */
-	
 	@SuppressWarnings("unchecked")
 	public static void start(User user, Map<?, ?> map) throws Exception 
 	{
@@ -80,42 +73,91 @@ public class QuestionBankScreenController implements Initializable
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show());
 	}
     
-    /*Updates the DB with the new question info.*/
+	/**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		ClientMessageHandler.setQuestionBankController(this);
+		ArrayList<String> request = new ArrayList<String>();
+		//A call to load all professor questions.
+		request.add("load professor questions");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);	
+	}
+
+	/**
+	 * Disconnects from the server and closes GUI window.
+	 * @param event
+	 */
+	@FXML
+	void exit(ActionEvent event) 
+	{
+		UserController.userExit(u);
+	}
+	
+	/**
+	 * Goes back to professor main screen.
+	 * @param event
+	 */
+	@FXML
+	void goBack(ActionEvent event) 
+	{	
+		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
+	}
+	
+    /**
+     * Updates the DB with the new question info.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void editQuestion(ActionEvent event) throws IOException 
     {
     	Question selectedQuestion = questionTable.getSelectionModel().getSelectedItem();
         
+    	//Condition to make sure that a question to edit was indeed selected.
         if (selectedQuestion != null) 
         {
         	UserController.hide(event);
         	try 
         	{
-    			EditQuestionScreenController.start(u, selectedQuestion);
+    			QuestionEditScreenController.start(u, selectedQuestion);
     		} catch (Exception e) {}
         } 
         else 
             JOptionPane.showMessageDialog(null, "Select a question to edit.", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
-
     }
     
-    /*Adds the DB with the new question info.*/
+    /**
+     * Adds the DB with the new question info.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void addQuestion(ActionEvent event) throws IOException 
     {
     	UserController.hide(event);
     	try 
     	{
-			CreateQuestionScreenController.start(u, teachingMap);
+			QuestionCreationScreenController.start(u, teachingMap);
 		} catch (Exception e) {}
     }
     
-    /*Deleted the question from the DB.*/
+    /**
+     * Deletes the question from the DB.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void deleteQuestion(ActionEvent event) throws IOException 
     {
 	Question selectedQuestion = questionTable.getSelectionModel().getSelectedItem();
         
+		//Condition to make sure that a question to delete was indeed selected.
         if (selectedQuestion != null) 
         {
         	ArrayList<String> request = new ArrayList<String>();
@@ -128,14 +170,9 @@ public class QuestionBankScreenController implements Initializable
             JOptionPane.showMessageDialog(null, "Select a question to delete.", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /*Disconnects from the server and closes GUI window.*/
-	@FXML
-	void exit(ActionEvent event) 
-	{
-		UserController.userExit(u);
-	}
-
-	/*Sets the question table with the values that are currently in the qArr.*/
+	/**
+	 * Sets the question table with the values that are currently in the qArr. 
+	 */
 	public void updateQuestionTable() 
 	{
 		idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -147,25 +184,12 @@ public class QuestionBankScreenController implements Initializable
 	    questionTable.setItems(questionObservableList);
     }
 	
-	@FXML
-	void goBack(ActionEvent event) 
-	{	
-		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
-	}
-	
 	/**
-	 * Initializes the GUI with the given logic.
-	 * @param location
-	 * @param resources
-	 */
-	@Override
-	public void initialize(URL location, ResourceBundle resources) 
-	{
-		ClientMessageHandler.setQuestionBankController(this);
-		ArrayList<String> request = new ArrayList<String>();
-		request.add("load professor questions");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);	
-	}
-
+     * Setter.
+     * @param qArr
+     */
+    public void setArr (ArrayList<Question> qArr)
+    {
+    	this.qArr = qArr;
+    }
 }

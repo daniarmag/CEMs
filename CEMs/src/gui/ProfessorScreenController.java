@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+/*A GUI for the professor main menu.*/
 public class ProfessorScreenController implements Initializable 
 {
 	public static Professor<?, ?> u;
@@ -45,10 +46,8 @@ public class ProfessorScreenController implements Initializable
     @FXML
     private Text welcomeText;
 	
-	
 	/**
 	 * Initializes the JavaFX controller during application startup.
-	 * @param primaryStage The primary stage of the application.
 	 * @param user
 	 * @throws Exception
 	 */
@@ -58,9 +57,20 @@ public class ProfessorScreenController implements Initializable
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ProfessorScreen.fxml").show());
 	}
 	
-	public void setTeachingMap(Map<?,?> map)
+    /**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
 	{
-		u.setMap(map);
+		ClientMessageHandler.setProfessorController(this);
+		welcomeText.setText("Welcome back " + u.getFirst_name());
+		ArrayList<String> request = new ArrayList<String>();
+		request.add("load teaching map");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);	
 	}
 	
 	/*Exits the GUI window.*/
@@ -71,6 +81,10 @@ public class ProfessorScreenController implements Initializable
     	UserController.userExit(u);
     }
     
+    /**
+     * Logs out from the current user + sets the correct flag in the DB.
+     * @param event
+     */
     @FXML
     void logout(ActionEvent event)
     {
@@ -79,7 +93,11 @@ public class ProfessorScreenController implements Initializable
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
     }
-
+    
+    /**
+     * Starts the question managing screen.
+     * @param event
+     */
     @FXML
     void manageQuestions(ActionEvent event)
     {
@@ -91,6 +109,10 @@ public class ProfessorScreenController implements Initializable
 		} catch (Exception e) {e.printStackTrace();}
     }
     
+    /**
+     * Starts the exam creation screen.
+     * @param event
+     */
     @FXML
     void createExam(ActionEvent event)
     {
@@ -100,15 +122,13 @@ public class ProfessorScreenController implements Initializable
     		ExamCreationFirstController.start(u, u.getMap());
 		} catch (Exception e) {e.printStackTrace();}
     }
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) 
+    
+	/**
+	 * Setter.
+	 * @param map
+	 */
+	public void setTeachingMap(Map<?,?> map)
 	{
-		ClientMessageHandler.setProfessorController(this);
-		welcomeText.setText("Welcome back " + u.getFirst_name());
-		ArrayList<String> request = new ArrayList<String>();
-		request.add("load teaching map");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);	
+		u.setMap(map);
 	}
 }

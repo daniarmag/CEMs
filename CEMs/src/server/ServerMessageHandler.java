@@ -3,6 +3,7 @@ package server;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import entities.Exam;
 import entities.Question;
 import entities.User;
 import enums.MessageType;
@@ -35,6 +36,9 @@ public class ServerMessageHandler
 			case QUESTION:
 				questionMessageHandler((Question)msg, client);
 				break;
+			case EXAM:
+				examMessageHandler((Exam)msg, client);
+				break;
 		}
 	}
 
@@ -49,6 +53,8 @@ public class ServerMessageHandler
 			return MessageType.STRING;
 		if (msg instanceof Question)
 			return MessageType.QUESTION;
+		if (msg instanceof Exam)
+			return MessageType.EXAM;
 		else if (msg instanceof ArrayList)
 		{
 			ArrayList<?> arrayList = (ArrayList<?>) msg;
@@ -139,6 +145,12 @@ public class ServerMessageHandler
 					client.sendToClient("updated question courses");
 					break;
 				
+				case "update exam questions":
+					arrayList.remove(0);
+					sqlController.addExamQuestions(arrayList);
+					client.sendToClient("added exam and questions");
+					break;
+				
 				case "update question":
 					arrayList.remove(0);
 					sqlController.editQuestionInDb(arrayList);
@@ -175,6 +187,20 @@ public class ServerMessageHandler
 		{
 			sqlController.addQuestionToDB(question);
 			client.sendToClient("question added");
+		} catch (IOException e) {}
+	}
+	
+	/**
+	 * Handles messages of type Exam.
+	 * @param msg
+	 * @param client
+	 */
+	private static void examMessageHandler(Exam exam, ConnectionToClient client) 
+	{
+		try 
+		{
+			sqlController.addExamToDB(exam);
+			client.sendToClient("exam added");
 		} catch (IOException e) {}
 	}
 }

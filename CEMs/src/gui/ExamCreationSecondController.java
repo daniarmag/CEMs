@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
-
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
@@ -27,11 +26,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
 
+/*A GUI for the for the second screen of exam creation.*/
 public class ExamCreationSecondController implements Initializable
 {
 	public static Professor<?, ?> u;
 	
 	public static ArrayList<Question> questionList = new ArrayList<Question>();
+	
+	public static ActionEvent e;
 	
 	public Exam newExam = new Exam(null, null, null, null, null, null, null, null, null, null, null);
 
@@ -59,65 +61,19 @@ public class ExamCreationSecondController implements Initializable
     @FXML
     private TableColumn<Question, String> scoreCol;
 
-    
     /**
 	 * Initializes the JavaFX controller during application startup.
-	 * @param primaryStage The primary stage of the application.
 	 * @param user
-     * @param info 
+	 * @param info
+	 * @param event
 	 * @throws Exception
 	 */
-	public static void start(User user, ArrayList<Question> info) throws Exception 
+	public static void start(User user, ArrayList<Question> info, ActionEvent event) throws Exception 
 	{
 		u = (Professor<?, ?>)user;
 		questionList = info;
-;		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ExamCreationSecond.fxml").show());
-	}
-	
-	/**
-	 * Goes back to professor main screen only if the user pressed yes.
-	 * @param event
-	 */
-	@FXML
-	void goBack(ActionEvent event) 
-	{
-	    int result = JOptionPane.showConfirmDialog(null, "Are you sure that you want to leave?", "Exam Creation", JOptionPane.YES_NO_OPTION, 
-	    																										  JOptionPane.QUESTION_MESSAGE);
-	    if (result == JOptionPane.YES_OPTION) 
-	    {
-	        UserController.goBack(event, "/gui/ProfessorScreen.fxml");
-	    }
-	}
-	
-	/**
-	 * Submits the exam to the DB.
-	 * @param event
-	 */
-	@FXML
-	void submit(ActionEvent event)
-	{
-	    HashMap<Boolean, String> errorMap = createErrorMap();
-		if (errorMap.containsKey(true))
-		{
-			JOptionPane.showMessageDialog(null, errorMap.get(true), "Exam Creation", JOptionPane.INFORMATION_MESSAGE);
-		    return;
-		}
-		buildExamList();
-		ArrayList<String> request = new ArrayList<>();
-	    request.add("update exam questions");
-	    for (Question question : questionTable.getItems()) 
-		    request.add(newExam.getExam_id() + " " +  question.getId() + " " + question.getScore());
-	    System.out.println(request);
-	}
-	
-	/**
-	 * Exits from client GUI - disconnectes from DB aswell.
-	 * @param event
-	 */
-	@FXML
-	void exit(ActionEvent event)
-	{
-		UserController.userExit(u);
+		e = event;
+		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ExamCreationSecond.fxml").show());
 	}
 	
 	/**
@@ -139,9 +95,54 @@ public class ExamCreationSecondController implements Initializable
 	}	
 	
 	/**
+	 * Exits from client GUI - disconnectes from DB aswell.
+	 * @param event
+	 */
+	@FXML
+	void exit(ActionEvent event)
+	{
+		UserController.userExit(u);
+	}
+	
+	
+	/**
+	 * Goes back to professor main screen only if the user pressed yes.
+	 * @param event
+	 */
+	@FXML
+	void goBack(ActionEvent event) 
+	{
+		UserController.hide(event);
+	    UserController.show(e);
+	}
+	
+	/**
+	 * Submits the exam to the DB.
+	 * @param event
+	 */
+	@FXML
+	void submit(ActionEvent event)
+	{
+	    HashMap<Boolean, String> errorMap = createErrorMap();
+		if (errorMap.containsKey(true))
+		{
+			JOptionPane.showMessageDialog(null, errorMap.get(true), "Exam Creation", JOptionPane.INFORMATION_MESSAGE);
+		    return;
+		}
+		buildExam();
+		ClientUI.chat.accept(newExam);
+		ArrayList<String> request = new ArrayList<>();
+	    request.add("update exam questions");
+	    for (Question question : questionTable.getItems()) 
+		    request.add(newExam.getExam_id() + " " +  question.getId() + " " + question.getScore());
+	    ClientUI.chat.accept(request);
+	    UserController.goBack(event, "/gui/ProfessorScreen.fxml");
+	}
+	
+	/**
 	 * This method builds the exam from the information within the controller.
 	 */
-	public void buildExamList()
+	public void buildExam()
 	{	
 		ClientUI.chat.accept("get amount of exams");
 		newExam.setSubject_id(questionList.get(0).getSubject());
@@ -191,6 +192,8 @@ public class ExamCreationSecondController implements Initializable
 	{
 	    HashMap<Boolean, String> errorMap = new HashMap<>();
 	    boolean isScoreEmpty = false;
+	    boolean isInvalidScore = false;
+	    int totalScore = 0;
 	    for (Question question : questionTable.getItems()) 
 	    {
 	        if (question.getScore() == null || question.getScore().isEmpty()) 
@@ -198,7 +201,27 @@ public class ExamCreationSecondController implements Initializable
 	            isScoreEmpty = true;
 	            break;
 	        }
+	        else 
+	        {
+	            try 
+	            {
+	                int scoreValue = Integer.parseInt(question.getScore());
+	                if (scoreValue < 0 || scoreValue > 100) 
+	                {
+	                    isInvalidScore = true;
+	                    break;
+	                }
+	                totalScore += scoreValue;
+	            }
+	            catch (NumberFormatException e) 
+	            {
+	                isInvalidScore = true;
+	                break;
+	            }
+	        }
 	    }
+	    errorMap.put(totalScore != 100, "Total score must be 100.");
+	    errorMap.put(isInvalidScore, "Invalid score value. Scores must be integers between 0 and 100.");
 	    errorMap.put(isScoreEmpty, "Score for each question is required.");
 	    errorMap.put(profNotesTextArea.getText().isEmpty(), "Professor notes are required");
 	    errorMap.put(studentNotesTextArea.getText().isEmpty(), "Student notes are required");

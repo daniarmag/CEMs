@@ -25,7 +25,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class CreateQuestionScreenController implements Initializable 
+/*A GUI for question creation.*/
+public class QuestionCreationScreenController implements Initializable 
 {
 	public static User u;
 	
@@ -74,34 +75,10 @@ public class CreateQuestionScreenController implements Initializable
     @FXML
     private ListView<String> courseListview;
 
-	public void setQuestionNumber(String number)
-	{
-		number = Integer.toString(Integer.parseInt(number) + 1);
-		String newQuestionNum = String.format("%03d", Integer.parseInt(number));
-		newQuestion.setQuestionNumber(newQuestionNum);
-	}
-	
-	public void selectSubject(MenuItem m)
-	{
-		courseListview.getItems().clear();
-		String selected = m.getText();
-		subjectMenu.setText(selected);
-		ArrayList<String> selectedValues = teachingMap.get(selected);
-		courseListview.getItems().addAll(selectedValues);
-	}
-
-	@FXML
-	void goBack(ActionEvent event) 
-	{
-		UserController.goBack(event, "/gui/QuestionBankScreen.fxml");
-	}
-
-	/**
+    /**
 	 * Initializes the JavaFX controller during application startup.
-	 * 
-	 * @param primaryStage The primary stage of the application.
 	 * @param user
-	 * @param teachingMap 
+	 * @param map
 	 * @throws Exception
 	 */
 	public static void start(User user, Map<String, ArrayList<String>> map) throws Exception 
@@ -109,46 +86,6 @@ public class CreateQuestionScreenController implements Initializable
 		u = user;
 		teachingMap =  map;
 		ScreenUtils.createNewStage("/gui/CreateQuestionScreen.fxml").show();
-	}
-	
-	@FXML
-	public void submit(ActionEvent event)
-	{
-		HashMap<Boolean, String> errorMap = createErrorMap();
-		if (errorMap.containsKey(true))
-		{
-			JOptionPane.showMessageDialog(null, errorMap.get(true), "Question Creation", JOptionPane.INFORMATION_MESSAGE);
-		    return;
-		}
-		ClientUI.chat.accept("get amount of questions");
-		String[] subjectId = subjectMenu.getText().split("\\s+");
-		String[] answers = {aAnswerText.getText(), bAnswerText.getText(), 
-							cAnswerText.getText(), dAnswerText.getText()};
-		newQuestion.setSubject(subjectId[0]);
-		newQuestion.setAnswers(answers);
-		newQuestion.setId(subjectId[0] + newQuestion.getQuestionNumber());
-		newQuestion.setQuestionText(questionTextArea.getText());
-		newQuestion.setAuthor(u.getFirst_name() + " " + u.getLast_name());
-		newQuestion.setProfessorId(u.getUser_id());
-		HashMap <Boolean, String> answerMap = createAnswerMap(answers);
-		newQuestion.setCorrectAnswer(answerMap.get(true));
-	    ClientUI.chat.accept(newQuestion);
-	    ArrayList<String> request = new ArrayList<>();
-	    request.add("update question courses");
-	    request.add(newQuestion.id);
-	    request.addAll(courseListview.getSelectionModel().getSelectedItems());
-	    ClientUI.chat.accept(request);
-	    goBack(event);
-	}
-	
-	/**
-	 * Exits from client GUI - disconnectes from DB aswell.
-	 * @param event
-	 */
-	@FXML
-	public void exit(ActionEvent event)
-	{
-		UserController.userExit(u);
 	}
 
 	/**
@@ -161,17 +98,105 @@ public class CreateQuestionScreenController implements Initializable
 	{
 		ClientMessageHandler.setCreateQuestionScreenController(this);
 		courseListview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		//Creating a toggle group here to so only one radio button can be selected.
 		ToggleGroup toggleGroup = new ToggleGroup();
 	    aRadio.setToggleGroup(toggleGroup);
 	    bRadio.setToggleGroup(toggleGroup);
 	    cRadio.setToggleGroup(toggleGroup);
 	    dRadio.setToggleGroup(toggleGroup);
+	    //Populating subjectmenu.
 	    for (String s : teachingMap.keySet())
 		{
 	    	MenuItem m = new MenuItem(s);
 			m.setOnAction(e -> selectSubject((MenuItem)e.getSource()));
 			subjectMenu.getItems().add(m);
 		}
+	}
+	
+	/**
+	 * Exits from client GUI - disconnectes from DB aswell.
+	 * @param event
+	 */
+	@FXML
+	public void exit(ActionEvent event)
+	{
+		UserController.userExit(u);
+	}
+	
+	/**
+	 * Goes back to QuestionBankScreen.
+	 * @param event
+	 */
+	@FXML
+	void goBack(ActionEvent event) 
+	{
+		UserController.goBack(event, "/gui/QuestionBankScreen.fxml");
+	}
+	
+	/**
+	 * A method that submits the question to the DB if no errors occurred.
+	 * @param event
+	 */
+	@FXML
+	public void submit(ActionEvent event)
+	{
+		HashMap<Boolean, String> errorMap = createErrorMap();
+		if (errorMap.containsKey(true))
+		{
+			JOptionPane.showMessageDialog(null, errorMap.get(true), "Question Creation", JOptionPane.INFORMATION_MESSAGE);
+		    return;
+		}
+		buildQuestion();
+	    ClientUI.chat.accept(newQuestion);
+	    ArrayList<String> request = new ArrayList<>();
+	    request.add("update question courses");
+	    request.add(newQuestion.id);
+	    request.addAll(courseListview.getSelectionModel().getSelectedItems());
+	    ClientUI.chat.accept(request);
+	    goBack(event);
+	}
+	
+	/**
+	 * This method builds the question from the information within the controller.
+	 */
+	public void buildQuestion()
+	{
+		ClientUI.chat.accept("get amount of questions");
+		String[] subjectId = subjectMenu.getText().split("\\s+");
+		String[] answers = {aAnswerText.getText(), bAnswerText.getText(), 
+							cAnswerText.getText(), dAnswerText.getText()};
+		newQuestion.setSubject(subjectId[0]);
+		newQuestion.setAnswers(answers);
+		newQuestion.setId(subjectId[0] + newQuestion.getQuestionNumber());
+		newQuestion.setQuestionText(questionTextArea.getText());
+		newQuestion.setAuthor(u.getFirst_name() + " " + u.getLast_name());
+		newQuestion.setProfessorId(u.getUser_id());
+		HashMap <Boolean, String> answerMap = createAnswerMap(answers);
+		newQuestion.setCorrectAnswer(answerMap.get(true));
+	}
+	
+	/**
+	 * Setter.
+	 * @param number
+	 */
+	public void setQuestionNumber(String number)
+	{
+		number = Integer.toString(Integer.parseInt(number) + 1);
+		String newQuestionNum = String.format("%03d", Integer.parseInt(number));
+		newQuestion.setQuestionNumber(newQuestionNum);
+	}
+	
+	/**
+	 * Handles the logic of when a subject was selected from the menubutton.
+	 * @param m
+	 */
+	public void selectSubject(MenuItem m)
+	{
+		courseListview.getItems().clear();
+		String selected = m.getText();
+		subjectMenu.setText(selected);
+		ArrayList<String> selectedValues = teachingMap.get(selected);
+		courseListview.getItems().addAll(selectedValues);
 	}
 	
 	/**

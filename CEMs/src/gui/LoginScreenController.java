@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-
 /*A GUI for the login screen.*/
 public class LoginScreenController
 {
@@ -45,15 +44,6 @@ public class LoginScreenController
     	
     }
     
-    public static void hideCurrentScene() throws Exception 
-    {
-    	try 
-    	{
-    		UserController.hide(e);
-    	}
-    	catch(Exception e){}
-	}
-
     /*disconnects from the server and exits from the GUI. */
     @FXML
     void exit(ActionEvent event) 
@@ -63,6 +53,16 @@ public class LoginScreenController
     	System.exit(0);
     }
     
-   
-    
+    /**
+     * Hides the screen.
+     * @throws Exception
+     */
+    public static void hideCurrentScene() throws Exception 
+    {
+    	try 
+    	{
+    		UserController.hide(e);
+    	}
+    	catch(Exception e){}
+	}
 }

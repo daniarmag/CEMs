@@ -19,7 +19,7 @@ public class Exam implements Serializable
 	public String professor_full_name;
 	public String professor_id;
 	public String password;
-	public String isActive = "";
+	public Integer isActive = 0;
 	
 	/**
 	 * @param exam_number
@@ -133,7 +133,7 @@ public class Exam implements Serializable
 	/**
 	 * @return the isActive
 	 */
-	public String getIsActive() {
+	public Integer getIsActive() {
 		return isActive;
 	}
 
@@ -217,8 +217,21 @@ public class Exam implements Serializable
 	/**
 	 * @param isActive the isActive to set
 	 */
-	public void setIsActive(String isActive) {
+	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
+	}
+
+
+	/**
+	 @return method representation of the class.
+	 */
+	@Override
+	public String toString() {
+		return "Exam [exam_number=" + exam_number + ", subject_id=" + subject_id + ", course_id=" + course_id
+				+ ", exam_id=" + exam_id + ", num_questions=" + num_questions + ", time=" + time + ", examinees_notes="
+				+ examinees_notes + ", professor_notes=" + professor_notes + ", professor_full_name="
+				+ professor_full_name + ", professor_id=" + professor_id + ", password=" + password + ", isActive="
+				+ isActive + "]";
 	}
 	
 	
