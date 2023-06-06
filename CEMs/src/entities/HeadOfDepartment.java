@@ -1,27 +1,53 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 @SuppressWarnings("serial")
 public class HeadOfDepartment extends User {
-	private static ArrayList<?> studentarr=new ArrayList<>();
+	private static ArrayList<?> studentArr=new ArrayList<>();
+	private static ArrayList<?> professorArr= new ArrayList<>();
+	private static Map<String,Consumer<ArrayList<?>>> mapArrays=new HashMap<>();//map between a function to fill a list
+	static {
+		mapArrays.put("professor",arr -> {setArrprofessor(arr);});
+		mapArrays.put("student",arr -> {setArrStudent(arr);});
+		}
+	
 	public HeadOfDepartment(String user_id, String first_name, String last_name, String email, String username,
 			String password, String role) {
 		super(user_id, first_name, last_name, email, username, password, role);
+		
 	}
 	
-	public ArrayList<?> getAllStudent()	{
-		return studentarr;
+	
+	public ArrayList<?> getArray(String str)	{
+		if(str.equals("student"))
+			return studentArr;
+		return professorArr;
 	}
 	
 	/**
 	 * @author czmat
 	 * @param arr
-	 * method for loading all the student in the data base -- data that only HeadOfDep have access to
+	 * this method load both arrays ( student and professor) according to the input.
 	 */
-	public void setArrStudent(ArrayList<?> arr) {
-		studentarr.clear();
-		HeadOfDepartment.studentarr=arr;
+	public void setArrUser(ArrayList<?> arr) {
+		String user=((User)arr.get(0)).getRole();
+		mapArrays.get(user).accept(arr);
+		}
+		
+	
+	public static void setArrprofessor(ArrayList<?> arr) {
+		professorArr.clear();
+		HeadOfDepartment.professorArr=arr;
 	}
-
+	
+	private static void setArrStudent(ArrayList<?> arr) {
+		studentArr.clear();
+		HeadOfDepartment.studentArr=arr;
+	}
+	
+	
 }

@@ -14,7 +14,7 @@ public class HeadOfDepScreenController
 {
 	private static StatisticsChooseScreenController statisticsScreen=new StatisticsChooseScreenController();
 	//static examController ex=new examController();
-	static HeadOfDepartment u;
+	static HeadOfDepartment u ;
     @FXML
     private Text Alert;
 
@@ -71,8 +71,8 @@ public class HeadOfDepScreenController
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
 	}
 
-	public void setStudentArr(ArrayList<?> msg) {
-			u.setArrStudent(msg);
+	public void setUserArr(ArrayList<User> msg) {
+			u.setArrUser(msg);
 			//statisticController.showData(msg);
 	}
 }

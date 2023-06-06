@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import entities.Course;
 import entities.Exam;
 import entities.HeadOfDepartment;
 import entities.Professor;
@@ -486,24 +487,50 @@ public class MySQLController
 		return answer;
 	}
 	
-	public ArrayList<?> getAllStudents(){
+	/**@author czmat
+	 * @param role
+	 * @return the function receives  or a student or a professor request and load all the 
+	 * Appropriate users
+	 */
+	public ArrayList<?> getAllStudents_Proffesors(String role){
 		try {
-			ArrayList<Student> arrayS=new ArrayList<>();
+			ArrayList<User> arrayS=new ArrayList<>();
 			Statement st = conn.createStatement();
-			ResultSet rs =st.executeQuery("SELECT * FROM users WHERE role=\"student\"");
+			ResultSet rs =st.executeQuery("SELECT * FROM users WHERE role=\""+role+"\"");
 			while(rs.next()) {
-				arrayS.add(new Student(rs.getString(1), rs.getString(2), 
-						rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), null));
+				arrayS.add(new User (rs.getString(1), rs.getString(2), 
+						rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), role));
 			}
 			return arrayS;
 			
-		}catch(Exception e) {e.printStackTrace();}
-		
-		
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+					}
 		return null;
 	}
 
+	
+	
+	/**to be continue 
+	 * @return
+	 */
+	public ArrayList<Course> getAllCourses(){
+		ArrayList<Course> arrayC=new ArrayList<>();
+		Statement st;
+		try {
+			st = conn.createStatement();
+		ResultSet rs =st.executeQuery("SELECT * FROM course");
+		while(rs.next()) {
+			arrayC.add(new Course (rs.getString(1), rs.getString(2), 
+					rs.getString(3)));
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return arrayC;		
+	}
+	
+	
 	/**
 	 * @return amount of exams in data base.
 	 */

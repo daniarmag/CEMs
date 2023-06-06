@@ -5,6 +5,7 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import entities.Exam;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import javafx.scene.layout.VBox;
 public class examController
 {
 
-	 @FXML
+	@FXML
 	private ScrollPane scrollPane;
     @FXML
     private VBox questionContainer;
@@ -27,7 +28,8 @@ public class examController
     private ArrayList<QuestionTemplateController> ansarry;
     
    
-    public void start() throws  Exception{
+    public static void start(Exam exam) throws  Exception{
+    	
     	Platform.runLater(()->ScreenUtils.createNewStage("/gui/examScreen.fxml").show());
     	
     }

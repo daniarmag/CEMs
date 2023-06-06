@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
+import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import control.guiMainController;
 import entities.HeadOfDepartment;
@@ -30,11 +33,13 @@ public class StatisticsChooseScreenController implements Initializable{
 	@FXML
 	private Button courseChoose;
 	@FXML
-	private TableColumn<Student, String> col1;
+	private TableColumn<?, String> col1;
 
-	private static ArrayList<Student> array;
+	private static ArrayList<User> array;
 	@FXML
-	private TableColumn<Student, String> col2;
+	private TableColumn<?, String> col2;
+    @FXML
+    private TableColumn<?, ?> col3;
 
 	@FXML
 	private Button professorChoose;
@@ -48,37 +53,57 @@ public class StatisticsChooseScreenController implements Initializable{
 	private Button studentChoose;
 
 	@FXML
-	private TableView<Student> tableInfo;
-	@SuppressWarnings("rawtypes")
-	private static Map<String,Consumer> functionMap;
-	@SuppressWarnings("unchecked")
-	
-	
+	private TableView<?> tableInfo=new TableView<>();
+	private static Map<String,Consumer<String>> functionMap;
 	public void showData(String navigateToFunctoin) {
-		
-		functionMap.get(navigateToFunctoin).accept(null);;
-	      
-
+		try {
+		functionMap.get(navigateToFunctoin).accept(navigateToFunctoin);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * this method will be activate from functionMap 
-	 * loading all the student in the tableView 
+	 * loading all the student or the professors in the tableView 
 	 */
 	@SuppressWarnings("unchecked")
-	public void LoadStudentIntable() {
-		array=(ArrayList<Student>)user.getAllStudent();
+	public void LoadStudentIntable(String str) {
+		tableInfo.getItems().clear();
+		array=(ArrayList<User>)user.getArray(str);
+		Platform.runLater(()->col1.setText("ID"));
+		Platform.runLater(()->col2.setText("Name"));
+		Platform.runLater(()->col3.setText("Last Name"));
 		col1.setCellValueFactory(new PropertyValueFactory<>("user_id"));
 		col2.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-	    for ( Student q : array)
+		col3.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+	    for ( User q : array)
 	    {
-	        tableInfo.getItems().addAll(q);
+	    	((TableView<User>)tableInfo).getItems().addAll(q);
 	    }
 	}
 	
+	
+	/**
+	 * @param e
+	 * searching in the table
+	 */
+	@SuppressWarnings("unchecked")
+	@FXML 
+	private void searchRow(ActionEvent e) {
+		String searchField=searchBar.getText();
+		for (User item : ((TableView<User>) tableInfo).getItems()) {
+			if (item.getFirst_name().equals(searchField)||item.getLast_name().equals(searchField)) {
+				((TableView<User>) tableInfo).getSelectionModel().select(item);
+				((TableView<User>) tableInfo).scrollTo(item);
+				return;
+			}
+		}
+		AlertMessages.makeAlert("No such values", "Serach");
+	}
 	public void start(User u) {
 		user=(HeadOfDepartment)u;
-		Platform.runLater(() -> ScreenUtils.createNewStage("/gui/headStatisticsChoose.fxml").show());
+		Platform.runLater(() -> ScreenUtils.createNewStage("/gui/StatisticsChoosingScreen.fxml").show());
 		
 	}	
 
@@ -91,7 +116,7 @@ public class StatisticsChooseScreenController implements Initializable{
 	
 	/**
 	 * @param event
-	 * Going to server to ask for data from the DB according to the button 
+	 * Going to server to ask for data from the DB according to the button pressed
 	 */
 	@FXML
 	void loadData(ActionEvent event) {
@@ -110,10 +135,11 @@ public class StatisticsChooseScreenController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	System.out.println(tableInfo.hashCode());
-	//ClientMessageHandler.setStatisticsChooseScreen(this);
-	guiMainController.setStatisticsChooseScreen(this);
+	ClientMessageHandler.setStatisticsChooseScreen(this);
+	//guiMainController.setStatisticsChooseScreen(this);
 	functionMap =new HashMap<>();
-	functionMap.put("student",(e)->LoadStudentIntable());
+	functionMap.put("student",str->LoadStudentIntable(str));
+	functionMap.put("professor",str->LoadStudentIntable(str));
 	
 	requsetMap.put("Choose professor", "Get all professors");
 	requsetMap.put("choose student", "Get all students");

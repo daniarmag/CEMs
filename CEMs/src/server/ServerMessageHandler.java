@@ -101,7 +101,14 @@ public class ServerMessageHandler
 					break;
 					
 				case "Get all students":			
-					client.sendToClient(sqlController.getAllStudents());
+					client.sendToClient(sqlController.getAllStudents_Proffesors("student"));
+					break;
+					
+				case "Get all professors":			
+					client.sendToClient(sqlController.getAllStudents_Proffesors("professor"));
+					break;
+				case "Get all courses":			
+					client.sendToClient(sqlController.getAllCourses());
 					break;
 			}
 			

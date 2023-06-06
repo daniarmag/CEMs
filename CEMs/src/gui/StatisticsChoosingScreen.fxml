@@ -32,13 +32,17 @@
                   </Button>
                </children>
             </VBox>
-            <TableView fx:id="tableInfo" layoutX="316.0" layoutY="97.0" prefHeight="200.0" prefWidth="167.0">
+            <TableView fx:id="tableInfo" layoutX="274.0" layoutY="98.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="240.0" prefWidth="313.0">
                <columns>
-                  <TableColumn fx:id="col1" prefWidth="83.0" text="ID" />
-                  <TableColumn fx:id="col2" prefWidth="83.0" text="name" />
+                  <TableColumn fx:id="col1" prefWidth="98.0" />
+                  <TableColumn fx:id="col2" prefWidth="107.0" />
+                  <TableColumn fx:id="col3" prefWidth="107.0" />
                </columns></TableView>
-            <TextField fx:id="searchBar" layoutX="329.0" layoutY="39.0" prefHeight="25.0" prefWidth="113.0" />
-            <Button fx:id="searchBtn" layoutX="343.0" layoutY="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Search By Id " />
+            <TextField fx:id="searchBar" layoutX="383.0" layoutY="64.0" prefHeight="25.0" prefWidth="113.0">
+               <opaqueInsets>
+                  <Insets top="50.0" />
+               </opaqueInsets></TextField>
+            <Button fx:id="searchBtn" layoutX="316.0" layoutY="64.0" mnemonicParsing="false" onAction="#searchRow" prefHeight="25.0" prefWidth="56.0" text="Search" />
             <Button fx:id="goBackBtn" layoutX="22.0" layoutY="361.0" mnemonicParsing="false" onAction="#goBack" text="returtn " />
          </children>
       </Pane>

@@ -3,6 +3,9 @@ package client;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
+
+import control.AlertMessages;
+import control.guiMainController;
 import entities.Question;
 import entities.Student;
 import entities.User;
@@ -110,9 +113,9 @@ public class ClientMessageHandler
 			case MAP:
 				mapMessageHandler((Map<?,?>) msg);
 				break;
-			case STUDENT_ARRAY_LIST:
-				headOfScreenController.setStudentArr((ArrayList<?>)msg);
-				statisticsScreen.showData("student");
+			case USER_ARRAY_LIST:
+				headOfScreenController.setUserArr((ArrayList<User>)msg);
+				statisticsScreen.showData(((ArrayList<User>)msg).get(0).getRole());
 				//guiController.statisticScreenData();
 				break;
 		}
@@ -137,8 +140,8 @@ public class ClientMessageHandler
 					return MessageType.STRING_ARRAY_LIST;
 				else if (firstElement instanceof Question)
 					return MessageType.QUESTION_ARRAY_LIST;
-				else if (firstElement instanceof Student)
-					return MessageType.STUDENT_ARRAY_LIST;
+				else if (firstElement instanceof User)
+					return MessageType.USER_ARRAY_LIST;
 			}
 		} 
 		else if (msg instanceof Map)
@@ -157,26 +160,33 @@ public class ClientMessageHandler
 		switch (message) 
 		{
 			case "incorrect login":
-				JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login",JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("Incorrect username or password.","Login");
+				//JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login",JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "abort":
-				JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected",JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("Server disconnected.","Disconnected");
+				//JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected",JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 				break;
 			case "already logged":
-				JOptionPane.showMessageDialog(null, "User is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("User is already logged.","Login");
+				//JOptionPane.showMessageDialog(null, "User is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "question added":
-				JOptionPane.showMessageDialog(null, "Question successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("Question successfully added.","Question Creation");
+				//JOptionPane.showMessageDialog(null, "Question successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "added exam and questions":
-				JOptionPane.showMessageDialog(null, "Exam successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("Exam successfully added.","Exam Creation");
+				//JOptionPane.showMessageDialog(null, "Exam successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "updated question":
-				JOptionPane.showMessageDialog(null, "Question successfully edited.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("Question successfully edited.","Question Creation");
+				//JOptionPane.showMessageDialog(null, "Question successfully edited.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "deleted question":
-				JOptionPane.showMessageDialog(null, "Question successfully deleted.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("Question successfully deleted.","Question Creation");
+				//JOptionPane.showMessageDialog(null, "Question successfully deleted.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
 		}
 	}
