@@ -71,7 +71,7 @@ public class HeadOfDepScreenController
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
 	}
 
-	public void setUserArr(ArrayList<User> msg) {
+	public void setUserArr(ArrayList<?> msg) {
 			u.setArrUser(msg);
 			//statisticController.showData(msg);
 	}

@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 public class HeadOfDepartment extends User {
 	private static ArrayList<?> studentArr=new ArrayList<>();
 	private static ArrayList<?> professorArr= new ArrayList<>();
+	private static ArrayList<?> courseArr= new ArrayList<>();
 	private static Map<String,Consumer<ArrayList<?>>> mapArrays=new HashMap<>();//map between a function to fill a list
 	private static Map<String,ArrayList<?>> mapData=new HashMap<>();
 	static {
@@ -36,10 +37,22 @@ public class HeadOfDepartment extends User {
 	 * this method load both arrays ( student and professor) according to the input.
 	 */
 	public void setArrUser(ArrayList<?> arr) {
+		if( arr.get(0).getClass().equals(User.class)) {		
 		String user=((User)arr.get(0)).getRole();
 		mapArrays.get(user).accept(arr);
 		}
+		else
+		setCourses(arr);
+		}
 		
+	
+	
+	public static void setCourses(ArrayList<?> arr) {
+		courseArr.clear();
+		HeadOfDepartment.courseArr=arr;
+		mapData.put("course", courseArr);
+		
+	}
 	
 	public static void setArrprofessor(ArrayList<?> arr) {
 		professorArr.clear();

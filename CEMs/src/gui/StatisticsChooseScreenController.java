@@ -12,6 +12,7 @@ import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
 import control.guiMainController;
+import entities.Course;
 import entities.HeadOfDepartment;
 import entities.Student;
 import entities.User;
@@ -30,13 +31,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class StatisticsChooseScreenController implements Initializable {
 
 	private static HeadOfDepartment user;
-	private static Map<String, String> requsetMap = new HashMap<>();;
+	private static Map<String, String> requsetMap = new HashMap<>();
 	@FXML
 	private Button courseChoose;
 	@FXML
 	private TableColumn<?, String> col1;
 
-	private static ArrayList<User> array;
+	private static ArrayList<?> array;
 	@FXML
 	private TableColumn<?, String> col2;
 	@FXML
@@ -74,7 +75,7 @@ public class StatisticsChooseScreenController implements Initializable {
 	 * professors in the tableView
 	 */
 	@SuppressWarnings("unchecked")
-	public void LoadStudentIntable(String str) {
+	public void LoadUserIntable(String str) {
 		tableInfo.getItems().clear();
 		array = (ArrayList<User>) user.getArray(str);
 		Platform.runLater(() -> col1.setText("ID"));
@@ -83,17 +84,40 @@ public class StatisticsChooseScreenController implements Initializable {
 		col1.setCellValueFactory(new PropertyValueFactory<>("user_id"));
 		col2.setCellValueFactory(new PropertyValueFactory<>("first_name"));
 		col3.setCellValueFactory(new PropertyValueFactory<>("last_name"));
-
-		ObservableList<User> questionObservableList = FXCollections.observableArrayList(array);
+		try {
+		ObservableList<User> questionObservableList = (ObservableList<User>) FXCollections.observableArrayList(array);
 		((TableView<User>) tableInfo).setItems(questionObservableList);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	
+	@SuppressWarnings("unchecked")
+	private void LoadCourseIntable(String str) {
+		tableInfo.getItems().clear();
+		array = (ArrayList<Course>)user.getArray(str);
+		Platform.runLater(() -> col1.setText("ID"));
+		Platform.runLater(() -> col2.setText("Name"));
+		Platform.runLater(() -> col3.setText("Course ID"));
+		col1.setCellValueFactory(new PropertyValueFactory<>("course_id"));
+		col2.setCellValueFactory(new PropertyValueFactory<>("course_name"));
+		col3.setCellValueFactory(new PropertyValueFactory<>("course_subject_id"));
+		try {
+		ObservableList<Course> questionObservableList = (ObservableList<Course>) FXCollections.observableArrayList(array);
+		((TableView<Course>) tableInfo).setItems(questionObservableList);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		}
+	
 	/**
 	 * @param e searching in the table
 	 */
 	@SuppressWarnings("unchecked")
 	@FXML
 	private void searchRow(ActionEvent e) {
+		
 		String searchField = searchBar.getText();
 		for (User item : ((TableView<User>) tableInfo).getItems()) {
 			if (item.getFirst_name().equals(searchField) || item.getLast_name().equals(searchField)) {
@@ -140,12 +164,17 @@ public class StatisticsChooseScreenController implements Initializable {
 		ClientMessageHandler.setStatisticsChooseScreen(this);
 		// guiMainController.setStatisticsChooseScreen(this);
 		functionMap = new HashMap<>();
-		functionMap.put("student", str -> LoadStudentIntable(str));
-		functionMap.put("professor", str -> LoadStudentIntable(str));
+		functionMap.put("student", str -> LoadUserIntable(str));
+		functionMap.put("professor", str -> LoadUserIntable(str));
+		functionMap.put("course", str -> LoadCourseIntable(str));
 
 		requsetMap.put("Choose professor", "Get all professors");
 		requsetMap.put("choose student", "Get all students");
 		requsetMap.put("Choose course", "Get all courses");
 	}
+
+	
+	
+
 
 }

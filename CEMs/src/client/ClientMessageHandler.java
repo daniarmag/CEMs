@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import control.AlertMessages;
 import control.guiMainController;
+import entities.Course;
 import entities.Question;
 import entities.Student;
 import entities.User;
@@ -118,6 +119,9 @@ public class ClientMessageHandler
 				statisticsScreen.showData(((ArrayList<User>)msg).get(0).getRole());
 				//guiController.statisticScreenData();
 				break;
+			case COURSE_ARRAY_LIST:
+				headOfScreenController.setUserArr((ArrayList<?>)msg);
+				statisticsScreen.showData("course");
 		}
 	}
 
@@ -144,6 +148,8 @@ public class ClientMessageHandler
 					return MessageType.QUESTION_ARRAY_LIST;
 				else if (firstElement instanceof User)
 					return MessageType.USER_ARRAY_LIST;
+				else if (firstElement instanceof Course)
+					return MessageType.COURSE_ARRAY_LIST;
 			}
 		} 
 		else if (msg instanceof Map)
