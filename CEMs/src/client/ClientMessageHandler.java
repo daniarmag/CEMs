@@ -130,9 +130,11 @@ public class ClientMessageHandler
 	{
 		if (msg instanceof String)
 			return MessageType.STRING;
+		
 		else if (msg instanceof ArrayList) 
 		{
 			ArrayList<?> arrayList = (ArrayList<?>) msg;
+			
 			if (!arrayList.isEmpty()) 
 			{
 				Object firstElement = arrayList.get(0);

@@ -11,7 +11,7 @@ import java.util.Map;
 @SuppressWarnings("serial")
 public class Professor<T, E> extends User {
 
-	private Map<T, E> teachingMap;// map to navigate between two types - our use is coue - subject but can be any
+	private Map<T, E> teachingMap;// map to navigate between two types - our use is course - subject but can be any
 									// type
 
 	/**

@@ -10,6 +10,7 @@ public class HeadOfDepartment extends User {
 	private static ArrayList<?> studentArr=new ArrayList<>();
 	private static ArrayList<?> professorArr= new ArrayList<>();
 	private static Map<String,Consumer<ArrayList<?>>> mapArrays=new HashMap<>();//map between a function to fill a list
+	private static Map<String,ArrayList<?>> mapData=new HashMap<>();
 	static {
 		mapArrays.put("professor",arr -> {setArrprofessor(arr);});
 		mapArrays.put("student",arr -> {setArrStudent(arr);});
@@ -23,9 +24,10 @@ public class HeadOfDepartment extends User {
 	
 	
 	public ArrayList<?> getArray(String str)	{
-		if(str.equals("student"))
-			return studentArr;
-		return professorArr;
+//		if(str.equals("student"))
+//			return studentArr;
+//		return professorArr;
+		return mapData.get(str);
 	}
 	
 	/**
@@ -42,11 +44,14 @@ public class HeadOfDepartment extends User {
 	public static void setArrprofessor(ArrayList<?> arr) {
 		professorArr.clear();
 		HeadOfDepartment.professorArr=arr;
+		mapData.put("professor", arr);
+		
 	}
 	
 	private static void setArrStudent(ArrayList<?> arr) {
 		studentArr.clear();
 		HeadOfDepartment.studentArr=arr;
+		mapData.put("student", arr);
 	}
 	
 	

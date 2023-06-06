@@ -511,8 +511,10 @@ public class MySQLController
 
 	
 	
-	/**to be continue 
+	/**@author czmat
+	 * the function return all the courses in the system 
 	 * @return
+	 * 
 	 */
 	public ArrayList<Course> getAllCourses(){
 		ArrayList<Course> arrayC=new ArrayList<>();
