@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * Represents the exams in the system.
@@ -20,6 +21,7 @@ public class Exam implements Serializable
 	public String professor_id;
 	public String password;
 	public Integer isActive = 0;
+	public String type = "c";
 	
 	/**
 	 * @param exam_number
@@ -136,6 +138,10 @@ public class Exam implements Serializable
 	public Integer getIsActive() {
 		return isActive;
 	}
+	
+	public String getType() {
+		return type;
+	}
 
 	/**
 	 * @param exam_number the exam_number to set
@@ -221,6 +227,9 @@ public class Exam implements Serializable
 		this.isActive = isActive;
 	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	/**
 	 @return method representation of the class.
@@ -231,7 +240,7 @@ public class Exam implements Serializable
 				+ ", exam_id=" + exam_id + ", num_questions=" + num_questions + ", time=" + time + ", examinees_notes="
 				+ examinees_notes + ", professor_notes=" + professor_notes + ", professor_full_name="
 				+ professor_full_name + ", professor_id=" + professor_id + ", password=" + password + ", isActive="
-				+ isActive + "]";
+				+ isActive + ",type=" + type + "]";
 	}
 	
 	

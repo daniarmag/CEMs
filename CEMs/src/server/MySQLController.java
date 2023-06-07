@@ -587,8 +587,8 @@ public class MySQLController
 		    {
 		    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam (exam_number, subject_id, course_id, " +
 											    			  "exam_id, num_questions, time, examinees_notes, professor_notes, " +
-											    			  "professor_full_name, professor_id, password, isActive) " +
-											    			  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+											    			  "professor_full_name, professor_id, password, isActive, type) " +
+											    			  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 		       ps.setString(1, exam.getExam_number());
 		       ps.setString(2, exam.getSubject_id());
 		       ps.setString(3, exam.getCourse_id());
@@ -601,6 +601,8 @@ public class MySQLController
 		       ps.setString(10, exam.getProfessor_id());
 		       ps.setString(11, exam.getPassword());
 		       ps.setInt(12, exam.getIsActive());
+		       ps.setString(13, exam.getType());
+		       //ps.setDate(14, exam.getDate());
 		       ps.executeUpdate();
 		    } 
 		    catch (SQLException e){e.printStackTrace();}
