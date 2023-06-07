@@ -1,7 +1,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  * Represents the exams in the system.
