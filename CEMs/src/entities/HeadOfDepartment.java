@@ -25,10 +25,8 @@ public class HeadOfDepartment extends User {
 	
 	
 	public ArrayList<?> getArray(String str)	{
-//		if(str.equals("student"))
-//			return studentArr;
-//		return professorArr;
 		return mapData.get(str);
+		
 	}
 	
 	/**
@@ -39,7 +37,7 @@ public class HeadOfDepartment extends User {
 	public void setArrUser(ArrayList<?> arr) {
 		if( arr.get(0).getClass().equals(User.class)) {		
 		String user=((User)arr.get(0)).getRole();
-		mapArrays.get(user).accept(arr);
+		mapArrays.get(user).accept(arr);//activate the specific set method to the array 
 		}
 		else
 		setCourses(arr);
@@ -47,24 +45,24 @@ public class HeadOfDepartment extends User {
 		
 	
 	
-	public static void setCourses(ArrayList<?> arr) {
+	private void setCourses(ArrayList<?> arr) {
 		courseArr.clear();
 		HeadOfDepartment.courseArr=arr;
-		mapData.put("course", courseArr);
+		mapData.put("Get all courses", courseArr);
 		
 	}
 	
-	public static void setArrprofessor(ArrayList<?> arr) {
+	private static  void setArrprofessor(ArrayList<?> arr) {
 		professorArr.clear();
 		HeadOfDepartment.professorArr=arr;
-		mapData.put("professor", arr);
+		mapData.put("Get all professors", arr);
 		
 	}
 	
 	private static void setArrStudent(ArrayList<?> arr) {
 		studentArr.clear();
 		HeadOfDepartment.studentArr=arr;
-		mapData.put("student", arr);
+		mapData.put("Get all students", arr);
 	}
 	
 	

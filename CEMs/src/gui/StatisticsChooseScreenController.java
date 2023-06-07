@@ -146,9 +146,12 @@ public class StatisticsChooseScreenController implements Initializable {
 	 */
 	@FXML
 	void loadData(ActionEvent event) {
-
-		String action = ((Button) event.getSource()).getText();
-		ClientUI.chat.accept(requsetMap.get(action));
+		
+		String buttonPressed = ((Button) event.getSource()).getText();
+		String action = requsetMap.get(buttonPressed);
+		if(user.getArray(action)==null) {
+		ClientUI.chat.accept(action);
+		}
 
 	}
 
