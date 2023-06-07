@@ -2,6 +2,10 @@ package client;
 
 import java.util.ArrayList;
 import java.util.Map;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f1c7e79 (head of department can search any row in the table)
 import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
@@ -122,7 +126,7 @@ public class ClientMessageHandler
 				mapMessageHandler((Map<?,?>) msg);
 				break;
 			case USER_ARRAY_LIST:
-				headOfScreenController.setUserArr((ArrayList<User>)msg);
+				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData(((ArrayList<User>)msg).get(0).getRole());
 				//guiController.statisticScreenData();
 				break;

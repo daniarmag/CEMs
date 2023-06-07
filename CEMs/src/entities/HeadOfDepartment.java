@@ -15,6 +15,7 @@ public class HeadOfDepartment extends User {
 	static {
 		mapArrays.put("professor",arr -> {setArrprofessor(arr);});
 		mapArrays.put("student",arr -> {setArrStudent(arr);});
+		mapArrays.put("course",arr -> {setArrCourses(arr);});
 		}
 	
 	public HeadOfDepartment(String user_id, String first_name, String last_name, String email, String username,
@@ -35,34 +36,46 @@ public class HeadOfDepartment extends User {
 	 * this method load both arrays ( student and professor) according to the input.
 	 */
 	public void setArrUser(ArrayList<?> arr) {
+		
 		if( arr.get(0).getClass().equals(User.class)) {		
 		String user=((User)arr.get(0)).getRole();
 		mapArrays.get(user).accept(arr);//activate the specific set method to the array 
 		}
 		else
-		setCourses(arr);
+			mapArrays.get("course").accept(arr);
 		}
 		
 	
 	
-	private void setCourses(ArrayList<?> arr) {
+	
+	
+	/**set the courses array
+	 * @param arr
+	 */
+	private static void setArrCourses(ArrayList<?> arr) {
 		courseArr.clear();
 		HeadOfDepartment.courseArr=arr;
-		mapData.put("Get all courses", courseArr);
+		mapData.put("course", courseArr);
 		
 	}
 	
+	/**set arrapy of all professors
+	 * @param arr
+	 */
 	private static  void setArrprofessor(ArrayList<?> arr) {
 		professorArr.clear();
 		HeadOfDepartment.professorArr=arr;
-		mapData.put("Get all professors", arr);
+		mapData.put("professor", arr);
 		
 	}
 	
+	/**set array for all studens
+	 * @param arr
+	 */
 	private static void setArrStudent(ArrayList<?> arr) {
 		studentArr.clear();
 		HeadOfDepartment.studentArr=arr;
-		mapData.put("Get all students", arr);
+		mapData.put("student", arr);
 	}
 	
 	

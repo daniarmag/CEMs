@@ -1,19 +1,22 @@
 package gui;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import control.UserController;
 import entities.HeadOfDepartment;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-public class HeadOfDepScreenController
+public class HeadOfDepScreenController implements Initializable
 {
 	private static StatisticsChooseScreenController statisticsScreen=new StatisticsChooseScreenController();
-	//static examController ex=new examController();
 	static HeadOfDepartment u ;
     @FXML
     private Text Alert;
@@ -48,7 +51,6 @@ public class HeadOfDepScreenController
     	UserController.hide(event);
     	
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
-		//UserController.logoutUser(u,event,path);
 		UserController.logoutUser(u);
 	}
 
@@ -69,11 +71,16 @@ public class HeadOfDepScreenController
 	public void start(User user) {
 		u = (HeadOfDepartment) user;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
+		
 	}
 
 	public void setUserArr(ArrayList<?> msg) {
 			u.setArrUser(msg);
-			//statisticController.showData(msg);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		welcomeText.setText("Welcome back " + u.getFirst_name());
 	}
 }
 	
