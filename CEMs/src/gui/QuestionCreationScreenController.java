@@ -85,7 +85,7 @@ public class QuestionCreationScreenController implements Initializable
 	{
 		u = user;
 		teachingMap =  map;
-		ScreenUtils.createNewStage("/gui/CreateQuestionScreen.fxml").show();
+		ScreenUtils.createNewStage("/gui/QuestionCreationScreen.fxml").show();
 	}
 
 	/**
@@ -206,10 +206,10 @@ public class QuestionCreationScreenController implements Initializable
 	private HashMap<Boolean, String> createAnswerMap(String[] answers) 
 	{
 	    HashMap<Boolean, String> answerMap = new HashMap<>();
-	    answerMap.put(aRadio.isSelected(), answers[0]);
-	    answerMap.put(bRadio.isSelected(), answers[1]);
-	    answerMap.put(cRadio.isSelected(), answers[2]);
-	    answerMap.put(dRadio.isSelected(), answers[3]);
+	    answerMap.put(aRadio.isSelected(), "1");
+	    answerMap.put(bRadio.isSelected(), "2");
+	    answerMap.put(cRadio.isSelected(), "3");
+	    answerMap.put(dRadio.isSelected(), "4");
 	    return answerMap;
 	}
 	

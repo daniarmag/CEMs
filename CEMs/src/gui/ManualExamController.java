@@ -2,8 +2,6 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.Map;
-
-import control.TimerController;
 import control.UserController;
 import entities.Exam;
 import entities.User;

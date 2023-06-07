@@ -77,7 +77,7 @@ public class QuestionEditScreenController implements Initializable
 	{
 		editQuestion = question;
 		u = user;
-		ScreenUtils.createNewStage("/gui/EditQuestionScreen.fxml").show();
+		ScreenUtils.createNewStage("/gui/QuestionEditScreen.fxml").show();
 	}
 
     /**

@@ -2,14 +2,10 @@ package client;
 
 import java.util.ArrayList;
 import java.util.Map;
-import javax.swing.JOptionPane;
-
 import control.AlertMessages;
-import control.guiMainController;
 import entities.Course;
 import entities.Exam;
 import entities.Question;
-import entities.Student;
 import entities.User;
 import enums.MessageType;
 import gui.QuestionCreationScreenController;
@@ -19,7 +15,7 @@ import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
-import gui.examController;
+import gui.ExamController;
 import gui.StatisticsChooseScreenController;
 import gui.QuestionBankScreenController;
 import gui.StudentExamScreenController;
@@ -34,7 +30,7 @@ public class ClientMessageHandler
     static QuestionBankScreenController questionBankScreenController;
     static StudentExamScreenController studentExamScreenController;
     static HeadOfDepScreenController headOfScreenController;
-    static examController examcontroller;
+    static ExamController examcontroller;
     static StatisticsChooseScreenController statisticsScreen;
     ///Check check check dont use 
     //static guiMainController guiController;
@@ -42,7 +38,7 @@ public class ClientMessageHandler
 		//guiController =new guiMainController();
 		studentController = new StudentScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
-		examcontroller=new examController();
+		examcontroller=new ExamController();
 		professorController = new ProfessorScreenController();
 	}
 
@@ -109,6 +105,7 @@ public class ClientMessageHandler
 				break;
 			case STRING_ARRAY_LIST:
 				stringArrayListMessageHandler((ArrayList<String>)msg);
+				break;
 			case USER:
 				userMessageHandler((User) msg);
 				break;
@@ -123,8 +120,10 @@ public class ClientMessageHandler
 			case COURSE_ARRAY_LIST:
 				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData("course");
+				break;
 			case EXAM_ARRAY_LIST:
 				examArrayListMessageHandler((ArrayList<Exam>) msg);
+				break;
 		}
 	}
 
@@ -175,32 +174,31 @@ public class ClientMessageHandler
 		{
 			case "incorrect login":
 				AlertMessages.makeAlert("Incorrect username or password.","Login");
-				//JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login",JOptionPane.INFORMATION_MESSAGE);
 				break;
+				
 			case "abort":
 				AlertMessages.makeAlert("Server disconnected.","Disconnected");
-				//JOptionPane.showMessageDialog(null, "Server disconnected.", "Disconnected",JOptionPane.INFORMATION_MESSAGE);
 				System.exit(0);
 				break;
+				
 			case "already logged":
 				AlertMessages.makeAlert("User is already logged.","Login");
-				//JOptionPane.showMessageDialog(null, "User is already logged.", "Login",JOptionPane.INFORMATION_MESSAGE);
 				break;
+				
 			case "question added":
 				AlertMessages.makeAlert("Question successfully added.","Question Creation");
-				//JOptionPane.showMessageDialog(null, "Question successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
+				
 			case "added exam and questions":
 				AlertMessages.makeAlert("Exam successfully added.","Exam Creation");
-				//JOptionPane.showMessageDialog(null, "Exam successfully added.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
+				
 			case "updated question":
 				AlertMessages.makeAlert("Question successfully edited.","Question Creation");
-				//JOptionPane.showMessageDialog(null, "Question successfully edited.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
+				
 			case "deleted question":
 				AlertMessages.makeAlert("Question successfully deleted.","Question Creation");
-				//JOptionPane.showMessageDialog(null, "Question successfully deleted.", "Question Creation",JOptionPane.INFORMATION_MESSAGE);
 				break;
 		}
 	}

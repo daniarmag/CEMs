@@ -138,5 +138,20 @@
          </font>
       </Text>
       <TextArea fx:id="profNotesTextArea" layoutX="421.0" layoutY="393.0" prefHeight="78.0" prefWidth="170.0" promptText="Insert notes.." />
+      <Text fx:id="totalScoreText" layoutX="714.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="120.0">
+         <font>
+            <Font name="Tahoma" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="631.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total score: ">
+         <font>
+            <Font name="Tahoma" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="719.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press enter to save score">
+         <font>
+            <Font name="Tahoma" size="10.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

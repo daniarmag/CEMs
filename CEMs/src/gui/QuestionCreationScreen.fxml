@@ -111,5 +111,10 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
+      <Text layoutX="546.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ctrl to select multiple">
+         <font>
+            <Font name="Tahoma" size="10.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

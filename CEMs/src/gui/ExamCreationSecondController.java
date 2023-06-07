@@ -36,9 +36,14 @@ public class ExamCreationSecondController implements Initializable
 	public static ActionEvent e;
 	
 	public Exam newExam = new Exam(null, null, null, null, null, null, null, null, null, null, null);
+	
+	public boolean isInvalidScore = false;
 
     @FXML
     private Text examAuthorText;
+    
+    @FXML
+    private Text totalScoreText;
 
     @FXML
     private TextField minutesTextField;
@@ -91,7 +96,7 @@ public class ExamCreationSecondController implements Initializable
 		scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
 		ObservableList<Question> questionObservableList = FXCollections.observableArrayList(questionList);
 		questionTable.setItems(questionObservableList);
-		editableCols();
+		colHandler();
 	}	
 	
 	/**
@@ -172,7 +177,7 @@ public class ExamCreationSecondController implements Initializable
 	/**
 	 * Sets the columns of the table to be editable.
 	 */
-	private void editableCols() 
+	private void colHandler() 
 	{
 		scoreCol.setCellFactory(TextFieldTableCell.forTableColumn());
 		scoreCol.setOnEditCommit(e -> 
@@ -180,10 +185,37 @@ public class ExamCreationSecondController implements Initializable
 	        Question question = e.getTableView().getItems().get(e.getTablePosition().getRow());
 	        //Update the score value of the Question object
 	        question.setScore(e.getNewValue()); 
+	        updateTotalScore();
 	    });
 	    questionTable.setEditable(true);
 	}
 	
+	/**
+	 * Updates the total score and keeps track of the validity of the score input.
+	 */
+	private void updateTotalScore() 
+	{
+	    int totalScore = 0;
+	    for (Question question : questionTable.getItems()) 
+	    {
+	    	try 
+	    	{
+	    		String scoreValue = question.getScore();
+		        if (scoreValue != null && !scoreValue.isEmpty())
+		        {
+		            int score = Integer.parseInt(scoreValue);
+		            totalScore += score;
+		        }
+		        if (totalScore > 100) 
+		        	isInvalidScore = true;
+	    	}
+	        catch(NumberFormatException e)
+	    	{
+	        	isInvalidScore = true;
+	    	}
+	    }
+	    totalScoreText.setText(Integer.toString(totalScore));
+	}
 
 	/**
 	 * @return a map with all kinds of error messages
@@ -192,35 +224,15 @@ public class ExamCreationSecondController implements Initializable
 	{
 	    HashMap<Boolean, String> errorMap = new HashMap<>();
 	    boolean isScoreEmpty = false;
-	    boolean isInvalidScore = false;
-	    int totalScore = 0;
-	    for (Question question : questionTable.getItems()) 
+	    for (Question question : questionTable.getItems())
 	    {
 	        if (question.getScore() == null || question.getScore().isEmpty()) 
 	        {
 	            isScoreEmpty = true;
 	            break;
-	        }
-	        else 
-	        {
-	            try 
-	            {
-	                int scoreValue = Integer.parseInt(question.getScore());
-	                if (scoreValue < 0 || scoreValue > 100) 
-	                {
-	                    isInvalidScore = true;
-	                    break;
-	                }
-	                totalScore += scoreValue;
-	            }
-	            catch (NumberFormatException e) 
-	            {
-	                isInvalidScore = true;
-	                break;
-	            }
-	        }
+	        } 
 	    }
-	    errorMap.put(totalScore != 100, "Total score must be 100.");
+	    errorMap.put(Integer.parseInt(totalScoreText.getText()) != 100, "Total score must be 100.");
 	    errorMap.put(isInvalidScore, "Invalid score value. Scores must be integers between 0 and 100.");
 	    errorMap.put(isScoreEmpty, "Score for each question is required.");
 	    errorMap.put(profNotesTextArea.getText().isEmpty(), "Professor notes are required");

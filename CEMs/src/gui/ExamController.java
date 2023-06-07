@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
-public class examController
+public class ExamController
 {
 
 	@FXML
