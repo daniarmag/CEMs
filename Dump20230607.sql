@@ -85,7 +85,7 @@ CREATE TABLE `exam` (
   `professor_full_name` varchar(45) DEFAULT NULL,
   `professor_id` varchar(45) DEFAULT NULL,
   `password` varchar(5) DEFAULT NULL,
-  `isActive` int DEFAULT NULL,
+  `isActive` varchar(2) DEFAULT NULL,
   `type` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`exam_number`,`subject_id`,`course_id`,`exam_id`),
   KEY `exam_subject_id_idx` (`subject_id`),
@@ -104,7 +104,7 @@ CREATE TABLE `exam` (
 
 LOCK TABLES `exam` WRITE;
 /*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES ('01','01','01','010101',3,60,'Don\'t forget to do something!','Don\'t forget to do nothing!','Daniel Armaganian','209146943','8520',0,'Manual'),('02','02','05','020502',1,60,'Yes	','No','Daniel Armaganian','209146943','1234',0,'Manual'),('03','01','01','010103',2,40,'test','test','Daniel Armaganian','209146943','1234',0,'c');
+INSERT INTO `exam` VALUES ('01','01','01','010101',3,60,'Don\'t forget to do something!','Don\'t forget to do nothing!','Daniel Armaganian','209146943','8520','0','Manual'),('02','02','05','020502',1,60,'Yes	','No','Daniel Armaganian','209146943','1234','0','Manual'),('03','01','01','010103',2,40,'test','test','Daniel Armaganian','209146943','1234','0','c');
 /*!40000 ALTER TABLE `exam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,8 +321,8 @@ DROP TABLE IF EXISTS `student_course`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `student_course` (
   `student_id` varchar(45) NOT NULL,
-  `course_id` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`student_id`),
+  `course_id` varchar(45) NOT NULL,
+  PRIMARY KEY (`student_id`,`course_id`),
   KEY `student_course_course_id_idx` (`course_id`),
   CONSTRAINT `student_course_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   CONSTRAINT `student_course_student_id` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`)
@@ -335,7 +335,7 @@ CREATE TABLE `student_course` (
 
 LOCK TABLES `student_course` WRITE;
 /*!40000 ALTER TABLE `student_course` DISABLE KEYS */;
-INSERT INTO `student_course` VALUES ('200000000','01');
+INSERT INTO `student_course` VALUES ('200000000','01'),('200000000','02');
 /*!40000 ALTER TABLE `student_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -489,4 +489,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-07 11:34:21
+-- Dump completed on 2023-06-07 23:38:38
