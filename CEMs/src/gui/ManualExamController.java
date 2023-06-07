@@ -61,7 +61,7 @@ public class ManualExamController {
 
     @FXML
     void DownloadBtn(ActionEvent event) {
-    	System.out.println(startCountdown());	
+    	//System.out.println(startCountdown());	
     }
 
     @FXML
@@ -87,8 +87,8 @@ public class ManualExamController {
 		UserController.goBack(event, "/gui/StudentExamScreen.fxml");
 	}
 	
-	int startCountdown() {
-		TimerController timerController = new TimerController(u.getUser_id(), e.time);
-		return timerController.getRemainingTime();
-	}
+//	int startCountdown() {
+//		TimerController timerController = new TimerController(u.getUser_id(), e.time);
+//		return timerController.getRemainingTime();
+//	}
 }
