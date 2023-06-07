@@ -211,6 +211,11 @@ public class MySQLController
 	
 	
 	
+	/**This method loads all the exams that the student can take.
+	 * @param id
+	 * @return an ArrayList of Exam objects
+
+	 */
 	public  ArrayList<Exam>loadStudentExams(String id)
 	{
 		ArrayList<Exam> eArr = new ArrayList<>();
@@ -601,7 +606,7 @@ public class MySQLController
 		       ps.setString(9, exam.getProfessor_full_name());
 		       ps.setString(10, exam.getProfessor_id());
 		       ps.setString(11, exam.getPassword());
-		       ps.setInt(12, exam.getIsActive());
+		       ps.setString(12, exam.getIsActive());
 		       ps.setString(13, exam.getType());
 		       //ps.setDate(14, exam.getDate());
 		       ps.executeUpdate();
@@ -609,4 +614,29 @@ public class MySQLController
 		    catch (SQLException e){e.printStackTrace();}
 	}
 	
+	/** This method load student's courses and their names.
+	 * @param id
+	 * @return an ArrayList of String objects
+
+	 */
+	public ArrayList<String> getStudentCourses(String id){
+        ArrayList<String> courses = new ArrayList<>();
+        courses.add("student courses");
+        try 
+	    {
+	        PreparedStatement ps = conn.prepareStatement("SELECT student_course.course_id, course.course_name "
+	        		+ "FROM student_course join course ON student_course.course_id = course.course_id "
+	        		+ "WHERE student_course.student_id = ?");
+	        ps.setString(1, id);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next())
+	        {
+	            String course_id = rs.getString("course_id");
+	            String course_name = rs.getString("course_name");
+	            courses.add(course_id + " - " + course_name);
+	        }
+	    } catch (SQLException e) { e.printStackTrace();}
+        return courses;
+		
+	}
 }

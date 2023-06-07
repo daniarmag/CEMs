@@ -32,6 +32,7 @@ public class ClientMessageHandler
 	static ExamCreationFirstController examCreationFirstController;
 	static ExamCreationSecondController examCreationSecondController;
     static QuestionBankScreenController questionBankScreenController;
+    static StudentScreenController studentScreenController;
     static StudentExamScreenController studentExamScreenController;
     static HeadOfDepScreenController headOfScreenController;
     static examController examcontroller;
@@ -89,6 +90,14 @@ public class ClientMessageHandler
 	{
 		studentExamScreenController = controller;
 	}
+	
+	/**
+	 * @param studentScreenController the studentScreenController to set
+	 */
+	public static void setStudentScreenController(StudentScreenController controller) 
+	{
+		studentScreenController = controller;
+	}
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
@@ -123,6 +132,7 @@ public class ClientMessageHandler
 			case COURSE_ARRAY_LIST:
 				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData("course");
+				break;
 			case EXAM_ARRAY_LIST:
 				examArrayListMessageHandler((ArrayList<Exam>) msg);
 		}
@@ -227,6 +237,12 @@ public class ClientMessageHandler
 				arrayList.remove(0);
 				examCreationFirstController.setArr(arrayList);
 				break;
+				
+			case "student courses":
+				arrayList.remove(0);
+				studentScreenController.setArr(arrayList);
+				break;
+				
 		}
 	}
 

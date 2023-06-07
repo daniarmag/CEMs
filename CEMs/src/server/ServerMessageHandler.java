@@ -176,9 +176,14 @@ public class ServerMessageHandler
 				case "load course questions":
 					client.sendToClient(sqlController.loadCourseQuestions(arrayList.get(1)));
 					break;
+					
 				case "load student exams":
-				client.sendToClient(sqlController.loadStudentExams(arrayList.get(1)));
-				break;
+					client.sendToClient(sqlController.loadStudentExams(arrayList.get(1)));
+					break;
+					
+				case "load student courses":
+					client.sendToClient(sqlController.getStudentCourses(arrayList.get(1)));
+					break;
 			}
 		} catch (IOException e) {}
 	}
@@ -199,7 +204,7 @@ public class ServerMessageHandler
 	
 	/**
 	 * Handles messages of type Exam.
-	 * @param msg
+	 * @param exam
 	 * @param client
 	 */
 	private static void examMessageHandler(Exam exam, ConnectionToClient client) 
