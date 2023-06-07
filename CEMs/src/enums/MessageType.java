@@ -8,6 +8,7 @@ public enum MessageType
 {
 	MAP,
 	EXAM,
+	EXAM_ARRAY_LIST,
 	USER,
     STRING,
     STRING_ARRAY_LIST,

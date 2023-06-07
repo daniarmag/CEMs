@@ -211,25 +211,26 @@ public class MySQLController
 	
 	
 	
-	public  ArrayList<Question> loadStudentExams(String id)
+	public  ArrayList<Exam>loadStudentExams(String id)
 	{
-		ArrayList<Question> qArr = new ArrayList<Question>();
-	    try
-		{
+		ArrayList<Exam> eArr = new ArrayList<>();
+		try {
 	    	//loading all the  student's exams from the table
-			PreparedStatement ps = conn.prepareStatement
-							("SELECT exam.exam_number, exam.exam_id, course.course_name, exam.exam_type "
-							+ "FROM student_course" + "JOIN exam ON exam.course_id = student_course.course_id"
-							+ "JOIN course ON exam.course_id = course.course_id" + "WHERE student_id = ?");
-		    ps.setString(1, id);
+			PreparedStatement ps = conn.prepareStatement("SELECT exam.* "
+									+ "FROM student_course JOIN exam ON exam.course_id = student_course.course_id "
+									+ "WHERE student_id = ?");
+			ps.setString(1, id);
 		    ResultSet rs = ps.executeQuery();
-//			while (rs.next()) TBD
-//			{
-//				Exam e = new Exam();
-//			}
+			while (rs.next()) 
+			{
+				Exam e = new Exam(rs.getString("exam_number"), rs.getString("subject_id") , rs.getString("course_id"), rs.getString("exam_id"),
+				rs.getInt("num_questions"), rs.getInt("time"), rs.getString("examinees_notes"), rs.getString("professor_notes"),
+				rs.getString("professor_full_name"), rs.getString("professor_id"), rs.getString("password"));
+				eArr.add(e);
+			}
 		} 
 		catch (SQLException e) {e.printStackTrace();}
-		return qArr;
+		return eArr;
 	}
 	
 	/**

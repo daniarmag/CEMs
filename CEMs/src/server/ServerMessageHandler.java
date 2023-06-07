@@ -176,9 +176,9 @@ public class ServerMessageHandler
 				case "load course questions":
 					client.sendToClient(sqlController.loadCourseQuestions(arrayList.get(1)));
 					break;
-				/*case "load student exams":
-				//client.sendToClient(sqlController.loadStudentExams(arrayList.get(1)))
-				break;*/
+				case "load student exams":
+				client.sendToClient(sqlController.loadStudentExams(arrayList.get(1)));
+				break;
 			}
 		} catch (IOException e) {}
 	}

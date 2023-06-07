@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import control.AlertMessages;
 import control.guiMainController;
 import entities.Course;
+import entities.Exam;
 import entities.Question;
 import entities.Student;
 import entities.User;
@@ -122,8 +123,11 @@ public class ClientMessageHandler
 			case COURSE_ARRAY_LIST:
 				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData("course");
+			case EXAM_ARRAY_LIST:
+				examArrayListMessageHandler((ArrayList<Exam>) msg);
 		}
 	}
+
 
 	/**
 	 * Determines the type of the client message.
@@ -150,6 +154,8 @@ public class ClientMessageHandler
 					return MessageType.USER_ARRAY_LIST;
 				else if (firstElement instanceof Course)
 					return MessageType.COURSE_ARRAY_LIST;
+				else if (firstElement instanceof Exam)
+					return MessageType.EXAM_ARRAY_LIST;
 			}
 		} 
 		else if (msg instanceof Map)
@@ -233,6 +239,12 @@ public class ClientMessageHandler
 		questionBankScreenController.setArr(arrayList);
 		questionBankScreenController.updateQuestionTable();
 	}
+	
+	public static void examArrayListMessageHandler(ArrayList<Exam> arrayList) 
+	{
+		studentExamScreenController.setArr(arrayList);
+		studentExamScreenController.updateExamTable();
+	}
 
 	/**
 	 * Handles client messages of type User.
@@ -264,7 +276,5 @@ public class ClientMessageHandler
 	{
 		professorController.setTeachingMap(map);
 	}
-	
-	
 	
 }
