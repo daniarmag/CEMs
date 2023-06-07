@@ -20,7 +20,7 @@ public class Exam implements Serializable
 	public String professor_full_name;
 	public String professor_id;
 	public String password;
-	public Integer isActive = 0;
+	public String isActive = "0";
 	public String type = "c";
 	
 	/**
@@ -135,7 +135,7 @@ public class Exam implements Serializable
 	/**
 	 * @return the isActive
 	 */
-	public Integer getIsActive() {
+	public String getIsActive() {
 		return isActive;
 	}
 	
@@ -223,7 +223,7 @@ public class Exam implements Serializable
 	/**
 	 * @param isActive the isActive to set
 	 */
-	public void setIsActive(Integer isActive) {
+	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
 
