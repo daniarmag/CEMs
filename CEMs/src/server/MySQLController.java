@@ -417,15 +417,20 @@ public class MySQLController
 	 * this method deleted a question with the given ID.
 	 * @param string
 	 */
-	public  void deleteQuestionFromDb(String string) 
+	public boolean deleteQuestionFromDb(String string) 
 	{
 		try 
 		{
 			PreparedStatement ps = conn.prepareStatement("DELETE FROM question WHERE id = ?");
 			ps.setString(1, string);
 			ps.executeUpdate();
+			return true;
 		}
-		catch(SQLException e){e.printStackTrace();}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+			}
 	}
 	
 	

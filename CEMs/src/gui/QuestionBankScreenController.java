@@ -32,6 +32,8 @@ public class QuestionBankScreenController implements Initializable
 	
 	public static User u;
 	
+	public static boolean isValidRemoval = true;
+	
 	@FXML
 	private Button exitBtn;
 
@@ -164,7 +166,8 @@ public class QuestionBankScreenController implements Initializable
     		request.add("delete question");
     		request.add(selectedQuestion.getId());
     		ClientUI.chat.accept(request);
-    		questionTable.getItems().remove(selectedQuestion);
+    		if(isValidRemoval)
+    			questionTable.getItems().remove(selectedQuestion);
         } 
         else 
             JOptionPane.showMessageDialog(null, "Select a question to delete.", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
@@ -191,5 +194,14 @@ public class QuestionBankScreenController implements Initializable
     public void setArr (ArrayList<Question> qArr)
     {
     	this.qArr = qArr;
+    }
+    
+    /**
+     * Setter.
+     * @param flag
+     */
+    public void setRemovalFlag (boolean removalFlag)
+    {
+    	isValidRemoval = removalFlag;
     }
 }

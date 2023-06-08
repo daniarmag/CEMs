@@ -165,8 +165,14 @@ public class ServerMessageHandler
 					break;
 					
 				case "delete question":
-					sqlController.deleteQuestionFromDb(arrayList.get(1));
-					client.sendToClient("deleted question");
+					if(sqlController.deleteQuestionFromDb(arrayList.get(1)))
+					{
+						client.sendToClient("deleted question");
+					}
+					else
+					{
+						client.sendToClient("question in use");
+					}
 					break;
 					
 				case "load teaching map":

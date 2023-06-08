@@ -209,6 +209,11 @@ public class ClientMessageHandler
 			case "deleted question":
 				AlertMessages.makeAlert("Question successfully deleted.","Question Creation");
 				break;
+			
+			case "question in use":
+				questionBankScreenController.setRemovalFlag(false);
+				AlertMessages.makeAlert("Cannot delete - question is already in use.","Question Creation");
+				break;
 		}
 	}
 	
