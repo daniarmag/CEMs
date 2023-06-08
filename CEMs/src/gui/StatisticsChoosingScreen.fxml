@@ -15,17 +15,17 @@
          <children>
             <VBox layoutX="74.0" layoutY="92.0">
                <children>
-                  <Button fx:id="studentChoose" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="choose student">
+                  <Button fx:id="studentChoose" accessibleText="student" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="choose student">
                      <VBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="courseChoose" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="Choose course">
+                  <Button fx:id="professorChoose" accessibleText="professor" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="Choose professor">
                      <VBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="professorChoose" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="Choose professor">
+                  <Button fx:id="courseChoose" accessibleText="course" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="Choose course">
                      <VBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </VBox.margin>
@@ -44,6 +44,7 @@
                </opaqueInsets></TextField>
             <Button fx:id="searchBtn" layoutX="316.0" layoutY="64.0" mnemonicParsing="false" onAction="#searchRow" prefHeight="25.0" prefWidth="56.0" text="Search" />
             <Button fx:id="goBackBtn" layoutX="22.0" layoutY="361.0" mnemonicParsing="false" onAction="#goBack" text="returtn " />
+            <Button fx:id="generateReportBtn" layoutX="483.0" layoutY="361.0" mnemonicParsing="false" onAction="#GenerateRepo" text="Generate Report" />
          </children>
       </Pane>
    </children>

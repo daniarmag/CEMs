@@ -2,6 +2,7 @@ package client;
 
 import java.util.ArrayList;
 import java.util.Map;
+
 import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
@@ -122,7 +123,7 @@ public class ClientMessageHandler
 				mapMessageHandler((Map<?,?>) msg);
 				break;
 			case USER_ARRAY_LIST:
-				headOfScreenController.setUserArr((ArrayList<User>)msg);
+				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData(((ArrayList<User>)msg).get(0).getRole());
 				//guiController.statisticScreenData();
 				break;
@@ -133,6 +134,7 @@ public class ClientMessageHandler
 			case EXAM_ARRAY_LIST:
 				examArrayListMessageHandler((ArrayList<Exam>) msg);
 				break;
+
 		}
 	}
 
