@@ -2,10 +2,7 @@ package client;
 
 import java.util.ArrayList;
 import java.util.Map;
-<<<<<<< HEAD
-=======
 
->>>>>>> f1c7e79 (head of department can search any row in the table)
 import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
@@ -137,6 +134,7 @@ public class ClientMessageHandler
 			case EXAM_ARRAY_LIST:
 				examArrayListMessageHandler((ArrayList<Exam>) msg);
 				break;
+
 		}
 	}
 
