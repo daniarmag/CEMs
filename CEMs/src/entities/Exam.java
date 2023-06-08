@@ -20,7 +20,8 @@ public class Exam implements Serializable
 	public String professor_id;
 	public String password;
 	public String isActive = "0";
-	public String type = "c";
+	public String type = "Computerized";
+	public String exam_name;
 	
 	/**
 	 * @param exam_number
@@ -34,11 +35,11 @@ public class Exam implements Serializable
 	 * @param professor_full_name
 	 * @param professor_id
 	 * @param password
-	 * @param isActive
+	 * @param exam_name
 	 */
 	public Exam(String exam_number, String subject_id, String course_id, String exam_id, Integer num_questions,
 		    	Integer time, String examinees_notes, String professor_notes, String professor_full_name,
-			    String professor_id, String password) 
+			    String professor_id, String password, String exam_name) 
 	{
 		super();
 		this.exam_number = exam_number;
@@ -52,6 +53,7 @@ public class Exam implements Serializable
 		this.professor_full_name = professor_full_name;
 		this.professor_id = professor_id;
 		this.password = password;
+		this.exam_name = exam_name;
 	}
 
 	/**
@@ -138,8 +140,25 @@ public class Exam implements Serializable
 		return isActive;
 	}
 	
+	/**
+	 * @return the type
+	 */
 	public String getType() {
 		return type;
+	}
+
+	/**
+	 * @return the exam_name
+	 */
+	public String getExam_name() {
+		return exam_name;
+	}
+
+	/**
+	 * @param exam_name the exam_name to set
+	 */
+	public void setExam_name(String exam_name) {
+		this.exam_name = exam_name;
 	}
 
 	/**
@@ -226,21 +245,10 @@ public class Exam implements Serializable
 		this.isActive = isActive;
 	}
 
+	/**
+	 * @param type the type to set
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	/**
-	 @return method representation of the class.
-	 */
-	@Override
-	public String toString() {
-		return "Exam [exam_number=" + exam_number + ", subject_id=" + subject_id + ", course_id=" + course_id
-				+ ", exam_id=" + exam_id + ", num_questions=" + num_questions + ", time=" + time + ", examinees_notes="
-				+ examinees_notes + ", professor_notes=" + professor_notes + ", professor_full_name="
-				+ professor_full_name + ", professor_id=" + professor_id + ", password=" + password + ", isActive="
-				+ isActive + ",type=" + type + "]";
-	}
-	
-	
 }

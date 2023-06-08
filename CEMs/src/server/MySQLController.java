@@ -12,10 +12,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import entities.Course;
 import entities.Exam;
 import entities.HeadOfDepartment;
@@ -182,7 +180,6 @@ public class MySQLController
 		}catch(SQLException e) {e.printStackTrace();}
 	}
 	
-	
 	/**
 	 * This method, loadQuestions, retrieves a list of questions from a database table
 	 * @return an ArrayList of Question objects
@@ -193,13 +190,17 @@ public class MySQLController
 	    try
 		{
 	    	//loading all the questions from the table
-	    	PreparedStatement ps = conn.prepareStatement("SELECT * FROM question WHERE professor_id = ?");
+	    	PreparedStatement ps = conn.prepareStatement("SELECT q.*, s.subject_name " +
+									                     "FROM question q " +
+									                     "JOIN subject s ON q.subject_id = s.subject_id " +
+									                     "WHERE professor_id = ?");
 		    ps.setString(1, id);
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
 			{
+				String s = rs.getString("subject_id") + " - " + rs.getString("subject_name");
 				Question q = new Question(rs.getString("question_number"), rs.getString("id"),
-				rs.getString("subject_id"), rs.getString("question_text"), rs.getString("professor_full_name"),
+				s, rs.getString("question_text"), rs.getString("professor_full_name"),
 				rs.getString("professor_id"), rs.getString("correct_answer"), 
 				new String[]{rs.getString("answer1"), rs.getString("answer2"), rs.getString("answer3"), rs.getString("answer4")});
 				qArr.add(q);
@@ -208,8 +209,6 @@ public class MySQLController
 		catch (SQLException e) {e.printStackTrace();}
 		return qArr;
 	}
-	
-	
 	
 	/**This method loads all the exams that the student can take.
 	 * @param id
@@ -230,7 +229,7 @@ public class MySQLController
 			{
 				Exam e = new Exam(rs.getString("exam_number"), rs.getString("subject_id") , rs.getString("course_id"), rs.getString("exam_id"),
 				rs.getInt("num_questions"), rs.getInt("time"), rs.getString("examinees_notes"), rs.getString("professor_notes"),
-				rs.getString("professor_full_name"), rs.getString("professor_id"), rs.getString("password"));
+				rs.getString("professor_full_name"), rs.getString("professor_id"), rs.getString("password"), rs.getString("exam_name"));
 				eArr.add(e);
 			}
 		} 
@@ -596,10 +595,10 @@ public class MySQLController
 	{
 		 try 
 		    {
-		    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam (exam_number, subject_id, course_id, " +
-											    			  "exam_id, num_questions, time, examinees_notes, professor_notes, " +
-											    			  "professor_full_name, professor_id, password, isActive, type) " +
-											    			  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
+		    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam (exam_number, subject_id, course_id, exam_id, " +
+											    			  "num_questions, time, examinees_notes, professor_notes, professor_full_name, " +
+											    			  "professor_id, password, isActive, type, exam_name) " +
+											    			  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" );
 		       ps.setString(1, exam.getExam_number());
 		       ps.setString(2, exam.getSubject_id());
 		       ps.setString(3, exam.getCourse_id());
@@ -613,7 +612,7 @@ public class MySQLController
 		       ps.setString(11, exam.getPassword());
 		       ps.setString(12, exam.getIsActive());
 		       ps.setString(13, exam.getType());
-		       //ps.setDate(14, exam.getDate());
+		       ps.setString(14, exam.getExam_name());
 		       ps.executeUpdate();
 		    } 
 		    catch (SQLException e){e.printStackTrace();}

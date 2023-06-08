@@ -60,7 +60,7 @@ public class ExamController
 		ansarry=new ArrayList<>();
         for (int i = 0; i < numberOfQuestions; i++) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/question_template.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/QuestionTemplate.fxml"));
                 Node questionComponent = loader.load();//this line must be before line @@@
                 QuestionTemplateController contorller =loader.getController();//@@@
                 System.out.println(contorller.hashCode());

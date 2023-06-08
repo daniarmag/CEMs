@@ -35,7 +35,7 @@ public class ExamCreationSecondController implements Initializable
 	
 	public static ActionEvent e;
 	
-	public Exam newExam = new Exam(null, null, null, null, null, null, null, null, null, null, null);
+	public Exam newExam = new Exam(null, null, null, null, null, null, null, null, null, null, null, null);
 	
 	public boolean isInvalidScore = false;
 
@@ -50,6 +50,9 @@ public class ExamCreationSecondController implements Initializable
 
     @FXML
     private TextField passwordTextField;
+
+    @FXML
+    private TextField examNameTextField;
 
     @FXML
     private TextArea profNotesTextArea;
@@ -159,6 +162,7 @@ public class ExamCreationSecondController implements Initializable
 		newExam.setProfessor_notes(profNotesTextArea.getText());
 		newExam.setProfessor_id(u.getUser_id());
 		newExam.setPassword(passwordTextField.getText());
+		newExam.setExam_name(examNameTextField.getText());
 	}
 	
 	
@@ -185,6 +189,7 @@ public class ExamCreationSecondController implements Initializable
 	        Question question = e.getTableView().getItems().get(e.getTablePosition().getRow());
 	        //Update the score value of the Question object
 	        question.setScore(e.getNewValue()); 
+	        //Update score counter
 	        updateTotalScore();
 	    });
 	    questionTable.setEditable(true);
@@ -235,8 +240,6 @@ public class ExamCreationSecondController implements Initializable
 	    errorMap.put(Integer.parseInt(totalScoreText.getText()) != 100, "Total score must be 100.");
 	    errorMap.put(isInvalidScore, "Invalid score value. Scores must be integers between 0 and 100.");
 	    errorMap.put(isScoreEmpty, "Score for each question is required.");
-	    errorMap.put(profNotesTextArea.getText().isEmpty(), "Professor notes are required");
-	    errorMap.put(studentNotesTextArea.getText().isEmpty(), "Student notes are required");
 	    errorMap.put(passwordTextField.getText().isEmpty(), "Password is required");
 	    errorMap.put(minutesTextField.getText().isEmpty(), "Time is required.");
 	    return errorMap;

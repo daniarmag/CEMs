@@ -257,7 +257,7 @@ public class ClientMessageHandler
 	public static void questionArrayListMessageHandler(ArrayList<Question> arrayList) 
 	{
 		questionBankScreenController.setArr(arrayList);
-		questionBankScreenController.updateQuestionTable();
+		questionBankScreenController.updateQuestionTable(arrayList);
 	}
 	
 	public static void examArrayListMessageHandler(ArrayList<Exam> arrayList) 

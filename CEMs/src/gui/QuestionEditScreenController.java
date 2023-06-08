@@ -99,11 +99,7 @@ public class QuestionEditScreenController implements Initializable
 		bAnswerText.setText(editQuestion.getAnswers()[1]);
 		cAnswerText.setText(editQuestion.getAnswers()[2]);
 		dAnswerText.setText(editQuestion.getAnswers()[3]);
-		int i;
-		for (i = 0; i < editQuestion.getAnswers().length; i++) 
-		    if (editQuestion.getAnswers()[i].equals(editQuestion.correctAnswer)) 
-		    	break;
-		toggleGroup.getToggles().get(i).setSelected(true);
+		toggleGroup.getToggles().get(Integer.parseInt(editQuestion.correctAnswer) - 1).setSelected(true);
 	}
 	
 	/**
@@ -155,8 +151,6 @@ public class QuestionEditScreenController implements Initializable
 	    goBack(event);
     }
 
-
-	
 	/**
 	 * @param answers
 	 * @return an answer map, where the only true key is the selected radio
@@ -164,10 +158,10 @@ public class QuestionEditScreenController implements Initializable
 	private HashMap<Boolean, String> createAnswerMap(String[] answers) 
 	{
 	    HashMap<Boolean, String> answerMap = new HashMap<>();
-	    answerMap.put(aRadio.isSelected(), answers[0]);
-	    answerMap.put(bRadio.isSelected(), answers[1]);
-	    answerMap.put(cRadio.isSelected(), answers[2]);
-	    answerMap.put(dRadio.isSelected(), answers[3]);
+	    answerMap.put(aRadio.isSelected(), "1");
+	    answerMap.put(bRadio.isSelected(), "2");
+	    answerMap.put(cRadio.isSelected(), "3");
+	    answerMap.put(dRadio.isSelected(), "4");
 	    return answerMap;
 	}
 	
@@ -185,5 +179,4 @@ public class QuestionEditScreenController implements Initializable
 	    errorMap.put(questionTextArea.getText().isEmpty(), "Question is required.");
 	    return errorMap;
 	}
-
 }

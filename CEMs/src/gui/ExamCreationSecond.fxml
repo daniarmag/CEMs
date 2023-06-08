@@ -73,12 +73,12 @@
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Text layoutX="221.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam time (in minutes):">
+      <Text layoutX="221.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam time (in minutes):">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="minutesTextField" layoutX="421.0" layoutY="162.0" prefHeight="31.0" prefWidth="170.0" promptText="Insert time">
+      <TextField fx:id="minutesTextField" layoutX="421.0" layoutY="205.0" prefHeight="31.0" prefWidth="170.0" promptText="Insert time">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
@@ -116,22 +116,22 @@
             <TableColumn fx:id="scoreCol" prefWidth="99.0" text="Score" />
         </columns>
       </TableView>
-      <Text layoutX="221.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam password: ">
+      <Text layoutX="222.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam password: ">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="passwordTextField" layoutX="421.0" layoutY="214.0" prefHeight="31.0" prefWidth="170.0" promptText="Insert password">
+      <TextField fx:id="passwordTextField" layoutX="421.0" layoutY="252.0" prefHeight="31.0" prefWidth="170.0" promptText="Insert password">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </TextField>
-      <Text layoutX="221.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes for studentds:">
+      <Text layoutX="222.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes for studentds:">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
-      <TextArea fx:id="studentNotesTextArea" layoutX="421.0" layoutY="276.0" prefHeight="78.0" prefWidth="170.0" promptText="Insert notes.." />
+      <TextArea fx:id="studentNotesTextArea" layoutX="421.0" layoutY="301.0" prefHeight="78.0" prefWidth="170.0" promptText="Insert notes.." />
       <Text layoutX="221.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes for Professors:">
          <font>
             <Font name="Tahoma" size="15.0" />
@@ -151,6 +151,16 @@
       <Text layoutX="719.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press enter to save score">
          <font>
             <Font name="Tahoma" size="10.0" />
+         </font>
+      </Text>
+      <TextField fx:id="examNameTextField" layoutX="421.0" layoutY="159.0" prefHeight="31.0" prefWidth="170.0" promptText="Insert exam name">
+         <font>
+            <Font name="Tahoma" size="15.0" />
+         </font>
+      </TextField>
+      <Text layoutX="221.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam name:">
+         <font>
+            <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
    </children>

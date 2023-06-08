@@ -21,7 +21,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 /*A GUI for the question bank*/
 public class QuestionBankScreenController implements Initializable
@@ -42,6 +44,9 @@ public class QuestionBankScreenController implements Initializable
 	
 	@FXML
     private Button addQstnBtn;
+	
+	@FXML
+	private TextField searchBar;
 
     @FXML
     private TableColumn<Question, String> authorTable;
@@ -88,7 +93,8 @@ public class QuestionBankScreenController implements Initializable
 		//A call to load all professor questions.
 		request.add("load professor questions");
 		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);	
+		ClientUI.chat.accept(request);
+		searchBar.setOnKeyReleased(event -> search(event));
 	}
 
 	/**
@@ -175,18 +181,35 @@ public class QuestionBankScreenController implements Initializable
 
 	/**
 	 * Sets the question table with the values that are currently in the qArr. 
+	 * @param arrayList 
 	 */
-	public void updateQuestionTable() 
+	public void updateQuestionTable(ArrayList<Question> arrayList) 
 	{
 		idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
 	    qnumTable.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
 	    qtextTable.setCellValueFactory(new PropertyValueFactory<>("questionText"));
 	    authorTable.setCellValueFactory(new PropertyValueFactory<>("author"));
 	    subjectTable.setCellValueFactory(new PropertyValueFactory<>("subject"));
-	    ObservableList<Question> questionObservableList = FXCollections.observableArrayList(qArr);
+	    ObservableList<Question> questionObservableList = FXCollections.observableArrayList(arrayList);
 	    questionTable.setItems(questionObservableList);
     }
 	
+	/**
+	 * This method is called when a key is released and filters the table.
+	 * @param event
+	 */
+	void search(KeyEvent event)
+	{
+		 String searchText = searchBar.getText().toLowerCase();
+		    //Filter the question list based on the search text
+		    ArrayList<Question> filteredList = new ArrayList<>();
+		    for (Question question : qArr)
+		        if (question.getSubject().toLowerCase().contains(searchText))
+		            filteredList.add(question);
+		    //Update the question table with the filtered list
+		    updateQuestionTable(filteredList);       
+	 }
+
 	/**
      * Setter.
      * @param qArr

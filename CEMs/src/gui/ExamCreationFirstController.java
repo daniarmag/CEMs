@@ -145,10 +145,12 @@ public class ExamCreationFirstController implements Initializable
 	{
 		String selectedSubject = m.getText();
 		subjectMenu.setText(selectedSubject);
+		courseMenu.setText("");
+		questionTable.getItems().clear();
 		//Getting the courses of a certain subject.
 		ArrayList<String> selectedValues = teachingMap.get(selectedSubject);
 		courseMenu.getItems().clear();
-		//Populating course menubutton.
+		//Populating course menu button.
 		for (String s : selectedValues)
 		{
 			MenuItem mi = new MenuItem(s);
