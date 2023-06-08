@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Represents the exams in the system.
@@ -22,7 +23,8 @@ public class Exam implements Serializable
 	public String isActive = "0";
 	public String type = "Computerized";
 	public String exam_name;
-	
+	public ArrayList<Question> examQuestions = new ArrayList<>();
+
 	/**
 	 * @param exam_number
 	 * @param subject_id
@@ -152,6 +154,20 @@ public class Exam implements Serializable
 	 */
 	public String getExam_name() {
 		return exam_name;
+	}
+	
+	/**
+	 * @return the examQuestions
+	 */
+	public ArrayList<Question> getExamQuestions() {
+		return examQuestions;
+	}
+
+	/**
+	 * @param examQuestions the examQuestions to set
+	 */
+	public void setExamQuestions(ArrayList<Question> examQuestions) {
+		this.examQuestions = examQuestions;
 	}
 
 	/**

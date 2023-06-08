@@ -31,7 +31,7 @@ public class ExamCreationSecondController implements Initializable
 {
 	public static Professor<?, ?> u;
 	
-	public static ArrayList<Question> questionList = new ArrayList<Question>();
+	public static ArrayList<Question> questionList = new ArrayList<>();
 	
 	public static ActionEvent e;
 	
@@ -148,6 +148,21 @@ public class ExamCreationSecondController implements Initializable
 	}
 	
 	/**
+	 * preview for the created exam
+	 * @param event
+	 */
+	@FXML
+	void preview(ActionEvent event)
+	{
+		try 
+		{
+			buildExam();
+			ExamController.start(newExam, "Professor");
+		} catch (Exception e) {e.printStackTrace();}
+	}
+	
+	
+	/**
 	 * This method builds the exam from the information within the controller.
 	 */
 	public void buildExam()
@@ -163,6 +178,7 @@ public class ExamCreationSecondController implements Initializable
 		newExam.setProfessor_id(u.getUser_id());
 		newExam.setPassword(passwordTextField.getText());
 		newExam.setExam_name(examNameTextField.getText());
+		newExam.setExamQuestions(questionList);
 	}
 	
 	

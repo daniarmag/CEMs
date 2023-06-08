@@ -57,7 +57,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Text id="profTitle" layoutX="348.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an exam" textAlignment="CENTER">
+      <Text id="profTitle" layoutX="256.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an exam" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
@@ -110,5 +110,10 @@
             <Insets right="20.0" />
          </padding>
       </Button>
+      <Text layoutX="249.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ctrl to select multiple">
+         <font>
+            <Font name="Tahoma" size="10.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

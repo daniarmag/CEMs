@@ -20,6 +20,14 @@ public class Question implements Serializable
 	public String[] answers;
 	
 	/**
+	 * Question for object passing.
+	 * @param author
+	 */
+	public Question(String questionText)
+	{
+		this.questionText = questionText;
+	}
+	/**
 	 * @param questionNumber
 	 * @param id
 	 * @param subject

@@ -13,6 +13,8 @@ import client.ClientUI;
 import control.UserController;
 import entities.Question;
 import entities.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,7 +33,7 @@ public class ExamCreationFirstController implements Initializable
 	
     public static Map<String, ArrayList<String>> teachingMap;
     
-    public static ArrayList<String> questionArr;
+    public static ArrayList<Question> questionArr;
 	
     @FXML
     private Button exitBtn;
@@ -132,7 +134,7 @@ public class ExamCreationFirstController implements Initializable
 	 * Setter.
 	 * @param qArr
 	 */
-	public void setArr (ArrayList<String> qArr)
+	public void setArr (ArrayList<Question> qArr)
 	{
 		questionArr = qArr;
 	}
@@ -183,17 +185,8 @@ public class ExamCreationFirstController implements Initializable
 	{
 	    tableViewQusetionId.setCellValueFactory(new PropertyValueFactory<>("id"));
 	    tableViewQusetionText.setCellValueFactory(new PropertyValueFactory<>("questionText"));
-	    for (String q : questionArr)
-	    {
-	    	//String manipulation when passing the arraylist, separating the string into two.
-	        String[] splitted = q.split("-");
-	        String questionId = splitted[0].trim();
-	        String questionText = splitted[1].trim();
-	        Question ques = new Question(null, questionId, null, questionText, null, null, null, null);
-	        ques.setSubject(subjectMenu.getText().split("\\s+")[0].trim());
-	        ques.setCourse(courseMenu.getText().split("\\s+")[0].trim());
-	        questionTable.getItems().addAll(ques);
-	    }
+	    ObservableList<Question> questionObservableList = FXCollections.observableArrayList(questionArr);
+	    questionTable.setItems(questionObservableList);
 	}
 
 	/**

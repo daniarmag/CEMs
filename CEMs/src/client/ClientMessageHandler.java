@@ -237,11 +237,6 @@ public class ClientMessageHandler
 				examCreationSecondController.setExamNumber(arrayList.get(1));
 				break;
 				
-			case "course questions":
-				arrayList.remove(0);
-				examCreationFirstController.setArr(arrayList);
-				break;
-				
 			case "student courses":
 				arrayList.remove(0);
 				studentScreenController.setArr(arrayList);
@@ -256,8 +251,19 @@ public class ClientMessageHandler
 	 */
 	public static void questionArrayListMessageHandler(ArrayList<Question> arrayList) 
 	{
-		questionBankScreenController.setArr(arrayList);
-		questionBankScreenController.updateQuestionTable(arrayList);
+		String messageType = arrayList.remove(0).getQuestionText();
+		switch (messageType) 
+		{
+			case "load professor questions":
+				questionBankScreenController.setArr(arrayList);
+				questionBankScreenController.updateQuestionTable(arrayList);
+				break;
+			
+			case "course questions":
+				examCreationFirstController.setArr(arrayList);
+				break;
+		}
+		
 	}
 	
 	public static void examArrayListMessageHandler(ArrayList<Exam> arrayList) 

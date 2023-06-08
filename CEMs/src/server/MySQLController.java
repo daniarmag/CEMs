@@ -1,3 +1,4 @@
+
 package server;
 
 import java.awt.Desktop;
@@ -187,6 +188,7 @@ public class MySQLController
 	public  ArrayList<Question> loadProfessorQuestions(String id)
 	{
 		ArrayList<Question> qArr = new ArrayList<Question>();
+		qArr.add(new Question("load professor questions"));
 	    try
 		{
 	    	//loading all the questions from the table
@@ -474,13 +476,14 @@ public class MySQLController
 	 * @param id
 	 * @return the courses that are assigned to a question with the given ID
 	 */
-	public ArrayList<String> loadCourseQuestions (String id)
+	public ArrayList<Question> loadCourseQuestions (String id)
 	{
-		ArrayList<String> answer = new ArrayList<String>();
-		answer.add("course questions");
+		ArrayList<Question> answer = new ArrayList<>();
+		answer.add(new Question("course questions"));
 		try 
 		{
-			PreparedStatement ps = conn.prepareStatement("SELECT qc.question_id, q.question_text " +
+			PreparedStatement ps = conn.prepareStatement("SELECT qc.question_id, q.question_text, " +
+														 "q.correct_answer, q.answer1, q.answer2, q.answer3, q.answer4 " +
 														 "FROM question_course qc " +
 														 "JOIN question q ON qc.question_id = q.id " +
 														 "WHERE qc.course_id = ?");
@@ -488,12 +491,12 @@ public class MySQLController
 		    ResultSet rs = ps.executeQuery();
 		    while (rs.next())
 		    {
-		    	String question_id = rs.getString("question_id");
-		        String question_text = rs.getString("question_text"); 
-		        String fullRow = question_id + " - " + question_text;
-		        answer.add(fullRow);
+		    	Question q = new Question(null, rs.getString(1), null, rs.getString(2), null, null, rs.getString(3), 
+		    							  new String[]{rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)}); 
+		        answer.add(q);
 			}
 		} catch (SQLException e) { e.printStackTrace();}
+		System.out.println(answer);
 		return answer;
 	}
 	

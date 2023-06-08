@@ -68,7 +68,7 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button layoutX="743.0" layoutY="561.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: #30BECC;" text="Submit">
+      <Button layoutX="735.0" layoutY="561.0" mnemonicParsing="false" onAction="#submit" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #30BECC;" text="Submit">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
@@ -163,5 +163,10 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
+      <Button layoutX="628.0" layoutY="561.0" mnemonicParsing="false" onAction="#preview" style="-fx-background-color: #30BECC;" text="Preview">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

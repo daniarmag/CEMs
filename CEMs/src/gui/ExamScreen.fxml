@@ -8,22 +8,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="729.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
          <children>
-            <Text fx:id="text" fill="#e40400" layoutX="227.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the exam" textAlignment="JUSTIFY" wrappingWidth="274.892578125">
+            <Text fx:id="text" fill="#e40400" layoutX="337.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the exam" textAlignment="JUSTIFY" wrappingWidth="274.892578125">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
-            <ScrollPane fx:id="scrollPane" layoutY="94.0">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="94.0" minHeight="-Infinity" prefWidth="900.0">
                <content>
-                  <VBox fx:id="questionContainer" prefHeight="419.0" prefWidth="729.0" />
+                  <VBox fx:id="questionContainer" alignment="CENTER" prefHeight="510.0" prefWidth="900.0" />
                </content>
             </ScrollPane>
-            <Button fx:id="start" layoutX="627.0" layoutY="52.0" mnemonicParsing="false" onAction="#init" text="Button" />
-            <Button fx:id="showAnswer" layoutX="56.0" layoutY="55.0" mnemonicParsing="false" onAction="#show" text="Show" />
+            <Button fx:id="start" layoutX="818.0" layoutY="54.0" mnemonicParsing="false" onAction="#init" text="questions" />
+            <Button fx:id="exitBtn" layoutX="20.0" layoutY="54.0" mnemonicParsing="false" onAction="#exit" text="exit" />
          </children>
       </Pane>
    </children>
