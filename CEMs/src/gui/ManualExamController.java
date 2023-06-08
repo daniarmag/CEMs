@@ -2,6 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.Map;
+
 import control.UserController;
 import entities.Exam;
 import entities.User;
@@ -57,10 +58,12 @@ public class ManualExamController {
 
     }
 
+
     @FXML
     void DownloadBtn(ActionEvent event) {
     	//System.out.println(startCountdown());	
     }
+
 
     @FXML
     void SubmitBtn(ActionEvent event) {
@@ -84,7 +87,7 @@ public class ManualExamController {
 	{	
 		UserController.goBack(event, "/gui/StudentExamScreen.fxml");
 	}
-	
+
 //	int startCountdown() {
 //		TimerController timerController = new TimerController(u.getUser_id(), e.time);
 //		return timerController.getRemainingTime();
