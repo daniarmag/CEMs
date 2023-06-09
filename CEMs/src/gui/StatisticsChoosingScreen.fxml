@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.statisticsChoseScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatisticsChooseScreenController">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
          <children>
-            <VBox layoutX="234.0" layoutY="235.0" prefHeight="173.0" prefWidth="230.0">
+            <VBox fx:id="choosingVbox" layoutX="234.0" layoutY="235.0" prefHeight="173.0" prefWidth="230.0">
                <children>
-                  <Button fx:id="courseChoose" mnemonicParsing="false" onAction="#loadData" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Choose course">
+                  <Button fx:id="courseChoose" accessibleText="course" mnemonicParsing="false" onAction="#loadData" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Choose course">
                      <VBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </VBox.margin>
@@ -26,7 +26,7 @@
                         <Font name="Tahoma" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="studentChoose" mnemonicParsing="false" onAction="#loadData" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Choose student">
+                  <Button fx:id="studentChoose" accessibleText="student" mnemonicParsing="false" onAction="#loadData" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Choose student">
                      <VBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </VBox.margin>
@@ -34,7 +34,7 @@
                         <Font name="Tahoma" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="professorChoose" mnemonicParsing="false" onAction="#loadData" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Choose professor">
+                  <Button fx:id="professorChoose" accessibleText="professor" mnemonicParsing="false" onAction="#loadData" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Choose professor">
                      <VBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </VBox.margin>
@@ -44,17 +44,18 @@
                   </Button>
                </children>
             </VBox>
-            <TableView fx:id="tableInfo" layoutX="481.0" layoutY="165.0" prefHeight="328.0" prefWidth="251.0">
+            <TableView fx:id="tableInfo" layoutX="464.0" layoutY="158.0" prefHeight="328.0" prefWidth="312.0">
                <columns>
-                  <TableColumn fx:id="col1" prefWidth="124.0" text="ID" />
-                  <TableColumn fx:id="col2" prefWidth="126.0" text="name" />
+                  <TableColumn fx:id="col1" prefWidth="98.0" />
+                  <TableColumn fx:id="col2" prefWidth="107.0" />
+                  <TableColumn fx:id="col3" prefWidth="107.0" />
                </columns></TableView>
-            <TextField fx:id="searchBar" layoutX="560.0" layoutY="112.0" prefHeight="32.0" prefWidth="138.0" style="-fx-border-color: #30BECC;" />
-            <Button fx:id="searchBtn" layoutX="493.0" layoutY="112.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="56.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Search">
+            <TextField fx:id="searchBar" layoutX="560.0" layoutY="112.0" prefHeight="32.0" prefWidth="110.0" style="-fx-border-color: #30BECC;" />
+            <Button fx:id="searchBtn" layoutX="472.0" layoutY="112.0" mnemonicParsing="false" onAction="#searchRow" prefHeight="32.0" prefWidth="56.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Search">
                <font>
                   <Font name="Tahoma" size="12.0" />
                </font></Button>
-            <VBox alignment="TOP_CENTER" prefHeight="601.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
+            <VBox fx:id="photoVbox" alignment="TOP_CENTER" prefHeight="601.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
                <children>
                   <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
                      <graphic>
@@ -83,6 +84,11 @@
                   <Image url="@../images/statistics.jpeg" />
                </image>
             </ImageView>
+            <Button fx:id="generateReportBtn" layoutX="676.0" layoutY="523.0" mnemonicParsing="false" onAction="#GenerateRepo" prefHeight="32.0" prefWidth="56.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Report">
+               <font>
+                  <Font name="Tahoma" size="12.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="706.0" layoutY="31.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">

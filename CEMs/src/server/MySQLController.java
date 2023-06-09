@@ -26,6 +26,7 @@ import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Question;
 import entities.Student;
+import entities.StudentExam;
 import entities.User;
 
 /**
@@ -551,6 +552,35 @@ public class MySQLController
 		}
 		return arrayC;		
 	}
+	
+	
+	
+	/**
+	 * @param arr
+	 * @return all the exam of the student and his grades orderd by grade
+	 */
+	public ArrayList<StudentExam> getAllStudentExams(ArrayList<String> arr){
+		ArrayList<StudentExam> array=new ArrayList<>();
+		ResultSet rs;		
+		System.out.println(arr +"check ");
+		try {
+			Statement st = conn.createStatement();
+			rs =st.executeQuery("SELECT se.exam_id,se.grade,ex.exam_name FROM student_exam as se,exam as ex WHERE"
+					+ " ex.exam_id=se.exam_id AND se.student_id=\""+arr.get(2)+"\" order by grade");
+			while(rs.next()) {
+				array.add(new StudentExam(rs.getString(1),rs.getInt(2),rs.getString(3)));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(array.isEmpty())
+			array.add(new StudentExam("empty", 0, "empty"));
+		return array;		
+		
+	}
+	
+	
 	
 	
 	/**

@@ -195,6 +195,13 @@ public class ServerMessageHandler
 					sqlController.openExamFile(arrayList.get(1));
 					client.sendToClient("file was loaded");
 					break;
+					
+				case "for head of department report":
+						if(arrayList.get(1).equals("student"))
+							client.sendToClient(sqlController.getAllStudentExams(arrayList));
+					
+					break;
+					
 			}
 		} catch (IOException e) {}
 	}

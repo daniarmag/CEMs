@@ -41,6 +41,15 @@ public class User implements Serializable
 		return user_id;
 	}
 
+	
+	/**
+	 * @return the user_id
+	 */
+	public String get_fullName() {
+		return first_name +" "+last_name;
+	}
+	
+	
 	/**
 	 * @return the first_name
 	 */

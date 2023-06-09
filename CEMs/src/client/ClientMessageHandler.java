@@ -7,6 +7,7 @@ import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
 import entities.Question;
+import entities.StudentExam;
 import entities.User;
 import enums.MessageType;
 import gui.QuestionCreationScreenController;
@@ -134,6 +135,9 @@ public class ClientMessageHandler
 			case EXAM_ARRAY_LIST:
 				examArrayListMessageHandler((ArrayList<Exam>) msg);
 				break;
+			case EXAM_STUDENT_ARRAY_LIST:
+				statisticsScreen.openRep(msg);
+				break;
 
 		}
 	}
@@ -166,6 +170,8 @@ public class ClientMessageHandler
 					return MessageType.COURSE_ARRAY_LIST;
 				else if (firstElement instanceof Exam)
 					return MessageType.EXAM_ARRAY_LIST;
+				else if (firstElement instanceof StudentExam)
+					return MessageType.EXAM_STUDENT_ARRAY_LIST;
 			}
 		} 
 		else if (msg instanceof Map)
