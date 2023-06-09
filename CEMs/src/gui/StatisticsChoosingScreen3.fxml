@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatisticsChooseScreenController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="601.0">
+         <children>
+            <VBox layoutX="74.0" layoutY="92.0">
+               <children>
+                  <Button fx:id="studentChoose" accessibleText="student" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="choose student">
+                     <VBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="professorChoose" accessibleText="professor" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="Choose professor">
+                     <VBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="courseChoose" accessibleText="course" mnemonicParsing="false" onAction="#loadData" prefHeight="25.0" prefWidth="180.0" text="Choose course">
+                     <VBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <TableView fx:id="tableInfo" layoutX="274.0" layoutY="98.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="240.0" prefWidth="313.0">
+               <columns>
+                  <TableColumn fx:id="col1" prefWidth="98.0" />
+                  <TableColumn fx:id="col2" prefWidth="107.0" />
+                  <TableColumn fx:id="col3" prefWidth="107.0" />
+               </columns></TableView>
+            <TextField fx:id="searchBar" layoutX="383.0" layoutY="64.0" prefHeight="25.0" prefWidth="113.0">
+               <opaqueInsets>
+                  <Insets top="50.0" />
+               </opaqueInsets></TextField>
+            <Button fx:id="searchBtn" layoutX="316.0" layoutY="64.0" mnemonicParsing="false" onAction="#searchRow" prefHeight="25.0" prefWidth="56.0" text="Search" />
+            <Button fx:id="goBackBtn" layoutX="22.0" layoutY="361.0" mnemonicParsing="false" onAction="#goBack" text="returtn " />
+            <Button fx:id="generateReportBtn" layoutX="483.0" layoutY="361.0" mnemonicParsing="false" onAction="#GenerateRepo" text="Generate Report" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

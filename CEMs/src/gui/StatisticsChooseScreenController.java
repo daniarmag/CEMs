@@ -246,11 +246,6 @@ public class StatisticsChooseScreenController implements Initializable {
 
 	}
 
-	
-	
-	
-	
-	
 	/**
 	 * initializing functionMap is a map between a string and a function that will
 	 * run requestMap will go to the server with the proper query
@@ -270,7 +265,6 @@ public class StatisticsChooseScreenController implements Initializable {
 		requsetMap.put("professor", "Get all professors");
 		requsetMap.put("student", "Get all students");
 		requsetMap.put("course", "Get all courses");
-		
 	}
 
 	

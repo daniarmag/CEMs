@@ -33,7 +33,6 @@ public class ExamController implements Initializable
     public static void start(Exam exam, String string) throws  Exception{
     	onGoingExam = exam;
     	Platform.runLater(()->ScreenUtils.createNewStage("/gui/ExamScreen.fxml").show());
-    	
     }
     
 	@FXML

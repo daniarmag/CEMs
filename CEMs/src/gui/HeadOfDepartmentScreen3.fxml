@@ -13,20 +13,20 @@
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
-            <ImageView fitHeight="175.0" fitWidth="175.0">
+            <ImageView fitHeight="200.0" fitWidth="200.0">
                <image>
-                  <Image url="@../images/manager.png" />
+                  <Image url="@../images/Professor%20Logo.png" />
                </image>
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30PX;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets right="85.0" top="310.0" />
+                  <Insets top="310.0" />
                </VBox.margin>
             </Button>
          </children>
@@ -39,17 +39,17 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="258.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: ffffff; -fx-border-radius: 30px; -fx-border-color: #30BECC; -fx-border-width: 4px;" text="Grant Approval ">
+      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="258.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Grant Approval ">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="187.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-border-color: #30BECC; -fx-border-radius: 30PX; -fx-border-width: 4PX; -fx-background-color: ffffff;" text="Access All Data">
+      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="187.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Access All Data">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="331.0" mnemonicParsing="false" onAction="#openStatistics" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: ffffff; -fx-border-color: #30BECC; -fx-border-radius: 30px; -fx-border-width: 4px;" text="Statistics ">
+      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="331.0" mnemonicParsing="false" onAction="#openStatistics" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Statistics ">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
