@@ -245,6 +245,7 @@ public class ExamCreationSecondController implements Initializable
 	{
 	    HashMap<Boolean, String> errorMap = new HashMap<>();
 	    boolean isScoreEmpty = false;
+	    boolean isWrongTime = false;
 	    for (Question question : questionTable.getItems())
 	    {
 	        if (question.getScore() == null || question.getScore().isEmpty()) 
@@ -253,10 +254,16 @@ public class ExamCreationSecondController implements Initializable
 	            break;
 	        } 
 	    }
+	    try 
+	    {
+	    	Integer.parseInt(minutesTextField.getText());
+		} catch (NumberFormatException e) {isWrongTime = true;}
 	    errorMap.put(Integer.parseInt(totalScoreText.getText()) != 100, "Total score must be 100.");
 	    errorMap.put(isInvalidScore, "Invalid score value. Scores must be integers between 0 and 100.");
 	    errorMap.put(isScoreEmpty, "Score for each question is required.");
 	    errorMap.put(passwordTextField.getText().isEmpty(), "Password is required");
+	    errorMap.put(passwordTextField.getText().trim().length() != 4, "Password must be 4 digits long.");
+	    errorMap.put(isWrongTime, "Time must be an integer.");
 	    errorMap.put(minutesTextField.getText().isEmpty(), "Time is required.");
 	    return errorMap;
 	}

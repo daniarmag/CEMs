@@ -22,7 +22,6 @@
                   <VBox fx:id="questionContainer" alignment="CENTER" prefHeight="510.0" prefWidth="900.0" />
                </content>
             </ScrollPane>
-            <Button fx:id="start" layoutX="818.0" layoutY="54.0" mnemonicParsing="false" onAction="#init" text="questions" />
             <Button fx:id="exitBtn" layoutX="20.0" layoutY="54.0" mnemonicParsing="false" onAction="#exit" text="exit" />
          </children>
       </Pane>

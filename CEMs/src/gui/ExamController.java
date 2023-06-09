@@ -1,22 +1,22 @@
-
 package gui;
-
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import control.UserController;
 import entities.Exam;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
-public class ExamController 
+public class ExamController implements Initializable
 {
 	private static Exam onGoingExam;
 	
@@ -41,6 +41,7 @@ public class ExamController
 	{
 		UserController.hide(event);
 	}
+	
     @FXML
     private void show(ActionEvent event){
     	
@@ -60,8 +61,7 @@ public class ExamController
 	 * this method load all the questions to the exam screen 
 	 * and for each question add a controller so we can track the answer 
 	 */
-	@FXML
-	 void init(ActionEvent event) {
+	 void activateExam() {
 		int numberOfQuestions = getNumberOfQuestions(); // Retrieve the number of questions from user input or a data source
 		ansarry=new ArrayList<>();
         for (int i = 0; i < numberOfQuestions; i++) {
@@ -87,6 +87,25 @@ public class ExamController
 		// TODO Auto-generated method stub
 		return onGoingExam.getNum_questions();
 	}
+
+	 
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		
+		activateExam();
+			//String input = JOptionPane.showInputDialog("Insert 4 digit password:");
+			//validatePasswords(input);
+	
+	}
+
+//	private void validatePasswords(String input) 
+//	{
+//		while(!input.equals(onGoingExam.getPassword()))
+//				input = JOptionPane.showInputDialog("Wrong password! Insert 4 digit password:");
+//
+//		activateExam();
+//	}
 
 
 
