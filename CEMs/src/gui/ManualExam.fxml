@@ -14,7 +14,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManualExamController">
    <children>
-      <Pane prefHeight="525.0" prefWidth="735.0" style="-fx-background-color: #FFFFFF;">
+      <Pane prefHeight="525.0" prefWidth="744.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
                <children>
@@ -35,7 +35,7 @@
                      </children></VBox>
                   <VBox prefHeight="96.0" prefWidth="250.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Grades and Copies" textAlignment="CENTER" wrappingWidth="429.13665771484375">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Manual Exam" textAlignment="CENTER" wrappingWidth="429.13665771484375">
                            <font>
                               <Font name="Times New Roman" size="55.0" />
                            </font>
@@ -63,7 +63,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Text id="profTitle" fx:id="welcomeText" layoutX="261.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manual Exam" textAlignment="CENTER">
+            <Text id="profTitle" fx:id="welcomeText" layoutX="275.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good luck!" textAlignment="CENTER">
                <font>
                   <Font name="Times New Roman Bold" size="42.0" />
                </font>
@@ -98,12 +98,18 @@
                   <Font name="David" size="24.0" />
                </font>
             </TextField>
-            <Text layoutX="36.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:" wrappingWidth="101.33334159851074">
+            <Text layoutX="36.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:" wrappingWidth="101.33334159851074">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
+            <Text layoutX="188.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remember: once the file is downloaded, the exam will begin" wrappingWidth="374.0000101725259">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>
 </AnchorPane>

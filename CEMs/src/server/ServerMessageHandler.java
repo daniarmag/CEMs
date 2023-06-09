@@ -190,6 +190,11 @@ public class ServerMessageHandler
 				case "load student courses":
 					client.sendToClient(sqlController.getStudentCourses(arrayList.get(1)));
 					break;
+				
+				case "load exam file":
+					sqlController.openExamFile(arrayList.get(1));
+					client.sendToClient("file was loaded");
+					break;
 			}
 		} catch (IOException e) {}
 	}

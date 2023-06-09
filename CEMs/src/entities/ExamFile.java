@@ -9,16 +9,14 @@ public class ExamFile implements Serializable {
 	private int size=0;
 	public  byte[] mybytearray;
 	
+	public ExamFile( String fileName) {
+		this.fileName = fileName;
+	}
 	
 	public void initArray(int size)
 	{
 		mybytearray = new byte [size];	
 	}
-	
-	public ExamFile( String fileName) {
-		this.fileName = fileName;
-	}
-	
 	
 	public String getFileName() {
 		return fileName;

@@ -2,9 +2,13 @@
 package server;
 
 import java.awt.Desktop;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.sql.*;
 import java.sql.DriverManager;
@@ -17,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import entities.Course;
 import entities.Exam;
+import entities.ExamFile;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Question;
@@ -185,7 +190,7 @@ public class MySQLController
 	 * This method, loadQuestions, retrieves a list of questions from a database table
 	 * @return an ArrayList of Question objects
 	 */
-	public  ArrayList<Question> loadProfessorQuestions(String id)
+	public ArrayList<Question> loadProfessorQuestions(String id)
 	{
 		ArrayList<Question> qArr = new ArrayList<Question>();
 		qArr.add(new Question("load professor questions"));
@@ -224,7 +229,7 @@ public class MySQLController
 	    	//loading all the  student's exams from the table
 			PreparedStatement ps = conn.prepareStatement("SELECT exam.* "
 									+ "FROM student_course JOIN exam ON exam.course_id = student_course.course_id "
-									+ "WHERE student_id = ?");
+									+ "WHERE student_id = ? ORDER BY exam.isActive DESC");
 			ps.setString(1, id);
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
@@ -232,6 +237,8 @@ public class MySQLController
 				Exam e = new Exam(rs.getString("exam_number"), rs.getString("subject_id") , rs.getString("course_id"), rs.getString("exam_id"),
 				rs.getInt("num_questions"), rs.getInt("time"), rs.getString("examinees_notes"), rs.getString("professor_notes"),
 				rs.getString("professor_full_name"), rs.getString("professor_id"), rs.getString("password"), rs.getString("exam_name"));
+				e.setIsActive(rs.getString("isActive"));
+				e.setType(rs.getString("type"));
 				eArr.add(e);
 			}
 		} 
@@ -644,6 +651,48 @@ public class MySQLController
 	        }
 	    } catch (SQLException e) { e.printStackTrace();}
         return courses;
-		
 	}
+	
+
+		@SuppressWarnings("unused")
+		public void openExamFile(String examID){ {
+			ResultSet rs = null;
+			try {
+			PreparedStatement ps = conn.prepareStatement("SELECT manual_exam_file FROM manual_exam WHERE idmanual_exam = ?");
+	    	ps.setString(1, examID);
+		    rs = ps.executeQuery();
+			
+				Blob blob=null;
+				while(rs.next()) {
+				 	blob = rs.getBlob(1);
+				}
+				byte[] bufferout = null;
+
+				bufferout = blob.getBytes(1, (int)blob.length());
+				File output = null;
+				String outputFileName = "C:\\Users\\nicol\\Downloads\\output.docx";
+				try {
+					output = new File(outputFileName);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				FileOutputStream fos = null;
+				try {
+					fos = new FileOutputStream(output);
+					fos.write(bufferout);
+					fos.close();
+					fos.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	            
+				  try {
+				    	Desktop desktop= Desktop.getDesktop();	
+				    	desktop.open(output);
+				    }catch(Exception e) {
+				    	e.printStackTrace();
+				    }
+			}catch(SQLException e) {e.printStackTrace();}
+		}
+		}		
 }

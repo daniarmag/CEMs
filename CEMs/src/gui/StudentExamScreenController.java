@@ -2,12 +2,15 @@ package gui;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.Exam;
-import entities.Question;
 import entities.User;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -18,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /*A GUI for choosing an exam to take.*/
@@ -31,19 +35,22 @@ public class StudentExamScreenController implements Initializable
 	    private TableColumn<?, ?> activeTable;
 
 	    @FXML
-	    private Button addQstnBtn;
-
-	    @FXML
 	    private Button exitBtn;
+	    
+	    @FXML
+	    private Button enterBtn;
 
 	    @FXML
 	    private Button goBackBtn;
+	    
+	    @FXML
+	    private TextField passwordTextField;
 
 	    @FXML
 	    private TableColumn<?, ?> idTable;
 
 	    @FXML
-	    private TableColumn<?, ?> professorTable;
+	    private TableColumn<?, ?> courseTable;
 
 	    @FXML
 	    private TableColumn<?, ?> typeTable;
@@ -59,14 +66,29 @@ public class StudentExamScreenController implements Initializable
      * @throws Exception
      */
     public static void start(User user, ArrayList<String> courses) throws Exception {
-		u = user;
+    	u = user;
 		courseArray = courses;
 		Platform.runLater(() -> ScreenUtils.createNewStage("/gui/StudentExamScreen.fxml").show());
 	}
+    
     @FXML
     void enterExam(ActionEvent event) {
+    	HashMap<Boolean, String> errorMap = createErrorMap();
+		if (errorMap.containsKey(true))
+		{
+			JOptionPane.showMessageDialog(null, errorMap.get(true), "Exam entry", JOptionPane.INFORMATION_MESSAGE);
+		    return;
+		}
+		Exam selectedExam = examTable.getSelectionModel().getSelectedItems().get(0);
+		if(selectedExam.getType().equals("Manual")){
+			 UserController.hide(event);
+		    	try 
+		    	{
+		    		ManualExamController.start(u, selectedExam);
+				} catch (Exception e) {}
+		    }
+		}
 
-    }
 	/* Exits the GUI window. */
 	/* disconnects from the server and exits from the GUI. */
     @FXML
@@ -95,20 +117,25 @@ public class StudentExamScreenController implements Initializable
 	
 	/**
 	 * Sets the exam table with the values that are currently in the eArr,
-	 * changes the isActive value to more understandable value.
+	 * changes the isActive and course_id values to more understandable values.
 	 */
 	public void updateExamTable() {
 		idTable.setCellValueFactory(new PropertyValueFactory<>("exam_id"));
-		professorTable.setCellValueFactory(new PropertyValueFactory<>("professor_full_name"));
+		courseTable.setCellValueFactory(new PropertyValueFactory<>("course_id"));
 		typeTable.setCellValueFactory(new PropertyValueFactory<>("type"));
 		activeTable.setCellValueFactory(new PropertyValueFactory<>("isActive"));
 	    ObservableList<Exam> examObservableList = FXCollections.observableArrayList(eArr);
+	    //These conditions make the table more understandable.
 	    for (Exam e: examObservableList) {
-	    	if (e.getIsActive().equals("0")) {
+	    	if (e.getIsActive().equals("0"))
 	    		e.setIsActive("No");
-	    	}
 	    	else
 	    		e.setIsActive("Yes");
+	    	for (String cName: courseArray)
+	    		if(cName.startsWith(e.getCourse_id())) {
+	    			System.out.println(cName);
+	    			e.setCourse_id(cName);
+	    		}
 	    }
 	    examTable.setItems(examObservableList);
 	}
@@ -122,5 +149,20 @@ public class StudentExamScreenController implements Initializable
 	    	this.eArr = eArr;
 	    }
 
-
+	 /**
+	  * @return a map with all kinds of error messages
+	  */
+	 private HashMap<Boolean, String> createErrorMap() 
+		{
+		    HashMap<Boolean, String> errorMap = new HashMap<>();
+		    if(!(examTable.getSelectionModel().getSelectedItems().isEmpty())) {
+		    	errorMap.put(!(passwordTextField.getText().trim().equals(examTable.getSelectionModel().getSelectedItems().get(0).getPassword())),
+		    				"Password incorrect");
+		    	errorMap.put("No".equals(examTable.getSelectionModel().getSelectedItems().get(0).getIsActive()),
+	    				"The exam has not activated yet");
+		    }
+		    errorMap.put(passwordTextField.getText().isEmpty(), "Password is required");
+		    errorMap.put(examTable.getSelectionModel().getSelectedItems().isEmpty(), "Exam is required");
+		    return errorMap;
+		}
 }

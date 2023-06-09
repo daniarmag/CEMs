@@ -1,19 +1,23 @@
 package gui;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.ResourceBundle;
 
+import client.ClientUI;
 import control.UserController;
 import entities.Exam;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class ManualExamController {
+public class ManualExamController implements Initializable{
 	public static User u;
 	public static Exam e;
 	static Integer minutesLeft;
@@ -51,7 +55,8 @@ public class ManualExamController {
 	{
 		u = user;
 		e = exam;
-		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show());
+		minutesLeft = e.getTime();
+		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ManualExam.fxml").show());
 	}
     @FXML
     void DeleteBtn(ActionEvent event) {
@@ -61,7 +66,11 @@ public class ManualExamController {
 
     @FXML
     void DownloadBtn(ActionEvent event) {
-    	//System.out.println(startCountdown());	
+    	//System.out.println(startCountdown())?;
+    	ArrayList<String> request = new ArrayList<String>();
+		request.add("load exam file");
+		request.add(e.getExam_id());
+		ClientUI.chat.accept(request);
     }
 
 
@@ -86,6 +95,13 @@ public class ManualExamController {
 	void goBack(ActionEvent event) 
 	{	
 		UserController.goBack(event, "/gui/StudentExamScreen.fxml");
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		TimerTXT.setEditable(false);
+		TimerTXT.setText(minutesLeft.toString());
+		
 	}
 
 //	int startCountdown() {

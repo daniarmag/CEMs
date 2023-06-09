@@ -24,8 +24,7 @@ public class Exam implements Serializable
 	public String type = "Computerized";
 	public String exam_name;
 	public ArrayList<Question> examQuestions = new ArrayList<>();
-
-	/**
+		/**
 	 * @param exam_number
 	 * @param subject_id
 	 * @param course_id
