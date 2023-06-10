@@ -13,6 +13,7 @@ import control.AlertMessages;
 import control.UserController;
 //import control.guiMainController;
 import entities.Course;
+import entities.HaveIDGrade;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Student;
@@ -23,10 +24,8 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -36,7 +35,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class StatisticsChooseScreenController implements Initializable {
 	private static  ReportScreenController reportScreen=new ReportScreenController();;
 	
-	private static HeadOfDepartment user;
+	static HeadOfDepartment user;
+	
 	private static Map<String, String> requsetMap = new HashMap<>();
 
 	@FXML
@@ -186,7 +186,7 @@ public class StatisticsChooseScreenController implements Initializable {
 	private boolean SearchCourse(String searchField) {
 		for (Course item : ((TableView<Course>) tableInfo).getItems()) 
 		{
-			String Id=item.getCourse_id();
+			String Id=item.get_id();
 			String name =item.getCourse_name();
 			if (searchField.equals(Id)||searchField.equals(name)) 
 			{
@@ -217,7 +217,7 @@ public class StatisticsChooseScreenController implements Initializable {
 			request.add(((User)item).getUser_id());
 		}
 		else 
-			request.add(((Course)item).getCourse_id());
+			request.add(((Course)item).get_id());
 		ClientUI.chat.accept(request);
 		
 		
@@ -226,10 +226,13 @@ public class StatisticsChooseScreenController implements Initializable {
 	
 	@SuppressWarnings("unchecked")
 	public void openRep(Object arr) {
-		if(((ArrayList<StudentExam>)arr).get(0).getExam_id().equals("empty")) {
-			AlertMessages.makeAlert("This student has no exams", "Student status");
+		
+		
+		if(((ArrayList<HaveIDGrade>)arr).get(0).get_id().equals("empty")) {
+			AlertMessages.makeAlert("There is no data for this choice", "Report alert");
 			return;
 		}
+		
 		try {
 			UserController.hide(event);
 		}catch(Exception e) {e.printStackTrace();}

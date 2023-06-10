@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -14,6 +15,7 @@ public class Professor<T, E> extends User {
 	private Map<T, E> teachingMap;// map to navigate between two types - our use is course - subject but can be any
 									// type
 
+	private ArrayList<ProfessorExam> exams_array;
 	/**
 	 * @param user_id
 	 * @param first_name
@@ -28,6 +30,23 @@ public class Professor<T, E> extends User {
 		super(user_id, first_name, last_name, email, username, password, "professor");
 	}
 
+	
+	public Professor(String user_id ,ArrayList<ProfessorExam>arr) {
+		super(user_id,null,null,null,null,null,"professor");
+		exams_array=arr;
+		
+	}
+	
+	
+	
+	public void setExamArray(ArrayList<ProfessorExam> arr) {
+		exams_array=arr;
+	}
+	
+	public ArrayList<ProfessorExam> getExamArray() {
+		return exams_array;
+	}
+	
 	/**
 	 * @return map
 	 */

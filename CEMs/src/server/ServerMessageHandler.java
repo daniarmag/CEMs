@@ -199,7 +199,10 @@ public class ServerMessageHandler
 				case "for head of department report":
 						if(arrayList.get(1).equals("student"))
 							client.sendToClient(sqlController.getAllStudentExams(arrayList));
-					
+						else if(arrayList.get(1).equals("professor"))
+							client.sendToClient(sqlController.getAllprofessorExams(arrayList));
+					//	else
+							//course
 					break;
 					
 			}
