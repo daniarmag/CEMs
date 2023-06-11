@@ -100,6 +100,13 @@ public class StudentExamScreenController implements Initializable
     void goBack(ActionEvent event)  {
     	UserController.goBack(event, "/gui/StudentScreen.fxml");
     }
+    
+    @FXML
+    void refresh(ActionEvent event)
+    {
+    	ClientUI.chat.accept("load student exams");	
+    	examTable.refresh();
+    }
 
 	 /**
 	  * Initializes the GUI with the given logic.
@@ -130,7 +137,6 @@ public class StudentExamScreenController implements Initializable
 	    		e.setIsActive("Yes");
 	    	for (String cName: courseArray)
 	    		if(cName.startsWith(e.getCourse_id())) {
-	    			System.out.println(cName);
 	    			e.setCourse_id(cName);
 	    		}
 	    }

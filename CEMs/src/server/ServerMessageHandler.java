@@ -223,6 +223,7 @@ public class ServerMessageHandler
 					sqlController.updateExamStatus(arrayList.get(1), false);
 					ArrayList<String> answer = new ArrayList<>();
 					answer.add("selected exam is now inactive");
+					//exam ID
 					answer.add(arrayList.get(1));
 					//Specific message for the professor.
 					client.sendToClient(answer.get(0));

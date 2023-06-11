@@ -16,7 +16,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StudentExamScreenController">
    <children>
-      <Pane prefHeight="477.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
+      <Pane fx:id="refreshBtn" prefHeight="477.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
                <children>
@@ -85,6 +85,7 @@
                </font>
             </Text>
             <TextField fx:id="passwordTextField" layoutX="280.0" layoutY="410.0" prefHeight="25.0" prefWidth="115.0" />
+            <Button fx:id="refreshBtn" layoutX="572.0" layoutY="123.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
          </children>
       </Pane>
    </children>

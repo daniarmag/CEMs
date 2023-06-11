@@ -22,13 +22,13 @@ import javafx.stage.Stage;
 
 public class ExamController implements Initializable
 {
-	private static Exam onGoingExam;
+	public static Exam onGoingExam;
 	
 	private static User u;
 	
     @FXML
     private TextField idTextField;
-    
+
 	@FXML
 	private ScrollPane scrollPane;
     @FXML
@@ -112,7 +112,14 @@ public class ExamController implements Initializable
 		return onGoingExam.getNum_questions();
 	 }
 
-	 
+	    
+	/**
+     * @return the onGoingExam
+	 */
+	public static Exam getOnGoingExam() 
+	{
+		return onGoingExam;
+	}
 	 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)

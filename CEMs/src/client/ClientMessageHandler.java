@@ -110,6 +110,15 @@ public class ClientMessageHandler
 	{
 		studentScreenController = controller;
 	}
+	
+	/**
+	 * @param ManualExamController the manualExamController to set
+	 */
+	public static void setManualExamController(ManualExamController controller) 
+	{
+		manualExamController = controller;
+	}
+	
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
@@ -117,7 +126,7 @@ public class ClientMessageHandler
 	@SuppressWarnings({ "unchecked", "incomplete-switch" })
 	public static void messageHandler(Object msg) 
 	{
-		MessageType message = getType(msg);
+		MessageType message = getType (msg);
 		if (message == null)
 			return;
 		switch (message) 
@@ -280,8 +289,21 @@ public class ClientMessageHandler
 				break;
 			
 			case "selected exam is now inactive":
-				AlertMessages.makeAlert("Exam has been terminated.","Exam");
-			//	examController.
+				
+			try 
+			{
+				if (ExamController.onGoingExam.getType().equals("Computerized"))
+				{
+					if (arrayList.get(1).equals(ExamController.getOnGoingExam().getExam_id()))
+					{
+						AlertMessages.makeAlert("Exam has been terminated.","Exam");
+						examController.closeWindow();
+					}
+				}
+				else
+					manualExamController.disableFileUpload();
+			} catch (NullPointerException e) {System.out.println("test");}
+				break;
 		}
 	}
 

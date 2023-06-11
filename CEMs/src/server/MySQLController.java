@@ -4,8 +4,6 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.sql.*;
 import java.sql.DriverManager;
@@ -816,7 +814,6 @@ public class MySQLController
 		} catch (SQLException e) {e.printStackTrace();}
 	}
 		
-	@SuppressWarnings("unused")
 	public ExamFile openExamFile(String examID) {
 		ExamFile examFile = new ExamFile(examID);
 		Blob blob = null;

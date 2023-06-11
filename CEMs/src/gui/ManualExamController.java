@@ -11,6 +11,7 @@ import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
+import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.Exam;
@@ -29,6 +30,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class ManualExamController implements Initializable{
 	public static User u;
 	public static Exam e;
+	public static Timer timer = new Timer();
 	static Integer minutesLeft;
 	boolean oneMinuteFlag = false;
 
@@ -126,6 +128,7 @@ public class ManualExamController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		ClientMessageHandler.setManualExamController(this);
 		TimerTXT.setEditable(false);
         SubmitBtn.setDisable(true);
 		TimerTXT.setText(minutesLeft.toString());
@@ -133,7 +136,7 @@ public class ManualExamController implements Initializable{
 	}
 
 	public void startCountdown() {
-		Timer timer = new Timer();
+		
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -148,7 +151,6 @@ public class ManualExamController implements Initializable{
                 else if (oneMinuteFlag) {
                     timer.cancel();
                     SubmitBtn.setDisable(true);
-                    System.out.println("Timer stopped.");
                 }
             }
         };
@@ -175,5 +177,17 @@ public class ManualExamController implements Initializable{
 		    Desktop desktop = Desktop.getDesktop();
 		    desktop.open(newFile);
 			} catch (Exception e) {e.printStackTrace();}
+	}
+	
+	/**
+	 * Disables the ability to submit the exam
+	 */
+	public void disableFileUpload()
+	{
+		UploadBtn.setDisable(true);
+		SubmitBtn.setDisable(true);
+		FileUploadTXT.setDisable(true);
+		timer.cancel();
+		TimerTXT.setText("0");
 	}
 }
