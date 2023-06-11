@@ -6,7 +6,9 @@ import java.util.Map;
 import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
+import entities.ProfessorExam;
 import entities.Question;
+import entities.StudentExam;
 import entities.User;
 import enums.MessageType;
 import gui.QuestionCreationScreenController;
@@ -134,7 +136,6 @@ public class ClientMessageHandler
 			case USER_ARRAY_LIST:
 				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData(((ArrayList<User>)msg).get(0).getRole());
-				//guiController.statisticScreenData();
 				break;
 			case COURSE_ARRAY_LIST:
 				headOfScreenController.setUserArr((ArrayList<?>)msg);
@@ -142,6 +143,12 @@ public class ClientMessageHandler
 				break;
 			case EXAM_ARRAY_LIST:
 				examArrayListMessageHandler((ArrayList<Exam>) msg);
+				break;
+			case EXAM_STUDENT_ARRAY_LIST:
+				statisticsScreen.openRep(msg);
+				break;
+			case PROFESSOR_EXAMS:
+				statisticsScreen.openRep(msg);
 				break;
 
 		}
@@ -164,6 +171,7 @@ public class ClientMessageHandler
 			
 			if (!arrayList.isEmpty()) 
 			{
+				
 				Object firstElement = arrayList.get(0);
 				if (firstElement instanceof String)
 					return MessageType.STRING_ARRAY_LIST;
@@ -175,6 +183,10 @@ public class ClientMessageHandler
 					return MessageType.COURSE_ARRAY_LIST;
 				else if (firstElement instanceof Exam)
 					return MessageType.EXAM_ARRAY_LIST;
+				else if (firstElement instanceof StudentExam)
+					return MessageType.EXAM_STUDENT_ARRAY_LIST;
+				else if (firstElement instanceof ProfessorExam)
+					return MessageType.PROFESSOR_EXAMS;
 			}
 		} 
 		else if (msg instanceof Map)

@@ -13,9 +13,11 @@ import control.AlertMessages;
 import control.UserController;
 //import control.guiMainController;
 import entities.Course;
+import entities.HaveIDGrade;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Student;
+import entities.StudentExam;
 //import entities.Student;
 import entities.User;
 import javafx.application.Platform;
@@ -31,11 +33,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class StatisticsChooseScreenController implements Initializable {
-
-	private static HeadOfDepartment user;
+	private static  ReportScreenController reportScreen=new ReportScreenController();;
+	
+	static HeadOfDepartment user;
+	
 	private static Map<String, String> requsetMap = new HashMap<>();
-	@FXML
-	private Button courseChoose;
+
 	@FXML
 	private TableColumn<?, String> col1;
 
@@ -48,16 +51,23 @@ public class StatisticsChooseScreenController implements Initializable {
 	@FXML
 	private Button professorChoose;
 	
-    @FXML
-    private Button generateReportBtn;
-
 	@FXML
-	private TextField searchBar;
-	
-	@FXML
-	private Button searchBtn;
+	private Button courseChoose;
+    
 	@FXML
 	private Button studentChoose;
+	
+	@FXML
+    private Button goBackBtn;
+    
+    @FXML
+    private Button generateReportBtn;
+	@FXML
+	private TextField searchBar;
+	@FXML
+	private Button searchBtn;
+	private static ActionEvent event;
+	private static Object itemChosen;
 
 	@FXML
 	private TableView<?> tableInfo = new TableView<>();
@@ -176,7 +186,7 @@ public class StatisticsChooseScreenController implements Initializable {
 	private boolean SearchCourse(String searchField) {
 		for (Course item : ((TableView<Course>) tableInfo).getItems()) 
 		{
-			String Id=item.getCourse_id();
+			String Id=item.get_id();
 			String name =item.getCourse_name();
 			if (searchField.equals(Id)||searchField.equals(name)) 
 			{
@@ -195,16 +205,41 @@ public class StatisticsChooseScreenController implements Initializable {
 	 */
 	@FXML
 	private void GenerateRepo(ActionEvent e) {
-		Class<?> chooseClass=tableInfo.getSelectionModel().getSelectedItem().getClass();
+		event=e;
 		Object item=tableInfo.getSelectionModel().getSelectedItem();
-		if(chooseClass.equals(User.class)) {
-			System.out.println(((User)item).getRole());
+		itemChosen=item;
+		@SuppressWarnings("unused")
+		Class<?> chooseClass=item.getClass();
+		ArrayList<String> request = new ArrayList<>();	
+		request.add("for head of department report");
+		if(chooseClass.equals(User.class)){
+			request.add(((User)item).getRole());
+			request.add(((User)item).getUser_id());
 		}
 		else 
-			System.out.println(((Course)item).getCourse_id());
-		//System.out.println(((User)tableInfo.getSelectionModel().getSelectedItem()).getRole());
+			request.add(((Course)item).get_id());
+		ClientUI.chat.accept(request);
+		
+		
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void openRep(Object arr) {
+		
+		
+		if(((ArrayList<HaveIDGrade>)arr).get(0).get_id().equals("empty")) {
+			AlertMessages.makeAlert("There is no data for this choice", "Report alert");
+			return;
+		}
+		
+		try {
+			UserController.hide(event);
+		}catch(Exception e) {e.printStackTrace();}
+		reportScreen.start(event,arr,itemChosen);
+		
+	}
+	
 	
 	
 	
@@ -226,6 +261,17 @@ public class StatisticsChooseScreenController implements Initializable {
 	
 	
 	
+	/** 
+	 * Exits from client GUI - disconnectes from DB aswell.
+	 * @param event
+	 */
+    @FXML
+    void exit(ActionEvent event)
+    {
+    	UserController.userExit(user);
+    }
+	
+	
 	/**
 	 * @param event Going to server to ask for data from the DB according to the
 	 *              button pressed
@@ -234,6 +280,7 @@ public class StatisticsChooseScreenController implements Initializable {
 	void loadData(ActionEvent event) {
 		
 		String buttonPressed = ((Button)event.getSource()).getAccessibleText();
+		try {
 		String action = requsetMap.get(buttonPressed);
 		ArrayList<?>arr=user.getArray(buttonPressed);
 		if(arr==null) 
@@ -242,15 +289,16 @@ public class StatisticsChooseScreenController implements Initializable {
 		}
 		else
 			showData(buttonPressed);
-		
-
+		}catch(Exception e) {e.printStackTrace();}
 	}
+	
+	
+	
+	
+	
+	
+	
 
-	
-	
-	
-	
-	
 	/**
 	 * initializing functionMap is a map between a string and a function that will
 	 * run requestMap will go to the server with the proper query
@@ -259,7 +307,6 @@ public class StatisticsChooseScreenController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println(tableInfo.hashCode());
 		ClientMessageHandler.setStatisticsChooseScreen(this);
 		// guiMainController.setStatisticsChooseScreen(this);
 		functionMap = new HashMap<>();
@@ -270,7 +317,6 @@ public class StatisticsChooseScreenController implements Initializable {
 		requsetMap.put("professor", "Get all professors");
 		requsetMap.put("student", "Get all students");
 		requsetMap.put("course", "Get all courses");
-		
 	}
 
 	

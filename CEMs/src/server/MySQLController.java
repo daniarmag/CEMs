@@ -24,8 +24,10 @@ import entities.Exam;
 import entities.ExamFile;
 import entities.HeadOfDepartment;
 import entities.Professor;
+import entities.ProfessorExam;
 import entities.Question;
 import entities.Student;
+import entities.StudentExam;
 import entities.User;
 
 /**
@@ -551,6 +553,102 @@ public class MySQLController
 		}
 		return arrayC;		
 	}
+	
+	
+	
+	/**
+	 * @param arr
+	 * @return all the exam of the student and his grades orderd by grade
+	 */
+	public ArrayList<StudentExam> getAllStudentExams(ArrayList<String> arr){
+		ArrayList<StudentExam> array=new ArrayList<>();
+		ResultSet rs;		
+		try {
+			Statement st = conn.createStatement();
+			rs =st.executeQuery("SELECT se.exam_id,se.grade,ex.exam_name FROM student_exam as se,exam as ex WHERE"
+					+ " ex.exam_id=se.exam_id AND se.student_id=\""+arr.get(2)+"\" order by grade");
+			while(rs.next()) {
+				array.add(new StudentExam(rs.getString(1),rs.getInt(2),rs.getString(3)));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(array.isEmpty())
+			array.add(new StudentExam("empty", 0, "empty"));
+		return array;		
+	}
+	
+	
+	
+	/**
+	 * @param arr
+	 * @return all the exam of the professor and his grades orderd by grade average
+	 */
+	public ArrayList<?> getAllprofessorExams(ArrayList<String> arr){
+		ArrayList<ProfessorExam> array=new ArrayList<>();
+		ResultSet rs;		
+		try {
+			Statement st = conn.createStatement();
+			rs =st.executeQuery("SELECT\r\n"
+					+ "   e.exam_id,ex.exam_name,\r\n"
+					+ "  round( AVG(e.grade),2) AS average_grade,\r\n"
+					+ "  MAX(grade) AS max_grade,\r\n"
+					+ "  MIN(grade) AS min_grade,\r\n"
+					+ " round((SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id AND grade < 55) / \r\n"
+					+ "  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id) * 100 ,2) AS fails\r\n"
+					+ "FROM\r\n"
+					+ "  student_exam AS e , exam as ex\r\n"
+					+ "  WHERE e.exam_id=ex.exam_id AND ex.professor_id=\""+arr.get(2)+"\""
+					+ "GROUP BY\r\n"
+					+ "  ex.exam_id , ex.exam_name   order by average_grade;"
+					);
+			while(rs.next()) {
+				ProfessorExam exam= new ProfessorExam(rs.getString(1), rs.getString(2), rs.getDouble(3),rs.getInt(4), rs.getInt(5), rs.getDouble(6));
+				array.add(exam);
+			}
+			
+			if(array.isEmpty()) {
+				array.add(new ProfessorExam("empty","", 0,0,0,0));
+				return array;
+			}
+			
+			array.add(new ProfessorExam("average of all", null, AverageofExam(arr.get(2)), 0, 0, 0));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return array;	
+		
+		
+	}
+	
+	/**
+	 * @param id
+	 * @return the average of all the exams of this id of professor
+	 */
+	private double AverageofExam(String id) {
+		double ave=0;
+		ResultSet rs;
+		try {
+		Statement st = conn.createStatement();
+		rs =st.executeQuery("SELECT round(avg(se.grade),2) FROM student_exam as se, "
+				+ "exam as e WHERE se.exam_id=e.exam_id AND "
+				+ "e.professor_id=\""+id+"\"");
+		while(rs.next()) {
+			ave=rs.getDouble(1);
+		}
+		return ave;
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
+	
+	
 	
 	
 	/**
