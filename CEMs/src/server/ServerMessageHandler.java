@@ -111,6 +111,8 @@ public class ServerMessageHandler
 				case "Get all courses":			
 					client.sendToClient(sqlController.getAllCourses());
 					break;
+				case "load student exams":
+					client.sendToClient(sqlController.loadStudentExams());
 			}
 			
 		} catch (IOException e) {}
@@ -195,17 +197,12 @@ public class ServerMessageHandler
 					client.sendToClient(sqlController.loadCourseQuestions(arrayList.get(1)));
 					break;
 					
-				case "load student exams":
-					client.sendToClient(sqlController.loadStudentExams(arrayList.get(1)));
-					break;
-					
 				case "load student courses":
-					client.sendToClient(sqlController.getStudentCourses(arrayList.get(1)));
+					client.sendToClient(sqlController.getStudentCourses());
 					break;
 				
 				case "load exam file":
-					sqlController.openExamFile(arrayList.get(1));
-					client.sendToClient("file was loaded");
+					client.sendToClient(sqlController.openExamFile(arrayList.get(1)));
 					break;
 					
 				case "for head of department report":

@@ -78,12 +78,12 @@
                   <Font name="Tahoma" size="20.0" />
                </font>
             </Button>
-            <TextField fx:id="FileUploadTXT" alignment="CENTER" layoutX="262.0" layoutY="264.0" prefHeight="53.0" prefWidth="225.0">
+            <TextField fx:id="FileUploadTXT" alignment="CENTER" editable="false" layoutX="76.0" layoutY="264.0" prefHeight="53.0" prefWidth="411.0">
                <font>
-                  <Font name="David" size="24.0" />
+                  <Font name="David" size="12.0" />
                </font>
             </TextField>
-            <Button fx:id="DeleteBtn" alignment="CENTER" layoutX="507.0" layoutY="334.0" mnemonicParsing="false" onAction="#DeleteBtn" prefHeight="53.0" prefWidth="188.0" style="-fx-background-color: #FF4500;" text="Delete Exam">
+            <Button fx:id="DeleteBtn" alignment="CENTER" layoutX="507.0" layoutY="334.0" mnemonicParsing="false" onAction="#DeleteBtn" prefHeight="53.0" prefWidth="188.0" style="-fx-background-color: #FF4500;" text="Delete File">
                <font>
                   <Font name="Tahoma" size="20.0" />
                </font>
@@ -93,12 +93,12 @@
                   <Font name="Tahoma" size="20.0" />
                </font>
             </Button>
-            <TextField fx:id="TimerTXT" alignment="CENTER" layoutX="148.0" layoutY="264.0" prefHeight="53.0" prefWidth="74.0">
+            <TextField fx:id="TimerTXT" alignment="CENTER" layoutX="387.0" layoutY="186.0" prefHeight="53.0" prefWidth="74.0">
                <font>
                   <Font name="David" size="24.0" />
                </font>
             </TextField>
-            <Text layoutX="36.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:" wrappingWidth="101.33334159851074">
+            <Text layoutX="275.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:" wrappingWidth="101.33334159851074">
                <font>
                   <Font size="18.0" />
                </font>

@@ -7,6 +7,7 @@ import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
 import entities.ProfessorExam;
+import entities.ExamFile;
 import entities.Question;
 import entities.StudentExam;
 import entities.User;
@@ -16,6 +17,7 @@ import gui.ExamCreationFirstController;
 import gui.ExamCreationSecondController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
+import gui.ManualExamController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.ExamBankScreenController;
@@ -35,6 +37,7 @@ public class ClientMessageHandler
     static QuestionBankScreenController questionBankScreenController;
     static StudentScreenController studentScreenController;
     static StudentExamScreenController studentExamScreenController;
+    static ManualExamController manualExamController;
     static HeadOfDepScreenController headOfScreenController;
     static ExamController examController;
     static StatisticsChooseScreenController statisticsScreen;
@@ -46,6 +49,7 @@ public class ClientMessageHandler
 		headOfScreenController = new HeadOfDepScreenController();
 		examController=new ExamController();
 		professorController = new ProfessorScreenController();
+		manualExamController = new ManualExamController();
 	}
 
 	/**
@@ -149,6 +153,8 @@ public class ClientMessageHandler
 				break;
 			case PROFESSOR_EXAMS:
 				statisticsScreen.openRep(msg);
+			case EXAM_FILE:
+				examFileMessageHandler((ExamFile) msg);
 				break;
 
 		}
@@ -193,6 +199,8 @@ public class ClientMessageHandler
 			return MessageType.MAP;
 		else if (msg instanceof User)
 			return MessageType.USER;
+		else if (msg instanceof ExamFile)
+			return MessageType.EXAM_FILE;
 		return null;
 	}
 
@@ -351,4 +359,8 @@ public class ClientMessageHandler
 		professorController.setTeachingMap(map);
 	}
 	
+	public static void examFileMessageHandler(ExamFile examFile) {
+		manualExamController.setExamFile(examFile);
+	}
+
 }

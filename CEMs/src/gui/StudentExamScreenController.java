@@ -109,10 +109,7 @@ public class StudentExamScreenController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientMessageHandler.setStudentExamController(this);
-		ArrayList<String> request = new ArrayList<String>();
-		request.add("load student exams");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);	
+		ClientUI.chat.accept("load student exams");	
 	}
 	
 	/**
@@ -162,7 +159,7 @@ public class StudentExamScreenController implements Initializable
 	    				"The exam has not activated yet");
 		    }
 		    errorMap.put(passwordTextField.getText().isEmpty(), "Password is required");
-		    errorMap.put(examTable.getSelectionModel().getSelectedItems().isEmpty(), "Exam is required");
+		    errorMap.put(examTable.getSelectionModel().getSelectedItems().isEmpty(), "Choose an exam");
 		    return errorMap;
 		}
 }

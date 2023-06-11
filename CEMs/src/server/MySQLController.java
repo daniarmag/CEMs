@@ -4,6 +4,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.sql.*;
 import java.sql.DriverManager;
@@ -16,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import entities.Course;
 import entities.Exam;
+import entities.ExamFile;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.ProfessorExam;
@@ -218,16 +221,13 @@ public class MySQLController
 	 * @return an ArrayList of Exam objects
 
 	 */
-	public  ArrayList<Exam>loadStudentExams(String id)
+	public ArrayList<Exam>loadStudentExams()
 	{
 		ArrayList<Exam> eArr = new ArrayList<>();
 		eArr.add(new Exam ("student exams"));
 		try {
 	    	//loading all the  student's exams from the table
-			PreparedStatement ps = conn.prepareStatement("SELECT exam.* "
-									+ "FROM student_course JOIN exam ON exam.course_id = student_course.course_id "
-									+ "WHERE student_id = ? ORDER BY exam.isActive DESC");
-			ps.setString(1, id);
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM cems.exam ORDER BY exam.isActive DESC");
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
 			{
@@ -757,15 +757,12 @@ public class MySQLController
 	 * @return an ArrayList of String objects
 
 	 */
-	public ArrayList<String> getStudentCourses(String id){
+	public ArrayList<String> getStudentCourses(){
         ArrayList<String> courses = new ArrayList<>();
         courses.add("student courses");
         try 
 	    {
-	        PreparedStatement ps = conn.prepareStatement("SELECT student_course.course_id, course.course_name "
-	        		+ "FROM student_course join course ON student_course.course_id = course.course_id "
-	        		+ "WHERE student_course.student_id = ?");
-	        ps.setString(1, id);
+	        PreparedStatement ps = conn.prepareStatement("SELECT course.course_id, course.course_name FROM course ");
 	        ResultSet rs = ps.executeQuery();
 	        while (rs.next())
 	        {
@@ -775,51 +772,6 @@ public class MySQLController
 	        }
 	    } catch (SQLException e) { e.printStackTrace();}
         return courses;
-	}
-
-	public void openExamFile(String examID) {
-		{
-			ResultSet rs = null;
-			try {
-				PreparedStatement ps = conn
-						.prepareStatement("SELECT manual_exam_file FROM manual_exam WHERE idmanual_exam = ?");
-				ps.setString(1, examID);
-				rs = ps.executeQuery();
-
-				Blob blob = null;
-				while (rs.next()) {
-					blob = rs.getBlob(1);
-				}
-				byte[] bufferout = null;
-
-				bufferout = blob.getBytes(1, (int) blob.length());
-				File output = null;
-				String outputFileName = "C:\\Users\\nicol\\Downloads\\output.docx";
-				try {
-					output = new File(outputFileName);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				FileOutputStream fos = null;
-				try {
-					fos = new FileOutputStream(output);
-					fos.write(bufferout);
-					fos.close();
-					fos.flush();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-				try {
-					Desktop desktop = Desktop.getDesktop();
-					desktop.open(output);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	/**
@@ -862,5 +814,28 @@ public class MySQLController
 			ps.setString(2, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();}
+	}
+		
+	@SuppressWarnings("unused")
+	public ExamFile openExamFile(String examID) {
+		ExamFile examFile = new ExamFile(examID);
+		Blob blob = null;
+		ResultSet rs = null;
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT manual_exam_file FROM manual_exam WHERE idmanual_exam = ?");
+			ps.setString(1, examID);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				blob = rs.getBlob(1);
+			}
+			examFile.initArray((int) blob.length());
+			examFile.setSize((int) blob.length());
+			examFile.setMybytearray(blob.getBytes(1, examFile.getSize()));
+			rs.close();
+		    ps.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return examFile;
 	}
 }
