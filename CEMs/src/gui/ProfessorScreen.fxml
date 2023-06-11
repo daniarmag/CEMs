@@ -39,7 +39,7 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Manage questions">
+      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Question management">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
@@ -49,12 +49,12 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="341.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Check results">
+      <Button fx:id="activateExamBtn" alignment="CENTER" layoutX="349.0" layoutY="339.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Exam management">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="activateExamBtn" alignment="CENTER" layoutX="349.0" layoutY="415.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Activate Exam">
+      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="415.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Check results">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>

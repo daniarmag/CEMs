@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import control.UserController;
 import entities.Exam;
 import javafx.application.Platform;
@@ -94,8 +97,8 @@ public class ExamController implements Initializable
 	{
 		
 		activateExam();
-			//String input = JOptionPane.showInputDialog("Insert 4 digit password:");
-			//validatePasswords(input);
+//			String input = JOptionPane.showInputDialog("Insert 4 digit password:");
+//			validatePasswords(input);
 	
 	}
 

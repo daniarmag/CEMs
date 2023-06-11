@@ -16,6 +16,7 @@ import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
+import gui.ExamBankScreenController;
 import gui.ExamController;
 import gui.StatisticsChooseScreenController;
 import gui.QuestionBankScreenController;
@@ -28,6 +29,7 @@ public class ClientMessageHandler
 	static QuestionCreationScreenController questionCreationScreenController;
 	static ExamCreationFirstController examCreationFirstController;
 	static ExamCreationSecondController examCreationSecondController;
+	static ExamBankScreenController examBankScreenController;
     static QuestionBankScreenController questionBankScreenController;
     static StudentScreenController studentScreenController;
     static StudentExamScreenController studentExamScreenController;
@@ -68,6 +70,13 @@ public class ClientMessageHandler
 		professorController = controller;
 	}
 
+	/**
+	 * @param examBankScreenController the examBankScreenController to set
+	 */
+	public static void setExamBankScreenController(ExamBankScreenController controller) 
+	{
+		examBankScreenController = controller;
+	}
 
 	public static void setStatisticsChooseScreen(StatisticsChooseScreenController controller)
 	{

@@ -653,22 +653,24 @@ public class MySQLController
         return courses;
 	}
 	
-
-		@SuppressWarnings("unused")
-		public void openExamFile(String examID){ {
+	
+	@SuppressWarnings("unused")
+	public void openExamFile(String examID) {
+		{
 			ResultSet rs = null;
 			try {
-			PreparedStatement ps = conn.prepareStatement("SELECT manual_exam_file FROM manual_exam WHERE idmanual_exam = ?");
-	    	ps.setString(1, examID);
-		    rs = ps.executeQuery();
-			
-				Blob blob=null;
-				while(rs.next()) {
-				 	blob = rs.getBlob(1);
+				PreparedStatement ps = conn
+						.prepareStatement("SELECT manual_exam_file FROM manual_exam WHERE idmanual_exam = ?");
+				ps.setString(1, examID);
+				rs = ps.executeQuery();
+
+				Blob blob = null;
+				while (rs.next()) {
+					blob = rs.getBlob(1);
 				}
 				byte[] bufferout = null;
 
-				bufferout = blob.getBytes(1, (int)blob.length());
+				bufferout = blob.getBytes(1, (int) blob.length());
 				File output = null;
 				String outputFileName = "C:\\Users\\nicol\\Downloads\\output.docx";
 				try {
@@ -685,14 +687,19 @@ public class MySQLController
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-	            
-				  try {
-				    	Desktop desktop= Desktop.getDesktop();	
-				    	desktop.open(output);
-				    }catch(Exception e) {
-				    	e.printStackTrace();
-				    }
-			}catch(SQLException e) {e.printStackTrace();}
+
+				try {
+					Desktop desktop = Desktop.getDesktop();
+					desktop.open(output);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		}		
+	}
+		
+
+		
 }
