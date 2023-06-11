@@ -95,9 +95,9 @@ public class ExamController implements Initializable
 		
 	}
 	 
-	 /**
-	     * This method closes the current window.
-	     */
+	/**
+	* This method closes the current window.
+	*/
 	public void closeWindow() 
 	{
 		Platform.runLater(() -> 
