@@ -94,7 +94,7 @@
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="average" layoutX="405.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="average" layoutX="405.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
@@ -145,7 +145,7 @@
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="highest" layoutX="617.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="28.8720703125">
+      <Text fx:id="highest" layoutX="617.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
@@ -155,7 +155,7 @@
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="lowest" layoutX="617.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="28.8720703125">
+      <Text fx:id="lowest" layoutX="617.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
