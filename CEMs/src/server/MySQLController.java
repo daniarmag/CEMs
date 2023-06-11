@@ -570,14 +570,44 @@ public class MySQLController
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if(array.isEmpty())
+		if(array.isEmpty()) {
 			array.add(new StudentExam("empty", 0, "empty"));
+			return array;
+		}
+		double ave=AverageofStudent(arr.get(2));
+		
+		array.add(new StudentExam(String.valueOf(ave),0,""));
+		
 		return array;		
 	}
 	
 	
-	
 	/**
+	 * @param id
+	 * @return the average of all the exams of this id of professor
+	 */
+	private double AverageofStudent(String id) {
+		double ave=0;
+		ResultSet rs;
+		try {
+		Statement st = conn.createStatement();
+		rs =st.executeQuery("SELECT round(AVG(grade),2) AS average\r\n"
+				+ "FROM student_exam WHERE student_id=\""+id+"\"");
+		while(rs.next()) {
+			ave=rs.getDouble(1);
+		}
+		return ave;
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
+	
+	
+	/**@author czmat
 	 * @param arr
 	 * @return all the exam of the professor and his grades ordered by grade average
 	 */

@@ -41,7 +41,10 @@ public String getExam_name() {
 
 
 
-public double getAverage_grade() {
+/**
+ * @return the average grade for all the student who took this test
+ */
+public double getGrade() {
 	return average_grade;
 }
 

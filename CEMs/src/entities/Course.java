@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Course implements Serializable,HaveIDGrade{
+public class Course implements Serializable{
 	private String course_id;
 	private String course_name;
 	private String course_subject_id;
@@ -16,9 +16,8 @@ public class Course implements Serializable,HaveIDGrade{
 	}
 
 
-//	public String getCourse_id() {
-//		return course_id;
-//	}
+
+	
  public String get_id() {
 	 return course_id;
  }

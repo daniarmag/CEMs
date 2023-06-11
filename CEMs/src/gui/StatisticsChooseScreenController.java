@@ -112,7 +112,7 @@ public class StatisticsChooseScreenController implements Initializable {
 	private void LoadCourseIntable(String str) {
 		tableInfo.getItems().clear();
 		array = (ArrayList<Course>)user.getArray(str);
-		loadingColumns("Subject ID","course_id","course_name","course_subject_id");
+		loadingColumns("Subject ID","_id","course_name","course_subject_id");
 		try {
 		ObservableList<Course> questionObservableList = (ObservableList<Course>) FXCollections.observableArrayList(array);
 		((TableView<Course>) tableInfo).setItems(questionObservableList);
@@ -129,12 +129,16 @@ public class StatisticsChooseScreenController implements Initializable {
 	 * loading all the column to their appropriate data 
 	 */
 	public void loadingColumns(String col_3,String propertyCol1 ,String propertyCol2 ,String propertyCol3) {
+		try {
 		Platform.runLater(() -> col1.setText("ID"));
 		Platform.runLater(() -> col2.setText("Name"));
 		Platform.runLater(() -> col3.setText(col_3));
 		col1.setCellValueFactory(new PropertyValueFactory<>(propertyCol1));
 		col2.setCellValueFactory(new PropertyValueFactory<>(propertyCol2));
 		col3.setCellValueFactory(new PropertyValueFactory<>(propertyCol3));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

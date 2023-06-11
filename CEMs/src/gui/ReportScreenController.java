@@ -20,8 +20,10 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -108,7 +110,7 @@ public class ReportScreenController implements Initializable {
 			try {
 				Platform.runLater(
 						() -> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreenStudentStat.fxml").show());
-				
+
 				array = (ArrayList<?>) arr;
 				backScreen = e;
 				object = obj;
@@ -118,171 +120,181 @@ public class ReportScreenController implements Initializable {
 
 		}
 
+		/**
+		 *initialize the BarChart
+		 */
 		@SuppressWarnings("unchecked")
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-		  
-			
-			if (object.getClass().equals(User.class))
-			{
-				
-				if(((User)object).getRole().equals("student"))
-					InitStudent();
+
+			if (object.getClass().equals(User.class)) {
+
+				if (((User) object).getRole().equals("student"))
+					InitStudent(commonInit());
 				else
-					InitProfessor();
-				
+					InitProfessor(commonInit());
+
 			}
 		}
-
-		
-		
-		
-		
 		
 		/**
-		 *initialize the chart report for professor 
+		 * common initialize for student and professor report
+		 * 
+		 * @return
 		 */
-		private void InitProfessor() {
-			@SuppressWarnings("unchecked")
-			ArrayList<ProfessorExam> arr=(ArrayList<ProfessorExam> )array;
-			ArrayList<Number> grades =new ArrayList<>();
-			
-			highestGradeLable.setText("Highest Average: ");
-			lowestGradeLabel.setText("Lowest Average: ");
+		private XYChart.Series<String, Number> commonInit() {
 			XYChart.Series<String, Number> series = new XYChart.Series<>();
 			series.setName("Exams");
-		
+
 			String user_name = ((User) object).get_fullName();
 			String user_id = ((User) object).getUser_id();
-		
-			for (int i = 0; i < arr.size()-1; i++) {
-				series.getData().add(new XYChart.Data<>(arr.get(i).getExam_name()+"\nMax grade: "
-						+ ""+arr.get(i).getMax_grade()+"\nMin grade: "+arr.get(i).getMin_grade()
-						+"\nFailing precentage: "+arr.get(i).getFails()
-						, arr.get(i).getAverage_grade()));
-					grades.add(arr.get(i).getAverage_grade());
-			}
-			// Add the series to the chart
-			barChart.getData().add(series);
-			
-			
-			for (XYChart.Data<String, Number> data : series.getData()) {
-				BarChart.Data<String, Number> bar = (BarChart.Data<String, Number>) data;
-				bar.getNode().setStyle("-fx-bar-fill: #787a7c;");
-				
-			}
-			
-			
-			try {
-				Image img=new Image("\\images\\StudentLogo.png");
-				Image img2=new Image("\\images\\student statistic.jpeg");
-				locationScreen.setImage(img2);
-				faceImage.setImage(img);
-				}catch(Exception e) {e.printStackTrace();}
-//				double ave = calcAverage(arr);
-				double med = calMeddian(grades);
-				DecimalFormat decimal = new DecimalFormat("#.00");
-				average.setText(String.valueOf(arr.get(arr.size()-1).getAverage_grade()));
-				median.setText(decimal.format(med));
-				highest.setText(String.valueOf(arr.get(arr.size() - 2).getAverage_grade()));
-				lowest.setText(String.valueOf(arr.get(0).getAverage_grade()));
-				name.setText(user_name);
-				id.setText(user_id);
-			
-				
-		
-			
+
 			name.setText(user_name);
 			id.setText(user_id);
 
-		}
-			
-			
-			
-			
+			return series;
 
+		}
+		
+		/**
+		 * initialize the chart report for professor
+		 */
+		private void InitProfessor(XYChart.Series<String, Number> series) {
+			@SuppressWarnings("unchecked")
+			ArrayList<ProfessorExam> arr = (ArrayList<ProfessorExam>) array;
+			ArrayList<Number> grades = new ArrayList<>();
+
+			for (int i = 0; i < arr.size() - 1; i++) {
+				series.getData().add(new XYChart.Data<>(
+						arr.get(i).getExam_name() + "\nMax grade: " + "" + arr.get(i).getMax_grade() + "\nMin grade: "
+								+ arr.get(i).getMin_grade() + "\nFailing precentage: " + arr.get(i).getFails(),
+						arr.get(i).getGrade()));
+				grades.add(arr.get(i).getGrade());
+			}
+
+			// Add the series to the chart
+			barChart.getData().add(series);
+			drawCol(series);
+
+			double med = calMeddian(grades);
+			String average_s = String.valueOf(arr.get(arr.size() - 1).getGrade());// the last place is the average of
+																					// all the averages
+			String highest_s = String.valueOf(arr.get(arr.size() - 2).getGrade());// this is the highest average because
+																					// the array is sorted
+			String lowest_s = String.valueOf(arr.get(0).getGrade());
+			initializeFields("\\images\\ProfessorLogo.png", "\\images\\ProfessorLabel.png", med, average_s, highest_s,
+					lowest_s);
+
+			highestGradeLable.setText("Highest Average: ");
+			lowestGradeLabel.setText("Lowest Average: ");
+
+		}
+
+		/**
+		 * common function to initialize the fields of the screen
+		 * 
+		 * @param image
+		 * @param pathImage
+		 * @param med
+		 * @param average_s
+		 * @param highest_s
+		 * @param lowest_s
+		 */
+		private void initializeFields(String image, String pathImage, double med, String average_s, String highest_s,
+				String lowest_s) {
+			try {
+
+				Image img = new Image(image);
+				Image img2 = new Image(pathImage);
+				locationScreen.setImage(img2);
+				faceImage.setImage(img);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			DecimalFormat decimal = new DecimalFormat("#.00");
+			median.setText(decimal.format(med));
+			average.setText(average_s);
+			highest.setText(highest_s);
+			lowest.setText(lowest_s);
+
+		}
+
+		/**
+		 * @param series drawing the columns and set on event - the cursor shows the
+		 *               data
+		 */
+		private void drawCol(XYChart.Series<String, Number> series) {
+
+			for (XYChart.Data<String, Number> data : series.getData()) {
+
+				BarChart.Data<String, Number> bar = (BarChart.Data<String, Number>) data;
+				bar.getNode().setStyle("-fx-bar-fill: #787a7c;");
+				Tooltip tooltip = new Tooltip(data.getYValue().toString());
+				Tooltip.install(data.getNode(), tooltip);
+
+				data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+					tooltip.show(data.getNode(), event.getScreenX(), event.getScreenY() + 10);
+				});
+
+				data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+					tooltip.hide();
+				});
+			}
+		}
 
 	
 		
 		/**
 		 * function to initialize the chart for a student Report
 		 */
-		private void InitStudent() {
+		private void InitStudent(XYChart.Series<String, Number> series) {
 			@SuppressWarnings("unchecked")
-			ArrayList<StudentExam> arr=(ArrayList<StudentExam> )array;
-			ArrayList<Number> grades=new ArrayList<>();
-			
-			XYChart.Series<String, Number> series = new XYChart.Series<>();
-			series.setName("Exams");
-		
-			String user_name = ((User) object).get_fullName();
-			String user_id = ((User) object).getUser_id();
-			
-			for (int i = 0; i < arr.size(); i++) {
+			ArrayList<StudentExam> arr = (ArrayList<StudentExam>) array;
+			ArrayList<Number> grades = new ArrayList<>();
+
+			for (int i = 0; i < arr.size() - 1; i++) {
 				series.getData().add(new XYChart.Data<>(arr.get(i).getExam_name(), arr.get(i).getGrade()));
 				grades.add(arr.get(i).getGrade());
+
 			}
+
 			// Add the series to the chart
 			barChart.getData().add(series);
-			
-			for (XYChart.Data<String, Number> data : series.getData()) {
-				BarChart.Data<String, Number> bar = (BarChart.Data<String, Number>) data;
-				bar.getNode().setStyle("-fx-bar-fill: #787a7c;");
-			}
-			
-			
-			
-			try {
-			Image img=new Image("\\images\\StudentLogo.png");
-			Image img2=new Image("\\images\\student statistic.jpeg");
-			locationScreen.setImage(img2);
-			faceImage.setImage(img);
-			}catch(Exception e) {e.printStackTrace();}
-			double ave = calcAverage(arr);
+
+			drawCol(series);
 			double med = calMeddian(grades);
-			DecimalFormat decimal = new DecimalFormat("#.00");
-			average.setText(decimal.format(ave));
-			median.setText(decimal.format(med));
-			highest.setText(String.valueOf(arr.get(arr.size() - 1).getGrade()));
-			lowest.setText(String.valueOf(arr.get(0).getGrade()));
-			name.setText(user_name);
-			id.setText(user_id);
-			
-			
-			
+			String average_s = arr.get(arr.size() - 1).get_id();// this is the average from the database
+			String highest_s = String.valueOf(arr.get(arr.size() - 2).getGrade());// the array is sorted so this is the
+																					// highest grade
+			String lowest_s = String.valueOf(arr.get(0).getGrade());
+			initializeFields("\\images\\StudentLogo.png", "\\images\\student statistic.jpeg", med, average_s, highest_s,
+					lowest_s);
+
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
+	
 
 		/**
+		 * the array is sorted so the median does not neet any calculation
+		 * 
 		 * @param array
 		 * @return the median of all the grades - they came ordered from the database
 		 */
 		private double calMeddian(ArrayList<Number> array) {
 			System.out.println(array);
-			if(array.size()%2==0) { 
-				return ((array.get((int)((array.size()/2)-1)).doubleValue() +array.get((int)(array.size()/2)).doubleValue())/2);
-				//return (double)((array.get((int)(array.size()/2)).getGrade() + array.get((int)(array.size()/2)+1).getGrade())/2);
-			}
-			else
-				return array.get((int)(array.size()/2)).doubleValue();
-			
-		}
+			if (array.size() % 2 == 0) {
+				return ((array.get((int) ((array.size() / 2) - 1)).doubleValue()
+						+ array.get((int) (array.size() / 2)).doubleValue()) / 2);
+				// return (double)((array.get((int)(array.size()/2)).getGrade() +
+				// array.get((int)(array.size()/2)+1).getGrade())/2);
+			} else
+				return array.get((int) (array.size() / 2)).doubleValue();
 
-		private double calcAverage(ArrayList<StudentExam> array) {
-			double counter=0;
-			for(int i=0;i<array.size();i++)
-				counter+=array.get(i).getGrade();
-			return (double)counter/array.size();
-			
 		}
+		
+	
 
 		
 
