@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
@@ -18,8 +17,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ExamController implements Initializable
 {
@@ -95,11 +94,23 @@ public class ExamController implements Initializable
 		
 		
 	}
+	 
+	 /**
+	     * This method closes the current window.
+	     */
+	public void closeWindow() 
+	{
+		Platform.runLater(() -> 
+		{
+	    	Stage stage = (Stage) start.getScene().getWindow();
+	    	stage.close();
+		});
+	}
 
 	 int getNumberOfQuestions() 
 	 {
 		return onGoingExam.getNum_questions();
-	}
+	 }
 
 	 
 	 

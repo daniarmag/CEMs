@@ -227,11 +227,14 @@ public class ServerMessageHandler
 					ArrayList<String> answer = new ArrayList<>();
 					answer.add("selected exam is now inactive");
 					answer.add(arrayList.get(1));
-					//A message for each client of role "student".
-					for (ConnectionToClient c : roleClientMap.get("student"))
-						c.sendToClient(answer);
 					//Specific message for the professor.
 					client.sendToClient(answer.get(0));
+					if (roleClientMap.get("student") != null)
+					{
+						//A message for each client of role "student".
+						for (ConnectionToClient c : roleClientMap.get("student"))
+							c.sendToClient(answer);
+					}
 					break;
 			}
 		} catch (IOException e) {}
