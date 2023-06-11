@@ -49,7 +49,7 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="activateExamBtn" alignment="CENTER" layoutX="349.0" layoutY="339.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Exam management">
+      <Button fx:id="activateExamBtn" alignment="CENTER" layoutX="349.0" layoutY="339.0" mnemonicParsing="false" onAction="#manageExams" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Exam management">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>

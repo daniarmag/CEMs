@@ -1,12 +1,18 @@
 package gui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import entities.Question;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
-public class QuestionTemplateController {
+public class QuestionTemplateController implements Initializable
+{
 
     @FXML
     private RadioButton aRadio;
@@ -37,6 +43,21 @@ public class QuestionTemplateController {
     
     @FXML
     private Text questionNumText;
+    
+    /**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		ToggleGroup toggleGroup = new ToggleGroup();
+	    aRadio.setToggleGroup(toggleGroup);
+	    bRadio.setToggleGroup(toggleGroup);
+	    cRadio.setToggleGroup(toggleGroup);
+	    dRadio.setToggleGroup(toggleGroup);
+	}
 
 	/**
 	 * Sets text and disables typing.
@@ -77,4 +98,6 @@ public class QuestionTemplateController {
 	{
 		questionNumText.setText(text);
 	}
+
+
 }

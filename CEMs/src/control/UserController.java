@@ -56,7 +56,20 @@ public class UserController
 	    Platform.runLater(() -> ((Stage) ((Node) e.getSource()).getScene().getWindow()).show());
 	}
 	
-	
+	/**
+	 * This method allows classes that are not a part of javafx to load 
+	 * and use GUIs. In this case we we close the desired window (e).
+	 * @param e
+	 */
+	public static void close(ActionEvent e) 
+	{
+	    Platform.runLater(() -> 
+	    {
+	        Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+	        currentStage.close();
+	    });
+	}
+
 	/**
 	 * Moving back to the previous screen.
 	 * @param e

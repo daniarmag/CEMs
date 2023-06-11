@@ -101,7 +101,6 @@ public class ProfessorScreenController implements Initializable
     @FXML
     void manageQuestions(ActionEvent event)
     {
-    	
     	UserController.hide(event);
     	try 
     	{
@@ -120,6 +119,20 @@ public class ProfessorScreenController implements Initializable
     	try 
     	{
     		ExamCreationFirstController.start(u, u.getMap());
+		} catch (Exception e) {e.printStackTrace();}
+    }
+    
+    /**
+     * Starts the exam creation screen.
+     * @param event
+     */
+    @FXML
+    void manageExams(ActionEvent event)
+    {
+    	UserController.hide(event);
+    	try 
+    	{
+    		ExamBankScreenController.start(u, u.getMap());
 		} catch (Exception e) {e.printStackTrace();}
     }
     

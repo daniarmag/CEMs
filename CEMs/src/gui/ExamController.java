@@ -5,10 +5,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-
+import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
+import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,12 +17,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 public class ExamController implements Initializable
 {
 	private static Exam onGoingExam;
 	
+	private static User u;
+	
+    @FXML
+    private TextField idTextField;
+    
 	@FXML
 	private ScrollPane scrollPane;
     @FXML
@@ -33,8 +40,10 @@ public class ExamController implements Initializable
     private ArrayList<QuestionTemplateController> ansarry;
     
    
-    public static void start(Exam exam, String string) throws  Exception{
+    public static void start(Exam exam, User user) throws  Exception
+    {
     	onGoingExam = exam;
+    	u = user;
     	Platform.runLater(()->ScreenUtils.createNewStage("/gui/ExamScreen.fxml").show());
     }
     
@@ -44,18 +53,20 @@ public class ExamController implements Initializable
 		UserController.hide(event);
 	}
 	
-    @FXML
-    private void show(ActionEvent event){
-    	
-    	try {
-    	if(ansarry!=null) {
-    		System.out.println("check printing ");
-    		for(int i=0;i<ansarry.size();i++)
-    			System.out.println(ansarry.get(i).getQuestionText()+" "+ i );
-    
-    	}
-    	}catch(Exception e) {e.printStackTrace(); System.out.println("controller not connected");}
-    }
+	@FXML
+	public void enter(ActionEvent event)
+	{
+		if (u.getRole().equals("student"))
+		{
+			if(idTextField.getText().trim().equals(u.getUser_id()))
+			{
+				AlertMessages.makeAlert("Good luck!", "Exam");
+				activateExam();
+			}
+			else
+				AlertMessages.makeAlert("Wrong ID!", "Exam");	
+		}
+	}
     
 	/**
 	 * @author czmat
@@ -85,31 +96,17 @@ public class ExamController implements Initializable
 		
 	}
 
-	 int getNumberOfQuestions() {
-		// TODO Auto-generated method stub
+	 int getNumberOfQuestions() 
+	 {
 		return onGoingExam.getNum_questions();
 	}
 
 	 
+	 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		
-		activateExam();
-//			String input = JOptionPane.showInputDialog("Insert 4 digit password:");
-//			validatePasswords(input);
-	
+		if (u.getRole().equals("professor"))
+			activateExam();
 	}
-
-//	private void validatePasswords(String input) 
-//	{
-//		while(!input.equals(onGoingExam.getPassword()))
-//				input = JOptionPane.showInputDialog("Wrong password! Insert 4 digit password:");
-//
-//		activateExam();
-//	}
-
-
-
-
 }

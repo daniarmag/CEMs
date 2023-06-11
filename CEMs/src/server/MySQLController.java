@@ -1,14 +1,9 @@
-
 package server;
 
 import java.awt.Desktop;
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.sql.*;
 import java.sql.DriverManager;
@@ -21,7 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import entities.Course;
 import entities.Exam;
-import entities.ExamFile;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.ProfessorExam;
@@ -195,7 +189,7 @@ public class MySQLController
 	public ArrayList<Question> loadProfessorQuestions(String id)
 	{
 		ArrayList<Question> qArr = new ArrayList<Question>();
-		qArr.add(new Question("load professor questions"));
+		qArr.add(new Question("professor questions"));
 	    try
 		{
 	    	//loading all the questions from the table
@@ -227,6 +221,7 @@ public class MySQLController
 	public  ArrayList<Exam>loadStudentExams(String id)
 	{
 		ArrayList<Exam> eArr = new ArrayList<>();
+		eArr.add(new Exam ("student exams"));
 		try {
 	    	//loading all the  student's exams from the table
 			PreparedStatement ps = conn.prepareStatement("SELECT exam.* "
@@ -502,6 +497,7 @@ public class MySQLController
 		    {
 		    	Question q = new Question(null, rs.getString(1), null, rs.getString(2), null, null, rs.getString(3), 
 		    							  new String[]{rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)}); 
+		    	q.setCourse(id);
 		        answer.add(q);
 			}
 		} catch (SQLException e) { e.printStackTrace();}
@@ -583,7 +579,7 @@ public class MySQLController
 	
 	/**
 	 * @param arr
-	 * @return all the exam of the professor and his grades orderd by grade average
+	 * @return all the exam of the professor and his grades ordered by grade average
 	 */
 	public ArrayList<?> getAllprofessorExams(ArrayList<String> arr){
 		ArrayList<ProfessorExam> array=new ArrayList<>();
@@ -750,9 +746,7 @@ public class MySQLController
 	    } catch (SQLException e) { e.printStackTrace();}
         return courses;
 	}
-	
-	
-	@SuppressWarnings("unused")
+
 	public void openExamFile(String examID) {
 		{
 			ResultSet rs = null;
@@ -797,7 +791,46 @@ public class MySQLController
 			}
 		}
 	}
-		
 
+	/**
+	 * This method, loadProfessorExams, retrieves a list of exams from a database table
+	 * @return an ArrayList of exam objects
+	 */
+	public ArrayList<Exam> loadProfessorExams(String id) 
+	{
+		ArrayList<Exam> eArr = new ArrayList<>();
+		eArr.add(new Exam("professor exams"));
+	    try
+		{
+	    	//loading all the exams from the table
+	    	PreparedStatement ps = conn.prepareStatement("SELECT * FROM exam WHERE professor_id = ?");
+		    ps.setString(1, id);
+		    ResultSet rs = ps.executeQuery();
+			while (rs.next()) 
+			{
+				Exam e = new Exam(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						          rs.getInt(5), rs.getInt(6), rs.getString(7), rs.getString(8),
+						          rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(14));
+				eArr.add(e);
+			}
+		} 
+		catch (SQLException e) {e.printStackTrace();}
+		return eArr;
+	}
 		
+	/**
+	 * This method activates or deactivates an exam with the given id
+	 * @param id
+	 * @param isActive 
+	 */
+	public void updateExamStatus(String id, boolean isActive) 
+	{
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("UPDATE exam SET isActive = ? WHERE exam_id = ?");
+			ps.setInt(1, isActive ? 1 : 0);
+			ps.setString(2, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}
+	}
 }

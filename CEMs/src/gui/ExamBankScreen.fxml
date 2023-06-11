@@ -74,7 +74,7 @@
                   <TableColumn id="subjectTable" fx:id="activeCol" prefWidth="78.0" text="Active" />
                </columns>
             </TableView>
-            <Button id="updateBtn" fx:id="activatExamBtn" layoutX="478.0" layoutY="149.0" mnemonicParsing="false" onAction="#activatExam" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Activate Exam" />
+            <Button id="updateBtn" fx:id="activatExamBtn" layoutX="478.0" layoutY="149.0" mnemonicParsing="false" onAction="#activateExam" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Activate Exam" />
             <Button id="updateBtn" fx:id="extendTimeBtn" layoutX="478.0" layoutY="336.0" mnemonicParsing="false" onAction="#extendTime" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Extend Time" />
             <TextField fx:id="searchBar" layoutX="52.0" layoutY="108.0" promptText="Search by exam name.." />
          </children>

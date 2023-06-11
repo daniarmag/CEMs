@@ -36,7 +36,7 @@ public class ClientMessageHandler
     static StudentScreenController studentScreenController;
     static StudentExamScreenController studentExamScreenController;
     static HeadOfDepScreenController headOfScreenController;
-    static ExamController examcontroller;
+    static ExamController examController;
     static StatisticsChooseScreenController statisticsScreen;
     ///Check check check dont use 
     //static guiMainController guiController;
@@ -44,7 +44,7 @@ public class ClientMessageHandler
 		//guiController =new guiMainController();
 		studentController = new StudentScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
-		examcontroller=new ExamController();
+		examController=new ExamController();
 		professorController = new ProfessorScreenController();
 	}
 
@@ -237,6 +237,14 @@ public class ClientMessageHandler
 				questionBankScreenController.setRemovalFlag(false);
 				AlertMessages.makeAlert("Cannot delete - question is already in use.","Question Creation");
 				break;
+			
+			case "selected exam is now active":
+				AlertMessages.makeAlert("Exam activated", "Activate Exam");
+				break;
+				
+			case "selected exam is now inactive":
+				AlertMessages.makeAlert("Exam deactivated", "Dectivate Exam");
+				break;
 		}
 	}
 	
@@ -262,7 +270,10 @@ public class ClientMessageHandler
 				arrayList.remove(0);
 				studentScreenController.setArr(arrayList);
 				break;
-				
+			
+			case "selected exam is now inactive":
+				AlertMessages.makeAlert("Exam has been terminated.","Exam");
+			//	examController.
 		}
 	}
 
@@ -275,7 +286,7 @@ public class ClientMessageHandler
 		String messageType = arrayList.remove(0).getQuestionText();
 		switch (messageType) 
 		{
-			case "load professor questions":
+			case "professor questions":
 				questionBankScreenController.setArr(arrayList);
 				questionBankScreenController.updateQuestionTable(arrayList);
 				break;
@@ -287,10 +298,26 @@ public class ClientMessageHandler
 		
 	}
 	
+	/**
+	 * Handles client messages that are an array list with Exam elements.
+	 * @param arrayList
+	 */
 	public static void examArrayListMessageHandler(ArrayList<Exam> arrayList) 
 	{
-		studentExamScreenController.setArr(arrayList);
-		studentExamScreenController.updateExamTable();
+		String messageType = arrayList.remove(0).getExam_name();
+		switch (messageType) 
+		{
+			case "student exams":
+				studentExamScreenController.setArr(arrayList);
+				studentExamScreenController.updateExamTable();
+				break;
+			
+			case "professor exams":
+				examBankScreenController.setArr(arrayList);
+				examBankScreenController.updateExamTable(arrayList);
+				break;
+		}
+		
 	}
 
 	/**

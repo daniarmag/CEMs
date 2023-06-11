@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
@@ -24,7 +25,7 @@ import javafx.scene.input.KeyEvent;
 
 public class ExamBankScreenController implements Initializable
 {
-	public ArrayList<Exam> eArr = new ArrayList<Exam>();
+	public ArrayList<Exam> eArr = new ArrayList<>();
 	
 	public static Map<String, ArrayList<String>> teachingMap;
 	
@@ -49,7 +50,7 @@ public class ExamBankScreenController implements Initializable
     private TextField searchBar;
     
     @FXML
-    private TableView<Exam> examTable;
+    private TableView<Exam> examTable = new TableView<>();
     
     @FXML
     private TableColumn<Exam, String> examNameCol;
@@ -89,6 +90,8 @@ public class ExamBankScreenController implements Initializable
 		request.add(u.getUser_id());
 		ClientUI.chat.accept(request);
 		searchBar.setOnKeyReleased(event -> search(event));
+	    for (Exam e : examTable.getItems()) 
+	        e.setIsActive(e.getIsActive().equals("0") ? "No" : "Yes");
 	}
 
 	/**
@@ -110,24 +113,72 @@ public class ExamBankScreenController implements Initializable
 	{	
 		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
 	}
-    
+ 
+
+    /**
+     * Sends a request to HOF to get time extension for the exam.
+     * @param event
+     */
     @FXML
     void extendTime(ActionEvent event)
     {
-
+    	Exam selectedExam = examTable.getSelectionModel().getSelectedItem();
+    	//Condition to make sure that an exam to deactivate was indeed selected.
+    	if (selectedExam != null)
+    	{
+    	 	/*ArrayList<String> request = new ArrayList<String>();
+    		//A call to activate an exam.
+    		request.add("extend time");
+    		request.add(selectedExam.getExam_id());
+    		ClientUI.chat.accept(request);*/
+    	}
+    	  else 
+              JOptionPane.showMessageDialog(null, "Select an exam for time extension.", "Extend Time", JOptionPane.INFORMATION_MESSAGE);
     }
     
-    @FXML
-    void activatExam(ActionEvent event)
-    {
+    
+	/**
+	 * Activates the exam via handleExamStatus
+	 * @param event
+	 */
+	@FXML
+	void activateExam(ActionEvent event) 
+	{
+	    handleExamStatus(true);
+	}
 
-    }
+	/**
+	 * Deactivates the exam via handleExamStatus
+	 * @param event
+	 */
+	@FXML
+	void deactivateExam(ActionEvent event)
+	{
+	    handleExamStatus(false);
+	}
 
-    @FXML
-    void deactivateExam(ActionEvent event) 
-    {
-
-    }
+	/**
+	 * Depending by button that was clicked, handling the request
+	 * to activate or deactivate the exam.
+	 * @param activate
+	 */
+	private void handleExamStatus(boolean activate)
+	{
+	    Exam selectedExam = examTable.getSelectionModel().getSelectedItem();
+	    String action = activate ? "activate" : "deactivate";
+	    String actionMessage = activate ? "Activate Exam" : "Deactivate Exam";
+	    if (selectedExam != null) 
+	    {
+	        ArrayList<String> request = new ArrayList<>();
+	        request.add(action);
+	        request.add(selectedExam.getExam_id());
+	        ClientUI.chat.accept(request);
+	        selectedExam.setIsActive(activate ? "Yes" : "No");
+	        examTable.refresh();
+	    } else 
+	        JOptionPane.showMessageDialog(null, "Select an exam to " + action, actionMessage, JOptionPane.INFORMATION_MESSAGE);
+	}
+    
     
     /**
 	 * Sets the exam table with the values that are currently in the eArr. 
@@ -135,9 +186,9 @@ public class ExamBankScreenController implements Initializable
 	 */
 	public void updateExamTable(ArrayList<Exam> arrayList) 
 	{
-		examNameCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-	    typeCol.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-	    activeCol.setCellValueFactory(new PropertyValueFactory<>("questionText"));
+		examNameCol.setCellValueFactory(new PropertyValueFactory<>("exam_name"));
+	    typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+	    activeCol.setCellValueFactory(new PropertyValueFactory<>("isActive"));
 	    ObservableList<Exam> examObservableList = FXCollections.observableArrayList(arrayList);
 	    examTable.setItems(examObservableList);
     }
@@ -157,5 +208,14 @@ public class ExamBankScreenController implements Initializable
 		    //Update the question table with the filtered list
 		    updateExamTable(filteredList);       
 	 }
+	
+	/**
+     * Setter.
+     * @param eArr
+     */
+    public void setArr (ArrayList<Exam> eArr)
+    {
+    	this.eArr = eArr;
+    }
 
 }

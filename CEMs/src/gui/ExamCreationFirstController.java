@@ -126,8 +126,17 @@ public class ExamCreationFirstController implements Initializable
     	{
     		ArrayList<Question> info = new ArrayList<>();
     		info.addAll(questionTable.getSelectionModel().getSelectedItems());
+    		setQuestionsSubject();
 			ExamCreationSecondController.start(u, info, event);
 		} catch (Exception e) {e.printStackTrace();}
+    }
+    
+    /**
+     * Sets subjects for question before passing the arrayList to the next list.
+     */
+    public void setQuestionsSubject()
+    {
+    	for (Question q : questionArr) q.setSubject(subjectMenu.getText().split("\\s+")[0]);
     }
     
 	/**

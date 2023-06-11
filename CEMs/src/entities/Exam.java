@@ -24,6 +24,16 @@ public class Exam implements Serializable
 	public String type = "Computerized";
 	public String exam_name;
 	public ArrayList<Question> examQuestions = new ArrayList<>();
+	
+	/**
+	 * Exam for object passing.
+	 * @param author
+	 */
+	public Exam(String exam_name)
+	{
+		this.exam_name = exam_name;
+	}
+	
 		/**
 	 * @param exam_number
 	 * @param subject_id

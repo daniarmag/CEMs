@@ -61,7 +61,7 @@ public class ExamCreationSecondController implements Initializable
     private TextArea studentNotesTextArea;
     
     @FXML
-    private TableView<Question> questionTable;
+    private TableView<Question> questionTable = new TableView<>();
     
     @FXML
     private TableColumn<Question, String> questionIdCol;
@@ -120,8 +120,9 @@ public class ExamCreationSecondController implements Initializable
 	@FXML
 	void goBack(ActionEvent event) 
 	{
-		UserController.hide(event);
+		UserController.close(event);
 	    UserController.show(e);
+	    resetQuestionScores();
 	}
 	
 	/**
@@ -154,10 +155,16 @@ public class ExamCreationSecondController implements Initializable
 	@FXML
 	void preview(ActionEvent event)
 	{
+		HashMap<Boolean, String> errorMap = createErrorMap();
+		if (errorMap.containsKey(true))
+		{
+			JOptionPane.showMessageDialog(null, errorMap.get(true), "Exam Creation", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		try 
 		{
 			buildExam();
-			ExamController.start(newExam, "Professor");
+			ExamController.start(newExam, u);
 		} catch (Exception e) {e.printStackTrace();}
 	}
 	
@@ -194,6 +201,13 @@ public class ExamCreationSecondController implements Initializable
 		newExam.setExam_number(newExamNum);
 	}
 	
+	/**
+	 * Resets the questionList when going back to the previous page.
+	 */
+	public void resetQuestionScores() 
+	{
+	    for (Question q : questionList) q.setScore(null);
+	}
 	/**
 	 * Sets the columns of the table to be editable.
 	 */

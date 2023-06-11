@@ -208,7 +208,6 @@ public class StatisticsChooseScreenController implements Initializable {
 		event=e;
 		Object item=tableInfo.getSelectionModel().getSelectedItem();
 		itemChosen=item;
-		@SuppressWarnings("unused")
 		Class<?> chooseClass=item.getClass();
 		ArrayList<String> request = new ArrayList<>();	
 		request.add("for head of department report");

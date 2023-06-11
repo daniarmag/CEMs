@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -23,6 +24,9 @@
                </content>
             </ScrollPane>
             <Button fx:id="exitBtn" layoutX="20.0" layoutY="54.0" mnemonicParsing="false" onAction="#exit" text="exit" />
+            <TextField fx:id="idTextField" layoutX="677.0" layoutY="54.0" />
+            <Text layoutX="656.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="20.755859375" />
+            <Button fx:id="enterBtn" layoutX="834.0" layoutY="54.0" mnemonicParsing="false" onAction="#enter" text="enter" />
          </children>
       </Pane>
    </children>

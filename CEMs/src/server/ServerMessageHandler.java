@@ -2,7 +2,8 @@ package server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 import entities.Exam;
 import entities.Question;
 import entities.User;
@@ -11,9 +12,9 @@ import ocsf.server.ConnectionToClient;
 
 public class ServerMessageHandler 
 {
-	static private MySQLController sqlController=MySQLController.getInstance(); 
+	static private MySQLController sqlController = MySQLController.getInstance(); 
 	
-	
+	static private Map<String, ArrayList<ConnectionToClient>> roleClientMap = new HashMap<>();
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
@@ -133,8 +134,19 @@ public class ServerMessageHandler
 						client.sendToClient("incorrect login");
 				    else if (user.getUser_id().equals("logged"))
 						client.sendToClient("already logged");
+					//Adds the client with his user-role to the roleClientMap.
 				    else
-				    	client.sendToClient(user);
+				    {
+				    	ArrayList<ConnectionToClient> clients = roleClientMap.get(user.getRole());
+				    	if (clients == null) 
+				    	{
+							clients = new ArrayList<>();
+							roleClientMap.put(user.getRole(), clients);
+						}
+				    	clients.add(client);
+				    	roleClientMap.put(user.getRole(), clients);
+						client.sendToClient(user);
+				    }
 					break;
 					
 				case "logout":
@@ -147,7 +159,7 @@ public class ServerMessageHandler
 					break;
 				
 				case "load professor exams":
-				//	client.sendToClient(sqlController.loadProfessorExams(arrayList.get(1)));
+					client.sendToClient(sqlController.loadProfessorExams(arrayList.get(1)));
 					break;
 					
 				case "update question courses":
@@ -170,13 +182,9 @@ public class ServerMessageHandler
 					
 				case "delete question":
 					if(sqlController.deleteQuestionFromDb(arrayList.get(1)))
-					{
 						client.sendToClient("deleted question");
-					}
 					else
-					{
 						client.sendToClient("question in use");
-					}
 					break;
 					
 				case "load teaching map":
@@ -209,6 +217,22 @@ public class ServerMessageHandler
 							//course
 					break;
 					
+				case "activate":
+					sqlController.updateExamStatus(arrayList.get(1), true);
+					client.sendToClient("selected exam is now active");
+					break;
+					
+				case "deactivate":
+					sqlController.updateExamStatus(arrayList.get(1), false);
+					ArrayList<String> answer = new ArrayList<>();
+					answer.add("selected exam is now inactive");
+					answer.add(arrayList.get(1));
+					//A message for each client of role "student".
+					for (ConnectionToClient c : roleClientMap.get("student"))
+						c.sendToClient(answer);
+					//Specific message for the professor.
+					client.sendToClient(answer.get(0));
+					break;
 			}
 		} catch (IOException e) {}
 	}
