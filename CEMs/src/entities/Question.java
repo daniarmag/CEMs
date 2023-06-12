@@ -42,10 +42,10 @@ public class Question implements Serializable
 				    String correctAnswer, String[] answers)
 	{
 		super();
+		this.questionNumber = questionNumber;
 		this.id = id;
 		this.subject = subject;
 		this.questionText = questionText;
-		this.questionNumber = questionNumber;
 		this.author = author;
 		this.professorId = professorId;
 		this.correctAnswer = correctAnswer;

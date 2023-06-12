@@ -5,41 +5,36 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
 public class TimerController {
-	private static int SECONDS_IN_MINUTE = 60;
+	public static Timer timer = new Timer();
+	static Integer minutesLeft;
+	static boolean oneMinuteFlag = false;
+    private static TextField TimerTXT;
+    
+	public static void startCountdown(Integer minutes, TextField TXT, String type) {
+		minutesLeft = minutes;
+        TimerTask task = new TimerTask() {
+        	
+            @Override
+            public void run() {
+            	minutesLeft--;
+            	TXT.setText(minutesLeft.toString());
 
-	private String studentID;
-	private int duration, minutes, seconds;
-	private int remainingSeconds;
-	private Timer timer;
-
-	public TimerController(String studentID, int duration) {
-		this.studentID = studentID;
-		this.remainingSeconds = duration * SECONDS_IN_MINUTE;
-	}
-
-	public void startTimer() {
-		timer = new Timer();
-		TimerTask timerTask = new TimerTask() {
-			@Override
-			public void run() {
-				if (remainingSeconds > 0) {
-					minutes = remainingSeconds / SECONDS_IN_MINUTE;
-					seconds = remainingSeconds % SECONDS_IN_MINUTE;
-					remainingSeconds--;
-				} else {
-					timer.cancel();
-					System.out.printf("[%s] Time's up!%n", studentID);
-				}
-			}
-		};
-		timer.scheduleAtFixedRate(timerTask, 0, 1000);
-	}
-
-	public int getRemainingTime() {
-		if (minutes > 0)
-			return minutes;
-		else
-			return seconds;
-	}
+        		if(type.equals("Manual"))
+	                if (minutesLeft == 0 && !oneMinuteFlag) {
+	                	oneMinuteFlag = true;
+	                	minutesLeft++;
+	            		TimerTXT.setText(minutesLeft.toString());
+	                	}
+	                else if (oneMinuteFlag) {
+	                    timer.cancel();
+	                }
+            }
+        };
+        // Schedule the task to run every minute
+        timer.schedule(task, 0, 1500);
+		}
 }
