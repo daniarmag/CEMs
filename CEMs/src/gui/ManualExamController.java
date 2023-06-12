@@ -56,8 +56,7 @@ public class ManualExamController implements Initializable{
     private Text welcomeText;
     
     @FXML
-    private TextField TimerTXT;
-
+    private Text timerTXT;
     /**
      * Starts the manual exam for the given user and exam.
      *
@@ -135,9 +134,8 @@ public class ManualExamController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientMessageHandler.setManualExamController(this);
-		TimerTXT.setEditable(false);
         SubmitBtn.setDisable(true);
-		TimerTXT.setText(minutesLeft.toString());
+        timerTXT.setText(minutesLeft.toString());
 	}
 
 	public void startCountdown() {
@@ -146,12 +144,12 @@ public class ManualExamController implements Initializable{
             @Override
             public void run() {
             	minutesLeft--;
-        		TimerTXT.setText(minutesLeft.toString());
+            	timerTXT.setText(minutesLeft.toString());
 
                 if (minutesLeft == 0 && !oneMinuteFlag) {
                 	oneMinuteFlag = true;
                 	minutesLeft++;
-            		TimerTXT.setText(minutesLeft.toString());
+                	timerTXT.setText(minutesLeft.toString());
                 	}
                 else if (oneMinuteFlag) {
                     timer.cancel();
@@ -162,8 +160,6 @@ public class ManualExamController implements Initializable{
         // Schedule the task to run every minute
         timer.schedule(task, 0, 60_000);
 		}
-//		TimerController timerController = new TimerController(u.getUser_id(), e.time);
-//		return timerController.getRemainingTime();
 	
 	/**
 	 * Writes the byte array from the ExamFile object to a file and opens it.
@@ -196,7 +192,7 @@ public class ManualExamController implements Initializable{
 		SubmitBtn.setDisable(true);
 		FileUploadTXT.setDisable(true);
 		timer.cancel();
-		TimerTXT.setText("0");
+		timerTXT.setText("0");
 	}
 	
 	public String getExamId() {

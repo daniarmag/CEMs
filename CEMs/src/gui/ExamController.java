@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import control.AlertMessages;
@@ -20,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class ExamController implements Initializable
 {
@@ -29,10 +33,14 @@ public class ExamController implements Initializable
 	
 	public static ActionEvent e;
 	
+	public static Timer timer = new Timer();
+	
+	Integer minutesLeft;
+	
     @FXML
     private TextField idTextField;
     @FXML
-    private TextField minutesTextField;
+    private Text timerTXT;
 	@FXML
 	private ScrollPane scrollPane;
     @FXML
@@ -112,8 +120,7 @@ public class ExamController implements Initializable
             }
         }
         scrollPane.setContent(questionContainer);
-		
-		
+        startCountdown();
 	}
 	 
 	/**
@@ -143,7 +150,23 @@ public class ExamController implements Initializable
 	{
 		if (u.getRole().equals("professor"))
 			activateExam();
-		else
+		else {
 			ClientMessageHandler.setExamController(this);
+			minutesLeft = onGoingExam.getTime();
+		}
+	}
+	
+	public void startCountdown() {
+		TimerTask task = new TimerTask() {
+			@Override
+	        public void run() {
+				minutesLeft--;
+	            timerTXT.setText(minutesLeft.toString());
+	            if (minutesLeft == 0) 
+	            	timer.cancel();
+	        }
+		};
+		// Schedule the task to run every minute
+		timer.schedule(task, 0, 60_000);
 	}
 }
