@@ -857,8 +857,8 @@ public class MySQLController
 			ps.setString(1, examID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Question q = new Question(rs.getString("id"), rs.getString("subject_id"),
-				rs.getString("question_text"),rs.getString("question_number"), rs.getString("professor_full_name"),
+				Question q = new Question(rs.getString("question_number"), rs.getString("id"), rs.getString("subject_id"),
+				rs.getString("question_text"), rs.getString("professor_full_name"),
 				rs.getString("professor_id"), rs.getString("correct_answer"), 
 				new String[]{rs.getString("answer1"), rs.getString("answer2"), rs.getString("answer3"), rs.getString("answer4")});
 				q.setScore(rs.getString("score"));

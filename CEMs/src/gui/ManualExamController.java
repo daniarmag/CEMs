@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
 import entities.ExamFile;
@@ -91,6 +92,7 @@ public class ManualExamController implements Initializable{
 		request.add(e.getExam_id());
 		ClientUI.chat.accept(request);
         SubmitBtn.setDisable(false);
+        DownloadBtn.setDisable(false);
 		startCountdown();
     }
 
@@ -145,11 +147,11 @@ public class ManualExamController implements Initializable{
             public void run() {
             	minutesLeft--;
             	timerTXT.setText(minutesLeft.toString());
-
                 if (minutesLeft == 0 && !oneMinuteFlag) {
                 	oneMinuteFlag = true;
                 	minutesLeft++;
                 	timerTXT.setText(minutesLeft.toString());
+        			AlertMessages.makeAlert("Exam is over, you have one minute for submiting", "Exam is over");		
                 	}
                 else if (oneMinuteFlag) {
                     timer.cancel();
@@ -158,7 +160,7 @@ public class ManualExamController implements Initializable{
             }
         };
         // Schedule the task to run every minute
-        timer.schedule(task, 0, 60_000);
+        timer.schedule(task, 0, 3000);
 		}
 	
 	/**
