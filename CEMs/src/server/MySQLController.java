@@ -222,8 +222,6 @@ public class MySQLController
 	public ArrayList<Exam>loadStudentExams()
 	{
 		ArrayList<Exam> eArr = new ArrayList<>();
-		ArrayList<Question> qArr = new ArrayList<>();
-		
 		eArr.add(new Exam ("student exams"));
 		try {
 	    	//loading all the  exams from the exam table
@@ -814,7 +812,13 @@ public class MySQLController
 			ps.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();}
 	}
-		
+	
+	/**
+	 * Creates an examFile with the specified exam ID for opening the exam.
+	 *
+	 * @param examID the ID of the exam file to open
+	 * @return the ExamFile object
+	 */
 	public ExamFile openExamFile(String examID) {
 		ExamFile examFile = new ExamFile(examID);
 		Blob blob = null;
@@ -837,6 +841,12 @@ public class MySQLController
 			return examFile;
 	}
 	
+	/**
+	 * This method loads the questions of specified exam and returns an ArrayList of Question objects.
+	 *
+	 * @param examID the ID of the exam to retrieve questions for
+	 * @return an ArrayList of Question objects representing the exam questions
+	 */
 	public ArrayList<Question> examQuestion(String examID){
 		ArrayList<Question> qArr = new ArrayList<>();
 		qArr.add(new Question("exam questions"));

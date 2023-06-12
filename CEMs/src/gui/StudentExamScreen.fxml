@@ -68,7 +68,7 @@
             <TableView id="examTable" fx:id="examTable" layoutX="189.0" layoutY="123.0" prefHeight="259.0" prefWidth="374.0">
               <columns>
                 <TableColumn id="idTable" fx:id="idTable" prefWidth="79.33334350585938" text="Exam ID" />
-                  <TableColumn id="courseTable" fx:id="courseTable" prefWidth="130.6666259765625" text="Course" />
+                  <TableColumn id="exNameTable" fx:id="exNameTable" prefWidth="130.6666259765625" text="Exam Name" />
                   <TableColumn id="typeTable" fx:id="typeTable" prefWidth="86.0" text="Type" />
                   <TableColumn id="activeTable" fx:id="activeTable" prefWidth="75.0" text="Active" />
               </columns>

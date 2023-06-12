@@ -31,7 +31,8 @@ public class ExamController implements Initializable
 	
     @FXML
     private TextField idTextField;
-
+    @FXML
+    private TextField minutesTextField;
 	@FXML
 	private ScrollPane scrollPane;
     @FXML

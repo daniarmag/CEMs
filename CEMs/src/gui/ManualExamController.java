@@ -50,9 +50,6 @@ public class ManualExamController implements Initializable{
     private Button UploadBtn;
 
     @FXML
-    private Button exitBtn;
-
-    @FXML
     private Button goBackBtn;
 
     @FXML
@@ -75,12 +72,19 @@ public class ManualExamController implements Initializable{
 		minutesLeft = e.getTime();
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ManualExam.fxml").show());
 	}
+    
+    /** Empties the FileUploadTXT
+     * @param event
+     */
     @FXML
     void DeleteBtn(ActionEvent event) {
     	FileUploadTXT.setText("");
     }
 
-
+    /**
+     * Sends a request to load the exam file and starts the countdown.
+     * @param event
+     */
     @FXML
     void DownloadBtn(ActionEvent event) {
     	ArrayList<String> request = new ArrayList<String>();
@@ -112,27 +116,28 @@ public class ManualExamController implements Initializable{
     	if (file != null)
     		FileUploadTXT.setText("Selected file: " + file.getAbsolutePath());
     }
-
-    /*Disconnects from the server and closes GUI window.*/
-   	@FXML
-   	void exit(ActionEvent event) 
-   	{
-   		UserController.userExit(u);
-   	}
-
+   	
 	@FXML
 	void goBack(ActionEvent event) 
 	{	
-		UserController.goBack(event, "/gui/StudentExamScreen.fxml");
+		int res = JOptionPane.showConfirmDialog(null, 
+				"Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam", 
+				JOptionPane.YES_NO_OPTION);
+		if (res == JOptionPane.YES_OPTION)
+			UserController.goBack(event, "/gui/StudentScreen.fxml");
 	}
 	
+	 /**
+	  * Initializes the GUI with the given logic.
+	  * @param location
+	  * @param resources
+	  */ 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientMessageHandler.setManualExamController(this);
 		TimerTXT.setEditable(false);
         SubmitBtn.setDisable(true);
 		TimerTXT.setText(minutesLeft.toString());
-		
 	}
 
 	public void startCountdown() {
@@ -162,7 +167,6 @@ public class ManualExamController implements Initializable{
 	
 	/**
 	 * Writes the byte array from the ExamFile object to a file and opens it.
-	 *
 	 * @param examFile The ExamFile object containing the byte array to be written to the file.
 	 */
 	public void setExamFile(ExamFile examFile) 

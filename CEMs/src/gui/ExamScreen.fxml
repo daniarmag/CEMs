@@ -27,6 +27,8 @@
             <TextField fx:id="idTextField" layoutX="677.0" layoutY="54.0" />
             <Text layoutX="656.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="20.755859375" />
             <Button fx:id="enterBtn" layoutX="834.0" layoutY="54.0" mnemonicParsing="false" onAction="#enter" text="enter" />
+            <TextField fx:id="minutesTextField" layoutX="409.0" layoutY="62.0" />
+            <Text layoutX="341.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left" wrappingWidth="67.42254638671875" />
          </children>
       </Pane>
    </children>

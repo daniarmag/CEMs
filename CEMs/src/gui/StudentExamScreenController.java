@@ -54,8 +54,8 @@ public class StudentExamScreenController implements Initializable
 	    private TableColumn<?, ?> idTable;
 
 	    @FXML
-	    private TableColumn<?, ?> courseTable;
-
+	    private TableColumn<?, ?> exNameTable;
+	    
 	    @FXML
 	    private TableColumn<?, ?> typeTable;
     
@@ -111,11 +111,20 @@ public class StudentExamScreenController implements Initializable
     	UserController.userExit(u);
     }
 
+	/**
+	 * Goes back to student main screen.
+	 * @param event
+	 */
     @FXML
     void goBack(ActionEvent event)  {
     	UserController.goBack(event, "/gui/StudentScreen.fxml");
     }
     
+    
+    /**
+     * Refreshes the exam table
+     * @param event
+     */
     @FXML
     void refresh(ActionEvent event)
     {
@@ -140,20 +149,16 @@ public class StudentExamScreenController implements Initializable
 	 */
 	public void updateExamTable() {
 		idTable.setCellValueFactory(new PropertyValueFactory<>("exam_id"));
-		courseTable.setCellValueFactory(new PropertyValueFactory<>("course_id"));
+		exNameTable.setCellValueFactory(new PropertyValueFactory<>("exam_name"));
 		typeTable.setCellValueFactory(new PropertyValueFactory<>("type"));
 		activeTable.setCellValueFactory(new PropertyValueFactory<>("isActive"));
 	    ObservableList<Exam> examObservableList = FXCollections.observableArrayList(eArr);
-	    //These conditions make the table more understandable.
+	    //These condition makes the table more understandable.
 	    for (Exam e: examObservableList) {
 	    	if (e.getIsActive().equals("0"))
 	    		e.setIsActive("No");
 	    	else
 	    		e.setIsActive("Yes");
-	    	for (String cName: courseArray)
-	    		if(cName.startsWith(e.getCourse_id())) {
-	    			e.setCourse_id(cName);
-	    		}
 	    }
 	    examTable.setItems(examObservableList);
 	}
