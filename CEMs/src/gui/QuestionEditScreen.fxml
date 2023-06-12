@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="536.0" prefWidth="684.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionEditScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionEditScreenController">
    <children>
-      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="536.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
+      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
             <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
                <graphic>
@@ -41,37 +41,37 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Text id="profTitle" fx:id="questionIdText" layoutX="237.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit question x" textAlignment="CENTER" wrappingWidth="373.744140625">
+      <Text id="profTitle" fx:id="questionIdText" layoutX="298.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit question x" textAlignment="CENTER" wrappingWidth="373.744140625">
          <font>
-            <Font name="Times New Roman Bold" size="42.0" />
+            <Font name="Tahoma Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="submitBtn" layoutX="569.0" layoutY="487.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: #30BECC;" text="Submit">
+      <Button fx:id="submitBtn" layoutX="596.0" layoutY="541.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Submit" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <TextArea fx:id="questionTextArea" layoutX="231.0" layoutY="171.0" prefHeight="188.0" prefWidth="427.0" promptText="Write a question and instructions.." />
-      <TextField fx:id="aAnswerText" layoutX="275.0" layoutY="402.0" promptText="Input answer A" />
-      <TextField fx:id="bAnswerText" layoutX="275.0" layoutY="442.0" promptText="Input answer B" />
-      <TextField fx:id="cAnswerText" layoutX="509.0" layoutY="402.0" promptText="Input answer C" />
-      <TextField fx:id="dAnswerText" layoutX="509.0" layoutY="442.0" promptText="Input answer D" />
-      <RadioButton fx:id="aRadio" layoutX="231.0" layoutY="404.0" mnemonicParsing="false" text="A">
+      <TextArea fx:id="questionTextArea" layoutX="231.0" layoutY="171.0" prefHeight="187.0" prefWidth="539.0" promptText="Write a question and instructions.." />
+      <TextField fx:id="aAnswerText" layoutX="255.0" layoutY="403.0" prefHeight="31.0" prefWidth="236.0" promptText="Input answer A" style="-fx-background-radius: 15px;" />
+      <TextField fx:id="bAnswerText" layoutX="255.0" layoutY="443.0" prefHeight="31.0" prefWidth="236.0" promptText="Input answer B" style="-fx-background-radius: 15px;" />
+      <TextField fx:id="cAnswerText" layoutX="543.0" layoutY="403.0" prefHeight="31.0" prefWidth="236.0" promptText="Input answer C" style="-fx-background-radius: 15px;" />
+      <TextField fx:id="dAnswerText" layoutX="544.0" layoutY="443.0" prefHeight="31.0" prefWidth="236.0" promptText="Input answer D" style="-fx-background-radius: 15px;" />
+      <RadioButton fx:id="aRadio" layoutX="210.0" layoutY="408.0" mnemonicParsing="false" text="A">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="bRadio" layoutX="231.0" layoutY="444.0" mnemonicParsing="false" text="B">
+      <RadioButton fx:id="bRadio" layoutX="210.0" layoutY="448.0" mnemonicParsing="false" text="B">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="cRadio" layoutX="463.0" layoutY="404.0" mnemonicParsing="false" text="C">
+      <RadioButton fx:id="cRadio" layoutX="501.0" layoutY="408.0" mnemonicParsing="false" text="C">
          <font>
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="dRadio" layoutX="462.0" layoutY="444.0" mnemonicParsing="false" text="D">
+      <RadioButton fx:id="dRadio" layoutX="501.0" layoutY="449.0" mnemonicParsing="false" text="D">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
@@ -81,22 +81,25 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
-      <ImageView fitHeight="60.0" fitWidth="280.0" layoutX="201.0" layoutY="14.0">
+      <ImageView fitHeight="60.0" fitWidth="420.0" layoutX="204.0" layoutY="6.0">
          <image>
-            <Image url="@../images/questionlogo.png" />
+            <Image url="@../images/EditQuestionLabel.png" />
          </image>
       </ImageView>
       <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="640.0" layoutY="26.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/exitBtn.png" />
-               </image>
-            </ImageView>
-         </graphic>
          <padding>
             <Insets right="20.0" />
          </padding>
       </Button>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="760.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/exitBtn.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="75.0" layoutX="711.0" layoutY="485.0">
+         <image>
+            <Image url="@../images/Logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

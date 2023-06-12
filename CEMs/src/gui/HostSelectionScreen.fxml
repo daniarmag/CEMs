@@ -12,17 +12,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HostSelectionScreenController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HostSelectionScreenController">
    <children>
-      <Pane prefHeight="281.0" prefWidth="390.0">
+      <Pane prefHeight="281.0" prefWidth="390.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <Text layoutX="57.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address" wrappingWidth="122.13671875">
                <font>
                   <Font size="16.5" />
                </font>
             </Text>
-            <TextField id="txtServerIP" fx:id="txtServerIP" layoutX="195.0" layoutY="128.0" prefHeight="25.0" prefWidth="130.0" />
-            <Button id="connectToServerBtn" fx:id="connectToServerBtn" layoutX="128.0" layoutY="206.0" mnemonicParsing="false" onAction="#connect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Connect" />
+            <TextField id="txtServerIP" fx:id="txtServerIP" layoutX="195.0" layoutY="128.0" prefHeight="25.0" prefWidth="130.0" style="-fx-background-radius: 15px;" />
+            <Button id="connectToServerBtn" fx:id="connectToServerBtn" layoutX="144.0" layoutY="208.0" mnemonicParsing="false" onAction="#connect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Connect" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma Bold" size="18.0" />
+               </font></Button>
             <HBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="85.0" prefWidth="390.0" style="-fx-background-color: #30BECC;">
                <children>
                   <VBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="50.0" />

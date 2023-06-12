@@ -13,20 +13,20 @@
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="200.0">
+            <ImageView fitHeight="180.0" fitWidth="180.0">
                <image>
-                  <Image url="@../images/Professor%20Logo.png" />
+                  <Image url="@../images/ProfessorLogo.png" />
                </image>
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30px;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets top="310.0" />
+                  <Insets top="335.0" />
                </VBox.margin>
             </Button>
          </children>
@@ -39,29 +39,29 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Question management">
+      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#manageQuestions" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Question management" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="265.0" mnemonicParsing="false" onAction="#createExam" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Create an exam">
+      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="265.0" mnemonicParsing="false" onAction="#createExam" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Create an exam" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="activateExamBtn" alignment="CENTER" layoutX="349.0" layoutY="339.0" mnemonicParsing="false" onAction="#manageExams" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Exam management">
+      <Button fx:id="activateExamBtn" alignment="CENTER" layoutX="349.0" layoutY="339.0" mnemonicParsing="false" onAction="#manageExams" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Exam management" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="415.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Check results">
+      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="415.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Check results" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="viewReportBtn" alignment="CENTER" layoutX="349.0" layoutY="492.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="View reports">
+      <Button fx:id="viewReportBtn" alignment="CENTER" layoutX="349.0" layoutY="492.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="View reports" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
       <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="507.0">

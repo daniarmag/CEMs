@@ -12,22 +12,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HeadOfDepScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HeadOfDepScreenController">
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
-            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0">
-                     <image>
-                        <Image url="@../images/Back%20Logo.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@../images/Back%20Logo.png" />
+               </image>
                <VBox.margin>
-                  <Insets right="135.0" top="10.0" />
+                  <Insets right="140.0" />
                </VBox.margin>
-            </Button>
+            </ImageView>
             <ImageView fitHeight="141.0" fitWidth="133.0">
                <image>
                   <Image url="@../images/manager.png" />

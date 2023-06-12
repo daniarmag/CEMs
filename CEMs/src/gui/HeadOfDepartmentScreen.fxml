@@ -13,12 +13,12 @@
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
-            <ImageView fitHeight="175.0" fitWidth="175.0">
+            <ImageView fitHeight="180.0" fitWidth="180.0">
                <image>
                   <Image url="@../images/manager.png" />
                </image>
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets top="80.0" />
                </VBox.margin>
             </ImageView>
             <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30PX;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
@@ -26,7 +26,7 @@
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets right="85.0" top="310.0" />
+                  <Insets top="308.0" />
                </VBox.margin>
             </Button>
          </children>
@@ -39,19 +39,19 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="258.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: ffffff; -fx-border-radius: 30px; -fx-border-color: #30BECC; -fx-border-width: 4px;" text="Grant Approval ">
+      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="283.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Grant Approval " textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="187.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-border-color: #30BECC; -fx-border-radius: 30PX; -fx-border-width: 4PX; -fx-background-color: ffffff;" text="Access All Data">
+      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="197.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Access All Data" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="331.0" mnemonicParsing="false" onAction="#openStatistics" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: ffffff; -fx-border-color: #30BECC; -fx-border-radius: 30px; -fx-border-width: 4px;" text="Statistics ">
+      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="368.0" mnemonicParsing="false" onAction="#openStatistics" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Statistics " textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
       <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="507.0">
@@ -64,19 +64,16 @@
             <Image url="@../images/Home%20Page%20Logo.png" />
          </image>
       </ImageView>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/exitBtn.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER" />
       <Text fx:id="Alert" fill="#ee0303" layoutX="349.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check Messages !!!" visible="false" wrappingWidth="210.13671875">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
       </Text>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="762.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/exitBtn.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

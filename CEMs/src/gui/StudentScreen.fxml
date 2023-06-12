@@ -13,20 +13,20 @@
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="200.0">
+            <ImageView fitHeight="180.0" fitWidth="180.0">
                <image>
-                  <Image url="@../images/ProfessorLogo.png" />
+                  <Image url="@../images/StudentLogo.png" />
                </image>
                <VBox.margin>
-                  <Insets top="50.0" />
+                  <Insets top="80.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30px;" text="Log Out" textAlignment="CENTER" textFill="#30becc" VBox.vgrow="NEVER">
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets top="310.0" />
+                  <Insets top="308.0" />
                </VBox.margin>
             </Button>
          </children>
@@ -39,14 +39,14 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="takeExamBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#takeExamBtn" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Take an exam">
+      <Button fx:id="takeExamBtn" alignment="CENTER" layoutX="349.0" layoutY="188.0" mnemonicParsing="false" onAction="#takeExamBtn" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Take an exam" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="gradesAndCopiesBtn" alignment="CENTER" layoutX="349.0" layoutY="265.0" mnemonicParsing="false" onAction="#gradesAndCopiesBtn" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC;" text="Grades and copies">
+      <Button fx:id="gradesAndCopiesBtn" alignment="CENTER" layoutX="349.0" layoutY="265.0" mnemonicParsing="false" onAction="#gradesAndCopiesBtn" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Grades and copies" textFill="WHITE">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
       <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="507.0">

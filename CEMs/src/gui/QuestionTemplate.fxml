@@ -6,18 +6,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionTemplateController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionTemplateController">
    <children>
-      <TextArea fx:id="questionText" disable="true" layoutX="76.0" layoutY="91.0" prefHeight="223.0" prefWidth="500.0" />
-      <Text fx:id="questionNumText" layoutX="76.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question" wrappingWidth="181.13671875" />
+      <TextArea fx:id="questionText" disable="true" layoutX="76.0" layoutY="91.0" prefHeight="223.0" prefWidth="462.0" style="-fx-border-color: #FFFFFF; -fx-background-color: #FFFFFF;" />
+      <Text fx:id="questionNumText" layoutX="76.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question" wrappingWidth="372.13671875">
+         <font>
+            <Font name="Tahoma Bold" size="20.0" />
+         </font></Text>
       <RadioButton fx:id="aRadio" layoutX="76.0" layoutY="375.0" mnemonicParsing="false">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </RadioButton>
-      <Text fx:id="textFieldA" layoutX="102.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="textFieldA" wrappingWidth="217.13671875">
+      <Text fx:id="textFieldA" layoutX="102.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="textFieldA" wrappingWidth="217.13671875">
          <font>
-            <Font size="18.0" />
+            <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
       <RadioButton fx:id="bRadio" layoutX="76.0" layoutY="433.0" mnemonicParsing="false">
@@ -27,7 +30,7 @@
       </RadioButton>
       <Text fx:id="textFieldB" layoutX="102.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="textFieldB" wrappingWidth="217.13671875">
          <font>
-            <Font size="18.0" />
+            <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
       <RadioButton fx:id="cRadio" layoutX="348.0" layoutY="375.0" mnemonicParsing="false">
@@ -42,17 +45,17 @@
       </RadioButton>
       <Text fx:id="textFieldC" layoutX="374.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="textFieldC" wrappingWidth="205.13671875">
          <font>
-            <Font size="18.0" />
+            <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
       <Text fx:id="textFieldD" layoutX="374.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="textFieldD" wrappingWidth="205.13671875">
          <font>
-            <Font size="18.0" />
+            <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
       <Text layoutX="76.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mark the correct answer:">
          <font>
-            <Font name="Tahoma" size="15.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Text>
    </children>

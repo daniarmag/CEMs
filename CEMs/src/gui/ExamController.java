@@ -12,6 +12,7 @@ import client.ClientMessageHandler;
 import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
+import entities.Question;
 import entities.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -25,13 +26,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * Class that represents the computerized exam.
+ */
 public class ExamController implements Initializable
 {
-	public static Exam onGoingExam;
+	private ArrayList<QuestionTemplateController> ansarry;
 	
 	private static User u;
 	
-	public static ActionEvent e;
+	public static Exam onGoingExam;
+	
+	public static ActionEvent savedEvent;
 	
 	public static Timer timer = new Timer();
 	
@@ -50,12 +56,13 @@ public class ExamController implements Initializable
     
     @FXML
     private Button enterBtn;
-    
-    private ArrayList<QuestionTemplateController> ansarry;
-
-
-    
    
+    /**
+   	 * Initializes the JavaFX controller during application startup.
+   	 * @param user
+   	 * @param exam
+   	 * @throws Exception
+   	 */
     public static void start(Exam exam, User user) throws  Exception
     {
     	onGoingExam = exam;
@@ -63,6 +70,26 @@ public class ExamController implements Initializable
     	Platform.runLater(()->ScreenUtils.createNewStage("/gui/ExamScreen.fxml").show());
     }
     
+    /**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		if (u.getRole().equals("professor"))
+			activateExam();
+		else {
+			ClientMessageHandler.setExamController(this);
+			minutesLeft = onGoingExam.getTime();
+		}
+	}
+	
+	/**
+	 * Exits the exam screen. Different functionality for student/professor.
+	 * @param event
+	 */
 	@FXML
 	public void exit(ActionEvent event)
 	{
@@ -78,6 +105,10 @@ public class ExamController implements Initializable
 		}
 	}
 	
+	/**
+	 * Checks if the ID the student used is correct.
+	 * @param event
+	 */
 	@FXML
 	public void enter(ActionEvent event)
 	{
@@ -89,7 +120,7 @@ public class ExamController implements Initializable
 				activateExam();
 				enterBtn.setDisable(true);
 				idTextField.setDisable(true);
-				e = event;
+				savedEvent = event;
 			}
 			else
 				AlertMessages.makeAlert("Wrong ID!", "Exam");	
@@ -97,30 +128,31 @@ public class ExamController implements Initializable
 	}
     
 	/**
-	 * @author czmat
 	 * @param event
 	 * this method load all the questions to the exam screen 
 	 * and for each question add a controller so we can track the answer 
 	 */
-	 void activateExam() {
-		int numberOfQuestions = getNumberOfQuestions(); // Retrieve the number of questions from user input or a data source
-		ansarry=new ArrayList<>();
-        for (int i = 0; i < numberOfQuestions; i++) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/QuestionTemplate.fxml"));
-                Node questionComponent = loader.load();//this line must be before line @@@
-                QuestionTemplateController controller = loader.getController();//@@@
-                controller.questionHandler(onGoingExam.examQuestions.get(i));
-                controller.setQuestionNumText("Question " + (i+1));
-                ansarry.add(controller);
-                
-               questionContainer.getChildren().add(questionComponent);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        scrollPane.setContent(questionContainer);
-        startCountdown();
+	void activateExam() {
+		// Retrieve the number of questions from user input or a data source
+		int numberOfQuestions = getNumberOfQuestions();
+		ansarry = new ArrayList<>();
+		for (int i = 0; i < numberOfQuestions; i++) 
+		{
+			try 
+			{
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/QuestionTemplate.fxml"));
+				Node questionComponent = loader.load();
+				QuestionTemplateController controller = loader.getController();
+				Question currentQuestion = onGoingExam.examQuestions.get(i);
+				controller.questionHandler(currentQuestion);
+				controller.setQuestionNumText("Question " + (i + 1) + " (" + currentQuestion.getScore() + " points)");
+				ansarry.add(controller);
+				questionContainer.getChildren().add(questionComponent);
+			}
+			catch (IOException e) {e.printStackTrace();}
+		}
+		scrollPane.setContent(questionContainer);
+		startCountdown();
 	}
 	 
 	/**
@@ -128,13 +160,17 @@ public class ExamController implements Initializable
 	*/
 	public void closeWindow() 
 	{
-		Platform.runLater(() -> UserController.goBack(e, "/gui/StudentScreen.fxml"));
+		Platform.runLater(() -> UserController.goBack(savedEvent, "/gui/StudentScreen.fxml"));
 	}
 
-	 int getNumberOfQuestions() 
-	 {
+	
+	/**
+	 * @return amount of questions in exam
+	 */
+	int getNumberOfQuestions() 
+	{
 		return onGoingExam.getNum_questions();
-	 }
+	}
 
 	    
 	/**
@@ -145,28 +181,23 @@ public class ExamController implements Initializable
 		return onGoingExam;
 	}
 	 
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	/**
+	 * Starts the timer for the exam.
+	 */
+	public void startCountdown() 
 	{
-		if (u.getRole().equals("professor"))
-			activateExam();
-		else {
-			ClientMessageHandler.setExamController(this);
-			minutesLeft = onGoingExam.getTime();
-		}
-	}
-	
-	public void startCountdown() {
-		TimerTask task = new TimerTask() {
+		TimerTask task = new TimerTask() 
+		{
 			@Override
-	        public void run() {
+	        public void run()
+			{
 				minutesLeft--;
 	            timerTXT.setText(minutesLeft.toString());
 	            if (minutesLeft == 0) 
 	            	timer.cancel();
 	        }
 		};
-		// Schedule the task to run every minute
+		//Schedule the task to run every minute
 		timer.schedule(task, 0, 60_000);
 	}
 }

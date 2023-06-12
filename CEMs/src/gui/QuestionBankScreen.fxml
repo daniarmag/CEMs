@@ -8,77 +8,84 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionBankScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.QuestionBankScreenController">
    <children>
-      <Pane prefHeight="477.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;">
+      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
-            <Button id="updateBtn" fx:id="updateBtn" layoutX="324.0" layoutY="404.0" mnemonicParsing="false" onAction="#editQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Edit Question" />
-            <HBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
-               <children>
-                  <VBox prefHeight="100.0" prefWidth="250.0">
-                     <children>
-                        <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0">
-                                 <image>
-                                    <Image url="@../images/Back%20Logo.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets left="25.0" top="25.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children></VBox>
-                  <VBox prefHeight="96.0" prefWidth="250.0">
-                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Question Bank" textAlignment="CENTER" wrappingWidth="337.13671875">
-                           <font>
-                              <Font name="Times New Roman" size="55.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Text>
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="250.0">
-                     <children>
-                        <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" textAlignment="CENTER">
-                           <VBox.margin>
-                              <Insets right="25.0" top="25.0" />
-                           </VBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/exitBtn.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <TableView id="questionTable" fx:id="questionTable" layoutX="52.0" layoutY="149.0" prefHeight="232.0" prefWidth="647.0">
-              <columns>
-                  <TableColumn id="qnumTable" fx:id="qnumTable" prefWidth="119.0" text="Question Number" />
-                <TableColumn id="idTable" fx:id="idTable" prefWidth="59.0" text="ID" />
-                <TableColumn id="subjectTable" fx:id="subjectTable" prefWidth="112.0" text="Subject" />
-                  <TableColumn id="qtextTable" fx:id="qtextTable" prefWidth="244.0" text="Question Text" />
-                  <TableColumn id="authorTable" fx:id="authorTable" prefWidth="112.0" text="Author" />
-              </columns>
-            </TableView>
-            <Button id="updateBtn" fx:id="addQstnBtn" layoutX="52.0" layoutY="404.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Add Question" />
-            <Button id="updateBtn" fx:id="updateBtn1" layoutX="596.0" layoutY="404.0" mnemonicParsing="false" onAction="#deleteQuestion" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 10px;" text="Delete Question" />
-            <TextField fx:id="searchBar" layoutX="52.0" layoutY="108.0" promptText="Search by subject.." />
+            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0">
+                     <image>
+                        <Image url="@../images/Back%20Logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets right="140.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <ImageView fitHeight="180.0" fitWidth="180.0">
+               <image>
+                  <Image url="@../images/ProfessorLogo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </ImageView>
          </children>
-      </Pane>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Text id="profTitle" fx:id="welcomeText" layoutX="438.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question Bank" textAlignment="CENTER">
+         <font>
+            <Font name="Tahoma Bold" size="42.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="914.0" layoutY="516.0">
+         <image>
+            <Image url="@../images/Logo.png" />
+         </image>
+      </ImageView>
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER" />
+      <TableView fx:id="questionTable" layoutX="220.0" layoutY="199.0" prefHeight="310.0" prefWidth="745.0">
+        <columns>
+          <TableColumn fx:id="qnumTable" prefWidth="141.0" text="Question Number" />
+          <TableColumn fx:id="idTable" prefWidth="63.0" text="ID" />
+            <TableColumn fx:id="subjectTable" prefWidth="87.0" text="Subject" />
+            <TableColumn fx:id="qtextTable" prefWidth="332.0" text="Question Text" />
+            <TableColumn fx:id="authorTable" prefWidth="121.0" text="Author" />
+        </columns>
+      </TableView>
+      <Button fx:id="addQstnBtn" layoutX="219.0" layoutY="549.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Add question" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="updateBtn" layoutX="449.0" layoutY="549.0" mnemonicParsing="false" onAction="#editQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Edit question" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="updateBtn1" layoutX="681.0" layoutY="549.0" mnemonicParsing="false" onAction="#deleteQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete question" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="205.0" layoutY="6.0">
+         <image>
+            <Image url="@../images/ManageQuestionsLabel.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="searchBar" layoutX="220.0" layoutY="158.0" promptText="Search by subject..." style="-fx-background-radius: 15px;" />
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="942.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/exitBtn.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
