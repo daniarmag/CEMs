@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -31,6 +32,8 @@ import javafx.scene.text.Text;
  */
 public class ExamController implements Initializable
 {
+	Integer minutesLeft;
+	
 	private ArrayList<QuestionTemplateController> ansarry;
 	
 	private static User u;
@@ -40,17 +43,25 @@ public class ExamController implements Initializable
 	public static ActionEvent savedEvent;
 	
 	public static Timer timer = new Timer();
-	
-	Integer minutesLeft;
+
+    @FXML
+    private TextArea professorNotes;
+
+    @FXML
+    private TextArea studentNotes;
 	
     @FXML
     private TextField idTextField;
+    
     @FXML
     private Text timerTXT;
+    
 	@FXML
 	private ScrollPane scrollPane;
+	
     @FXML
     private VBox questionContainer;
+    
     @FXML 
     private Button start;
     
@@ -78,10 +89,14 @@ public class ExamController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		studentNotes.setText(onGoingExam.getExaminees_notes());
+		professorNotes.setText(onGoingExam.getProfessor_notes());
 		if (u.getRole().equals("professor"))
 			activateExam();
-		else {
+		else 
+		{
 			ClientMessageHandler.setExamController(this);
+			professorNotes.setVisible(false);
 			minutesLeft = onGoingExam.getTime();
 		}
 	}

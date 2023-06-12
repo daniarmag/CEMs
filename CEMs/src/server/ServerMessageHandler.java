@@ -245,6 +245,14 @@ public class ServerMessageHandler
 					answer.add(arrayList.get(1));
 					//Specific message for the professor.
 					client.sendToClient(answer.get(0));
+					System.out.println(roleClientMap);
+					// Print the entire map
+			        for (Map.Entry<String, ArrayList<ConnectionToClient>> entry : roleClientMap.entrySet()) {
+			            String key = entry.getKey();
+			            ArrayList<ConnectionToClient> clients = entry.getValue();
+			            System.out.println("Key: " + key);
+			            System.out.println("Clients: " + clients);
+			        }
 					if (roleClientMap.get("student") != null)
 					{
 						//A message for each client of role "student".
