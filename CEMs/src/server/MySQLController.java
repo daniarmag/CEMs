@@ -501,7 +501,6 @@ public class MySQLController
 		        answer.add(q);
 			}
 		} catch (SQLException e) { e.printStackTrace();}
-		System.out.println(answer);
 		return answer;
 	}
 	
@@ -843,7 +842,7 @@ public class MySQLController
 		qArr.add(new Question("exam questions"));
 		try 
 		{
-			PreparedStatement ps = conn.prepareStatement("SELECT q.* FROM question q JOIN exam_question eq "
+			PreparedStatement ps = conn.prepareStatement("SELECT q.*, eq.score FROM question q JOIN exam_question eq "
 														+ "ON q.id = eq.question_id WHERE eq.exam_id = ?");
 			ps.setString(1, examID);
 			ResultSet rs = ps.executeQuery();

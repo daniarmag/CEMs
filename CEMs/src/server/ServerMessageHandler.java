@@ -31,12 +31,15 @@ public class ServerMessageHandler
 			case STRING:
 				stringMessageHandler((String) msg, client);
 				break;
+				
 			case STRING_ARRAY_LIST:
 				stringArrayListMessageHandler((ArrayList<String>) msg, client);
 				break;
+				
 			case QUESTION:
 				questionMessageHandler((Question)msg, client);
 				break;
+				
 			case EXAM:
 				examMessageHandler((Exam)msg, client);
 				break;
@@ -90,6 +93,7 @@ public class ServerMessageHandler
 					
 				case "disconnected":
 					EchoServer.updateclientsInfoList(client, "Disconnected");
+					roleClientMap = new HashMap<>(); 
 					client.sendToClient("Disonnected");
 					break;
 					
@@ -111,8 +115,10 @@ public class ServerMessageHandler
 				case "Get all courses":			
 					client.sendToClient(sqlController.getAllCourses());
 					break;
+					
 				case "load student exams":
 					client.sendToClient(sqlController.loadStudentExams());
+					break;
 			}
 			
 		} catch (IOException e) {}

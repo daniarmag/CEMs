@@ -165,15 +165,19 @@ public class ManualExamController implements Initializable{
 	 *
 	 * @param examFile The ExamFile object containing the byte array to be written to the file.
 	 */
-	public void setExamFile(ExamFile examFile) {
+	public void setExamFile(ExamFile examFile) 
+	{
 		try {
 			ExamFile exFile = examFile;
-		    File newFile = new File("C:\\Users\\nicol\\Downloads\\exam"+ exFile.getFileName() + ".docx");
-		    // Create an output stream to write the byte array to the file
+			//Put file in downloads.
+			String userDir = System.getProperty("user.home");
+			String filePath = userDir + "/downloads/exam" + exFile.getFileName() + ".docx";
+		    File newFile = new File(filePath);
+		    //Create an output stream to write the byte array to the file
 			FileOutputStream fos = new FileOutputStream(newFile);
 			fos.write(exFile.getMybytearray());
 			fos.close();
-		    // Open the file
+		    //Open the file
 		    Desktop desktop = Desktop.getDesktop();
 		    desktop.open(newFile);
 			} catch (Exception e) {e.printStackTrace();}

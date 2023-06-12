@@ -96,6 +96,7 @@ public class StudentExamScreenController implements Initializable
 			ClientUI.chat.accept(request);
 			selectedExam.setExamQuestions(qArr);
 			try {
+				UserController.hide(event);
 				ExamController.start(selectedExam, u);
 			} catch (Exception e) {
 				e.printStackTrace();

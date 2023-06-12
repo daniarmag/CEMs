@@ -2,7 +2,6 @@ package client;
 
 import java.util.ArrayList;
 import java.util.Map;
-
 import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
@@ -40,16 +39,17 @@ public class ClientMessageHandler
     static ManualExamController manualExamController;
     static HeadOfDepScreenController headOfScreenController;
     static ExamController examController;
-    static StatisticsChooseScreenController statisticsScreen;
+	static StatisticsChooseScreenController statisticsScreen;
     ///Check check check dont use 
     //static guiMainController guiController;
 	static {
 		//guiController =new guiMainController();
 		studentController = new StudentScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
-		examController=new ExamController();
+		//examController=new ExamController();
 		professorController = new ProfessorScreenController();
-		manualExamController = new ManualExamController();
+		//manualExamController = new ManualExamController();
+		
 	}
 
 	/**
@@ -120,6 +120,14 @@ public class ClientMessageHandler
 	}
 	
 	/**
+	 * @param examController the examController to set
+	 */
+	public static void setExamController(ExamController examController) 
+	{
+			ClientMessageHandler.examController = examController;
+	}
+		
+	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
 	 */
@@ -134,34 +142,45 @@ public class ClientMessageHandler
 			case STRING:
 				stringMessageHandler((String) msg);
 				break;
+				
 			case QUESTION_ARRAY_LIST:
 				questionArrayListMessageHandler((ArrayList<Question>) msg);
 				break;
+				
 			case STRING_ARRAY_LIST:
 				stringArrayListMessageHandler((ArrayList<String>)msg);
 				break;
+				
 			case USER:
 				userMessageHandler((User) msg);
 				break;
+				
 			case MAP:
 				mapMessageHandler((Map<?,?>) msg);
 				break;
+				
 			case USER_ARRAY_LIST:
 				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData(((ArrayList<User>)msg).get(0).getRole());
 				break;
+				
 			case COURSE_ARRAY_LIST:
 				headOfScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData("course");
 				break;
+				
 			case EXAM_ARRAY_LIST:
 				examArrayListMessageHandler((ArrayList<Exam>) msg);
 				break;
+				
 			case EXAM_STUDENT_ARRAY_LIST:
 				statisticsScreen.openRep(msg);
 				break;
+				
 			case PROFESSOR_EXAMS:
 				statisticsScreen.openRep(msg);
+				break;
+				
 			case EXAM_FILE:
 				examFileMessageHandler((ExamFile) msg);
 				break;
@@ -289,21 +308,24 @@ public class ClientMessageHandler
 				break;
 			
 			case "selected exam is now inactive":
-				
-			try 
-			{
-				if (manualExamController.getExamId().equals(arrayList.get(1))) {
-					manualExamController.disableFileUpload();
-				}
-				else if (examController != null)
-				{
-					if (arrayList.get(1).equals(ExamController.getOnGoingExam().getExam_id()))
+				try {
+					if (manualExamController != null) 
 					{
-						AlertMessages.makeAlert("Exam has been terminated.","Exam");
-						examController.closeWindow();
+						if (manualExamController.getExamId().equals(arrayList.get(1)))
+						{
+							AlertMessages.makeAlert("Exam has been terminated.", "Exam");
+							manualExamController.disableFileUpload();
+						}
 					}
-				}
-			} catch (NullPointerException e) {System.out.println("test");}
+					 if (examController != null)
+					 {
+						if (arrayList.get(1).equals(examController.getOnGoingExam().getExam_id())) 
+						{
+							AlertMessages.makeAlert("Exam has been terminated.", "Exam");
+							examController.closeWindow();
+						}
+					}
+				} catch (NullPointerException e) {e.printStackTrace();}
 				break;
 		}
 	}
