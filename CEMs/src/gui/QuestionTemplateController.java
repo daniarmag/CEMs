@@ -67,6 +67,7 @@ public class QuestionTemplateController implements Initializable
 	{
 		questionText.setText(text);
 		questionText.setEditable(false);
+		questionText.setStyle("-fx-opacity: 1; -fx-background-color: white; -fx-text-fill: black;");
 	}	
 	
 	/**

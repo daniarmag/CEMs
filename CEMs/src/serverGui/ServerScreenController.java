@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import server.EchoServer;
 import server.MySQLController;
+import server.ServerMessageHandler;
 import server.ServerUI;
 
 /*A GUI for server area.*/
@@ -166,6 +167,7 @@ public class ServerScreenController implements Initializable
 		{
 			ServerUI.getEs().sendToAllClients("abort");
 		} catch (Exception e) {}
+		ServerMessageHandler.clearRoleClientMap();
 		ServerUI.closeServer();
 		onCircle.setFill(Color.TRANSPARENT);
 		offCircle.setFill(Color.rgb(255, 96, 92));

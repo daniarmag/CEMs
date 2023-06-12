@@ -15,6 +15,15 @@ public class ServerMessageHandler
 	static private MySQLController sqlController = MySQLController.getInstance(); 
 	
 	static private Map<String, ArrayList<ConnectionToClient>> roleClientMap = new HashMap<>();
+	
+	/**
+	 * Resets the map when the server disconnects. 
+	 */
+	public static void clearRoleClientMap()
+	{
+		roleClientMap = new HashMap<>();
+	}
+	
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
@@ -93,7 +102,6 @@ public class ServerMessageHandler
 					
 				case "disconnected":
 					EchoServer.updateclientsInfoList(client, "Disconnected");
-					roleClientMap = new HashMap<>(); 
 					client.sendToClient("Disonnected");
 					break;
 					

@@ -121,7 +121,7 @@ public class ExamController implements Initializable
 	*/
 	public void closeWindow() 
 	{
-		UserController.goBack(e, "/gui/StudentScreen.fxml");
+		Platform.runLater(() -> UserController.goBack(e, "/gui/StudentScreen.fxml"));
 	}
 
 	 int getNumberOfQuestions() 
