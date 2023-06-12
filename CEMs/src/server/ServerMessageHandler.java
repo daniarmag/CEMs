@@ -164,6 +164,10 @@ public class ServerMessageHandler
 					client.sendToClient(sqlController.loadProfessorExams(arrayList.get(1)));
 					break;
 					
+				case "load exam questions":
+					client.sendToClient(sqlController.examQuestion(arrayList.get(1)));
+					break;
+					
 				case "update question courses":
 					arrayList.remove(0);
 					sqlController.addQuestionCourses(arrayList);

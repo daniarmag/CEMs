@@ -190,4 +190,8 @@ public class ManualExamController implements Initializable{
 		timer.cancel();
 		TimerTXT.setText("0");
 	}
+	
+	public String getExamId() {
+		return e.getExam_id();
+	}
 }

@@ -222,9 +222,11 @@ public class MySQLController
 	public ArrayList<Exam>loadStudentExams()
 	{
 		ArrayList<Exam> eArr = new ArrayList<>();
+		ArrayList<Question> qArr = new ArrayList<>();
+		
 		eArr.add(new Exam ("student exams"));
 		try {
-	    	//loading all the  student's exams from the table
+	    	//loading all the  exams from the exam table
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM cems.exam ORDER BY exam.isActive DESC");
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
@@ -834,5 +836,26 @@ public class MySQLController
 				e.printStackTrace();
 			}
 			return examFile;
+	}
+	
+	public ArrayList<Question> examQuestion(String examID){
+		ArrayList<Question> qArr = new ArrayList<>();
+		qArr.add(new Question("exam questions"));
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT q.* FROM question q JOIN exam_question eq "
+														+ "ON q.id = eq.question_id WHERE eq.exam_id = ?");
+			ps.setString(1, examID);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Question q = new Question(rs.getString("id"), rs.getString("subject_id"),
+				rs.getString("question_text"),rs.getString("question_number"), rs.getString("professor_full_name"),
+				rs.getString("professor_id"), rs.getString("correct_answer"), 
+				new String[]{rs.getString("answer1"), rs.getString("answer2"), rs.getString("answer3"), rs.getString("answer4")});
+				q.setScore(rs.getString("score"));
+				qArr.add(q);
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return qArr;
 	}
 }

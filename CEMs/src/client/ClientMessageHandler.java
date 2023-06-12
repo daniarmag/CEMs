@@ -292,7 +292,10 @@ public class ClientMessageHandler
 				
 			try 
 			{
-				if (ExamController.onGoingExam.getType().equals("Computerized"))
+				if (manualExamController.getExamId().equals(arrayList.get(1))) {
+					manualExamController.disableFileUpload();
+				}
+				else if (examController != null)
 				{
 					if (arrayList.get(1).equals(ExamController.getOnGoingExam().getExam_id()))
 					{
@@ -300,8 +303,6 @@ public class ClientMessageHandler
 						examController.closeWindow();
 					}
 				}
-				else
-					manualExamController.disableFileUpload();
 			} catch (NullPointerException e) {System.out.println("test");}
 				break;
 		}
@@ -323,6 +324,10 @@ public class ClientMessageHandler
 			
 			case "course questions":
 				examCreationFirstController.setArr(arrayList);
+				break;
+				
+			case "exam questions":
+				studentExamScreenController.setQArr(arrayList);
 				break;
 		}
 		
