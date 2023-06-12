@@ -124,7 +124,7 @@
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <PasswordField id="passwordField" fx:id="passwordField" prefHeight="63.0" prefWidth="143.0" style="-fx-background-radius: 15px;" />
-                        <TextField id="passwordTextField" fx:id="passwordTextField" visible="false" />
+                        <TextField id="passwordTextField" fx:id="passwordTextField" style="-fx-background-radius: 15px;" visible="false" />
                      </children>
                      <VBox.margin>
                         <Insets top="17.0" />

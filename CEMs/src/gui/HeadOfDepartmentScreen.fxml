@@ -54,7 +54,7 @@
             <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="507.0">
+      <ImageView fitHeight="100.0" fitWidth="87.0" layoutX="699.0" layoutY="507.0">
          <image>
             <Image url="@../images/Logo.png" />
          </image>
@@ -64,16 +64,18 @@
             <Image url="@../images/Home%20Page%20Logo.png" />
          </image>
       </ImageView>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER" />
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitBtn.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <Text fx:id="Alert" fill="#ee0303" layoutX="349.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check Messages !!!" visible="false" wrappingWidth="210.13671875">
          <font>
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
       </Text>
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="762.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/exitBtn.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

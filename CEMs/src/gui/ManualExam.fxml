@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManualExamController">
+<AnchorPane prefHeight="607.0" prefWidth="638.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManualExamController">
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <children>
-            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30px;" text="Quit test" textAlignment="CENTER" textFill="RED">
+            <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30px;" text="Quit test" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
@@ -35,51 +35,51 @@
             </ImageView>
          </children>
       </VBox>
-      <Text id="profTitle" fx:id="welcomeText" layoutX="329.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manual Exam" textAlignment="CENTER">
+      <Text id="profTitle" fx:id="welcomeText" layoutX="218.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manual Exam" textAlignment="CENTER">
          <font>
             <Font name="Tahoma Bold" size="48.0" />
          </font>
       </Text>
-      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="507.0">
+      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="531.0" layoutY="496.0">
          <image>
             <Image url="@../images/Logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="DownloadBtn" layoutX="415.0" layoutY="174.0" mnemonicParsing="false" onAction="#DownloadBtn" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Download exam" textFill="WHITE">
+      <Button fx:id="DownloadBtn" layoutX="221.0" layoutY="234.0" mnemonicParsing="false" onAction="#DownloadBtn" prefHeight="39.0" prefWidth="201.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Download exam" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="UploadBtn" layoutX="617.0" layoutY="338.0" mnemonicParsing="false" onAction="#UploadBtn" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Upload File" textFill="WHITE">
+      <Button fx:id="UploadBtn" layoutX="221.0" layoutY="293.0" mnemonicParsing="false" onAction="#UploadBtn" prefHeight="35.0" prefWidth="201.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Upload File" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="DeleteBtn" layoutX="576.0" layoutY="386.0" mnemonicParsing="false" onAction="#DeleteBtn" style="-fx-background-color: #ff0000; -fx-background-radius: 30px;" text="Delete uploaded file" textFill="WHITE">
+      <Button fx:id="DeleteBtn" layoutX="219.0" layoutY="350.0" mnemonicParsing="false" onAction="#DeleteBtn" prefHeight="35.0" prefWidth="201.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete uploaded file" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="SubmitBtn" layoutX="436.0" layoutY="541.0" mnemonicParsing="false" onAction="#SubmitBtn" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Submit" textFill="WHITE">
+      <Button fx:id="SubmitBtn" layoutX="262.0" layoutY="546.0" mnemonicParsing="false" onAction="#SubmitBtn" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Submit" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="22.0" />
          </font>
       </Button>
-      <Text layoutX="317.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remember! Once you have downloaded the file, the exam will begin">
+      <Text layoutX="218.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remember! Once you have downloaded the file, the exam will begin" wrappingWidth="385.37109375">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="244.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:">
+      <Text layoutX="221.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font></Text>
-      <Text fx:id="TimerTXT" layoutX="345.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" wrappingWidth="65.65234375">
+      <Text fx:id="TimerTXT" layoutX="324.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="65.65234375">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font></Text>
-      <TextField fx:id="FileUploadTXT" layoutX="244.0" layoutY="336.0" prefHeight="39.0" prefWidth="323.0" style="-fx-background-radius: 30px;" />
-      <Text layoutX="389.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good luck!">
+      <TextField fx:id="FileUploadTXT" layoutX="438.0" layoutY="291.0" prefHeight="39.0" prefWidth="173.0" promptText="File path will be seen here.." style="-fx-background-radius: 30px;" />
+      <Text layoutX="221.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good luck!" wrappingWidth="213.0234375">
          <font>
             <Font name="Tahoma Bold" size="38.0" />
          </font>

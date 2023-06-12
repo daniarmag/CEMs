@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -45,12 +46,12 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <TextArea fx:id="studentNotes" prefHeight="104.0" prefWidth="168.0" promptText="Notes and comments.." style="-fx-background-color: #30BECC;">
+            <TextArea fx:id="studentNotes" editable="false" prefHeight="104.0" prefWidth="168.0" promptText="Notes and comments.." style="-fx-background-color: #30BECC;">
                <VBox.margin>
                   <Insets top="70.0" />
                </VBox.margin>
             </TextArea>
-            <TextArea fx:id="professorNotes" prefHeight="104.0" prefWidth="168.0" promptText="Notes and comments.." style="-fx-background-color: #30BECC;">
+            <TextArea fx:id="professorNotes" editable="false" prefHeight="104.0" prefWidth="168.0" promptText="Notes and comments.." style="-fx-background-color: #30BECC;">
                <VBox.margin>
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
@@ -60,23 +61,12 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Text id="profTitle" fx:id="welcomeText" layoutX="384.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam name" textAlignment="CENTER">
-         <font>
-            <Font name="Times New Roman Bold" size="42.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="14.0">
-         <image>
-            <Image url="@../images/Logo.png" />
-         </image>
-      </ImageView>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER" />
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="201.0" layoutY="124.0" prefHeight="496.0" prefWidth="598.0" style="-fx-background-color: #FFFFFF;">
          <content>
             <VBox fx:id="questionContainer" prefHeight="494.0" prefWidth="596.0" style="-fx-background-color: #FFFFFF;" />
          </content>
       </ScrollPane>
-      <Text layoutX="212.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:">
+      <Text layoutX="216.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
@@ -86,5 +76,14 @@
             <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
+      <HBox alignment="TOP_CENTER" layoutX="201.0" layoutY="26.0" prefHeight="63.0" prefWidth="586.0">
+         <children>
+            <Text id="profTitle" fx:id="welcomeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam name" textAlignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="42.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

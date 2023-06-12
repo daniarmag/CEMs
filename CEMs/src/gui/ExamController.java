@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import control.AlertMessages;
@@ -44,6 +43,9 @@ public class ExamController implements Initializable
 	
 	public static Timer timer = new Timer();
 
+    @FXML
+    private Text welcomeText;
+    
     @FXML
     private TextArea professorNotes;
 
@@ -91,6 +93,7 @@ public class ExamController implements Initializable
 	{
 		studentNotes.setText(onGoingExam.getExaminees_notes());
 		professorNotes.setText(onGoingExam.getProfessor_notes());
+		welcomeText.setText(onGoingExam.getExam_name());
 		if (u.getRole().equals("professor"))
 			activateExam();
 		else 
@@ -167,7 +170,8 @@ public class ExamController implements Initializable
 			catch (IOException e) {e.printStackTrace();}
 		}
 		scrollPane.setContent(questionContainer);
-		startCountdown();
+		if (u.getRole().equals("student"))
+			startCountdown();
 	}
 	 
 	/**

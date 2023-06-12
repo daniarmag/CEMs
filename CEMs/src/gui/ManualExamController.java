@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.JOptionPane;
-
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
@@ -48,16 +46,14 @@ public class ManualExamController implements Initializable{
     private Button SubmitBtn;
 
     @FXML
-    private Button UploadBtn;
+    private Text TimerTXT;
 
     @FXML
-    private Button goBackBtn;
+    private Button UploadBtn;
 
     @FXML
     private Text welcomeText;
     
-    @FXML
-    private Text timerTXT;
     /**
      * Starts the manual exam for the given user and exam.
      *
@@ -73,20 +69,37 @@ public class ManualExamController implements Initializable{
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ManualExam.fxml").show());
 	}
     
-    /** Empties the FileUploadTXT
+    /**
+	  * Initializes the GUI with the given logic.
+	  * @param location
+	  * @param resources
+	  */ 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		ClientMessageHandler.setManualExamController(this);
+		welcomeText.setText(e.getExam_name());
+       SubmitBtn.setDisable(true);
+       TimerTXT.setText(minutesLeft.toString());
+	}
+    
+    /** 
+     * Empties the FileUploadTXT
      * @param event
      */
     @FXML
-    void DeleteBtn(ActionEvent event) {
+    void DeleteBtn(ActionEvent event) 
+    {
     	FileUploadTXT.setText("");
     }
 
     /**
-     * Sends a request to load the exam file and starts the countdown.
+     * Sends a request to load the exam file and starts the count-down.
      * @param event
      */
     @FXML
-    void DownloadBtn(ActionEvent event) {
+    void DownloadBtn(ActionEvent event) 
+    {
     	ArrayList<String> request = new ArrayList<String>();
 		request.add("load exam file");
 		request.add(e.getExam_id());
@@ -96,11 +109,17 @@ public class ManualExamController implements Initializable{
 		startCountdown();
     }
 
-
+    /**
+     * Sends a message according to if is FileUploadTXT if full or not.
+     * @param event
+     */
     @FXML
-    void SubmitBtn(ActionEvent event) {
+    void SubmitBtn(ActionEvent event) 
+    {
     	if (FileUploadTXT.getText().strip().equals(""))
-			JOptionPane.showMessageDialog(null, "File not uploaded", "Exam upload", JOptionPane.INFORMATION_MESSAGE);		
+			AlertMessages.makeAlert("File not uploaded", "Exam upload");	
+    	else
+    		AlertMessages.makeAlert("File uploaded", "Exam upload");
     }
 
     /**
@@ -110,7 +129,8 @@ public class ManualExamController implements Initializable{
      * @param event The action event triggered by clicking the UploadBtn button.
      */
     @FXML
-    void UploadBtn(ActionEvent event) {
+    void UploadBtn(ActionEvent event) 
+    {
     	FileChooser fc = new FileChooser();
     	fc.getExtensionFilters().add(new ExtensionFilter("Word Files", "*.docx"));
     	File file = fc.showOpenDialog(null);
@@ -118,50 +138,49 @@ public class ManualExamController implements Initializable{
     		FileUploadTXT.setText("Selected file: " + file.getAbsolutePath());
     }
    	
+    /**
+	 * Exits the exam screen. Different functionality for student/professor.
+	 * @param event
+	 */
 	@FXML
-	void goBack(ActionEvent event) 
-	{	
-		int res = JOptionPane.showConfirmDialog(null, 
-				"Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam", 
+	public void exit(ActionEvent event)
+	{
+		int res = JOptionPane.showConfirmDialog(null,
+				"Are you sure you want to exit the exam? All progress will be lost", "Exit Exam",
 				JOptionPane.YES_NO_OPTION);
 		if (res == JOptionPane.YES_OPTION)
-			UserController.goBack(event, "/gui/StudentScreen.fxml");
+			UserController.goBack(event, "/gui/StudentScreen.fxml");	
 	}
 	
-	 /**
-	  * Initializes the GUI with the given logic.
-	  * @param location
-	  * @param resources
-	  */ 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		ClientMessageHandler.setManualExamController(this);
-        SubmitBtn.setDisable(true);
-        timerTXT.setText(minutesLeft.toString());
+	/**
+	 * Starts the timer for the exam.
+	 */
+	public void startCountdown() 
+	{
+		TimerTask task = new TimerTask() 
+		{
+			@Override
+			public void run() 
+			{
+				minutesLeft--;
+				TimerTXT.setText(minutesLeft.toString());
+				if (minutesLeft == 0 && !oneMinuteFlag) 
+				{
+					oneMinuteFlag = true;
+					minutesLeft++;
+					TimerTXT.setText(minutesLeft.toString());
+					AlertMessages.makeAlert("Exam is over, you have one minute for submiting", "Exam is over");
+				} 
+				else if (oneMinuteFlag) 
+				{
+					timer.cancel();
+					SubmitBtn.setDisable(true);
+				}
+			}
+		};
+		// Schedule the task to run every minute
+		timer.schedule(task, 0, 60000);
 	}
-
-	public void startCountdown() {
-		
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-            	minutesLeft--;
-            	timerTXT.setText(minutesLeft.toString());
-                if (minutesLeft == 0 && !oneMinuteFlag) {
-                	oneMinuteFlag = true;
-                	minutesLeft++;
-                	timerTXT.setText(minutesLeft.toString());
-        			AlertMessages.makeAlert("Exam is over, you have one minute for submiting", "Exam is over");		
-                	}
-                else if (oneMinuteFlag) {
-                    timer.cancel();
-                    SubmitBtn.setDisable(true);
-                }
-            }
-        };
-        // Schedule the task to run every minute
-        timer.schedule(task, 0, 3000);
-		}
 	
 	/**
 	 * Writes the byte array from the ExamFile object to a file and opens it.
@@ -169,20 +188,25 @@ public class ManualExamController implements Initializable{
 	 */
 	public void setExamFile(ExamFile examFile) 
 	{
-		try {
+		try 
+		{
 			ExamFile exFile = examFile;
-			//Put file in downloads.
+			// Put file in downloads.
 			String userDir = System.getProperty("user.home");
 			String filePath = userDir + "/downloads/exam" + exFile.getFileName() + ".docx";
-		    File newFile = new File(filePath);
-		    //Create an output stream to write the byte array to the file
+			File newFile = new File(filePath);
+			// Create an output stream to write the byte array to the file
 			FileOutputStream fos = new FileOutputStream(newFile);
 			fos.write(exFile.getMybytearray());
 			fos.close();
-		    //Open the file
-		    Desktop desktop = Desktop.getDesktop();
-		    desktop.open(newFile);
-			} catch (Exception e) {e.printStackTrace();}
+			// Open the file
+			Desktop desktop = Desktop.getDesktop();
+			desktop.open(newFile);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -194,10 +218,14 @@ public class ManualExamController implements Initializable{
 		SubmitBtn.setDisable(true);
 		FileUploadTXT.setDisable(true);
 		timer.cancel();
-		timerTXT.setText("0");
+		TimerTXT.setText("0");
 	}
 	
-	public String getExamId() {
+	/**
+	 * @return exam id
+	 */
+	public String getExamId() 
+	{
 		return e.getExam_id();
 	}
 }
