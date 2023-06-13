@@ -1,6 +1,6 @@
 package entities;
 
-public interface HaveIDGrade {
+public interface HaveID {
 	public String get_id(); 
 	
 }

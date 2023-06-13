@@ -1,12 +1,13 @@
 package client;
 
 import java.util.ArrayList;
+
 import java.util.Map;
 import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
-import entities.ProfessorExam;
 import entities.ExamFile;
+import entities.ExamStatistics;
 import entities.Question;
 import entities.StudentExam;
 import entities.User;
@@ -177,7 +178,7 @@ public class ClientMessageHandler
 				statisticsScreen.openRep(msg);
 				break;
 				
-			case PROFESSOR_EXAMS:
+			case EXAMS_STATISTICS:
 				statisticsScreen.openRep(msg);
 				break;
 				
@@ -219,8 +220,8 @@ public class ClientMessageHandler
 					return MessageType.EXAM_ARRAY_LIST;
 				else if (firstElement instanceof StudentExam)
 					return MessageType.EXAM_STUDENT_ARRAY_LIST;
-				else if (firstElement instanceof ProfessorExam)
-					return MessageType.PROFESSOR_EXAMS;
+				else if (firstElement instanceof ExamStatistics)
+					return MessageType.EXAMS_STATISTICS;
 			}
 		} 
 		else if (msg instanceof Map)

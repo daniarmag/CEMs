@@ -115,16 +115,7 @@ public class ServerMessageHandler
 					client.sendToClient(sqlController.getAmountOfExams());
 					break;
 					
-				case "Get all students":			
-					client.sendToClient(sqlController.getAllStudents_Proffesors("student"));
-					break;
-					
-				case "Get all professors":			
-					client.sendToClient(sqlController.getAllStudents_Proffesors("professor"));
-					break;
-				case "Get all courses":			
-					client.sendToClient(sqlController.getAllCourses());
-					break;
+			
 					
 				case "load student exams":
 					client.sendToClient(sqlController.loadStudentExams());
@@ -235,10 +226,15 @@ public class ServerMessageHandler
 				case "for head of department report":
 						if(arrayList.get(1).equals("student"))
 							client.sendToClient(sqlController.getAllStudentExams(arrayList));
-						else if(arrayList.get(1).equals("professor"))
-							client.sendToClient(sqlController.getAllprofessorExams(arrayList));
-					//	else
-							//course
+						else if(arrayList.get(1).equals("professor")) {
+							arrayList.add("ex.professor_id");
+							client.sendToClient(sqlController.getAllprofessor_courseExams(arrayList));
+						}
+						else {	
+							arrayList.add("ex.course_id");
+							client.sendToClient(sqlController.getAllprofessor_courseExams(arrayList));
+						}
+					//
 					break;
 					
 				//Info about indexes is next to the declaration.
@@ -291,6 +287,19 @@ public class ServerMessageHandler
 							c.sendToClient(answer);
 					}
 					break;
+					
+				case "Get all students":			
+					client.sendToClient(sqlController.getAllStudents("student"));
+					break;
+					
+				case "Get all professors":			
+					client.sendToClient(sqlController.getAllProffesors(arrayList.get(1)));
+					break;
+				case "Get all courses":			
+					client.sendToClient(sqlController.getAllCourses(arrayList.get(1)));
+					break;
+					
+					
 			}
 		} catch (IOException e) {}
 	}

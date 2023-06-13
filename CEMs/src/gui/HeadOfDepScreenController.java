@@ -48,7 +48,7 @@ public class HeadOfDepScreenController implements Initializable
 
     @FXML
     void logout(ActionEvent event) {
-    	UserController.hide(event);
+    	UserController.close(event);
     	
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
@@ -62,7 +62,6 @@ public class HeadOfDepScreenController implements Initializable
     void openStatistics(ActionEvent event) {
     	UserController.hide(event);
     	statisticsScreen.start(u);
-    	
     	
     }
     
