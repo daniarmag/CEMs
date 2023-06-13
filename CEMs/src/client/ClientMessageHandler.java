@@ -281,6 +281,10 @@ public class ClientMessageHandler
 			case "selected exam is now inactive":
 				AlertMessages.makeAlert("Exam deactivated", "Dectivate Exam");
 				break;
+				
+			case "exam submitted":
+				AlertMessages.makeAlert("Exam submitted, good luck!", "Submit Exam");
+				break;
 		}
 	}
 	

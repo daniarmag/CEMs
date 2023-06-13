@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamController">
+<AnchorPane prefHeight="673.0" prefWidth="802.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamController">
    <children>
-      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
+      <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="-3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="673.0" prefWidth="204.0" style="-fx-background-color: #30BECC;">
          <children>
             <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30px;" text="Quit test" textAlignment="CENTER" textFill="RED" VBox.vgrow="NEVER">
                <font>
@@ -71,7 +71,7 @@
             <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="timerTXT" layoutX="315.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="59.65234375">
+      <Text fx:id="timerTXT" layoutX="315.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="59.65234375">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
@@ -85,5 +85,10 @@
             </Text>
          </children>
       </HBox>
+      <Button fx:id="submitBtn" layoutX="441.0" layoutY="620.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Submit" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

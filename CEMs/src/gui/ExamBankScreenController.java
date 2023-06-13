@@ -4,9 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
 import entities.User;
@@ -133,7 +133,7 @@ public class ExamBankScreenController implements Initializable
     		ClientUI.chat.accept(request);*/
     	}
     	  else 
-              JOptionPane.showMessageDialog(null, "Select an exam for time extension.", "Extend Time", JOptionPane.INFORMATION_MESSAGE);
+              AlertMessages.makeAlert("Select an exam for time extension.", "Extend Time");
     }
     
     
@@ -176,7 +176,7 @@ public class ExamBankScreenController implements Initializable
 	        selectedExam.setIsActive(activate ? "Yes" : "No");
 	        examTable.refresh();
 	    } else 
-	        JOptionPane.showMessageDialog(null, "Select an exam to " + action, actionMessage, JOptionPane.INFORMATION_MESSAGE);
+	    	 AlertMessages.makeDecisionAlert("Select an exam to " + action, actionMessage);
 	}
     
     

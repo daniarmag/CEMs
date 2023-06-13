@@ -4,9 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
 import entities.Professor;
@@ -135,7 +135,7 @@ public class ExamCreationSecondController implements Initializable
 	    HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			JOptionPane.showMessageDialog(null, errorMap.get(true), "Exam Creation", JOptionPane.INFORMATION_MESSAGE);
+			 AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
 		    return;
 		}
 		buildExam();
@@ -158,7 +158,7 @@ public class ExamCreationSecondController implements Initializable
 		HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			JOptionPane.showMessageDialog(null, errorMap.get(true), "Exam Creation", JOptionPane.INFORMATION_MESSAGE);
+			 AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
 			return;
 		}
 		try 

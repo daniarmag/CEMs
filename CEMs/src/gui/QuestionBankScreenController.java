@@ -5,10 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
-
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Question;
 import entities.User;
@@ -137,7 +136,7 @@ public class QuestionBankScreenController implements Initializable
     		} catch (Exception e) {}
         } 
         else 
-            JOptionPane.showMessageDialog(null, "Select a question to edit.", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
+        	 AlertMessages.makeAlert("Select a question to edit.", "Update Questions");
     }
     
     /**
@@ -176,7 +175,7 @@ public class QuestionBankScreenController implements Initializable
     			questionTable.getItems().remove(selectedQuestion);
         } 
         else 
-            JOptionPane.showMessageDialog(null, "Select a question to delete.", "Update Questions", JOptionPane.INFORMATION_MESSAGE);
+        	 AlertMessages.makeAlert("Select a question to delete.", "Update Questions");
     }
 
 	/**

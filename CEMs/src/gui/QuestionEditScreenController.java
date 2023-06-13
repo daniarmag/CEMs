@@ -135,9 +135,7 @@ public class QuestionEditScreenController implements Initializable
 			JOptionPane.showMessageDialog(null, errorMap.get(true), "Question Creation", JOptionPane.INFORMATION_MESSAGE);
 		    return;
 		}
-		String[] answers = {aAnswerText.getText(), bAnswerText.getText(), 
-				cAnswerText.getText(), dAnswerText.getText()};
-		HashMap <Boolean, String> answerMap = createAnswerMap(answers);
+		HashMap <Boolean, String> answerMap = createAnswerMap();
 	    ArrayList<String> request = new ArrayList<>();
 	    request.add("update question");
 	    request.add(editQuestion.getId());
@@ -152,10 +150,9 @@ public class QuestionEditScreenController implements Initializable
     }
 
 	/**
-	 * @param answers
 	 * @return an answer map, where the only true key is the selected radio
 	 */
-	private HashMap<Boolean, String> createAnswerMap(String[] answers) 
+	private HashMap<Boolean, String> createAnswerMap() 
 	{
 	    HashMap<Boolean, String> answerMap = new HashMap<>();
 	    answerMap.put(aRadio.isSelected(), "1");

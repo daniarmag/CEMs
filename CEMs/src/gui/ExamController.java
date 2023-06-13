@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
+import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
@@ -64,6 +65,9 @@ public class ExamController implements Initializable
     @FXML
     private VBox questionContainer;
     
+    @FXML
+    private Button submitBtn;
+    
     @FXML 
     private Button start;
     
@@ -94,6 +98,7 @@ public class ExamController implements Initializable
 		studentNotes.setText(onGoingExam.getExaminees_notes());
 		professorNotes.setText(onGoingExam.getProfessor_notes());
 		welcomeText.setText(onGoingExam.getExam_name());
+		submitBtn.setDisable(true);
 		if (u.getRole().equals("professor"))
 			activateExam();
 		else 
@@ -115,9 +120,8 @@ public class ExamController implements Initializable
 			UserController.hide(event);
 		else
 		{
-			int res = JOptionPane.showConfirmDialog(null, 
-					"Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam", 
-					JOptionPane.YES_NO_OPTION);
+			int res = AlertMessages.makeDecisionAlert
+					("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
 			if (res == JOptionPane.YES_OPTION)
 				UserController.goBack(event, "/gui/StudentScreen.fxml");
 		}
@@ -139,25 +143,91 @@ public class ExamController implements Initializable
 				enterBtn.setDisable(true);
 				idTextField.setDisable(true);
 				savedEvent = event;
+				submitBtn.setDisable(false);
 			}
 			else
 				AlertMessages.makeAlert("Wrong ID!", "Exam");	
 		}
 	}
+	
+	/**
+	 * Submits the request to the server.
+	 * @param event
+	 */
+	@FXML
+	public void submit(ActionEvent event)
+	{
+		if(!isAnyAnswerEmpty())
+		{
+			int res = AlertMessages.makeDecisionAlert
+					("Are you sure you are ready to submit?", "Submit Exam");
+			if (res == JOptionPane.YES_OPTION)
+				UserController.goBack(event, "/gui/StudentScreen.fxml");
+			ArrayList<String> request = buildFinishedExam();
+			ClientUI.chat.accept(request);
+		}
+		else
+			AlertMessages.makeAlert("You must answer all the questions!", "Submit Exam");
+	}
     
+	/**
+	 * @return a finished exam
+	 */
+	public ArrayList<String> buildFinishedExam()
+	{
+		//Array list that will be sent back to the server and uploaded to the DB.
+		ArrayList<String> finishedExam = new ArrayList<>();
+		StringBuilder correctAnswers = new StringBuilder();
+		StringBuilder wrongAnswers = new StringBuilder();
+		int grade = 0;
+		finishedExam.add("finished exam");
+		finishedExam.add(onGoingExam.getExam_id());
+		finishedExam.add(u.getUser_id());
+		for (int i = 0; i < getNumberOfQuestions(); i++)
+		{
+			Question currQuestion = onGoingExam.getExamQuestions().get(i);
+			String questionInExam = currQuestion.getCorrectAnswer();
+			String answeredQuestion = ansarry.get(i).getSelectedAnswer();
+			if (questionInExam.equals(answeredQuestion))
+			{
+				grade += Integer.parseInt(currQuestion.getScore());
+				correctAnswers.append(currQuestion.getId()).append(",");
+			}
+			else
+				//# sign to notify select wrong answer.
+				wrongAnswers.append(currQuestion.getId()).append("#").append(answeredQuestion).append(",");
+		}
+		finishedExam.add(String.valueOf(grade));
+		//Removing commas at the end of the string
+		finishedExam.add(correctAnswers.toString().replaceAll(",$", ""));
+		finishedExam.add(wrongAnswers.toString().replaceAll(",$", ""));
+		finishedExam.add("0");
+		return finishedExam;
+	}
+	
+	/**
+	 * @return true if any of the answers left unanswered.
+	 */
+	public boolean isAnyAnswerEmpty() 
+	{
+	    for (QuestionTemplateController q : ansarry) 
+	        if (q.checkIfAnswersEmpty()) 
+	            return true;
+	    return false;
+	}
 	/**
 	 * @param event
 	 * this method load all the questions to the exam screen 
 	 * and for each question add a controller so we can track the answer 
 	 */
-	void activateExam() {
-		// Retrieve the number of questions from user input or a data source
-		int numberOfQuestions = getNumberOfQuestions();
+	void activateExam() 
+	{
 		ansarry = new ArrayList<>();
-		for (int i = 0; i < numberOfQuestions; i++) 
+		for (int i = 0; i < getNumberOfQuestions(); i++) 
 		{
 			try 
 			{
+				//Load new question template (until number of questions in exam has been reached).
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/QuestionTemplate.fxml"));
 				Node questionComponent = loader.load();
 				QuestionTemplateController controller = loader.getController();

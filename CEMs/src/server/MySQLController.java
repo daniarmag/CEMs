@@ -869,4 +869,22 @@ public class MySQLController
 		} catch (SQLException e) {e.printStackTrace();}
 		return qArr;
 	}
+
+	public void uploadFinishedExam(ArrayList<String> arrayList)
+	{
+		try 
+	    {
+	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO student_exam (exam_id, student_id, " +
+										    			  "grade, correct_answers, wrong_answer, isConfirmed) " +
+										    			  "VALUES (?, ?, ?, ?, ?, ?)" );
+	       ps.setString(1, arrayList.get(0));
+	       ps.setString(2, arrayList.get(1));
+	       ps.setInt(3, Integer.parseInt(arrayList.get(2)));
+	       ps.setString(4, arrayList.get(3));
+	       ps.setString(5, arrayList.get(4));
+	       ps.setString(6, arrayList.get(5));
+	       ps.executeUpdate();
+	    } 
+	    catch (SQLException e){e.printStackTrace();}
+	}
 }

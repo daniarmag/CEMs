@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
-
-import javax.swing.JOptionPane;
-
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Question;
 import entities.User;
@@ -118,7 +116,7 @@ public class ExamCreationFirstController implements Initializable
     	HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			JOptionPane.showMessageDialog(null, errorMap.get(true), "Exam Creation", JOptionPane.INFORMATION_MESSAGE);
+			AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
 		    return;
 		}
     	UserController.hide(event);

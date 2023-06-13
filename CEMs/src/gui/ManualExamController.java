@@ -26,11 +26,16 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class ManualExamController implements Initializable{
+public class ManualExamController implements Initializable
+{
 	public static User u;
+	
 	public static Exam e;
+	
 	public static Timer timer = new Timer();
+	
 	static Integer minutesLeft;
+	
 	boolean oneMinuteFlag = false;
 
     @FXML
@@ -101,11 +106,12 @@ public class ManualExamController implements Initializable{
     void DownloadBtn(ActionEvent event) 
     {
     	ArrayList<String> request = new ArrayList<String>();
+    	//Loads the exam file from the DB.
 		request.add("load exam file");
 		request.add(e.getExam_id());
 		ClientUI.chat.accept(request);
         SubmitBtn.setDisable(false);
-        DownloadBtn.setDisable(false);
+        DownloadBtn.setDisable(true);
 		startCountdown();
     }
 
@@ -145,11 +151,10 @@ public class ManualExamController implements Initializable{
 	@FXML
 	public void exit(ActionEvent event)
 	{
-		int res = JOptionPane.showConfirmDialog(null,
-				"Are you sure you want to exit the exam? All progress will be lost", "Exit Exam",
-				JOptionPane.YES_NO_OPTION);
+		int res = AlertMessages.makeDecisionAlert
+				("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
 		if (res == JOptionPane.YES_OPTION)
-			UserController.goBack(event, "/gui/StudentScreen.fxml");	
+			UserController.goBack(event, "/gui/StudentScreen.fxml");
 	}
 	
 	/**

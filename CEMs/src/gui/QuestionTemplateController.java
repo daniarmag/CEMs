@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import entities.Question;
@@ -99,6 +100,33 @@ public class QuestionTemplateController implements Initializable
 	{
 		questionNumText.setText(text);
 	}
+	
+	/**
+	 * @return an answer map, where the only true key is the selected radio
+	 */
+	private HashMap<Boolean, String> createAnswerMap() 
+	{
+	    HashMap<Boolean, String> answerMap = new HashMap<>();
+	    answerMap.put(aRadio.isSelected(), "1");
+	    answerMap.put(bRadio.isSelected(), "2");
+	    answerMap.put(cRadio.isSelected(), "3");
+	    answerMap.put(dRadio.isSelected(), "4");
+	    return answerMap;
+	}
 
-
+	/**
+	 * @return the selected answer.
+	 */
+	public String getSelectedAnswer()
+	{
+		return createAnswerMap().get(true);
+	}
+	
+	/**
+	 * @return true/false depending on if an answer was left unanswered
+	 */
+	public boolean checkIfAnswersEmpty()
+	{
+		return !aRadio.isSelected() && !bRadio.isSelected() && !cRadio.isSelected() && !dRadio.isSelected();
+	}
 }

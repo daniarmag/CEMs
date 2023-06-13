@@ -3,8 +3,8 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,8 +70,7 @@ public class HostSelectionScreenController implements Initializable
 		String IP = getIP().trim();
 		// A case for invalid IP
 		if (IP.isEmpty())
-			JOptionPane.showMessageDialog(null, "You must enter server IP!", "Connect to Server",
-					JOptionPane.INFORMATION_MESSAGE);
+			AlertMessages.makeAlert("You must enter server IP!", "Connect to Server");
 		else 
 		{
 			//Server IP is correct AND server is running.
@@ -85,8 +84,7 @@ public class HostSelectionScreenController implements Initializable
 			//Wrong IP OR server is not running.
 			else
 			{
-				JOptionPane.showMessageDialog(null, "Couldn't connect to server.", "Connect to Server",
-						JOptionPane.INFORMATION_MESSAGE);
+				AlertMessages.makeAlert("Couldn't connect to server.", "Connect to Server");
 				System.exit(0);
 			}
 		}

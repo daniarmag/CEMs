@@ -171,7 +171,7 @@ public class QuestionCreationScreenController implements Initializable
 		newQuestion.setQuestionText(questionTextArea.getText());
 		newQuestion.setAuthor(u.getFirst_name() + " " + u.getLast_name());
 		newQuestion.setProfessorId(u.getUser_id());
-		HashMap <Boolean, String> answerMap = createAnswerMap(answers);
+		HashMap <Boolean, String> answerMap = createAnswerMap();
 		newQuestion.setCorrectAnswer(answerMap.get(true));
 	}
 	
@@ -200,10 +200,9 @@ public class QuestionCreationScreenController implements Initializable
 	}
 	
 	/**
-	 * @param answers
 	 * @return an answer map, where the only true key is the selected radio
 	 */
-	private HashMap<Boolean, String> createAnswerMap(String[] answers) 
+	private HashMap<Boolean, String> createAnswerMap() 
 	{
 	    HashMap<Boolean, String> answerMap = new HashMap<>();
 	    answerMap.put(aRadio.isSelected(), "1");
