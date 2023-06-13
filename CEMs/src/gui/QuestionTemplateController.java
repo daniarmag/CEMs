@@ -115,12 +115,13 @@ public class QuestionTemplateController implements Initializable
 	}
 
 	/**
-	 * @return the selected answer.
+	 * @return the selected answer, empty string if no answer was selected.
 	 */
-	public String getSelectedAnswer()
+	public String getSelectedAnswer() 
 	{
-		return createAnswerMap().get(true);
+	    return createAnswerMap().getOrDefault(true, "");
 	}
+
 	
 	/**
 	 * @return true/false depending on if an answer was left unanswered

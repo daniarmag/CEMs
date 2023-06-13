@@ -123,7 +123,11 @@ public class ExamController implements Initializable
 			int res = AlertMessages.makeDecisionAlert
 					("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
 			if (res == JOptionPane.YES_OPTION)
+			{
+				autoSubmit("finished exam");
 				UserController.goBack(event, "/gui/StudentScreen.fxml");
+			}
+				
 		}
 	}
 	
@@ -162,30 +166,44 @@ public class ExamController implements Initializable
 			int res = AlertMessages.makeDecisionAlert
 					("Are you sure you are ready to submit?", "Submit Exam");
 			if (res == JOptionPane.YES_OPTION)
+			{
+				ArrayList<String> request = buildFinishedExam("finished exam");
+				ClientUI.chat.accept(request);
 				UserController.goBack(event, "/gui/StudentScreen.fxml");
-			ArrayList<String> request = buildFinishedExam();
-			ClientUI.chat.accept(request);
+				timer.cancel();
+			}
 		}
 		else
 			AlertMessages.makeAlert("You must answer all the questions!", "Submit Exam");
+	}
+	
+	/**
+	 * Automatically submits exam when time's up.
+	 */
+	public void autoSubmit(String req)
+	{
+		ArrayList<String> request = buildFinishedExam(req);
+		ClientUI.chat.accept(request);
+		Platform.runLater(() -> UserController.goBack(savedEvent, "/gui/StudentScreen.fxml"));
 	}
     
 	/**
 	 * @return a finished exam
 	 */
-	public ArrayList<String> buildFinishedExam()
+	public ArrayList<String> buildFinishedExam(String req)
 	{
 		//Array list that will be sent back to the server and uploaded to the DB.
 		ArrayList<String> finishedExam = new ArrayList<>();
 		StringBuilder correctAnswers = new StringBuilder();
 		StringBuilder wrongAnswers = new StringBuilder();
 		int grade = 0;
-		finishedExam.add("finished exam");
+		finishedExam.add(req);
 		finishedExam.add(onGoingExam.getExam_id());
 		finishedExam.add(u.getUser_id());
 		for (int i = 0; i < getNumberOfQuestions(); i++)
 		{
 			Question currQuestion = onGoingExam.getExamQuestions().get(i);
+			//Retrieve the answer ("" if non was selected - for autoSubmit)
 			String questionInExam = currQuestion.getCorrectAnswer();
 			String answeredQuestion = ansarry.get(i).getSelectedAnswer();
 			if (questionInExam.equals(answeredQuestion))
@@ -202,7 +220,18 @@ public class ExamController implements Initializable
 		finishedExam.add(correctAnswers.toString().replaceAll(",$", ""));
 		finishedExam.add(wrongAnswers.toString().replaceAll(",$", ""));
 		finishedExam.add("0");
+		finishedExam.add(onGoingExam.getTime().toString());
+		finishedExam.add(String.valueOf(onGoingExam.getTime() - minutesLeft));
 		return finishedExam;
+	}
+	
+	/**
+	 * @return array list full of exam statistics.
+	 */
+	public ArrayList<String> buildExamStats()
+	{
+		ArrayList<String> examStats = new ArrayList<>();
+		return examStats;
 	}
 	
 	/**
@@ -240,8 +269,12 @@ public class ExamController implements Initializable
 			catch (IOException e) {e.printStackTrace();}
 		}
 		scrollPane.setContent(questionContainer);
-		if (u.getRole().equals("student"))
+		if (u.getRole().equals("student"))	
+		{
+			ClientUI.chat.accept("count");
 			startCountdown();
+		}
+			
 	}
 	 
 	/**
@@ -283,10 +316,13 @@ public class ExamController implements Initializable
 				minutesLeft--;
 	            timerTXT.setText(minutesLeft.toString());
 	            if (minutesLeft == 0) 
+	            {
 	            	timer.cancel();
+	            	autoSubmit("unfinished exam");
+	            }
 	        }
 		};
 		//Schedule the task to run every minute
-		timer.schedule(task, 0, 60_000);
+		timer.schedule(task, 0, 500);
 	}
 }

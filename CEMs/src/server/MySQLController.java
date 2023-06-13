@@ -887,4 +887,23 @@ public class MySQLController
 	    } 
 	    catch (SQLException e){e.printStackTrace();}
 	}
+
+	public void addExamStats(ArrayList<String> examStats) 
+	{
+		try 
+	    {
+	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam_stats (exam_id, date, time, actual_time, " +
+										    			  "students_total, students_completed, students_uncompleted) " +
+										    			  "VALUES (?, ?, ?, ?, ?, ?, ?)" );
+	       ps.setString(1, examStats.get(0));
+	       ps.setString(2, examStats.get(1));
+	       ps.setInt(3, Integer.parseInt(examStats.get(2)));
+	       ps.setInt(4, Integer.parseInt(examStats.get(3)));
+	       ps.setInt(5, Integer.parseInt(examStats.get(4)));
+	       ps.setInt(6, Integer.parseInt(examStats.get(5)));
+	       ps.setInt(7, Integer.parseInt(examStats.get(6)));
+	       ps.executeUpdate();
+	    } 
+	    catch (SQLException e){e.printStackTrace();}
+	}
 }

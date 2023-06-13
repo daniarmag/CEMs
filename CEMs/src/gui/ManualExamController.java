@@ -125,7 +125,17 @@ public class ManualExamController implements Initializable
     	if (FileUploadTXT.getText().strip().equals(""))
 			AlertMessages.makeAlert("File not uploaded", "Exam upload");	
     	else
+    	{
+    		ArrayList<String> request = new ArrayList<>();
+    		request.add("finished manual exam");
+    		request.add(e.getExam_id());
+    		request.add(String.valueOf(e.getTime()));
+    		request.add(String.valueOf(e.getTime() - minutesLeft));
+    		ClientUI.chat.accept("finished manual exam");
     		AlertMessages.makeAlert("File uploaded", "Exam upload");
+    		UserController.goBack(event, "/gui/StudentScreen.fxml");
+    		timer.cancel();
+    	}
     }
 
     /**
@@ -178,8 +188,9 @@ public class ManualExamController implements Initializable
 				} 
 				else if (oneMinuteFlag) 
 				{
-					timer.cancel();
-					SubmitBtn.setDisable(true);
+					disableFileUpload();
+					ClientUI.chat.accept("unfinished manual exam");
+					AlertMessages.makeAlert("Time is up!", "Exam");
 				}
 			}
 		};

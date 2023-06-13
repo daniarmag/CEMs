@@ -80,5 +80,17 @@
             <Font name="Tahoma Bold" size="15.0" />
          </font>
       </Text>
+      <Button fx:id="goBackBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0">
+               <image>
+                  <Image url="@../images/Back%20Logo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets right="130.0" />
+         </padding>
+      </Button>
    </children>
 </AnchorPane>

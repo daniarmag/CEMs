@@ -167,7 +167,7 @@ public class ServerScreenController implements Initializable
 		{
 			ServerUI.getEs().sendToAllClients("abort");
 		} catch (Exception e) {}
-		ServerMessageHandler.clearRoleClientMap();
+		ServerMessageHandler.clearServerVars();
 		ServerUI.closeServer();
 		onCircle.setFill(Color.TRANSPARENT);
 		offCircle.setFill(Color.rgb(255, 96, 92));
