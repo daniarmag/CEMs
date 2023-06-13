@@ -5,38 +5,40 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HeadOfDepScreenController">
+<AnchorPane fx:id="ancorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReportScreenController">
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
          <children>
-            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+            <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0">
+                  <ImageView fitHeight="40.0" fitWidth="40.0">
                      <image>
                         <Image url="@../images/Back%20Logo.png" />
                      </image>
                   </ImageView>
                </graphic>
                <VBox.margin>
-                  <Insets right="135.0" top="10.0" />
+                  <Insets right="150.0" />
                </VBox.margin>
             </Button>
-            <ImageView fitHeight="141.0" fitWidth="133.0">
-               <image>
-                  <Image url="@../images/manager.png" />
-               </image>
+            <ImageView fx:id="faceImage" fitHeight="141.0" fitWidth="133.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Course:">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
@@ -44,7 +46,7 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Algebra 1">
+            <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="Tahoma" size="18.0" />
                </font>
@@ -57,7 +59,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0201">
+            <Text fx:id="id" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="Tahoma" size="18.0" />
                </font>
@@ -81,58 +83,82 @@
             </ImageView>
          </graphic>
       </Button>
-      <Text fx:id="Alert" fill="#ee0303" layoutX="349.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check Messages !!!" visible="false" wrappingWidth="210.13671875">
-         <font>
-            <Font name="Times New Roman Bold" size="24.0" />
-         </font>
-      </Text>
-      <Text layoutX="317.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algebra statistics">
+      <ImageView fx:id="locationScreen" fitHeight="65.0" fitWidth="400.0" layoutX="214.0" layoutY="7.0" />
+      <Text fx:id="TextOfName" layoutX="349.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Tahoma Bold" size="42.0" />
          </font>
       </Text>
-      <Text layoutX="328.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average:">
+      <Text layoutX="336.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average:">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="397.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82.1">
+      <Text fx:id="average" layoutX="405.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="328.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:">
+      <Text layoutX="336.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="394.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="78.6">
+      <Text fx:id="median" layoutX="405.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <BarChart layoutX="240.0" layoutY="229.0" prefHeight="337.0" prefWidth="463.0">
+      <BarChart fx:id="barChart" layoutX="240.0" layoutY="246.0" legendVisible="false" prefHeight="320.0" prefWidth="463.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis fx:id="axisX" side="BOTTOM">
+               <tickLabelFont>
+                  <Font name="System Bold" size="9.0" />
+               </tickLabelFont></CategoryAxis>
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis fx:id="axisY" autoRanging="false" side="LEFT" tickLabelGap="5.0" tickLength="5.0" tickUnit="10.0">
+               <effect>
+                  <Bloom />
+               </effect>
+               <tickLabelFont>
+                  <Font size="11.0" />
+               </tickLabelFont></NumberAxis>
         </yAxis>
+         <effect>
+            <Lighting diffuseConstant="1.53" specularConstant="0.0" specularExponent="8.51" surfaceScale="3.1">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant azimuth="73.97">
+                     <color>
+                        <Color red="0.5427631735801697" green="0.8412829041481018" blue="0.8684210777282715" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
       </BarChart>
-      <Text layoutX="492.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of tests:">
+      <Text fx:id="highestGradeLable" layoutX="491.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highest grade:">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="617.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="17">
+      <Text fx:id="highest" layoutX="617.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <ImageView fitHeight="65.0" fitWidth="400.0" layoutX="203.0" layoutY="3.0">
-         <image>
-            <Image url="@../images/CourseLabel.png" />
-         </image>
-      </ImageView>
+      <Text fx:id="lowestGradeLabel" layoutX="490.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lowest grade:">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="lowest" layoutX="617.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

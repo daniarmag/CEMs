@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class StudentExam implements Serializable,HaveIDGrade{
+public class StudentExam implements Serializable,HaveID{
 	private String exam_id;
 	private int grade;
 	private String student_id;

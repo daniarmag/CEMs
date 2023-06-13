@@ -1,9 +1,11 @@
 package entities;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @SuppressWarnings("serial")
-public class ProfessorExam implements Serializable,HaveIDGrade{
+public class ExamStatistics implements Serializable,HaveID{
 private String exam_id;
 private String exam_name;
 private double average_grade;
@@ -13,7 +15,7 @@ private double fails;
 
 
 
-public ProfessorExam(String exam_id, String exam_name, double average_grade, int max_grade, int min_grade,
+public ExamStatistics(String exam_id, String exam_name, double average_grade, int max_grade, int min_grade,
 		double fails) 
 {
 	this.exam_id = exam_id;
@@ -65,6 +67,7 @@ public int getMin_grade() {
 public double getFails() {
 	return fails;
 }
+
 
 
 

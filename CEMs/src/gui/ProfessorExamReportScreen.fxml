@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProfessorExamReportController">
+   <children>
+      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
+         <children>
+            <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+               <graphic>
+                  <ImageView fx:id="returnBtn" fitHeight="32.0" fitWidth="32.0">
+                     <image>
+                        <Image url="@../images/Back%20Logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets right="150.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <ImageView fitHeight="175.0" fitWidth="175.0">
+               <image>
+                  <Image url="@../images/ProfessorLogo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Text id="profTitle" fx:id="welcomeText" layoutX="382.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Bank" textAlignment="CENTER">
+         <font>
+            <Font name="Times New Roman Bold" size="42.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="507.0">
+         <image>
+            <Image url="@../images/Logo.png" />
+         </image>
+      </ImageView>
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+         <graphic>
+            <ImageView fx:id="exitBtn" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitBtn.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="examTable" layoutX="260.0" layoutY="205.0" prefHeight="289.0" prefWidth="469.0">
+         <columns>
+            <TableColumn fx:id="examNameCol" prefWidth="162.0" text="Exam Name" />
+            <TableColumn fx:id="examIdCol" prefWidth="149.0" text="Exam Id" />
+            <TableColumn fx:id="examCol" prefWidth="157.0" text="Course" />
+         </columns>
+      </TableView>
+      <TextField fx:id="searchBar" layoutX="260.0" layoutY="165.0" promptText="Search by exam name..." style="-fx-background-radius: 15px;" />
+      <Button fx:id="viewReport" layoutX="587.0" layoutY="543.0" mnemonicParsing="false" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="View Report" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="204.0" layoutY="13.0">
+         <image>
+            <Image url="@../images/ManageExamLabel.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

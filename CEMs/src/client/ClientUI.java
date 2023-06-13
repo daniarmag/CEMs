@@ -33,6 +33,7 @@ public class ClientUI extends Application
 		//Starting window of client-side.
 		HostSelectionScreenController clientScreen = new HostSelectionScreenController();
 		clientScreen.start(primaryStage);
+		
 	}
 
 	/**

@@ -1,7 +1,9 @@
 package gui;
 
 import java.net.URL;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -13,7 +15,7 @@ import control.AlertMessages;
 import control.UserController;
 //import control.guiMainController;
 import entities.Course;
-import entities.HaveIDGrade;
+import entities.HaveID;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Student;
@@ -37,7 +39,7 @@ public class StatisticsChooseScreenController implements Initializable {
 	
 	static HeadOfDepartment user;
 	
-	private static Map<String, String> requsetMap = new HashMap<>();
+	private static Map<String,ArrayList<String>> requsetMap = new HashMap<>();
 
 	@FXML
 	private TableColumn<?, String> col1;
@@ -219,19 +221,26 @@ public class StatisticsChooseScreenController implements Initializable {
 			request.add(((User)item).getRole());
 			request.add(((User)item).getUser_id());
 		}
-		else 
+		else {
+			request.add("gap");
 			request.add(((Course)item).get_id());
+		}
 		ClientUI.chat.accept(request);
 		
 		
 		
 	}
 	
+	
+	
+	/**check if the array is empty
+	 * @param arr
+	 */
 	@SuppressWarnings("unchecked")
 	public void openRep(Object arr) {
 		
 		
-		if(((ArrayList<HaveIDGrade>)arr).get(0).get_id().equals("empty")) {
+		if(((ArrayList<HaveID>)arr).get(0).get_id().equals("empty")) {
 			AlertMessages.makeAlert("There is no data for this choice", "Report alert");
 			return;
 		}
@@ -284,7 +293,7 @@ public class StatisticsChooseScreenController implements Initializable {
 		
 		String buttonPressed = ((Button)event.getSource()).getAccessibleText();
 		try {
-		String action = requsetMap.get(buttonPressed);
+		ArrayList<String> action = requsetMap.get(buttonPressed);
 		ArrayList<?>arr=user.getArray(buttonPressed);
 		if(arr==null) 
 		{
@@ -311,15 +320,14 @@ public class StatisticsChooseScreenController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientMessageHandler.setStatisticsChooseScreen(this);
-		// guiMainController.setStatisticsChooseScreen(this);
 		functionMap = new HashMap<>();
 		functionMap.put("student", str -> LoadUserIntable(str));
 		functionMap.put("professor", str -> LoadUserIntable(str));
 		functionMap.put("course", str -> LoadCourseIntable(str));
 
-		requsetMap.put("professor", "Get all professors");
-		requsetMap.put("student", "Get all students");
-		requsetMap.put("course", "Get all courses");
+		requsetMap.put("professor", new ArrayList<>( Arrays.asList("Get all professors",user.getUser_id())));
+		requsetMap.put("student", new ArrayList<>( Arrays.asList( "Get all students",user.getUser_id())));
+		requsetMap.put("course",  new ArrayList<>( Arrays.asList("Get all courses",user.getUser_id())));
 	}
 
 	

@@ -8,3 +8,10 @@
 Added score counter in exam creation screen
 Added more safety checks to this area and made the code more modular in that area.
 Fixed issue where abort wouldn't pass through to all the clients
+
+******************************************************************
+12.6
+Manual + Computerized are now functional 
+Professor can preview his exam before submitting them (same GUI like computerized exam but different permissions)
+Added exam bank which handles exam activation and deactiovation (which are already fully functional) and request for time extension TBD.
+When the professor disables an exam, the exam will be closed in the students prespective.

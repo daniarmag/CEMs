@@ -1,0 +1,136 @@
+"SELECT
+  DISTINCT e.exam_id,
+  AVG(e.grade) AS average_grade,
+  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id AND grade < 55) AS grade_under_55_count,
+  MAX(grade) AS max_grade,
+  MIN(grade) AS min_grade,
+  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id) AS exam_count,
+  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id AND grade < 55) / (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id) * 100 AS percentage_under_55
+FROM
+  student_exam AS e
+GROUP BY
+  exam_id;"
+  
+  query to calculate average, number of grade under 55 
+  max grade, min grade , number of examine and precent of fails
+  
+  ###########################
+  
+  
+  "SELECT avg(se.grade) as average ,max(se.grade) as maxGrade,min(se.grade) minGrade ,se.exam_id
+as examId FROM student_exam as se , exam as ex 
+WHERE ex.professor_full_name="Daniel Armaganian" AND ex.exam_id=se.exam_id
+group by se.exam_id order by average;"
+
+avergae, maxGrade minGrade and ExamId of specific professor 
+
+##############################
+
+
+
+ "SELECT
+  distinct(e.exam_id),avg(e.grade),
+  (SELECT COUNT(*)  FROM student_exam WHERE student_exam.exam_id=e.exam_id AND grade < 55) AS grade_under_55_count,max(grade),min(grade),
+  (SELECT COUNT(*) FROM student_exam WHERE  student_exam.exam_id=e.exam_id) as exam_count
+FROM
+  student_exam as e ,exam as ex
+  WHERE e.exam_id=ex.exam_id AND ex.course_id="01"
+  group by e.exam_id;"
+
+average max ,min, number of student failed and total 
+for a course group by exam_id
+
+##########################################
+
+"SELECT
+    MAX(grade) AS highest_grade,
+    MIN(grade) AS lowest_grade,
+    AVG(grade) AS average_grade
+FROM
+    student_exam
+INNER JOIN
+    exam ON student_exam.exam_id = exam.exam_id
+WHERE
+    exam.course_id = '01';"
+    
+    
+    max grade in a course , min and avergae (for all exams related combined )| 
+    
+    ################################
+    
+    
+    "SELECT
+   e.exam_id,ex.exam_name,
+ round( AVG(e.grade),2) AS average_grade,
+  MAX(grade) AS max_grade,
+  MIN(grade) AS min_grade,
+round((SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id AND grade < 55) / 
+  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id) * 100 ,2) AS fails
+FROM
+  student_exam AS e , exam as ex
+  WHERE e.exam_id=ex.exam_id AND ex.professor_id="209146943" 
+GROUP BY
+  ex.exam_id , ex.exam_name
+  order by average_grade;"
+  
+    #################################
+    
+    
+    
+    "SELECT
+   e.exam_id,ex.exam_name,
+ round( AVG(e.grade),2) AS average_grade,
+  MAX(grade) AS max_grade,
+  MIN(grade) AS min_grade,
+round((SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id AND grade < 55) / 
+  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id) * 100 ,2) AS fails
+FROM
+  student_exam AS e , exam as ex
+  WHERE e.exam_id=ex.exam_id AND ex.professor_id="209146943" 
+GROUP BY
+  ex.exam_id , ex.exam_name
+  order by average_grade;"
+  
+  
+  
+  exam_id,exam_name,avergae,min,max.precentoffails
+  
+  
+  ########################################
+  
+  
+    
+        SELECT
+   e.exam_id,ex.exam_name,
+ round( AVG(e.grade),2) AS average_grade,
+  MAX(grade) AS max_grade,
+  MIN(grade) AS min_grade,
+round((SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id AND grade < 55) / 
+  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id) * 100 ,2) AS fails
+FROM
+  student_exam AS e , exam as ex
+  WHERE e.exam_id=ex.exam_id AND ex.course_id="01"
+GROUP BY
+  ex.exam_id , ex.exam_name
+  order by average_grade;
+  
+  
+  
+  
+  query for courses statistics.
+
+##############################
+
+
+
+
+
+
+
+
+
+
+
+
+
+

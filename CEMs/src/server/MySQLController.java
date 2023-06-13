@@ -1,6 +1,7 @@
 package server;
 
 import java.awt.Desktop;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,9 +19,9 @@ import entities.Course;
 import entities.Exam;
 import entities.ExamFile;
 import entities.ExamResults;
+import entities.ExamStatistics;
 import entities.HeadOfDepartment;
 import entities.Professor;
-import entities.ProfessorExam;
 import entities.Question;
 import entities.Student;
 import entities.StudentExam;
@@ -508,7 +509,7 @@ public class MySQLController
 	 * @return the function receives  or a student or a professor request and load all the 
 	 * Appropriate users
 	 */
-	public ArrayList<?> getAllStudents_Proffesors(String role){
+	public ArrayList<?> getAllStudents(String role){
 		try {
 			ArrayList<User> arrayS=new ArrayList<>();
 			Statement st = conn.createStatement();
@@ -526,18 +527,44 @@ public class MySQLController
 	}
 
 	
+	/**@author czmat
+	 * @param role
+	 * @return the function receives   professor request and load all the 
+	 * Appropriate professors belongs to the department 
+	 */
+	public ArrayList<?> getAllProffesors(String id){
+		try {
+			ArrayList<User> arrayS=new ArrayList<>();
+			Statement st = conn.createStatement();
+			ResultSet rs =st.executeQuery("SELECT u.* from users as u , professor_department as dp\r\n"
+					+ "WHERE u.user_id=dp.professor_id AND dp.head_of_department_id=\""+id+"\";");
+			while(rs.next()) {
+				arrayS.add(new User (rs.getString(1), rs.getString(2), 
+						rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),"professor"));//can changed to be a specific student or user
+			}
+			return arrayS;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+					}
+		return null;
+	}
+
+	
+	
 	
 	/**@author czmat
 	 * the function return all the courses in the system 
 	 * @return
 	 * 
 	 */
-	public ArrayList<Course> getAllCourses(){
+	public ArrayList<Course> getAllCourses(String id){
 		ArrayList<Course> arrayC=new ArrayList<>();
 		Statement st;
 		try {
 			st = conn.createStatement();
-		ResultSet rs =st.executeQuery("SELECT * FROM course");
+		ResultSet rs =st.executeQuery("SELECT c.* FROM course as c, subject as sb\r\n"
+				+ "WHERE c.course_subject_id=sb.subject_id AND sb.head_department_id=\""+ id +"\"");
 		while(rs.next()) {
 			arrayC.add(new Course (rs.getString(1), rs.getString(2), 
 					rs.getString(3)));
@@ -608,11 +635,14 @@ public class MySQLController
 	/**@author czmat
 	 * @param arr
 	 * @return all the exam of the professor and his grades ordered by grade average
+	 * or the course grades 
 	 */
-	public ArrayList<?> getAllprofessorExams(ArrayList<String> arr){
-		ArrayList<ProfessorExam> array=new ArrayList<>();
+	public ArrayList<?> getAllprofessor_courseExams(ArrayList<String> arr){
+		ArrayList<ExamStatistics> array=new ArrayList<>();
+		ExamStatistics exam;
 		ResultSet rs;		
 		try {
+			
 			Statement st = conn.createStatement();
 			rs =st.executeQuery("SELECT\r\n"
 					+ "   e.exam_id,ex.exam_name,\r\n"
@@ -623,21 +653,21 @@ public class MySQLController
 					+ "  (SELECT COUNT(*) FROM student_exam WHERE student_exam.exam_id = e.exam_id) * 100 ,2) AS fails\r\n"
 					+ "FROM\r\n"
 					+ "  student_exam AS e , exam as ex\r\n"
-					+ "  WHERE e.exam_id=ex.exam_id AND ex.professor_id=\""+arr.get(2)+"\""
+					+ "  WHERE e.exam_id=ex.exam_id AND "+arr.get(3)+"=\""+arr.get(2)+"\""
 					+ "GROUP BY\r\n"
 					+ "  ex.exam_id , ex.exam_name   order by average_grade;"
 					);
 			while(rs.next()) {
-				ProfessorExam exam= new ProfessorExam(rs.getString(1), rs.getString(2), rs.getDouble(3),rs.getInt(4), rs.getInt(5), rs.getDouble(6));
+				 exam= new ExamStatistics(rs.getString(1), rs.getString(2), rs.getDouble(3),rs.getInt(4), rs.getInt(5), rs.getDouble(6));
 				array.add(exam);
 			}
 			
 			if(array.isEmpty()) {
-				array.add(new ProfessorExam("empty","", 0,0,0,0));
+				array.add(new ExamStatistics("empty","", 0,0,0,0));
 				return array;
 			}
 			
-			array.add(new ProfessorExam("average of all", null, AverageofExam(arr.get(2)), 0, 0, 0));
+			array.add(new ExamStatistics("average of all", null, AverageofExam(arr.get(2),arr.get(3)), 0, 0, 0));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -651,14 +681,14 @@ public class MySQLController
 	 * @param id
 	 * @return the average of all the exams of this id of professor
 	 */
-	private double AverageofExam(String id) {
+	private double AverageofExam(String id,String path) {
 		double ave=0;
 		ResultSet rs;
 		try {
 		Statement st = conn.createStatement();
 		rs =st.executeQuery("SELECT round(avg(se.grade),2) FROM student_exam as se, "
-				+ "exam as e WHERE se.exam_id=e.exam_id AND "
-				+ "e.professor_id=\""+id+"\"");
+				+ "exam as ex WHERE se.exam_id=ex.exam_id AND "
+				+ path +"=\""+id+"\"");
 		while(rs.next()) {
 			ave=rs.getDouble(1);
 		}
