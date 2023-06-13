@@ -1,6 +1,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 public class ExamStatistics implements Serializable,HaveID{
@@ -65,6 +67,7 @@ public int getMin_grade() {
 public double getFails() {
 	return fails;
 }
+
 
 
 
