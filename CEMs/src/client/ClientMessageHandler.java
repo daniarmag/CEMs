@@ -7,6 +7,7 @@ import entities.Course;
 import entities.Exam;
 import entities.ProfessorExam;
 import entities.ExamFile;
+import entities.ExamResults;
 import entities.Question;
 import entities.StudentExam;
 import entities.User;
@@ -14,6 +15,7 @@ import enums.MessageType;
 import gui.QuestionCreationScreenController;
 import gui.ExamCreationFirstController;
 import gui.ExamCreationSecondController;
+import gui.ExamResultsScreenController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ManualExamController;
@@ -33,6 +35,7 @@ public class ClientMessageHandler
 	static ExamCreationFirstController examCreationFirstController;
 	static ExamCreationSecondController examCreationSecondController;
 	static ExamBankScreenController examBankScreenController;
+	static ExamResultsScreenController examResultsScreenController;
     static QuestionBankScreenController questionBankScreenController;
     static StudentScreenController studentScreenController;
     static StudentExamScreenController studentExamScreenController;
@@ -42,14 +45,22 @@ public class ClientMessageHandler
 	static StatisticsChooseScreenController statisticsScreen;
     ///Check check check dont use 
     //static guiMainController guiController;
-	static {
+	static 
+	{
 		//guiController =new guiMainController();
 		studentController = new StudentScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
 		//examController=new ExamController();
 		professorController = new ProfessorScreenController();
 		//manualExamController = new ManualExamController();
-		
+	}
+	
+	/**
+	 * @param examResultsScreenController the examCreationFirstController to set
+	 */
+	public static void setExamResultsScreenController(ExamResultsScreenController controller) 
+	{
+		examResultsScreenController = controller;
 	}
 
 	/**
@@ -184,10 +195,12 @@ public class ClientMessageHandler
 			case EXAM_FILE:
 				examFileMessageHandler((ExamFile) msg);
 				break;
-
+			
+			case EXAM_RESULTS_ARRAY_LIST:
+				examResultsArrayListMessageHandler((ArrayList<ExamResults>)msg);
+				break;
 		}
 	}
-
 
 	/**
 	 * Determines the type of the client message.
@@ -202,7 +215,6 @@ public class ClientMessageHandler
 		else if (msg instanceof ArrayList) 
 		{
 			ArrayList<?> arrayList = (ArrayList<?>) msg;
-			
 			if (!arrayList.isEmpty()) 
 			{
 				
@@ -221,6 +233,8 @@ public class ClientMessageHandler
 					return MessageType.EXAM_STUDENT_ARRAY_LIST;
 				else if (firstElement instanceof ProfessorExam)
 					return MessageType.PROFESSOR_EXAMS;
+				else if (firstElement instanceof ExamResults)
+					return MessageType.EXAM_RESULTS_ARRAY_LIST;
 			}
 		} 
 		else if (msg instanceof Map)
@@ -407,13 +421,32 @@ public class ClientMessageHandler
 		catch (Exception e) {e.printStackTrace();}
 	}
 	
+	/**
+	 * Handles client messages of type Map.
+	 * @param map
+	 */
 	public static void mapMessageHandler(Map<?, ?> map)
 	{
 		professorController.setTeachingMap(map);
 	}
 	
-	public static void examFileMessageHandler(ExamFile examFile) {
+	/**
+	 * Handles client messages of type ExamFile
+	 * @param examFile
+	 */
+	public static void examFileMessageHandler(ExamFile examFile) 
+	{
 		manualExamController.setExamFile(examFile);
 	}
 
+	/**
+	 * Handles client messages of type ExamResults
+	 * @param arrayList
+	 */
+	private static void examResultsArrayListMessageHandler(ArrayList<ExamResults> arrayList) 
+	{
+		examResultsScreenController.setArr(arrayList);
+		examResultsScreenController.updateTables();
+		examResultsScreenController.checkForSuspects();
+	}
 }

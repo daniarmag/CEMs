@@ -323,6 +323,6 @@ public class ExamController implements Initializable
 	        }
 		};
 		//Schedule the task to run every minute
-		timer.schedule(task, 0, 500);
+		timer.schedule(task, 0, 60000);
 	}
 }

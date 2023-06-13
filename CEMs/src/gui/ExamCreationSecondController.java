@@ -135,7 +135,7 @@ public class ExamCreationSecondController implements Initializable
 	    HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			 AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
+			AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
 		    return;
 		}
 		buildExam();
@@ -208,6 +208,7 @@ public class ExamCreationSecondController implements Initializable
 	{
 	    for (Question q : questionList) q.setScore(null);
 	}
+	
 	/**
 	 * Sets the columns of the table to be editable.
 	 */

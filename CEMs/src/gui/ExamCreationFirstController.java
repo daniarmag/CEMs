@@ -87,7 +87,7 @@ public class ExamCreationFirstController implements Initializable
 	}
 	
 	/** 
-	 * Exits from client GUI - disconnectes from DB aswell.
+	 * Exits from client GUI - disconnects from DB aswell.
 	 * @param event
 	 */
     @FXML

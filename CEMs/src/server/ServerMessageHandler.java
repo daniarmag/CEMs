@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import entities.Exam;
+import entities.ExamResults;
 import entities.Question;
 import entities.User;
 import enums.MessageType;
@@ -24,7 +25,6 @@ public class ServerMessageHandler
 	
 	//0 - finishedExam, 1 - unFinishedExam, 2 - totalStudents
 	static private Integer[] counterArray = {0, 0, 0};
-	
 	
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
@@ -54,6 +54,10 @@ public class ServerMessageHandler
 			case EXAM:
 				examMessageHandler((Exam)msg, client);
 				break;
+				
+			case EXAM_RESULTS_ARRAY_LIST:
+				examResultsArrayListMessageHandler((ArrayList<ExamResults>)msg, client);
+				break;
 		}
 	}
 
@@ -80,6 +84,8 @@ public class ServerMessageHandler
 					return MessageType.STRING_ARRAY_LIST;
 				else if (firstElement instanceof Question)
 					return MessageType.QUESTION_ARRAY_LIST;
+				else if (firstElement instanceof ExamResults)
+					return MessageType.EXAM_RESULTS_ARRAY_LIST;
 			}
 		}
 		return null;
@@ -291,6 +297,10 @@ public class ServerMessageHandler
 							c.sendToClient(answer);
 					}
 					break;
+				
+				case "load pending exams":
+					client.sendToClient(sqlController.getProfessorPendingExams(arrayList.get(1)));
+					break;
 			}
 		} catch (IOException e) {}
 	}
@@ -321,6 +331,16 @@ public class ServerMessageHandler
 			sqlController.addExamToDB(exam);
 			client.sendToClient("exam added");
 		} catch (IOException e) {}
+	}
+	
+	/**
+	 * Handles messages of type ExamResults
+	 * @param arrayList
+	 * @param client
+	 */
+	private static void examResultsArrayListMessageHandler(ArrayList<ExamResults> arrayList, ConnectionToClient client) 
+	{
+		
 	}
 	
 	/**

@@ -136,6 +136,20 @@ public class ProfessorScreenController implements Initializable
 		} catch (Exception e) {e.printStackTrace();}
     }
     
+    /**
+     * Starts the exam result screen.
+     * @param event
+     */
+    @FXML
+    void checkResults(ActionEvent event)
+    {
+    	UserController.hide(event);
+    	try 
+    	{
+    		ExamResultsScreenController.start(u);
+		} catch (Exception e) {e.printStackTrace();}
+    }
+    
 	/**
 	 * Setter.
 	 * @param map

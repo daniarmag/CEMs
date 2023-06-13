@@ -17,6 +17,7 @@ import java.util.Map;
 import entities.Course;
 import entities.Exam;
 import entities.ExamFile;
+import entities.ExamResults;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.ProfessorExam;
@@ -870,6 +871,10 @@ public class MySQLController
 		return qArr;
 	}
 
+	/**
+	 * Uploads the computerized exam that was also checked by the system to the DB.
+	 * @param arrayList
+	 */
 	public void uploadFinishedExam(ArrayList<String> arrayList)
 	{
 		try 
@@ -888,6 +893,10 @@ public class MySQLController
 	    catch (SQLException e){e.printStackTrace();}
 	}
 
+	/**
+	 * sets exam stats (date, time, etc..) in the DB.
+	 * @param examStats
+	 */
 	public void addExamStats(ArrayList<String> examStats) 
 	{
 		try 
@@ -905,5 +914,31 @@ public class MySQLController
 	       ps.executeUpdate();
 	    } 
 	    catch (SQLException e){e.printStackTrace();}
+	}
+
+	/**
+	 * @param string
+	 * @return arraylist that contains an exam that needs to be checked.
+	 */
+	public ArrayList<ExamResults> getProfessorPendingExams(String string)
+	{
+		ArrayList<ExamResults> examResultsArr = new ArrayList<>();
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT e.exam_name, se.exam_id, se.student_id, se.grade, se.wrong_answer " +
+														 "FROM exam e " +
+														 "JOIN student_exam se ON e.exam_id = se.exam_id " +
+														 "WHERE e.professor_id = ? " +
+	                									 "AND se.isConfirmed = 0");
+			ps.setString(1, string);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				ExamResults e = new ExamResults(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+				e.setWrong_answers(rs.getString(5));
+				examResultsArr.add(e);
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return examResultsArr;
 	}
 }
