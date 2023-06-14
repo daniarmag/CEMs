@@ -134,9 +134,9 @@ public class ClientMessageHandler
 	/**
 	 * @param examController the examController to set
 	 */
-	public static void setExamController(ExamController examController) 
+	public static void setExamController(ExamController controller) 
 	{
-			ClientMessageHandler.examController = examController;
+			examController = controller;
 	}
 		
 	/**
@@ -232,8 +232,6 @@ public class ClientMessageHandler
 					return MessageType.EXAM_ARRAY_LIST;
 				else if (firstElement instanceof StudentExam)
 					return MessageType.EXAM_STUDENT_ARRAY_LIST;
-			//	else if (firstElement instanceof ProfessorExam)
-				//	return MessageType.PROFESSOR_EXAMS;
 				else if (firstElement instanceof ExamResults)
 					return MessageType.EXAM_RESULTS_ARRAY_LIST;
 				else if (firstElement instanceof ExamStatistics)
