@@ -121,8 +121,8 @@ public class ProfessorExamReportController implements Initializable{
 		request.add("generate full exam report");
 		request.add(((ExamTemplate)item).get_id());
 		ClientUI.chat.accept(request);
-		//System.out.println(request.get(1));
 	}
+	
 	
 	
 	

@@ -13,12 +13,16 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import entities.Course;
+import entities.Distribution;
 import entities.Exam;
 import entities.ExamFile;
+import entities.ExamProfessorReport;
 import entities.ExamResults;
+import entities.ExamStat;
 import entities.ExamStatistics;
 import entities.ExamTemplate;
 import entities.HeadOfDepartment;
@@ -274,83 +278,59 @@ public class MySQLController
 		return arr;
 	}
 	
-	
-	
-	/**
-	 * @param exam
-	 * @return the amount of student that receive the grade shown in the query
-	 */
-	public ArrayList<?> ExamHistogramResult(String exam){
-		ResultSet rs;
-		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT \r\n"
-					+ "    CASE \r\n"
-					+ "        WHEN grade >= 0 AND grade <= 55 THEN '0-54'\r\n"
-					+ "        WHEN grade > 55 AND grade <= 75 THEN '55-65'\r\n"
-					+ "        WHEN grade > 10 AND grade <= 20 THEN '66-75'\r\n"
-					+ "        WHEN grade > 75 AND grade <= 85 THEN '76-85'\r\n"
-					+ "        WHEN grade > 85 AND grade <= 95 THEN '86-95'\r\n"
-					+ "        WHEN grade > 95 AND grade <= 100 THEN '96-100'\r\n"
-					+ "        \r\n"
-					+ "    END AS grade_range,\r\n"
-					+ "    COUNT(*) AS student_count\r\n"
-					+ "FROM \r\n"
-					+ "    student_exam as exam\r\n"
-					+ "WHERE \r\n"
-					+ "    exam.exam_id =\""+exam+"\"\r\n"
-					+ "GROUP BY \r\n"
-					+ "    grade_range "
-					+ "order by grade_range;");
-			
-			rs=ps.executeQuery();
-			
-			while(rs.next()) {
-				//add entity histogrampoint
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return null;
-	}
-	
-	
+
 	
 	
 	
 	/**
 	 * @param exam
-	 * @return statistics on exam of preffesor average max min histogram fails ... 
+	 * @return statistics on exam of professor average max min histogram fails ... 
 	 */
-	private ArrayList<Number> professorExamStat(String exam) {
-		ArrayList<Number> gradeStat=new ArrayList<>(); 
+	public ExamProfessorReport  professorExamStat(String exam) {
 		ResultSet rs;
-		
+		ExamProfessorReport examRep;
 		try {
 			
 			Statement st = conn.createStatement();
-			rs =st.executeQuery("SELECT round(AVG(grade),2) as average ,max(grade) as max ,min(grade) AS min\r\n"
-					+"round((SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\" AND grade<55)/\r\n"
-					+ "(SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\")*100,2) as fails"
-					+ "FROM student_exam WHERE exam_id=\""+exam+"\";");
-			while(rs.next()) {
-				gradeStat.add(rs.getDouble(1));//average
-				gradeStat.add(rs.getInt(2));//max
-				gradeStat.add(rs.getInt(3));//min
-				gradeStat.add(rs.getDouble(4));//failes
-			}
+			rs=st.executeQuery("SELECT round(AVG(grade),2) as average ,max(grade) as max ,min(grade) AS min,\r\n"
+					+ "round((SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\" AND grade<55)/\r\n"
+					+ "(SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\")*100,2) as fails\r\n"
+					+ "				FROM student_exam WHERE exam_id=\""+exam+"\";");
 			
-			if(!gradeStat.isEmpty()) {
-				gradeStat.add(medianExam(exam));
-			return gradeStat;
-			}
+		
+			rs.next();
+			examRep=new ExamProfessorReport(exam,"", rs.getDouble(1), rs.getInt(2), rs.getInt(3), rs.getDouble(4));
+			examRep.setMedian(medianExam(exam));
+			examRep.setDistribution(ExamHistogramResult(exam));
+			examRep.setStat(examStatistics(exam));
+			
+			
+			//System.out.println(examRep);
+			return examRep;
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return null ;
 	}
 	
+	private ExamStat examStatistics(String exam) {
+
+		ResultSet rs;
+		ExamStat stat;
+		try {
+			Statement st = conn.createStatement();
+			rs = st.executeQuery("SELECT * FROM exam_stats WHERE exam_id=\""+exam+"\"");
+			rs.next();
+			stat=new ExamStat(exam, rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7));
+			return stat;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	/**
 	 * @param exam
 	 * @return returnning the median - the grades coming sorted already
@@ -395,6 +375,49 @@ public class MySQLController
 	}
 	
 	
+	
+	
+	
+	/**
+	 * @param exam
+	 * @return the amount of student that receive the grade shown in the query
+	 */
+	private Distribution ExamHistogramResult(String exam){
+		ResultSet rs;
+		Distribution dist=new Distribution();
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT \r\n"
+					+ "    CASE \r\n"
+					+ "        WHEN grade >= 0 AND grade <= 55 THEN '0-54'\r\n"
+					+ "        WHEN grade > 55 AND grade <= 75 THEN '55-65'\r\n"
+					+ "        WHEN grade > 10 AND grade <= 20 THEN '66-75'\r\n"
+					+ "        WHEN grade > 75 AND grade <= 85 THEN '76-85'\r\n"
+					+ "        WHEN grade > 85 AND grade <= 95 THEN '86-95'\r\n"
+					+ "        WHEN grade > 95 AND grade <= 100 THEN '96-100'\r\n"
+					+ "        \r\n"
+					+ "    END AS grade_range,\r\n"
+					+ "    COUNT(*) AS student_count\r\n"
+					+ "FROM \r\n"
+					+ "    student_exam as exam\r\n"
+					+ "WHERE \r\n"
+					+ "    exam.exam_id =\""+exam+"\"\r\n"
+					+ "GROUP BY \r\n"
+					+ "    grade_range "
+					+ "order by grade_range;");
+			
+			rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				dist.addToRange(rs.getString(1), rs.getInt(2));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return dist;
+	}
 	
 	
 	

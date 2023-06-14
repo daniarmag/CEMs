@@ -7,6 +7,7 @@ import control.AlertMessages;
 import entities.Course;
 import entities.Exam;
 import entities.ExamFile;
+import entities.ExamProfessorReport;
 import entities.ExamResults;
 import entities.ExamStatistics;
 import entities.ExamTemplate;
@@ -214,6 +215,10 @@ public class ClientMessageHandler
 			case EXAM_TEMPLATE:
 				professorExamReportController.loadTable((ArrayList<ExamTemplate>)msg);
 				break;
+				
+			case EXAM_PROFESSOR_REPORT:
+				System.out.println((ExamProfessorReport)msg);
+				break;
 		}
 	}
 
@@ -260,6 +265,8 @@ public class ClientMessageHandler
 			return MessageType.USER;
 		else if (msg instanceof ExamFile)
 			return MessageType.EXAM_FILE;
+		else if (msg instanceof ExamProfessorReport)
+			return MessageType.EXAM_PROFESSOR_REPORT;
 		return null;
 	}
 

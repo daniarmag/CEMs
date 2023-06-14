@@ -1,15 +1,17 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class ExamProfessorReport extends ExamStatistics {
-private String course_id;
-private ArrayList<Distribution> rangeArr;	
+public class ExamProfessorReport extends ExamStatistics implements Serializable{
 
-	///distribution
-	///all info from exam stat
-	///all info currenlty in 
+	
+private String course_id;
+private Distribution dist;	
+private double median;
+private ExamStat statistics;
+
 	
 	
 
@@ -26,15 +28,27 @@ private ArrayList<Distribution> rangeArr;
 
 
 	
-	
-	public ArrayList<Distribution> getDistribution() {
-		return rangeArr;
+	 public void setMedian(double val) {
+		 median=val;
+	 }
+	public Distribution getDistribution() {
+		return dist;
 	}
 	
-	public void setDistribution( ArrayList<Distribution> array) {
-		rangeArr=array;
+	public void setDistribution( Distribution dist) {
+		this.dist=dist;
 	}
 
+	public void setStat(ExamStat stat) {
+		statistics=stat;
+	}
+
+	@Override
+	public String toString() {
+		return "ExamProfessorReport [course_id=" + course_id + ", dist=" + dist + ", median=" + median + ", statistics="
+				+ statistics + ", get_id()=" + get_id() + ", getGrade()=" + getGrade() + ", getMax_grade()="
+				+ getMax_grade() + ", getMin_grade()=" + getMin_grade() + ", getFails()=" + getFails() + "]";
+	}
 
 
 	

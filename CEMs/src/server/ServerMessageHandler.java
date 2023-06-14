@@ -314,7 +314,12 @@ public class ServerMessageHandler
 					break;
 					
 				case "generate full exam report":
-					//client.sendToClient(sqlController.(arrayList.get(1)));
+					try {
+					client.sendToClient(sqlController.professorExamStat(arrayList.get(1)));
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+					//System.out.println(sqlController.professorExamStat(arrayList.get(1)));
 					break;
 			}
 		} catch (IOException e) {}
