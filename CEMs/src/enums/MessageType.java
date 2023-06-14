@@ -21,5 +21,6 @@ public enum MessageType
     EXAM_RESULTS_ARRAY_LIST,
     PROFESSOR_EXAMS,
     EXAMS_STATISTICS,
+    EXAM_RESULTS,
     EXAM_FILE
 }

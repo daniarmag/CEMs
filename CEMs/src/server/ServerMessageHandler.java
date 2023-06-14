@@ -55,8 +55,8 @@ public class ServerMessageHandler
 				examMessageHandler((Exam)msg, client);
 				break;
 				
-			case EXAM_RESULTS_ARRAY_LIST:
-				examResultsArrayListMessageHandler((ArrayList<ExamResults>)msg, client);
+			case EXAM_RESULTS:
+				examResultsMessageHandler((ExamResults)msg, client);
 				break;
 		}
 	}
@@ -72,6 +72,8 @@ public class ServerMessageHandler
 			return MessageType.STRING;
 		if (msg instanceof Question)
 			return MessageType.QUESTION;
+		if (msg instanceof ExamResults)
+			return MessageType.EXAM_RESULTS;
 		if (msg instanceof Exam)
 			return MessageType.EXAM;
 		else if (msg instanceof ArrayList)
@@ -342,12 +344,16 @@ public class ServerMessageHandler
 	
 	/**
 	 * Handles messages of type ExamResults
-	 * @param arrayList
+	 * @param examResult
 	 * @param client
 	 */
-	private static void examResultsArrayListMessageHandler(ArrayList<ExamResults> arrayList, ConnectionToClient client) 
+	private static void examResultsMessageHandler(ExamResults examResult, ConnectionToClient client) 
 	{
-		
+		try 
+		{
+			sqlController.approveExamResult(examResult);
+			client.sendToClient("exam approved");
+		} catch (IOException e) {}
 	}
 	
 	/**

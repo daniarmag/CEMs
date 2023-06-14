@@ -971,4 +971,24 @@ public class MySQLController
 		} catch (SQLException e) {e.printStackTrace();}
 		return examResultsArr;
 	}
+
+	/**
+	 * This method is responsible for updating a non approved exam after the professor approved it.
+	 * @param examResult
+	 */
+	public void approveExamResult(ExamResults examResult) 
+	{
+		 try 
+		    {
+		        PreparedStatement ps = conn.prepareStatement("UPDATE student_exam SET grade = ?, comment = ?, isConfirmed = ? " +
+		        									         "WHERE exam_id = ? AND student_id = ?");
+		        ps.setInt(1, examResult.getGrade());
+		        ps.setString(2, examResult.getComment());
+		        ps.setString(3, examResult.getIsConfirmed());
+		        ps.setString(4, examResult.getExam_id());
+		        ps.setString(5, examResult.getStudent_id());
+		        ps.executeUpdate();
+		    } 
+		    catch (SQLException e) {e.printStackTrace();}
+	}
 }

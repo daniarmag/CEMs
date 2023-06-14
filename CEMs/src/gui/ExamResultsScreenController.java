@@ -20,8 +20,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.util.converter.IntegerStringConverter;
 
 public class ExamResultsScreenController implements Initializable
@@ -29,6 +31,9 @@ public class ExamResultsScreenController implements Initializable
 	public static User u;
 	
 	public ArrayList<ExamResults> arr = new ArrayList<>();
+	
+    @FXML
+    private TextField searchBar;
 
 	@FXML
 	private ListView<String> suspectListView;
@@ -73,6 +78,7 @@ public class ExamResultsScreenController implements Initializable
 		request.add("load pending exams");
 		request.add(u.getUser_id());
 		ClientUI.chat.accept(request);
+		searchBar.setOnKeyReleased(event -> search(event));
 		colHandler();
 	}
 	
@@ -96,8 +102,12 @@ public class ExamResultsScreenController implements Initializable
     	UserController.goBack(event, "/gui/ProfessorScreen.fxml");
     }
     
+    /**
+     * Submits approval to the DB.
+     * @param event
+     */
     @FXML
-    void submit(ActionEvent event)
+    void approve(ActionEvent event)
     {
     	HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
@@ -105,8 +115,16 @@ public class ExamResultsScreenController implements Initializable
 			AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
 		    return;
 		}
-		ArrayList<ExamResults> tableData = new ArrayList<>(examResultsTable.getItems());
-	    ClientUI.chat.accept(tableData);
+		ExamResults selectedExam = examResultsTable.getSelectionModel().getSelectedItem();
+		//Condition to make sure that a question to delete was indeed selected.
+        if (selectedExam != null) 
+        {
+        	selectedExam.setIsConfirmed("1");
+        	ClientUI.chat.accept(selectedExam);
+        	examResultsTable.getItems().remove(selectedExam);
+        }
+        else 
+       	 AlertMessages.makeAlert("Select an exam to approve.", "Approve Exam");
     }
     
     /**
@@ -142,19 +160,34 @@ public class ExamResultsScreenController implements Initializable
 	        er.setComment(e.getNewValue());
 	    });
 	    examResultsTable.setEditable(true);
-	    
 	}
+	
+	/**
+	 * This method is called when a key is released and filters the table.
+	 * @param event
+	 */
+	void search(KeyEvent event)
+	{
+		 String searchText = searchBar.getText().toLowerCase();
+		    //Filter the question list based on the search text
+		    ArrayList<ExamResults> filteredList = new ArrayList<>();
+		    for (ExamResults er : arr)
+		        if (er.getExam_name().toLowerCase().contains(searchText))
+		            filteredList.add(er);
+		    //Update the question table with the filtered list
+		    updateExamTable(filteredList);       
+	 }
 	
     /**
      * Sets the examResultsTable with the values that are currently in the Arr.
      */
-    public void updateTables() 
+    public void updateExamTable(ArrayList<ExamResults> arrayList) 
     {
     	examNameCol.setCellValueFactory(new PropertyValueFactory<>("exam_name"));
 	    studentIdCol.setCellValueFactory(new PropertyValueFactory<>("student_id"));
 	    gradeCol.setCellValueFactory(new PropertyValueFactory<>("grade"));
 	    commentsCol.setCellValueFactory(new PropertyValueFactory<>("comment"));
-	    ObservableList<ExamResults> examResultsObservableList = FXCollections.observableArrayList(arr);
+	    ObservableList<ExamResults> examResultsObservableList = FXCollections.observableArrayList(arrayList);
 	    examResultsTable.setItems(examResultsObservableList);
 	}
     
@@ -176,6 +209,7 @@ public class ExamResultsScreenController implements Initializable
             	else 
             	{
             	    ArrayList<String> list = new ArrayList<>();
+            	    list.add(e.getExam_name());
             	    list.add(e.getStudent_id());
             	    suspectPairs.put(wrongAnswers, list);
             	}
@@ -183,13 +217,12 @@ public class ExamResultsScreenController implements Initializable
         }
         for (List<String> suspects : suspectPairs.values()) 
         {
-        	//Insures that there are at least two suspects.
-            if (suspects.size() > 1)
+        	//Insures that there are at least two suspects (+1 for the exam_name).
+            if (suspects.size() > 2)
             {
             	//In case there's more than two suspects, it joins the first two n - 1 with commas to suspectPair.
-                String suspectPair = String.join(", ", suspects.subList(0, suspects.size() - 1));
-                String additionalSuspect = suspects.get(suspects.size() - 1);
-                String suspectEntry = String.format("%s suspect(s) with %s", suspectPair, additionalSuspect);
+                String suspectPair = String.join(", ", suspects.subList(1, suspects.size()));
+                String suspectEntry = String.format("%s \nsuspect(s) in exam %s", suspectPair, suspects.get(0));
                 suspectListView.getItems().add(suspectEntry);
             }
         }

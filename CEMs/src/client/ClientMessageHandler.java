@@ -292,15 +292,19 @@ public class ClientMessageHandler
 				break;
 			
 			case "selected exam is now active":
-				AlertMessages.makeAlert("Exam activated", "Activate Exam");
+				AlertMessages.makeAlert("Exam activated.", "Activate Exam");
 				break;
 				
 			case "selected exam is now inactive":
-				AlertMessages.makeAlert("Exam deactivated", "Dectivate Exam");
+				AlertMessages.makeAlert("Exam deactivated.", "Dectivate Exam");
 				break;
 				
 			case "exam submitted":
 				AlertMessages.makeAlert("Exam submitted, good luck!", "Submit Exam");
+				break;
+			
+			case "exam approved":
+				AlertMessages.makeAlert("Exam successfully approved.", "Approve Exam");
 				break;
 		}
 	}
@@ -449,7 +453,7 @@ public class ClientMessageHandler
 	private static void examResultsArrayListMessageHandler(ArrayList<ExamResults> arrayList) 
 	{
 		examResultsScreenController.setArr(arrayList);
-		examResultsScreenController.updateTables();
+		examResultsScreenController.updateExamTable(arrayList);
 		examResultsScreenController.checkForSuspects();
 	}
 }
