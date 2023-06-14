@@ -4,12 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
-
-import client.ChatClient;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
-import entities.ExamTemplate;
 import entities.Professor;
 import entities.User;
 import javafx.application.Platform;
