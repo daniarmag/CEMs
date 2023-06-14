@@ -130,7 +130,7 @@ public class StatisticsChooseScreenController implements Initializable {
 	 * @param propertyCol3
 	 * loading all the column to their appropriate data 
 	 */
-	public void loadingColumns(String col_3,String propertyCol1 ,String propertyCol2 ,String propertyCol3) {
+	private void loadingColumns(String col_3,String propertyCol1 ,String propertyCol2 ,String propertyCol3) {
 		try {
 		Platform.runLater(() -> col1.setText("ID"));
 		Platform.runLater(() -> col2.setText("Name"));

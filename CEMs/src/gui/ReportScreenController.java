@@ -112,7 +112,7 @@ public class ReportScreenController implements Initializable {
 		public void start(ActionEvent e, Object arr, Object obj) {
 			try {
 				Platform.runLater(
-						() -> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreenStat.fxml").show());
+						() -> ScreenUtils.createNewStage("/gui/ReportScreen.fxml").show());
 
 				array = (ArrayList<?>) arr;
 				backScreen = e;

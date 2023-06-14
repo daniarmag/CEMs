@@ -18,7 +18,7 @@
          <children>
             <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
                <graphic>
-                  <ImageView fx:id="returnBtn" fitHeight="32.0" fitWidth="32.0">
+                  <ImageView fx:id="returnIm" fitHeight="32.0" fitWidth="32.0">
                      <image>
                         <Image url="@../images/Back%20Logo.png" />
                      </image>
@@ -28,7 +28,7 @@
                   <Insets right="150.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <ImageView fitHeight="175.0" fitWidth="175.0">
+            <ImageView fx:id="faceImage" fitHeight="175.0" fitWidth="175.0">
                <image>
                   <Image url="@../images/ProfessorLogo.png" />
                </image>
@@ -53,7 +53,7 @@
       </ImageView>
       <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
          <graphic>
-            <ImageView fx:id="exitBtn" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exitImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/exitBtn.png" />
                </image>
@@ -64,16 +64,16 @@
          <columns>
             <TableColumn fx:id="examNameCol" prefWidth="162.0" text="Exam Name" />
             <TableColumn fx:id="examIdCol" prefWidth="149.0" text="Exam Id" />
-            <TableColumn fx:id="examCol" prefWidth="157.0" text="Course" />
+            <TableColumn fx:id="examCourseCol" prefWidth="157.0" text="Course" />
          </columns>
       </TableView>
       <TextField fx:id="searchBar" layoutX="260.0" layoutY="165.0" promptText="Search by exam name..." style="-fx-background-radius: 15px;" />
-      <Button fx:id="viewReport" layoutX="587.0" layoutY="543.0" mnemonicParsing="false" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="View Report" textFill="WHITE">
+      <Button fx:id="viewReport" layoutX="587.0" layoutY="543.0" mnemonicParsing="false" onAction="#GenerateReport" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="View Report" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="15.0" />
          </font>
       </Button>
-      <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="204.0" layoutY="13.0">
+      <ImageView fx:id="labelImage" fitHeight="60.0" fitWidth="330.0" layoutX="204.0" layoutY="13.0">
          <image>
             <Image url="@../images/ManageExamLabel.png" />
          </image>

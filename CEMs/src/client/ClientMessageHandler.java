@@ -9,6 +9,7 @@ import entities.Exam;
 import entities.ExamFile;
 import entities.ExamResults;
 import entities.ExamStatistics;
+import entities.ExamTemplate;
 import entities.Question;
 import entities.StudentExam;
 import entities.User;
@@ -20,6 +21,7 @@ import gui.ExamResultsScreenController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ManualExamController;
+import gui.ProfessorExamReportController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.ExamBankScreenController;
@@ -44,6 +46,7 @@ public class ClientMessageHandler
     static HeadOfDepScreenController headOfScreenController;
     static ExamController examController;
 	static StatisticsChooseScreenController statisticsScreen;
+	static ProfessorExamReportController professorExamReportController;
     ///Check check check dont use 
     //static guiMainController guiController;
 	static 
@@ -62,6 +65,13 @@ public class ClientMessageHandler
 	public static void setExamResultsScreenController(ExamResultsScreenController controller) 
 	{
 		examResultsScreenController = controller;
+	}
+	/**
+	 * @param examResultsScreenController the examCreationFirstController to set
+	 */
+	public static void setProfessorExamReportController(ProfessorExamReportController controller) 
+	{
+		professorExamReportController = controller;
 	}
 
 	/**
@@ -200,6 +210,10 @@ public class ClientMessageHandler
 			case EXAM_RESULTS_ARRAY_LIST:
 				examResultsArrayListMessageHandler((ArrayList<ExamResults>)msg);
 				break;
+				
+			case EXAM_TEMPLATE:
+				professorExamReportController.loadTable((ArrayList<ExamTemplate>)msg);
+				break;
 		}
 	}
 
@@ -236,6 +250,8 @@ public class ClientMessageHandler
 					return MessageType.EXAM_RESULTS_ARRAY_LIST;
 				else if (firstElement instanceof ExamStatistics)
 					return MessageType.EXAMS_STATISTICS;
+				else if(firstElement instanceof ExamTemplate)
+					return MessageType.EXAM_TEMPLATE;
 			}
 		} 
 		else if (msg instanceof Map)

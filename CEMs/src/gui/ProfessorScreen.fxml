@@ -59,7 +59,7 @@
             <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="viewReportBtn" alignment="CENTER" layoutX="349.0" layoutY="492.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="View reports" textFill="WHITE">
+      <Button fx:id="viewReportBtn" alignment="CENTER" layoutX="349.0" layoutY="492.0" mnemonicParsing="false" onAction="#viewReport" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="View reports" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="20.0" />
          </font>

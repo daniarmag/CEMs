@@ -16,7 +16,8 @@ import javafx.scene.text.Text;
 
 public class HeadOfDepScreenController implements Initializable
 {
-	private static StatisticsChooseScreenController statisticsScreen=new StatisticsChooseScreenController();
+	private static StatisticsChooseScreenController 
+	statisticsScreen=new StatisticsChooseScreenController();
 	static HeadOfDepartment u ;
     @FXML
     private Text Alert;

@@ -20,6 +20,7 @@ import entities.Exam;
 import entities.ExamFile;
 import entities.ExamResults;
 import entities.ExamStatistics;
+import entities.ExamTemplate;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Question;
@@ -251,24 +252,26 @@ public class MySQLController
 	 * @param exam
 	 * @return the exams of the prefessor which student already took and have grades.
 	 */
-	public ArrayList<?> loadProfessorExams_toReport(String exam){
+	public ArrayList<?> loadProfessorExams_toReport(String id){
 		ResultSet rs;
-		
+		ArrayList<ExamTemplate> arr=new ArrayList<>();
 		try {
 			PreparedStatement ps = conn.prepareStatement("SELECT distinct e.exam_name,e.exam_id,e.course_id FROM exam as e , student_exam as se \r\n"
 					+ "WHERE e.professor_id=? AND se.exam_id=e.exam_id;");
-			ps.setString(1, exam);
+			ps.setString(1, id);
 			rs=ps.executeQuery();
 			while(rs.next()) {
-				//add to a kind of struct
+				arr.add(new ExamTemplate(rs.getString(1),rs.getString(2),rs.getString(3)));
+			}
+			if(arr.isEmpty()) {
+				arr.add(new ExamTemplate("empty", "", ""));
+				return arr;
 			}
 					
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		//if empty return empty struct.
-		
-		return null;
+		return arr;
 	}
 	
 	
@@ -296,7 +299,9 @@ public class MySQLController
 					+ "WHERE \r\n"
 					+ "    exam.exam_id =\""+exam+"\"\r\n"
 					+ "GROUP BY \r\n"
-					+ "    grade_range;");
+					+ "    grade_range "
+					+ "order by grade_range;");
+			
 			rs=ps.executeQuery();
 			
 			while(rs.next()) {
@@ -311,28 +316,45 @@ public class MySQLController
 	}
 	
 	
-	private Number[] professorExamStat(String exam) {
-		Number [] gradeStat= new Number[3];
+	
+	
+	
+	/**
+	 * @param exam
+	 * @return statistics on exam of preffesor average max min histogram fails ... 
+	 */
+	private ArrayList<Number> professorExamStat(String exam) {
+		ArrayList<Number> gradeStat=new ArrayList<>(); 
 		ResultSet rs;
 		
 		try {
 			
 			Statement st = conn.createStatement();
 			rs =st.executeQuery("SELECT round(AVG(grade),2) as average ,max(grade) as max ,min(grade) AS min\r\n"
+					+"round((SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\" AND grade<55)/\r\n"
+					+ "(SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\")*100,2) as fails"
 					+ "FROM student_exam WHERE exam_id=\""+exam+"\";");
 			while(rs.next()) {
-				gradeStat[0]=rs.getDouble(1);//average
-				gradeStat[1]=rs.getInt(2);//max
-				gradeStat[2]=rs.getInt(3);//min
+				gradeStat.add(rs.getDouble(1));//average
+				gradeStat.add(rs.getInt(2));//max
+				gradeStat.add(rs.getInt(3));//min
+				gradeStat.add(rs.getDouble(4));//failes
 			}
 			
+			if(!gradeStat.isEmpty()) {
+				gradeStat.add(medianExam(exam));
 			return gradeStat;
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null ;
 	}
 	
+	/**
+	 * @param exam
+	 * @return returnning the median - the grades coming sorted already
+	 */
 	private double medianExam(String exam) {
 		ArrayList<Number> grades=new ArrayList<>();
 		ResultSet rs;
@@ -346,7 +368,7 @@ public class MySQLController
 			while(rs.next()) {
 				grades.add(rs.getInt(1));
 			}
-			///calculate median by index approache
+			return calMeddian(grades);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -355,6 +377,22 @@ public class MySQLController
 		
 	}
 	
+	
+	/**
+	 * the array is sorted so the median does not need any calculation
+	 * 
+	 * @param array
+	 * @return the median of all the grades - they came ordered from the database
+	 */
+	private double calMeddian(ArrayList<Number> array) {
+		System.out.println(array);
+		if (array.size() % 2 == 0) {
+			return ((array.get((int) ((array.size() / 2) - 1)).doubleValue()
+					+ array.get((int) (array.size() / 2)).doubleValue()) / 2);
+		} else
+			return array.get((int) (array.size() / 2)).doubleValue();
+
+	}
 	
 	
 	

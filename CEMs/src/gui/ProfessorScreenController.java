@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import client.ChatClient;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
+import entities.ExamTemplate;
 import entities.Professor;
 import entities.User;
 import javafx.application.Platform;
@@ -20,6 +22,8 @@ import javafx.scene.text.Text;
 /*A GUI for the professor main menu.*/
 public class ProfessorScreenController implements Initializable 
 {
+	
+	
 	public static Professor<?, ?> u;
 	
 	@FXML
@@ -161,8 +165,12 @@ public class ProfessorScreenController implements Initializable
 	
 	
 	
+	@FXML
+	public void viewReport(ActionEvent event) {
+		 ProfessorExamReportController.start(u);	
+	}
 	
-	
+
 	
 	
 }

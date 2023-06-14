@@ -123,8 +123,6 @@ public class ServerMessageHandler
 					client.sendToClient(sqlController.getAmountOfExams());
 					break;
 					
-			
-					
 				case "load student exams":
 					client.sendToClient(sqlController.loadStudentExams());
 					break;
@@ -309,6 +307,14 @@ public class ServerMessageHandler
 					break;
 				case "Get all courses":			
 					client.sendToClient(sqlController.getAllCourses(arrayList.get(1)));
+					break;
+					
+				case "send all exams to professor":
+					client.sendToClient(sqlController.loadProfessorExams_toReport(arrayList.get(1)));
+					break;
+					
+				case "generate full exam report":
+					//client.sendToClient(sqlController.(arrayList.get(1)));
 					break;
 			}
 		} catch (IOException e) {}
