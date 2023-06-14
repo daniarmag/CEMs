@@ -6,9 +6,11 @@ import java.util.ResourceBundle;
 
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Course;
 import entities.ExamTemplate;
+import entities.HaveID;
 import entities.User;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -25,7 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class ProfessorExamReportController implements Initializable{
-
+	private static  ReportScreenController reportScreen=new ReportScreenController();
     
     private static User user;
     private static ArrayList<?> arr;
@@ -124,7 +126,13 @@ public class ProfessorExamReportController implements Initializable{
 	}
 	
 	
-	
+	public void openRep(Object obj) {
+		try {
+			UserController.hide(currentEvent);
+		}catch(Exception e) {e.printStackTrace();}
+		System.out.println(obj.toString());
+		reportScreen.start(currentEvent,obj,itemChosen,user);
+	}
 	
 	
 	

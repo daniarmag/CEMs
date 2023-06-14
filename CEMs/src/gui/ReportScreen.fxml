@@ -17,9 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="ancorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReportScreenController">
+<AnchorPane fx:id="ancorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="712.0" prefWidth="981.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReportScreenController">
    <children>
-      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
+      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="712.0" prefWidth="206.0" style="-fx-background-color: #30BECC;">
          <children>
             <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
                <graphic>
@@ -64,52 +64,54 @@
                   <Font name="Tahoma" size="18.0" />
                </font>
             </Text>
+            <ImageView fitHeight="100.0" fitWidth="80.0">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="20.0" right="50.0" top="20.0" />
+               </VBox.margin>
+            </ImageView>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
-      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="706.0" layoutY="507.0">
-         <image>
-            <Image url="@../images/Logo.png" />
-         </image>
-      </ImageView>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="914.0" layoutY="23.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/exitBtn.png" />
                </image>
             </ImageView>
-         </graphic>
-      </Button>
-      <ImageView fx:id="locationScreen" fitHeight="65.0" fitWidth="400.0" layoutX="214.0" layoutY="7.0" />
-      <Text fx:id="TextOfName" layoutX="349.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         </graphic></Button>
+      <ImageView fx:id="locationScreen" fitHeight="65.0" fitWidth="400.0" layoutX="206.0" layoutY="8.0" />
+      <Text fx:id="TextOfName" layoutX="457.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="21.0">
          <font>
             <Font name="Tahoma Bold" size="42.0" />
          </font>
       </Text>
-      <Text layoutX="336.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average:">
+      <Text layoutX="234.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average:">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="average" layoutX="405.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="average" layoutX="338.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="336.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:">
+      <Text layoutX="234.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="median" layoutX="405.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="median" layoutX="338.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <BarChart fx:id="barChart" layoutX="240.0" layoutY="246.0" legendVisible="false" prefHeight="320.0" prefWidth="463.0">
+      <BarChart fx:id="barChart" layoutX="226.0" layoutY="364.0" legendVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="320.0" prefWidth="741.0">
         <xAxis>
           <CategoryAxis fx:id="axisX" side="BOTTOM">
                <tickLabelFont>
@@ -140,22 +142,82 @@
             </Lighting>
          </effect>
       </BarChart>
-      <Text fx:id="highestGradeLable" layoutX="491.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highest grade:">
+      <Text fx:id="highestGradeLable" layoutX="235.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Highest grade:">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="highest" layoutX="617.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="highest" layoutX="379.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="lowestGradeLabel" layoutX="490.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lowest grade:">
+      <Text fx:id="lowestGradeLabel" layoutX="234.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lowest grade:">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="lowest" layoutX="617.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="lowest" layoutX="352.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="failesLabel" layoutX="234.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fails">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="fails" layoutX="352.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="date" layoutX="646.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="date_" layoutX="770.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="timelabel" layoutX="646.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="time" layoutX="770.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="totalStudent" layoutX="646.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="total st">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="total_student" layoutX="770.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="timelabel1" layoutX="646.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="st uncomplited ">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="time1" layoutX="770.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+         <font>
+            <Font name="Tahoma" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="totalStudent1" layoutX="646.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="st complited">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="total_student1" layoutX="770.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>

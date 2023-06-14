@@ -6,8 +6,8 @@ import java.util.Map;
 
 @SuppressWarnings("serial")
 public class Distribution implements Serializable{
-	Map<String,Integer> location=new HashMap<>();
-	Range[] dArr=new Range[6]; 
+	private Map<String,Integer> location=new HashMap<>();
+	private Range[] dArr=new Range[6]; 
 	
 	public Distribution() {
 		
@@ -34,7 +34,7 @@ public class Distribution implements Serializable{
 		dArr[location.get(range)].setVal(val);
 	}
 	
-	 public Range[] getDistribution() {
+	 public Range[] RangeArray() {
 		 return dArr;
 	 }
 	

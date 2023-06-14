@@ -35,7 +35,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class StatisticsChooseScreenController implements Initializable {
-	private static  ReportScreenController reportScreen=new ReportScreenController();;
+	private static  ReportScreenController reportScreen=new ReportScreenController();
 	
 	static HeadOfDepartment user;
 	
@@ -248,7 +248,7 @@ public class StatisticsChooseScreenController implements Initializable {
 		try {
 			UserController.hide(event);
 		}catch(Exception e) {e.printStackTrace();}
-		reportScreen.start(event,arr,itemChosen);
+		reportScreen.start(event,arr,itemChosen,user);
 		
 	}
 	

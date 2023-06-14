@@ -227,7 +227,7 @@ public class ClientMessageHandler
 				break;
 				
 			case EXAM_PROFESSOR_REPORT:
-				System.out.println((ExamProfessorReport)msg);
+				professorExamReportController.openRep(msg);
 				break;
 		}
 	}

@@ -3,13 +3,16 @@ package gui;
 
 import java.net.URL;
 
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import control.UserController;
 import entities.Course;
+import entities.ExamProfessorReport;
 import entities.ExamStatistics;
+import entities.ExamTemplate;
 import entities.StudentExam;
 import entities.User;
 import javafx.application.Platform;
@@ -21,6 +24,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -87,16 +91,14 @@ public class ReportScreenController implements Initializable {
 	    @FXML
 	    private Text name;
 	     
-	   // private static ArrayList<StudentExam> array;
 	    private static ArrayList<?> array;
 	    private static ActionEvent backScreen;
-	    
+	    private static User user;
 	    private static Object object;
-	    
+	    private static ExamProfessorReport exam;
 	    @FXML
 	    void exit(ActionEvent event) {
-	    	User u=StatisticsChooseScreenController.user;
-	    	UserController.userExit(u);
+	    	UserController.userExit(user);
 	    }
 
 	    @FXML
@@ -109,12 +111,15 @@ public class ReportScreenController implements Initializable {
 	    
 	    
 		@SuppressWarnings("unchecked")
-		public void start(ActionEvent e, Object arr, Object obj) {
+		public void start(ActionEvent e, Object data, Object obj,User user) {
 			try {
-				Platform.runLater(
-						() -> ScreenUtils.createNewStage("/gui/ReportScreen.fxml").show());
-
-				array = (ArrayList<?>) arr;
+				Platform.runLater(() -> ScreenUtils.createNewStage("/gui/ReportScreen.fxml").show());
+				if(data instanceof ArrayList)
+					array = (ArrayList<?>) data;
+				else
+					exam=(ExamProfessorReport)data;
+				
+				ReportScreenController.user=user;
 				backScreen = e;
 				object = obj;
 			} catch (Exception error) {
@@ -132,7 +137,7 @@ public class ReportScreenController implements Initializable {
 
 			String id;
 			String name;
-			if (object.getClass().equals(User.class)) {
+			if (object instanceof User) {
 				name=((User)object).get_fullName();
 				id=((User)object).getUser_id();
 				
@@ -141,15 +146,38 @@ public class ReportScreenController implements Initializable {
 				else
 					InitProfessorCourse(commonInit(name,id), "\\images\\ProfessorLogo.png", "\\images\\ProfessorLabel.png");
 
-			} else
+			} 
+			else if(object instanceof Course)
 			{
 				name=((Course)object).getCourse_name();	 
 				id=((Course)object).get_id();
 				InitProfessorCourse(commonInit(name,id), "\\images\\ReportLogo.png", "\\images\\CourseLabel.png");
 			}
+			else
+			{
+				name= ((ExamTemplate)object).get_name();	
+				id=((ExamTemplate)object).get_id();
+				InitProfessorExamReport(commonInit(name,id),"\\images\\ProfessorLogo.png", "\\images\\ProfessorLabel.png");
+			}
+
+			
+		
 
 		}
 		
+		private void InitProfessorExamReport(XYChart.Series<String, Number> series, String image, String path) {
+			
+			
+			for (int i = 0; i < exam.getDistribution().RangeArray().length; i++) {	
+				series.getData().add(new XYChart.Data<>( exam.getDistribution().RangeArray()[i].get_range(), 
+						exam.getDistribution().RangeArray()[i].get_val()));		
+			}
+			// Add the series to the chart
+			barChart.getData().add(series);
+			drawCol(series);
+			
+		}
+
 		/**
 		 * common initialize for student and professor report
 		 * 
@@ -157,7 +185,7 @@ public class ReportScreenController implements Initializable {
 		 */
 		private XYChart.Series<String, Number> commonInit( String name_,String id_) {
 			XYChart.Series<String, Number> series = new XYChart.Series<>();
-			
+			barChart.setMaxWidth(Double.MAX_VALUE);
 			name.setText(name_);
 			id.setText(id_);
 			return series;
@@ -293,9 +321,7 @@ public class ReportScreenController implements Initializable {
 		}
 
 		
-		
-		
-
+	
 		/**
 		 * the array is sorted so the median does not neet any calculation
 		 * 
