@@ -4,10 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-
-import javax.swing.JOptionPane;
-
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Question;
 import entities.User;
@@ -132,7 +130,7 @@ public class QuestionEditScreenController implements Initializable
     	HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			JOptionPane.showMessageDialog(null, errorMap.get(true), "Question Creation", JOptionPane.INFORMATION_MESSAGE);
+			AlertMessages.makeAlert(errorMap.get(true), "Edit Question");
 		    return;
 		}
 		HashMap <Boolean, String> answerMap = createAnswerMap();

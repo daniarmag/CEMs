@@ -45,24 +45,24 @@
             <Image url="@../images/Logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="DownloadBtn" layoutX="221.0" layoutY="234.0" mnemonicParsing="false" onAction="#DownloadBtn" prefHeight="39.0" prefWidth="201.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Download exam" textFill="WHITE">
-         <font>
-            <Font name="Tahoma Bold" size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="UploadBtn" layoutX="221.0" layoutY="293.0" mnemonicParsing="false" onAction="#UploadBtn" prefHeight="35.0" prefWidth="201.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Upload File" textFill="WHITE">
+      <Button fx:id="DownloadBtn" layoutX="221.0" layoutY="234.0" mnemonicParsing="false" onAction="#DownloadBtn" prefHeight="39.0" prefWidth="207.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Download exam" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="DeleteBtn" layoutX="219.0" layoutY="350.0" mnemonicParsing="false" onAction="#DeleteBtn" prefHeight="35.0" prefWidth="201.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete uploaded file" textFill="WHITE">
+      <Button fx:id="UploadBtn" layoutX="221.0" layoutY="293.0" mnemonicParsing="false" onAction="#UploadBtn" prefHeight="35.0" prefWidth="207.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Upload File" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="DeleteBtn" layoutX="219.0" layoutY="350.0" mnemonicParsing="false" onAction="#DeleteBtn" prefHeight="35.0" prefWidth="207.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete uploaded file" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
       <Button fx:id="SubmitBtn" layoutX="262.0" layoutY="546.0" mnemonicParsing="false" onAction="#SubmitBtn" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Submit" textFill="WHITE">
          <font>
-            <Font name="Tahoma Bold" size="22.0" />
+            <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
       <Text layoutX="218.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remember! Once you have downloaded the file, the exam will begin" wrappingWidth="385.37109375">

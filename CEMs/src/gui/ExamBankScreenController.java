@@ -126,11 +126,20 @@ public class ExamBankScreenController implements Initializable
     	//Condition to make sure that an exam to deactivate was indeed selected.
     	if (selectedExam != null)
     	{
-    	 	/*ArrayList<String> request = new ArrayList<String>();
-    		//A call to activate an exam.
-    		request.add("extend time");
-    		request.add(selectedExam.getExam_id());
-    		ClientUI.chat.accept(request);*/
+    		if (selectedExam.getIsActive().equals("Yes"))
+    		{
+    			ArrayList<String> array = new ArrayList<String>();
+        		//A call to activate an exam.
+        		array.add(selectedExam.getExam_id());
+        		array.add(selectedExam.getExam_name());
+        		UserController.hide(event);
+            	try 
+            	{
+        			ExamRequestTimeController.start(array, u);
+        		} catch (Exception e) {}
+    		}
+    		else
+    			 AlertMessages.makeAlert("Exam must be active to request time extension.", "Extend Time");
     	}
     	  else 
               AlertMessages.makeAlert("Select an exam for time extension.", "Extend Time");

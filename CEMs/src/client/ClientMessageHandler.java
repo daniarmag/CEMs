@@ -18,6 +18,7 @@ import enums.MessageType;
 import gui.QuestionCreationScreenController;
 import gui.ExamCreationFirstController;
 import gui.ExamCreationSecondController;
+import gui.ExamRequestTimeController;
 import gui.ExamResultsScreenController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
@@ -39,6 +40,7 @@ public class ClientMessageHandler
 	static ExamCreationFirstController examCreationFirstController;
 	static ExamCreationSecondController examCreationSecondController;
 	static ExamBankScreenController examBankScreenController;
+	static ExamRequestTimeController examRequestTimeController;
 	static ExamResultsScreenController examResultsScreenController;
     static QuestionBankScreenController questionBankScreenController;
     static StudentScreenController studentScreenController;
@@ -58,6 +60,14 @@ public class ClientMessageHandler
 		//examController=new ExamController();
 		professorController = new ProfessorScreenController();
 		//manualExamController = new ManualExamController();
+	}
+	
+	/**
+	 * @param examRequestTimeController the examRequestTimeController to set
+	 */
+	public static void setExamRequestTimeController(ExamRequestTimeController controller) 
+	{
+		examRequestTimeController = controller;
 	}
 	
 	/**

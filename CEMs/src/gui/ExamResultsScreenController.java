@@ -115,7 +115,7 @@ public class ExamResultsScreenController implements Initializable
     	HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
+			AlertMessages.makeAlert(errorMap.get(true), "Exam Results");
 		    return;
 		}
 		ExamResults selectedExam = examResultsTable.getSelectionModel().getSelectedItem();
