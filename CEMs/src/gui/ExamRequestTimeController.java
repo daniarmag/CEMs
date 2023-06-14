@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import client.ClientMessageHandler;
+import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
 import entities.User;
@@ -98,8 +99,25 @@ public class ExamRequestTimeController implements Initializable
 			AlertMessages.makeAlert(errorMap.get(true), "Time Extension");
 		    return;
 		}
+		ArrayList<String> request = constructRequest();
+		ClientUI.chat.accept(request);
     }
 
+    /**
+     * Constructs the request.
+     */
+    private ArrayList<String> constructRequest()
+    {
+    	ArrayList<String> request = new ArrayList<>();
+		request.add("request to add time");
+		request.add(sArr.get(0));
+		request.add(timeToAdd.getText());
+		request.add("0");
+		request.add(u.getUser_id());
+		request.add(u.get_fullName());
+		return request;
+    }
+    
 	/**
 	 * @return a map with all kinds of error messages
 	 */

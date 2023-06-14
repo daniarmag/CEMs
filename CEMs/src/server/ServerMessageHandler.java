@@ -305,6 +305,7 @@ public class ServerMessageHandler
 				case "Get all professors":			
 					client.sendToClient(sqlController.getAllProffesors(arrayList.get(1)));
 					break;
+					
 				case "Get all courses":			
 					client.sendToClient(sqlController.getAllCourses(arrayList.get(1)));
 					break;
@@ -320,6 +321,11 @@ public class ServerMessageHandler
 						e.printStackTrace();
 					}
 					//System.out.println(sqlController.professorExamStat(arrayList.get(1)));
+					break;
+					
+				case "request to add time":
+					//TBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+					
 					break;
 			}
 		} catch (IOException e) {}
