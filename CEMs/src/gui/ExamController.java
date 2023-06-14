@@ -34,6 +34,8 @@ public class ExamController implements Initializable
 {
 	Integer minutesLeft;
 	
+	private boolean startedExamFlag = false;
+	
 	private ArrayList<QuestionTemplateController> ansarry;
 	
 	private static User u;
@@ -124,7 +126,7 @@ public class ExamController implements Initializable
 					("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
 			if (res == JOptionPane.YES_OPTION)
 			{
-				autoSubmit("finished exam");
+				if(startedExamFlag) autoSubmit("finished exam");
 				UserController.goBack(event, "/gui/StudentScreen.fxml");
 			}
 				
@@ -144,6 +146,7 @@ public class ExamController implements Initializable
 			{
 				AlertMessages.makeAlert("Good luck!", "Exam");
 				activateExam();
+				startedExamFlag = true;
 				enterBtn.setDisable(true);
 				idTextField.setDisable(true);
 				savedEvent = event;

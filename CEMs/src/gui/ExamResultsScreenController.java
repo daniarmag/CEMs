@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
@@ -119,9 +122,13 @@ public class ExamResultsScreenController implements Initializable
 		//Condition to make sure that a question to delete was indeed selected.
         if (selectedExam != null) 
         {
-        	selectedExam.setIsConfirmed("1");
-        	ClientUI.chat.accept(selectedExam);
-        	examResultsTable.getItems().remove(selectedExam);
+        	int res = AlertMessages.makeDecisionAlert("Ready to submit? Make sure you pressed enter to save changes!", "Approve Exam");
+        	if (res == JOptionPane.YES_OPTION)
+			{
+	        	selectedExam.setIsConfirmed("1");
+	        	ClientUI.chat.accept(selectedExam);
+	        	examResultsTable.getItems().remove(selectedExam);
+			}
         }
         else 
        	 AlertMessages.makeAlert("Select an exam to approve.", "Approve Exam");
@@ -199,7 +206,7 @@ public class ExamResultsScreenController implements Initializable
         Map<String, List<String>> suspectPairs = new HashMap<>();
         for (ExamResults e : arr) 
         {
-            String wrongAnswers = e.getWrong_answers();
+            String wrongAnswers = e.getWrong_answers() + e.getExam_id();
             if (wrongAnswers != null && !wrongAnswers.isEmpty()) 
             {
             	//If the key wrong answer is already in the map, join the student to the suspect list in the map
@@ -222,7 +229,7 @@ public class ExamResultsScreenController implements Initializable
             {
             	//In case there's more than two suspects, it joins the first two n - 1 with commas to suspectPair.
                 String suspectPair = String.join(", ", suspects.subList(1, suspects.size()));
-                String suspectEntry = String.format("%s \nsuspect(s) in exam %s", suspectPair, suspects.get(0));
+                String suspectEntry = String.format("Students with IDs: %s \nsuspect(s) in exam %s", suspectPair, suspects.get(0));
                 suspectListView.getItems().add(suspectEntry);
             }
         }
