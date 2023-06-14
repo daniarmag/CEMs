@@ -243,6 +243,123 @@ public class MySQLController
 		return eArr;
 	}
 	
+	
+	
+	
+	
+	/**
+	 * @param exam
+	 * @return the exams of the prefessor which student already took and have grades.
+	 */
+	public ArrayList<?> loadProfessorExams_toReport(String exam){
+		ResultSet rs;
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT distinct e.exam_name,e.exam_id,e.course_id FROM exam as e , student_exam as se \r\n"
+					+ "WHERE e.professor_id=? AND se.exam_id=e.exam_id;");
+			ps.setString(1, exam);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				//add to a kind of struct
+			}
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		//if empty return empty struct.
+		
+		return null;
+	}
+	
+	
+	
+	/**
+	 * @param exam
+	 * @return the amount of student that receive the grade shown in the query
+	 */
+	public ArrayList<?> ExamHistogramResult(String exam){
+		ResultSet rs;
+		try {
+			PreparedStatement ps = conn.prepareStatement("SELECT \r\n"
+					+ "    CASE \r\n"
+					+ "        WHEN grade >= 0 AND grade <= 55 THEN '0-54'\r\n"
+					+ "        WHEN grade > 55 AND grade <= 75 THEN '55-65'\r\n"
+					+ "        WHEN grade > 10 AND grade <= 20 THEN '66-75'\r\n"
+					+ "        WHEN grade > 75 AND grade <= 85 THEN '76-85'\r\n"
+					+ "        WHEN grade > 85 AND grade <= 95 THEN '86-95'\r\n"
+					+ "        WHEN grade > 95 AND grade <= 100 THEN '96-100'\r\n"
+					+ "        \r\n"
+					+ "    END AS grade_range,\r\n"
+					+ "    COUNT(*) AS student_count\r\n"
+					+ "FROM \r\n"
+					+ "    student_exam as exam\r\n"
+					+ "WHERE \r\n"
+					+ "    exam.exam_id =\""+exam+"\"\r\n"
+					+ "GROUP BY \r\n"
+					+ "    grade_range;");
+			rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				//add entity histogrampoint
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+	
+	
+	private Number[] professorExamStat(String exam) {
+		Number [] gradeStat= new Number[3];
+		ResultSet rs;
+		
+		try {
+			
+			Statement st = conn.createStatement();
+			rs =st.executeQuery("SELECT round(AVG(grade),2) as average ,max(grade) as max ,min(grade) AS min\r\n"
+					+ "FROM student_exam WHERE exam_id=\""+exam+"\";");
+			while(rs.next()) {
+				gradeStat[0]=rs.getDouble(1);//average
+				gradeStat[1]=rs.getInt(2);//max
+				gradeStat[2]=rs.getInt(3);//min
+			}
+			
+			return gradeStat;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private double medianExam(String exam) {
+		ArrayList<Number> grades=new ArrayList<>();
+		ResultSet rs;
+		
+		try {
+			
+			Statement st = conn.createStatement();
+			rs =st.executeQuery("SELECT grade FROM student_exam\r\n"
+					+ "WHERE exam_id=\""+exam+"\"\r\n"
+					+ "order by grade;");
+			while(rs.next()) {
+				grades.add(rs.getInt(1));
+			}
+			///calculate median by index approache
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+		
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * This method is responsible for updating question text and question number records in the database. 
 	 * @param arr represents the updated question data.
