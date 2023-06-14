@@ -321,7 +321,7 @@ public class MySQLController
 			Statement st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM exam_stats WHERE exam_id=\""+exam+"\"");
 			rs.next();
-			stat=new ExamStat(exam, rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7));
+			stat=new ExamStat(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getInt(7));
 			return stat;
 			
 			

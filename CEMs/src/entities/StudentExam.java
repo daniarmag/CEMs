@@ -16,6 +16,8 @@ public class StudentExam implements Serializable,HaveID{
 		this.grade=grade;
 		this.exam_name=exam_name;
 	}
+	
+	
 
 
 	@Override
