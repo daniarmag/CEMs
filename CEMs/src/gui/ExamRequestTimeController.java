@@ -102,6 +102,7 @@ public class ExamRequestTimeController implements Initializable
 		}
 		ArrayList<String> request = constructRequest();
 		ClientUI.chat.accept(request);
+		UserController.goBack(event, "/gui/ExamBankScreen.fxml");
     }
 
     /**

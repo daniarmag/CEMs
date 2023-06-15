@@ -68,17 +68,17 @@
         </columns>
       </TableView>
       <TextField fx:id="searchBar" layoutX="260.0" layoutY="165.0" promptText="Search by exam name..." style="-fx-background-radius: 15px;" />
-      <Button fx:id="activatExamBtn" layoutX="260.0" layoutY="543.0" mnemonicParsing="false" onAction="#activateExam" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Activate Exam" textFill="WHITE">
+      <Button fx:id="activatExamBtn" layoutX="260.0" layoutY="543.0" mnemonicParsing="false" onAction="#activateExam" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Activate Exam" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="deactivateExamBtn" layoutX="414.0" layoutY="543.0" mnemonicParsing="false" onAction="#deactivateExam" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Deactivate Exam" textFill="WHITE">
+      <Button fx:id="deactivateExamBtn" layoutX="407.0" layoutY="543.0" mnemonicParsing="false" onAction="#deactivateExam" prefHeight="29.0" prefWidth="147.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Deactivate Exam" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="extendTimeBtn" layoutX="587.0" layoutY="543.0" mnemonicParsing="false" onAction="#extendTime" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Extend Time" textFill="WHITE">
+      <Button layoutX="567.0" layoutY="543.0" mnemonicParsing="false" onAction="#changeTime" prefHeight="29.0" prefWidth="138.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Change Time" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="15.0" />
          </font>

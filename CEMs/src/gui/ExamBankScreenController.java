@@ -120,7 +120,7 @@ public class ExamBankScreenController implements Initializable
      * @param event
      */
     @FXML
-    void extendTime(ActionEvent event)
+    void changeTime(ActionEvent event)
     {
     	Exam selectedExam = examTable.getSelectionModel().getSelectedItem();
     	//Condition to make sure that an exam to deactivate was indeed selected.
@@ -139,10 +139,10 @@ public class ExamBankScreenController implements Initializable
         		} catch (Exception e) {}
     		}
     		else
-    			 AlertMessages.makeAlert("Exam must be active to request time extension.", "Extend Time");
+    			 AlertMessages.makeAlert("Exam must be active to request time change.", "Change Time");
     	}
     	  else 
-              AlertMessages.makeAlert("Select an exam for time extension.", "Extend Time");
+              AlertMessages.makeAlert("Select an exam for time change.", "Change Time");
     }
     
     

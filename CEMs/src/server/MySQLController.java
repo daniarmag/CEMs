@@ -1228,7 +1228,7 @@ public class MySQLController
 			while (rs.next())
 			{
 				String isApprovedValue = rs.getString(1);
-				isPendingRequest = isApprovedValue.equals("0") ? false : true;
+				isPendingRequest = isApprovedValue.equals("0") ? true : false;
 			}
 		} catch (SQLException e) {e.printStackTrace();}
 		return isPendingRequest;

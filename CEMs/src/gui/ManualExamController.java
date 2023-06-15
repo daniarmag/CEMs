@@ -164,7 +164,10 @@ public class ManualExamController implements Initializable
 		int res = AlertMessages.makeDecisionAlert
 				("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
 		if (res == JOptionPane.YES_OPTION)
+		{
 			UserController.goBack(event, "/gui/StudentScreen.fxml");
+			ClientUI.chat.accept("unfinished manual exam");
+		}
 	}
 	
 	/**
