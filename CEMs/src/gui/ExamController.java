@@ -297,6 +297,14 @@ public class ExamController implements Initializable
 		return onGoingExam.getNum_questions();
 	}
 
+	/**
+	 * Adds time to the exam.
+	 * @param time
+	 */
+	void addTime(int time)
+	{
+		minutesLeft += time;
+	}
 	    
 	/**
      * @return the onGoingExam

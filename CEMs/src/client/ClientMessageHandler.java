@@ -334,8 +334,8 @@ public class ClientMessageHandler
 				AlertMessages.makeAlert("Exam submitted, good luck!", "Submit Exam");
 				break;
 			
-			case "exam approved":
-				AlertMessages.makeAlert("Exam successfully approved.", "Approve Exam");
+			case "request sent":
+				AlertMessages.makeAlert("Request Sent.", "Extend Time");
 				break;
 		}
 	}
@@ -364,17 +364,18 @@ public class ClientMessageHandler
 				break;
 			
 			case "selected exam is now inactive":
-				try {
+				try 
+				{
 					if (manualExamController != null) 
 					{
-						if (manualExamController.getExamId().equals(arrayList.get(1)))
+						if (manualExamController.getExamId().equals(arrayList.get(1))) 
 						{
 							AlertMessages.makeAlert("Exam has been terminated.", "Exam");
 							manualExamController.disableFileUpload();
 						}
 					}
-					 if (examController != null)
-					 {
+					if (examController != null) 
+					{
 						if (arrayList.get(1).equals(examController.getOnGoingExam().getExam_id())) 
 						{
 							AlertMessages.makeAlert("Exam has been terminated.", "Exam");
@@ -382,6 +383,11 @@ public class ClientMessageHandler
 						}
 					}
 				} catch (NullPointerException e) {e.printStackTrace();}
+				break;
+			
+				
+			case "Send email to student":
+				AlertMessages.makeAlert("Exam approved - email sent to: " + arrayList.get(1), "Simulation");
 				break;
 		}
 	}

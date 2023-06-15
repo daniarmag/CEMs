@@ -23,8 +23,8 @@ public class ServerMessageHandler
 	//0 - exam_id 1 - time 2 - actualTime
 	static private String[] onGoingExam = {"0", "0", "0"};
 	
-	//0 - finishedExam, 1 - unFinishedExam, 2 - totalStudents
-	static private Integer[] counterArray = {0, 0, 0};
+	//0 - finishedExam, 1 - unFinishedExam, 2 - totalStudents, 3 - time to add
+	static private Integer[] counterArray = {0, 0, 0, 0};
 	
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
@@ -324,8 +324,9 @@ public class ServerMessageHandler
 					break;
 					
 				case "request to add time":
-					//TBDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-					
+					arrayList.remove(0);
+					sqlController.requestTimeExtension(arrayList);
+					client.sendToClient("request sent");
 					break;
 			}
 		} catch (IOException e) {}
@@ -369,7 +370,7 @@ public class ServerMessageHandler
 		try 
 		{
 			sqlController.approveExamResult(examResult);
-			client.sendToClient("exam approved");
+			client.sendToClient(sqlController.sendEmailToStudent(examResult.getStudent_id()));
 		} catch (IOException e) {}
 	}
 	
@@ -422,7 +423,8 @@ public class ServerMessageHandler
 		    String dateString = currentDate.format(formatter);
 		    examStats.add(dateString);
 		    examStats.add(String.valueOf(onGoingExam[1]));
-		    examStats.add(String.valueOf(onGoingExam[2]));
+		    //Actual time + minutes added.
+		    examStats.add(String.valueOf(onGoingExam[2]) + onGoingExam[3]);
 		    examStats.add(String.valueOf(counterArray[0] + counterArray[1]));
 		    examStats.add(String.valueOf(counterArray[0]));
 		    examStats.add(String.valueOf(counterArray[1]));

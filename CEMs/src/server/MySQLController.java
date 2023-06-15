@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import entities.Course;
@@ -232,7 +231,7 @@ public class MySQLController
 		eArr.add(new Exam ("student exams"));
 		try {
 	    	//loading all the  exams from the exam table
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM cems.exam ORDER BY exam.isActive DESC");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM exam WHERE isActive <> -1 ORDER BY isActive DESC ");
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
 			{
@@ -991,7 +990,7 @@ public class MySQLController
 	    try
 		{
 	    	//loading all the exams from the table
-	    	PreparedStatement ps = conn.prepareStatement("SELECT * FROM exam WHERE professor_id = ?");
+	    	PreparedStatement ps = conn.prepareStatement("SELECT * FROM exam WHERE professor_id = ? AND isActive <> -1 ");
 		    ps.setString(1, id);
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 
@@ -1018,7 +1017,7 @@ public class MySQLController
 		try 
 		{
 			PreparedStatement ps = conn.prepareStatement("UPDATE exam SET isActive = ? WHERE exam_id = ?");
-			ps.setInt(1, isActive ? 1 : 0);
+			ps.setInt(1, isActive ? 1 : -1);
 			ps.setString(2, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();}
@@ -1168,5 +1167,68 @@ public class MySQLController
 		        ps.executeUpdate();
 		    } 
 		    catch (SQLException e) {e.printStackTrace();}
+	}
+	
+	/**
+	 * Sends an 'email' to a student.
+	 * @param id
+	 * @return
+	 */
+	public ArrayList<String> sendEmailToStudent(String id)
+	{
+		ArrayList<String> emailToSend = new ArrayList<>();
+		emailToSend.add("Send email to student");
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT email FROM users WHERE user_id = ? ");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				emailToSend.add(rs.getString(1));
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return emailToSend;
+	}
+	
+	/**
+	 * Uploads the request to add time to the DB.
+	 * @param request
+	 */
+	public void requestTimeExtension(ArrayList<String> request)
+	{
+		try 
+	    {
+	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam_time_request (exam_id, exam_time_request, " +
+										    			  "isApproved, professor_id, professor_name, reason) " +
+										    			  "VALUES (?, ?, ?, ?, ?, ?)" );
+	       ps.setString(1, request.get(0));
+	       ps.setInt(2, Integer.parseInt(request.get(1)));
+	       ps.setString(3, request.get(2));
+	       ps.setString(4, request.get(3));
+	       ps.setString(5, request.get(4));
+	       ps.setString(6, request.get(5));
+	       ps.executeUpdate();
+	    } 
+	    catch (SQLException e){e.printStackTrace();}
+	}
+	
+	/**
+	 * @return true or false depending on whether there's any request for the HOF.
+	 */
+	public boolean checkForTimeExtensionRequests()
+	{
+		boolean isPendingRequest = false;
+		try 
+		{
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("SELECT isApproved FROM exam_time_request WHERE isApproved <> -1");
+			while (rs.next())
+			{
+				String isApprovedValue = rs.getString(1);
+				isPendingRequest = isApprovedValue.equals("0") ? false : true;
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return isPendingRequest;
 	}
 }

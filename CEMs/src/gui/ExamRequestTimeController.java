@@ -24,6 +24,7 @@ public class ExamRequestTimeController implements Initializable
 	private static ArrayList<String> sArr;
 	
 	private static User u;
+	
     @FXML
     private Button SubmitBtn;
 
@@ -115,6 +116,7 @@ public class ExamRequestTimeController implements Initializable
 		request.add("0");
 		request.add(u.getUser_id());
 		request.add(u.get_fullName());
+		request.add(reason.getText());
 		return request;
     }
     
