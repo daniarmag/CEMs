@@ -164,7 +164,12 @@ public class ProfessorScreenController implements Initializable
 	
 	@FXML
 	public void viewReport(ActionEvent event) {
+		UserController.hide(event);
+		try {
 		 ProfessorExamReportController.start(u);	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 

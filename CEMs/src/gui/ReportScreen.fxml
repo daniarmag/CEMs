@@ -68,9 +68,6 @@
                <image>
                   <Image url="@../images/Logo.png" />
                </image>
-               <VBox.margin>
-                  <Insets bottom="20.0" right="50.0" top="20.0" />
-               </VBox.margin>
             </ImageView>
          </children>
          <opaqueInsets>
@@ -96,7 +93,7 @@
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="average" layoutX="338.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="average" layoutX="370.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
@@ -106,7 +103,7 @@
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="median" layoutX="338.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="median" layoutX="370.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
@@ -147,7 +144,7 @@
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="highest" layoutX="379.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="highest" layoutX="370.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
@@ -157,67 +154,67 @@
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="lowest" layoutX="352.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="lowest" layoutX="370.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="failesLabel" layoutX="234.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fails">
+      <Text fx:id="failesLabel" layoutX="234.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fails" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="fails" layoutX="352.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="fails" layoutX="370.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="date" layoutX="646.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date">
+      <Text fx:id="dateLabel" layoutX="646.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="date_" layoutX="770.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="date" layoutX="770.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="timelabel" layoutX="646.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time">
+      <Text fx:id="timelabel" layoutX="646.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="time" layoutX="770.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="time" layoutX="770.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="totalStudent" layoutX="646.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="total st">
+      <Text fx:id="totalStudentLabel" layoutX="646.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="total st" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="total_student" layoutX="770.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="totalStudent" layoutX="770.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="timelabel1" layoutX="646.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="st uncomplited ">
+      <Text fx:id="uncompleteLabel" layoutX="646.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="st uncomplited " visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="time1" layoutX="770.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="uncompleted" layoutX="770.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="totalStudent1" layoutX="646.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="st complited">
+      <Text fx:id="completeLabel" layoutX="646.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="st complited" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="total_student1" layoutX="770.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="40.0">
+      <Text fx:id="complete" layoutX="770.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0">
          <font>
             <Font name="Tahoma" size="14.0" />
          </font>

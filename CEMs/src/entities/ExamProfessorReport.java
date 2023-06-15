@@ -10,6 +10,8 @@ public class ExamProfessorReport extends ExamStatistics implements Serializable{
 private String course_id;
 private Distribution dist;	
 private double median;
+
+
 private ExamStat statistics;
 
 	
@@ -26,13 +28,19 @@ private ExamStat statistics;
 		return course_id;
 	}
 
-
+	public ExamStat getStat() {
+		return statistics;
+	}
 	
 	 public void setMedian(double val) {
 		 median=val;
 	 }
 	public Distribution getDistribution() {
 		return dist;
+	}
+	
+	public double getMedian() {
+		return median;
 	}
 	
 	public void setDistribution( Distribution dist) {

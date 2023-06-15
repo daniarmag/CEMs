@@ -42,16 +42,11 @@ public class ReportScreenController implements Initializable {
 		@FXML
 		private Text highestGradeLable;
 
-
 	    @FXML
 	    private Text lowestGradeLabel;
-		
-    	@FXML
-    	private AnchorPane ancorPane;
-	
+			
 	    @FXML
 	    private Text TextOfName;
-
 	    @FXML
 	    private Text average;
 
@@ -91,6 +86,33 @@ public class ReportScreenController implements Initializable {
 	    @FXML
 	    private Text name;
 	     
+	    
+	    @FXML
+	    private Text complete;
+	    @FXML
+	    private Text completeLabel;
+	    @FXML
+	    private Text date;
+	    @FXML
+	    private Text dateLabel;
+	    @FXML
+	    private Text failesLabel;
+	    @FXML
+	    private Text fails;
+	    @FXML
+	    private Text time;
+	    @FXML
+	    private Text timelabel;
+	    @FXML
+	    private Text totalStudent;
+	    @FXML
+	    private Text totalStudentLabel;
+	    @FXML
+	    private Text uncompleteLabel;
+	    @FXML
+	    private Text uncompleted;
+	    
+	    
 	    private static ArrayList<?> array;
 	    private static ActionEvent backScreen;
 	    private static User user;
@@ -172,10 +194,31 @@ public class ReportScreenController implements Initializable {
 				series.getData().add(new XYChart.Data<>( exam.getDistribution().RangeArray()[i].get_range(), 
 						exam.getDistribution().RangeArray()[i].get_val()));		
 			}
+			
+			
+			setHiddenFiedls();
+			initializeFields("\\images\\ProfessorLogo.png", "\\images\\ProfessorLabel.png", exam.getMedian(),
+					String.valueOf(exam.getGrade()),String.valueOf(exam.getMax_grade()),String.valueOf(exam.getMin_grade()));
+			axisY.setUpperBound(20);
 			// Add the series to the chart
 			barChart.getData().add(series);
 			drawCol(series);
 			
+		}
+
+		private void setHiddenFiedls() {
+			completeLabel.setVisible(true);
+			dateLabel.setVisible(true);
+			totalStudentLabel.setVisible(true);
+			uncompleteLabel.setVisible(true);
+			timelabel.setVisible(true);
+			failesLabel.setVisible(true);
+			complete.setText(exam.getStat().getStudenComplited().toString());
+			date.setText(exam.getStat().getDate().toString());
+			totalStudent.setText(exam.getStat().getTotalStudents().toString());
+			uncompleted.setText(exam.getStat().getStudentUncompleted().toString());
+			time.setText(exam.getStat().getTime().toString());
+			fails.setText(String.valueOf(exam.getFails()));
 		}
 
 		/**

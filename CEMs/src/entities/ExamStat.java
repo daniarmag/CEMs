@@ -6,11 +6,11 @@ import java.io.Serializable;
 public class ExamStat  implements Serializable{
 	private String exam_id;
 	private String date;
-	private int time;
-	private int actualTime;
-	private int totalStudents;
-	private int studenComplited;
-	private int studentUncompleted;
+	private Integer time;
+	private Integer actualTime;
+	private Integer totalStudents;
+	private Integer studenComplited;
+	private Integer studentUncompleted;
 	
 	
 
@@ -39,30 +39,33 @@ public class ExamStat  implements Serializable{
 	}
 
 
-	public int getTime() {
+
+	
+	public Integer getTime() {
 		return time;
 	}
 
 
-	public int getActualTime() {
+	public Integer getActualTime() {
 		return actualTime;
 	}
 
 
-	public int getTotalStudents() {
+	public Integer getTotalStudents() {
 		return totalStudents;
 	}
 
 
-	public int getStudenComplited() {
+	public Integer getStudenComplited() {
 		return studenComplited;
 	}
 
 
-	public int getStudentUncompleted() {
+	public Integer getStudentUncompleted() {
 		return studentUncompleted;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "ExamStat [exam_id=" + exam_id + ", date=" + date + ", time=" + time + ", actualTime=" + actualTime
