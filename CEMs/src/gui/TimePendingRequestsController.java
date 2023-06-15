@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.ExamTimeChange;
 import entities.User;
@@ -86,16 +87,46 @@ public class TimePendingRequestsController implements Initializable
 		UserController.goBack(event, "/gui/HeadOfDepartmentScreen.fxml");
 	}
 	
+    /**
+     * Approves a request - updates DB with 1
+     * @param event
+     */
     @FXML
     void approve(ActionEvent event) 
     {
-
+    	handleRequest("1");
     }
 
+    /**
+     * Disapproves a request - updates DB with -1
+     * @param event
+     */
     @FXML
     void disApprove(ActionEvent event) 
     {
-
+    	handleRequest("-1");
+    }
+    
+    /**
+	 * Depending by button that was clicked, handling the request
+	 * to approve or disapprove the exam.
+	 * @param activate
+	 */
+    void handleRequest(String answer)
+    {
+    	ExamTimeChange selectedRequest = pendingRequestsTable.getSelectionModel().getSelectedItem();
+    	if (selectedRequest != null)
+    	{
+    		ArrayList<String> request = new ArrayList<>();
+    		request.add("request answered");
+    		request.add(answer);
+    		request.add(selectedRequest.getExam_id());
+    		request.add(selectedRequest.getProfessor_id());
+    		request.add(String.valueOf(selectedRequest.getExam_time_request()));
+    		ClientUI.chat.accept(request);
+    	}
+    	else
+    		AlertMessages.makeAlert("You must select a request", "Grant Approval");
     }
     
     /**

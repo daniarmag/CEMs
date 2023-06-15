@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import client.ClientUI;
 import control.UserController;
 import entities.HeadOfDepartment;
 import entities.User;
@@ -40,17 +41,45 @@ public class HeadOfDepScreenController implements Initializable
     @FXML
     private Text welcomeText;
     
+    /**
+  	 * Initializes the JavaFX controller during application startup.
+  	 * @param user
+  	 * @throws Exception
+  	 */
+	public void start(User user) 
+	{
+		u = (HeadOfDepartment) user;
+		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
+	}
+    
+	/**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		welcomeText.setText("Welcome back " + u.getFirst_name());
+		ClientUI.chat.accept("check for pending requests");
+	}
+	
 	/*Exits the GUI window.*/
 	/*disconnects from the server and exits from the GUI. */
     @FXML
-    void exit(ActionEvent event) {
+    void exit(ActionEvent event) 
+    {
     	UserController.userExit(u);
     }
 
+    /**
+     * Logs out from the current user + sets the correct flag in the DB.
+     * @param event
+     */
     @FXML
-    void logout(ActionEvent event) {
+    void logout(ActionEvent event)
+{
     	UserController.close(event);
-    	
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);
 	}
@@ -60,10 +89,10 @@ public class HeadOfDepScreenController implements Initializable
      * @param event
      */
     @FXML
-    void openStatistics(ActionEvent event) {
+    void openStatistics(ActionEvent event) 
+    {
     	UserController.hide(event);
     	statisticsScreen.start(u);
-    	
     }
     
     
@@ -81,21 +110,13 @@ public class HeadOfDepScreenController implements Initializable
 		} catch (Exception e) {}
     }
     
-    
-
-	public void start(User user) {
-		u = (HeadOfDepartment) user;
-		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
-		
-	}
-
-	public void setUserArr(ArrayList<?> msg) {
+    /**
+     * Setter.
+     * @param msg
+     */
+	public void setUserArr(ArrayList<?> msg)
+	{
 			u.setArrUser(msg);
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		welcomeText.setText("Welcome back " + u.getFirst_name());
 	}
 }
 	

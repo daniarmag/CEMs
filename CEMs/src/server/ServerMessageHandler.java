@@ -131,6 +131,13 @@ public class ServerMessageHandler
 					counterArray[2]++;
 					client.sendToClient("student entered exam");
 					break;
+				
+				case "check for pending requests":
+					String msg = "no pending requests";
+					if (sqlController.checkForTimeChangeRequests())
+						msg = "You have pending time change requests";
+					client.sendToClient(msg);
+					break;
 			}
 			
 		} catch (IOException e) {}
@@ -332,6 +339,33 @@ public class ServerMessageHandler
 				case "load pending requests":
 					client.sendToClient(sqlController.loadPendingRequests(arrayList.get(1)));
 					break;
+					
+				case "request answered":
+					ArrayList<String> message = sqlController.sendEmailToUser(arrayList.get(3));
+					sqlController.updateApprovalStatus(arrayList.get(2), arrayList.get(1));
+					if (arrayList.get(1).equals("-1"))
+					{
+						message.add("Request disapproved - email sent to: ");
+						client.sendToClient(message);
+					}
+					else 
+					{
+						message.add("Request approved - email sent to: ");
+						client.sendToClient(message);
+						ArrayList<String> newTime = new ArrayList<>();
+						newTime.add("exam time is now changed");
+						//exam id
+						newTime.add(arrayList.get(2));
+						//new time
+						newTime.add(arrayList.get(4));
+						if (roleClientMap.get("student") != null)
+						{
+							//A message for each client of role "student".
+							for (ConnectionToClient c : roleClientMap.get("student"))
+								c.sendToClient(newTime);
+						}
+					}
+					break;
 			}
 		} catch (IOException e) {}
 	}
@@ -374,7 +408,9 @@ public class ServerMessageHandler
 		try 
 		{
 			sqlController.approveExamResult(examResult);
-			client.sendToClient(sqlController.sendEmailToStudent(examResult.getStudent_id()));
+			ArrayList<String> message = sqlController.sendEmailToUser(examResult.getStudent_id());
+			message.add("Exam approved - email sent to: ");
+			client.sendToClient(message);
 		} catch (IOException e) {}
 	}
 	

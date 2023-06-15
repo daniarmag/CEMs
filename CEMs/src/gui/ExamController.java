@@ -125,11 +125,7 @@ public class ExamController implements Initializable
 			int res = AlertMessages.makeDecisionAlert
 					("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
 			if (res == JOptionPane.YES_OPTION)
-			{
 				if(startedExamFlag) autoSubmit("finished exam");
-				UserController.goBack(event, "/gui/StudentScreen.fxml");
-			}
-				
 		}
 	}
 	
@@ -301,10 +297,11 @@ public class ExamController implements Initializable
 	 * Sets exam time.
 	 * @param time
 	 */
-	void setTime(int time)
+	public void setTime(int time)
 	{
 		minutesLeft = time;
 		onGoingExam.setTime(time);
+		timerTXT.setText(String.valueOf(time));
 	}
 	    
 	/**

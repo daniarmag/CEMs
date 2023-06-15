@@ -34,7 +34,7 @@ public class ManualExamController implements Initializable
 	
 	public static Timer timer = new Timer();
 	
-	static Integer minutesLeft;
+	static Integer minutesLeft, actualTime = 0;;
 	
 	boolean oneMinuteFlag = false;
 
@@ -168,6 +168,17 @@ public class ManualExamController implements Initializable
 	}
 	
 	/**
+	 * Sets exam time.
+	 * @param time
+	 */
+	public void setTime(int time)
+	{
+		minutesLeft = time;
+		e.setTime(time);
+		TimerTXT.setText(String.valueOf(time));
+	}
+	
+	/**
 	 * Starts the timer for the exam.
 	 */
 	public void startCountdown() 
@@ -178,6 +189,7 @@ public class ManualExamController implements Initializable
 			public void run() 
 			{
 				minutesLeft--;
+				actualTime++;
 				TimerTXT.setText(minutesLeft.toString());
 				if (minutesLeft == 0 && !oneMinuteFlag) 
 				{

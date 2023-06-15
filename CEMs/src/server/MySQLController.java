@@ -1175,10 +1175,10 @@ public class MySQLController
 	 * @param id
 	 * @return
 	 */
-	public ArrayList<String> sendEmailToStudent(String id)
+	public ArrayList<String> sendEmailToUser(String id)
 	{
 		ArrayList<String> emailToSend = new ArrayList<>();
-		emailToSend.add("Send email to student");
+		emailToSend.add("send email to user");
 		try 
 		{
 			PreparedStatement ps = conn.prepareStatement("SELECT email FROM users WHERE user_id = ? ");
@@ -1234,6 +1234,11 @@ public class MySQLController
 		return isPendingRequest;
 	}
 
+	/**
+	 * Loads from the DB all the relevant requests.
+	 * @param id
+	 * @return arraylist full of requests for time change
+	 */
 	public ArrayList<ExamTimeChange> loadPendingRequests(String id) 
 	{
 		ArrayList<ExamTimeChange> pendingRequestsArr = new ArrayList<>();
@@ -1241,7 +1246,7 @@ public class MySQLController
 		{
 			PreparedStatement ps = conn.prepareStatement("SELECT etr.* " +
 									                     "FROM exam_time_request etr " +
-									                     "WHERE etr.professor_id IN (" +
+									                     "WHERE etr.isApproved = 0 AND etr.professor_id IN (" +
 									                     "SELECT pd.professor_id " +
 									                     "FROM professor_department pd " +
 									                     "WHERE pd.head_of_department_id = ?)");
@@ -1255,5 +1260,21 @@ public class MySQLController
 			}
 		} catch (SQLException e) {e.printStackTrace();}
 		return pendingRequestsArr;
+	}
+	
+	/**
+	 * This method approves or disapproves a time request with the given ID.
+	 * @param id
+	 * @param isApproved 
+	 */
+	public void updateApprovalStatus(String id, String isApproved) 
+	{
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("UPDATE exam_time_request SET isApproved = ? WHERE exam_id = ?");
+			ps.setString(1, isApproved);
+			ps.setString(2, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();}
 	}
 }

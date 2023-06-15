@@ -353,6 +353,10 @@ public class ClientMessageHandler
 			case "request sent":
 				AlertMessages.makeAlert("Request Sent.", "Extend Time");
 				break;
+			
+			case "You have pending time change requests":
+				AlertMessages.makeAlert("You have pending time change approvals", "Alert");
+				break;
 		}
 	}
 	
@@ -402,8 +406,25 @@ public class ClientMessageHandler
 				break;
 			
 				
-			case "Send email to student":
-				AlertMessages.makeAlert("Exam approved - email sent to: " + arrayList.get(1), "Simulation");
+			case "send email to user":
+				AlertMessages.makeAlert(arrayList.get(2) + arrayList.get(1), "Simulation");
+				break;
+			
+			case "exam time is now changed":
+				try 
+				{
+					if (manualExamController != null) 
+					{
+						if (manualExamController.getExamId().equals(arrayList.get(1))) 
+							manualExamController.setTime(Integer.parseInt(arrayList.get(2)));
+					}
+					if (examController != null) 
+					{
+						if (arrayList.get(1).equals(examController.getOnGoingExam().getExam_id())) 
+							examController.setTime(Integer.parseInt(arrayList.get(2)));
+					}
+					AlertMessages.makeAlert("Exam has new time.", "Exam");
+				} catch (NullPointerException e) {e.printStackTrace();}
 				break;
 		}
 	}
