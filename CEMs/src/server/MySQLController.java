@@ -1255,7 +1255,6 @@ public class MySQLController
 		} catch (SQLException e) {e.printStackTrace();}
 		return isPendingRequest;
 	}
-<<<<<<< HEAD
 
 	/**
 	 * Loads from the DB all the relevant requests.
@@ -1318,8 +1317,7 @@ public class MySQLController
 				hofId.add(rs.getString(1));
 		} catch (SQLException e) {e.printStackTrace();}
 		return hofId;
-=======
-	
+	}	
 	/**
 	 * This method add a new row to student_manual_exam table
 	 * @param examID
@@ -1354,6 +1352,5 @@ public class MySQLController
 			ps.executeUpdate();
 	    } 
 	    catch (SQLException e){e.printStackTrace();}
->>>>>>> f46139f (.)
 	}
 }
