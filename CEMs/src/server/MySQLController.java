@@ -1340,17 +1340,24 @@ public class MySQLController
 	 * @param examID
 	 * @param StudentID
 	 */
-	public void setStudentExamGrade(String StudentID) 
+	public ArrayList<StudentExam> setStudentExamGrade(String StudentID) 
 	{
-		try 
+		ArrayList<StudentExam> studentExamArr = new ArrayList<>();
+		try
 	    {
 			PreparedStatement ps = conn.prepareStatement("SELECT exam.exam_name, grade, student_exam.comment "
 					+ "FROM student_exam "
 					+ "JOIN exam ON student_exam.exam_id = exam.exam_id "
 					+ "WHERE student_id = ? AND isConfirmed = 1");
 			ps.setString(1, StudentID);
-			ps.executeUpdate();
-	    } 
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				StudentExam e = new StudentExam(rs.getString(1), rs.getString(2), rs.getInt(3));
+				studentExamArr.add(e);
+			}	   
+		} 
 	    catch (SQLException e){e.printStackTrace();}
+		return studentExamArr;
 	}
 }

@@ -258,6 +258,10 @@ public class ClientMessageHandler
 			
 			case EXAM_TIME_CHANGE_ARRAY_LIST:
 				examTimeChangeArrayListHandler((ArrayList<ExamTimeChange>)msg);
+				
+			case STUDENT_EXAM:
+				studentExamArrayListMessageHandler((ArrayList<StudentExam>)msg) ;
+				break;
 		}
 	}
 
@@ -298,6 +302,8 @@ public class ClientMessageHandler
 					return MessageType.EXAM_TEMPLATE;
 				else if (firstElement instanceof ExamTimeChange)
 					return MessageType.EXAM_TIME_CHANGE_ARRAY_LIST;
+				else if (firstElement instanceof StudentExam)
+					return MessageType.STUDENT_EXAM;
 			}
 		} 
 		else if (msg instanceof Map)
@@ -550,14 +556,13 @@ public class ClientMessageHandler
 	}
 
 	/**
-	 * Handles client messages of type ExamResults
+	 * Handles client messages of type StudentExam
 	 * @param arrayList
 	 */
-	private static void examResultsArrayListMessageHandler(ArrayList<ExamResults> arrayList) 
+	private static void studentExamArrayListMessageHandler(ArrayList<StudentExam> arrayList) 
 	{
-		examResultsScreenController.setArr(arrayList);
-		examResultsScreenController.updateExamTable(arrayList);
-		examResultsScreenController.checkForSuspects();
+		studentExamGradesController.setArr(arrayList);
+		studentExamGradesController.updateExamTable(arrayList);
 	}
 	
 	/**
@@ -569,4 +574,5 @@ public class ClientMessageHandler
 		timePendingRequestsController.setArr(arrayList);
 		timePendingRequestsController.updateRequestsTable();
 	}
+	
 }

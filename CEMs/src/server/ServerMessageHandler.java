@@ -10,6 +10,7 @@ import java.util.Map;
 import entities.Exam;
 import entities.ExamResults;
 import entities.Question;
+import entities.StudentExam;
 import entities.User;
 import enums.MessageType;
 import ocsf.server.ConnectionToClient;
@@ -124,10 +125,6 @@ public class ServerMessageHandler
 					break;
 					
 				case "load student exams":
-					client.sendToClient(sqlController.loadStudentExams());
-					break;
-					
-				case "load student grades":
 					client.sendToClient(sqlController.loadStudentExams());
 					break;
 					
@@ -393,6 +390,10 @@ public class ServerMessageHandler
 					
 				case "get head of dep id":
 					client.sendToClient(sqlController.getHeadofDepId(arrayList.get(1)));
+					break;
+					
+				case "load student grades":
+					client.sendToClient(sqlController.setStudentExamGrade(arrayList.get(1)));
 					break;
 			}
 		} catch (IOException e) {}
