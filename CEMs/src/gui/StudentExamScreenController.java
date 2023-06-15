@@ -75,6 +75,17 @@ public class StudentExamScreenController implements Initializable
 		Platform.runLater(() -> ScreenUtils.createNewStage("/gui/StudentExamScreen.fxml").show());
 	}
     
+	 /**
+	  * Initializes the GUI with the given logic.
+	  * @param location
+	  * @param resources
+	  */  
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ClientMessageHandler.setStudentExamController(this);
+		ClientUI.chat.accept("load student exams");	
+	}
+	
 	@FXML
 	void enterExam(ActionEvent event) {
 		HashMap<Boolean, String> errorMap = createErrorMap();
@@ -120,7 +131,6 @@ public class StudentExamScreenController implements Initializable
     	UserController.goBack(event, "/gui/StudentScreen.fxml");
     }
     
-    
     /**
      * Refreshes the exam table
      * @param event
@@ -132,17 +142,6 @@ public class StudentExamScreenController implements Initializable
     	examTable.refresh();
     }
 
-	 /**
-	  * Initializes the GUI with the given logic.
-	  * @param location
-	  * @param resources
-	  */  
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		ClientMessageHandler.setStudentExamController(this);
-		ClientUI.chat.accept("load student exams");	
-	}
-	
 	/**
 	 * Sets the exam table with the values that are currently in the eArr,
 	 * changes the isActive and course_id values to more understandable values.

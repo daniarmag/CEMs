@@ -131,8 +131,12 @@ public class ManualExamController implements Initializable
     		request.add(e.getExam_id());
     		request.add(String.valueOf(e.getTime()));
     		request.add(String.valueOf(e.getTime() - minutesLeft));
-    		ClientUI.chat.accept("finished manual exam");
-    		AlertMessages.makeAlert("File uploaded", "Exam upload");
+    		ClientUI.chat.accept(request);
+    		request.clear();
+    		request.add("upload exam");
+    		request.add(e.getExam_id());
+    		request.add(FileUploadTXT.getText().strip());
+    		ClientUI.chat.accept(request);
     		UserController.goBack(event, "/gui/StudentScreen.fxml");
     		timer.cancel();
     	}
@@ -151,7 +155,7 @@ public class ManualExamController implements Initializable
     	fc.getExtensionFilters().add(new ExtensionFilter("Word Files", "*.docx"));
     	File file = fc.showOpenDialog(null);
     	if (file != null)
-    		FileUploadTXT.setText("Selected file: " + file.getAbsolutePath());
+    		FileUploadTXT.setText(file.getAbsolutePath());
     }
    	
     /**

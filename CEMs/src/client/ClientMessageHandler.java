@@ -31,6 +31,7 @@ import gui.TimePendingRequestsController;
 import gui.ExamBankScreenController;
 import gui.ExamController;
 import gui.StatisticsChooseScreenController;
+import gui.StudentExamGradesController;
 import gui.QuestionBankScreenController;
 import gui.StudentExamScreenController;
 
@@ -46,6 +47,7 @@ public class ClientMessageHandler
 	static ExamResultsScreenController examResultsScreenController;
     static QuestionBankScreenController questionBankScreenController;
     static StudentScreenController studentScreenController;
+    static StudentExamGradesController studentExamGradesController;
     static StudentExamScreenController studentExamScreenController;
     static ManualExamController manualExamController;
     static HeadOfDepScreenController headOfScreenController;
@@ -158,6 +160,14 @@ public class ClientMessageHandler
 	public static void setStudentScreenController(StudentScreenController controller) 
 	{
 		studentScreenController = controller;
+	}
+	
+	/**
+	 * @param studentExamGradesController the studentExamGradesController to set
+	 */
+	public static void setStudentExamGradesController(StudentExamGradesController controller)
+	{
+		studentExamGradesController = controller;
 	}
 	
 	/**
@@ -361,6 +371,8 @@ public class ClientMessageHandler
 			
 			case "You have pending time change requests":
 				AlertMessages.makeAlert("You have pending time change approvals", "Alert");
+				
+			case "exam uploaded":
 				break;
 		}
 	}

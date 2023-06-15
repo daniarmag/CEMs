@@ -3,6 +3,7 @@ package server;
 import java.awt.Desktop;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -1044,14 +1045,32 @@ public class MySQLController
 			examFile.initArray((int) blob.length());
 			examFile.setSize((int) blob.length());
 			examFile.setMybytearray(blob.getBytes(1, examFile.getSize()));
-			rs.close();
-		    ps.close();
+//			rs.close();
+//		    ps.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return examFile;
 	}
 	
+	public void uploadExamFile(String examID, String examPath) {
+		//ExamFile examFile = new ExamFile(examID);
+		try {
+		// Create a PreparedStatement for the SQL statement
+        PreparedStatement ps = conn.prepareStatement("UPDATE student_exam SET uploaded_exam_file  = ? "
+        		+ " WHERE exam_id = ?");
+        // Read the file
+        File file = new File(examPath);
+        FileInputStream inputStream = new FileInputStream(file);
+        // Set the BLOB parameter
+        ps.setBinaryStream(1, inputStream, (int) file.length());
+        ps.setString(2, examID);
+		ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * This method loads the questions of specified exam and returns an ArrayList of Question objects.
 	 *

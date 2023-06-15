@@ -127,6 +127,10 @@ public class ServerMessageHandler
 					client.sendToClient(sqlController.loadStudentExams());
 					break;
 					
+				case "load student grades":
+					client.sendToClient(sqlController.loadStudentExams());
+					break;
+					
 				case "count":
 					counterArray[2]++;
 					client.sendToClient("student entered exam");
@@ -234,6 +238,11 @@ public class ServerMessageHandler
 				case "load exam file":
 					counterArray[2]++;
 					client.sendToClient(sqlController.openExamFile(arrayList.get(1)));
+					break;
+					
+				case "upload exam":
+					sqlController.uploadExamFile(arrayList.get(1), arrayList.get(2));
+					client.sendToClient("exam uploaded");
 					break;
 					
 				case "for head of department report":

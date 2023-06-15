@@ -1,35 +1,44 @@
 package gui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import client.ClientMessageHandler;
+import client.ClientUI;
 import control.UserController;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 
-public class StudentExamGradesController {
+public class StudentExamGradesController implements Initializable {
 
 	public static User u;
 
-    @FXML
-    private Button exitBtn;
+	  @FXML
+	    private Button exitBtn;
 
-    @FXML
-    private Button goBackBtn;
+	    @FXML
+	    private TableColumn<?, ?> qnumTable;
 
-    @FXML
-    private TableColumn<?, ?> idTable;
+	    @FXML
+	    private TableColumn<?, ?> qtextTable;
 
-    @FXML
-    private TableColumn<?, ?> qnumTable;
+	    @FXML
+	    private TableView<?> questionTable;
 
-    @FXML
-    private TableColumn<?, ?> qtextTable;
+	    @FXML
+	    private Text welcomeText;
 
-    @FXML
-    private TableView<?> questionTable;
-
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ClientMessageHandler.setStudentExamGradesController(this);
+		ClientUI.chat.accept("load student grades");	
+	}
     @FXML
     void enterExam(ActionEvent event) {
 
@@ -57,5 +66,7 @@ public class StudentExamGradesController {
 		u = user;
 		ScreenUtils.createNewStage("/gui/StudentExamGrades.fxml").show();
 	}
+
+
 
 }
