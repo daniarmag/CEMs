@@ -1345,17 +1345,21 @@ public class MySQLController
 		ArrayList<StudentExam> studentExamArr = new ArrayList<>();
 		try
 	    {
-			PreparedStatement ps = conn.prepareStatement("SELECT exam.exam_name, grade, student_exam.comment "
+			PreparedStatement ps = conn.prepareStatement("SELECT exam.exam_name, grade, comment "
 					+ "FROM student_exam "
 					+ "JOIN exam ON student_exam.exam_id = exam.exam_id "
-					+ "WHERE student_id = ? AND isConfirmed = 1");
+					+ "WHERE student_id = ? "
+					+ "AND isConfirmed = 1");
 			ps.setString(1, StudentID);
 			ResultSet rs = ps.executeQuery();
+			System.out.println("test1");
 			while (rs.next())
 			{
-				StudentExam e = new StudentExam(rs.getString(1), rs.getString(2), rs.getInt(3));
+				StudentExam e = new StudentExam(rs.getString(1), rs.getString(3), rs.getInt(2));
 				studentExamArr.add(e);
 			}	   
+			System.out.println("test2");
+
 		} 
 	    catch (SQLException e){e.printStackTrace();}
 		return studentExamArr;

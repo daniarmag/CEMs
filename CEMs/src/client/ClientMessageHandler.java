@@ -554,7 +554,18 @@ public class ClientMessageHandler
 	{
 		manualExamController.setExamFile(examFile);
 	}
-
+	
+	/**
+	 * Handles client messages of type ExamResults
+	 * @param arrayList
+	 */
+	private static void examResultsArrayListMessageHandler(ArrayList<ExamResults> arrayList) 
+	{
+		examResultsScreenController.setArr(arrayList);
+		examResultsScreenController.updateExamTable(arrayList);
+		examResultsScreenController.checkForSuspects();
+	}
+	
 	/**
 	 * Handles client messages of type StudentExam
 	 * @param arrayList
