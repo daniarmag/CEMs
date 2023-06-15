@@ -65,8 +65,8 @@
                <columns>
                   <TableColumn fx:id="examNameCol" prefWidth="122.0" text="Exam Name" />
                   <TableColumn fx:id="professorNameCol" prefWidth="111.0" text="Professor Name" />
-                  <TableColumn fx:id="timeCol" prefWidth="66.0" text="New Time" />
-                  <TableColumn fx:id="reasonCol" prefWidth="158.0" text="Reason" />
+                  <TableColumn fx:id="timeCol" prefWidth="83.0" text="New Time" />
+                  <TableColumn fx:id="reasonCol" prefWidth="141.0" text="Reason" />
                </columns>
             </TableView>
             <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="204.0" layoutY="13.0">

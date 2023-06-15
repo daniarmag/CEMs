@@ -9,6 +9,7 @@ import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
 import entities.Course;
+import entities.Exam;
 import entities.ExamTemplate;
 import entities.HaveID;
 import entities.User;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 public class ProfessorExamReportController implements Initializable{
@@ -86,22 +88,37 @@ public class ProfessorExamReportController implements Initializable{
     	}
     }
     
+    
+    
+    
+    /**loading the table with the data of all the exams 
+     * @param array
+     */
     public void loadTable(ArrayList<ExamTemplate> array) {
     	arr=array;
     	examTable.getItems().clear();
-    	
 		loadingColumns( "_name","_id", "course_id");
+		updateExamTable(array);
+	}
+
+    
+    /**
+	 * Sets the exam table with the values that are currently in the eArr. 
+	 * @param arrayList 
+	 */
+	public void updateExamTable(ArrayList<ExamTemplate> arrayList) 
+	{
 		try {
-		@SuppressWarnings("unchecked")
-		ObservableList<ExamTemplate> questionObservableList = 
-				(ObservableList<ExamTemplate>) FXCollections.observableArrayList(arr);
-		
-		((TableView<ExamTemplate>) examTable).setItems(questionObservableList);
+	    ObservableList<ExamTemplate> examObservableList = FXCollections.observableArrayList(arrayList);
+	    examTable.setItems(examObservableList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-
+    }
+	
+    
+    
+    
 	private void loadingColumns( String examId, String name, String course) {
 		try {
 		examIdCol.setCellValueFactory(new PropertyValueFactory<>(examId));
@@ -140,9 +157,25 @@ public class ProfessorExamReportController implements Initializable{
 	}
 	
 	
+	/**
+	 * This method is called when a key is released and filters the table.
+	 * @param event
+	 */
+	void search(KeyEvent event)
+	{
+		 String searchText = searchBar.getText().toLowerCase();
+		    //Filter the question list based on the search text
+		    ArrayList<ExamTemplate> filteredList = new ArrayList<>();
+		    for (Object exam : arr)
+		        if (((ExamTemplate)exam).getCourse_id().contains(searchText))
+		            filteredList.add((ExamTemplate) exam);
+		    //Update the question table with the filtered list
+		    updateExamTable(filteredList);       
+	 }
+
 	
-	
-	
+
+
 	/**
 	 * Disconnects from the server and closes GUI window.
 	 * @param event
@@ -171,7 +204,9 @@ public class ProfessorExamReportController implements Initializable{
 		String request="send all exams to professor";
 		arr.add(request);
 		arr.add(user.getUser_id());
+		searchBar.setOnKeyReleased(event -> search(event));
 		ClientUI.chat.accept(arr);
+		
 	}
 	
 	

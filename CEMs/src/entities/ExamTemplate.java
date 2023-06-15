@@ -7,7 +7,7 @@ public class ExamTemplate implements Serializable,HaveID{
 	private String exam_id;
 	private String exam_name;
 	private String course_id;
-	
+	private String author;
 	
 	
 	public ExamTemplate(String exam_name,String exam_id,String course_id) {

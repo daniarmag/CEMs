@@ -118,6 +118,7 @@ public class ReportScreenController implements Initializable {
 	    private static User user;
 	    private static Object object;
 	    private static ExamProfessorReport exam;
+	    
 	    @FXML
 	    void exit(ActionEvent event) {
 	    	UserController.userExit(user);
@@ -132,6 +133,12 @@ public class ReportScreenController implements Initializable {
 	    
 	    
 	    
+		/*start the report and set the important info
+		 * @param e
+		 * @param data
+		 * @param obj
+		 * @param user
+		 */
 		@SuppressWarnings("unchecked")
 		public void start(ActionEvent e, Object data, Object obj,User user) {
 			try {
@@ -141,9 +148,9 @@ public class ReportScreenController implements Initializable {
 				else
 					exam=(ExamProfessorReport)data;
 				
-				ReportScreenController.user=user;
-				backScreen = e;
-				object = obj;
+				ReportScreenController.user=user;//the user of this screen
+				backScreen = e;//the previous screen so we can back to it
+				object = obj;//the object that was chosen in the previous screen 
 			} catch (Exception error) {
 				error.printStackTrace();
 			}
@@ -159,6 +166,7 @@ public class ReportScreenController implements Initializable {
 
 			String id;
 			String name;
+			 
 			if (object instanceof User) {
 				name=((User)object).get_fullName();
 				id=((User)object).getUser_id();
@@ -187,6 +195,11 @@ public class ReportScreenController implements Initializable {
 
 		}
 		
+		/**initialize the report screen so it will fit the professor exam report
+		 * @param series
+		 * @param image
+		 * @param path
+		 */
 		private void InitProfessorExamReport(XYChart.Series<String, Number> series, String image, String path) {
 			
 			
@@ -206,7 +219,11 @@ public class ReportScreenController implements Initializable {
 			
 		}
 
+		/**
+		 * initialize the hidden fields that belongs to specific report
+		 */
 		private void setHiddenFiedls() {
+			try {
 			completeLabel.setVisible(true);
 			dateLabel.setVisible(true);
 			totalStudentLabel.setVisible(true);
@@ -219,6 +236,9 @@ public class ReportScreenController implements Initializable {
 			uncompleted.setText(exam.getStat().getStudentUncompleted().toString());
 			time.setText(exam.getStat().getTime().toString());
 			fails.setText(String.valueOf(exam.getFails()));
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		/**
