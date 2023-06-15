@@ -11,6 +11,7 @@ import entities.ExamProfessorReport;
 import entities.ExamResults;
 import entities.ExamStatistics;
 import entities.ExamTemplate;
+import entities.ExamTimeChange;
 import entities.Question;
 import entities.StudentExam;
 import entities.User;
@@ -26,6 +27,7 @@ import gui.ManualExamController;
 import gui.ProfessorExamReportController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
+import gui.TimePendingRequestsController;
 import gui.ExamBankScreenController;
 import gui.ExamController;
 import gui.StatisticsChooseScreenController;
@@ -50,6 +52,7 @@ public class ClientMessageHandler
     static ExamController examController;
 	static StatisticsChooseScreenController statisticsScreen;
 	static ProfessorExamReportController professorExamReportController;
+	static TimePendingRequestsController timePendingRequestsController;
     ///Check check check dont use 
     //static guiMainController guiController;
 	static 
@@ -60,6 +63,14 @@ public class ClientMessageHandler
 		//examController=new ExamController();
 		professorController = new ProfessorScreenController();
 		//manualExamController = new ManualExamController();
+	}
+	
+	/**
+	 * @param timePendingRequestsController the timePendingRequestsController to set
+	 */
+	public static void setTimePendingRequestsController(TimePendingRequestsController controller) 
+	{
+		timePendingRequestsController = controller;
 	}
 	
 	/**
@@ -229,6 +240,9 @@ public class ClientMessageHandler
 			case EXAM_PROFESSOR_REPORT:
 				professorExamReportController.openRep(msg);
 				break;
+			
+			case EXAM_TIME_CHANGE_ARRAY_LIST:
+				examTimeChangeArrayListHandler((ArrayList<ExamTimeChange>)msg);
 		}
 	}
 
@@ -265,8 +279,10 @@ public class ClientMessageHandler
 					return MessageType.EXAM_RESULTS_ARRAY_LIST;
 				else if (firstElement instanceof ExamStatistics)
 					return MessageType.EXAMS_STATISTICS;
-				else if(firstElement instanceof ExamTemplate)
+				else if (firstElement instanceof ExamTemplate)
 					return MessageType.EXAM_TEMPLATE;
+				else if (firstElement instanceof ExamTimeChange)
+					return MessageType.EXAM_TIME_CHANGE_ARRAY_LIST;
 			}
 		} 
 		else if (msg instanceof Map)
@@ -492,5 +508,15 @@ public class ClientMessageHandler
 		examResultsScreenController.setArr(arrayList);
 		examResultsScreenController.updateExamTable(arrayList);
 		examResultsScreenController.checkForSuspects();
+	}
+	
+	/**
+	 * Handles client messages of type ExamTimeChange
+	 * @param arrayList
+	 */
+	private static void examTimeChangeArrayListHandler(ArrayList<ExamTimeChange> arrayList) 
+	{
+		timePendingRequestsController.setArr(arrayList);
+		timePendingRequestsController.updateRequestsTable();
 	}
 }

@@ -328,6 +328,10 @@ public class ServerMessageHandler
 					sqlController.requestTimeChange(arrayList);
 					client.sendToClient("request sent");
 					break;
+					
+				case "load pending requests":
+					client.sendToClient(sqlController.loadPendingRequests(arrayList.get(1)));
+					break;
 			}
 		} catch (IOException e) {}
 	}

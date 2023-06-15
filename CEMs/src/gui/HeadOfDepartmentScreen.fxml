@@ -39,7 +39,7 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="283.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Grant Approval " textFill="WHITE">
+      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="283.0" mnemonicParsing="false" onAction="#grantApproval" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Grant Approval " textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="20.0" />
          </font>

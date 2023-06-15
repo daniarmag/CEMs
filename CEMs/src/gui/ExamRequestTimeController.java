@@ -117,6 +117,7 @@ public class ExamRequestTimeController implements Initializable
 		request.add(u.getUser_id());
 		request.add(u.get_fullName());
 		request.add(reason.getText());
+		request.add(sArr.get(1));
 		return request;
     }
     

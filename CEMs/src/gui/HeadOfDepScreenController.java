@@ -67,6 +67,21 @@ public class HeadOfDepScreenController implements Initializable
     }
     
     
+    /**
+     * Starts time pending requests screen
+     * @param event
+     */
+    @FXML 
+    void grantApproval(ActionEvent event)
+    {
+    	UserController.hide(event);
+    	try 
+    	{
+			TimePendingRequestsController.start(u);
+		} catch (Exception e) {}
+    }
+    
+    
 
 	public void start(User user) {
 		u = (HeadOfDepartment) user;

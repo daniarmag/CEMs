@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="573.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TimePendingRequestsController">
+   <children>
+      <AnchorPane prefHeight="573.0" prefWidth="744.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="573.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0">
+                           <image>
+                              <Image url="@../images/Back%20Logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets right="150.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <ImageView fitHeight="175.0" fitWidth="175.0">
+                     <image>
+                        <Image url="@../images/manager.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <Text id="profTitle" layoutX="302.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending  Requests" textAlignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="42.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="650.0" layoutY="456.0">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+            </ImageView>
+            <Button id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/exitBtn.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TableView fx:id="pendingRequestsTable" layoutX="238.0" layoutY="175.0" prefHeight="254.0" prefWidth="458.0">
+               <columns>
+                  <TableColumn fx:id="examNameCol" prefWidth="122.0" text="Exam Name" />
+                  <TableColumn fx:id="professorNameCol" prefWidth="111.0" text="Professor Name" />
+                  <TableColumn fx:id="timeCol" prefWidth="66.0" text="New Time" />
+                  <TableColumn fx:id="reasonCol" prefWidth="158.0" text="Reason" />
+               </columns>
+            </TableView>
+            <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="204.0" layoutY="13.0">
+               <image>
+                  <Image url="@../images/CheckResultsLabel.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="316.0" layoutY="521.0" mnemonicParsing="false" onAction="#approve" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Approve" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma Bold" size="18.0" />
+               </font>
+            </Button>
+            <Text layoutX="238.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Select an exam and press approve to submit your approval/disapproval">
+               <font>
+                  <Font name="Tahoma" size="12.0" />
+               </font>
+            </Text>
+            <Button layoutX="475.0" layoutY="521.0" mnemonicParsing="false" onAction="#disApprove" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Dispprove" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

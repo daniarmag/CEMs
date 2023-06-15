@@ -24,6 +24,7 @@ import entities.ExamResults;
 import entities.ExamStat;
 import entities.ExamStatistics;
 import entities.ExamTemplate;
+import entities.ExamTimeChange;
 import entities.HeadOfDepartment;
 import entities.Professor;
 import entities.Question;
@@ -1200,14 +1201,15 @@ public class MySQLController
 		try 
 	    {
 	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam_time_request (exam_id, exam_time_request, " +
-										    			  "isApproved, professor_id, professor_name, reason) " +
-										    			  "VALUES (?, ?, ?, ?, ?, ?)" );
+										    			  "isApproved, professor_id, professor_name, reason, exam_name) " +
+										    			  "VALUES (?, ?, ?, ?, ?, ?, ?)" );
 	       ps.setString(1, request.get(0));
 	       ps.setInt(2, Integer.parseInt(request.get(1)));
 	       ps.setString(3, request.get(2));
 	       ps.setString(4, request.get(3));
 	       ps.setString(5, request.get(4));
 	       ps.setString(6, request.get(5));
+	       ps.setString(7, request.get(6));
 	       ps.executeUpdate();
 	    } 
 	    catch (SQLException e){e.printStackTrace();}
@@ -1230,5 +1232,28 @@ public class MySQLController
 			}
 		} catch (SQLException e) {e.printStackTrace();}
 		return isPendingRequest;
+	}
+
+	public ArrayList<ExamTimeChange> loadPendingRequests(String id) 
+	{
+		ArrayList<ExamTimeChange> pendingRequestsArr = new ArrayList<>();
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT etr.* " +
+									                     "FROM exam_time_request etr " +
+									                     "WHERE etr.professor_id IN (" +
+									                     "SELECT pd.professor_id " +
+									                     "FROM professor_department pd " +
+									                     "WHERE pd.head_of_department_id = ?)");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				ExamTimeChange e = new ExamTimeChange(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
+													  rs.getString(6), rs.getString(7));
+				pendingRequestsArr.add(e);
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return pendingRequestsArr;
 	}
 }
