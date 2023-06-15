@@ -144,7 +144,7 @@ public class StudentExamScreenController implements Initializable
 
 	/**
 	 * Sets the exam table with the values that are currently in the eArr,
-	 * changes the isActive and course_id values to more understandable values.
+	 * changes the isActive to more understandable values.
 	 */
 	public void updateExamTable() {
 		idTable.setCellValueFactory(new PropertyValueFactory<>("exam_id"));
@@ -152,7 +152,7 @@ public class StudentExamScreenController implements Initializable
 		typeTable.setCellValueFactory(new PropertyValueFactory<>("type"));
 		activeTable.setCellValueFactory(new PropertyValueFactory<>("isActive"));
 	    ObservableList<Exam> examObservableList = FXCollections.observableArrayList(eArr);
-	    //These condition makes the table more understandable.
+	    //This condition makes the table more understandable.
 	    for (Exam e: examObservableList) {
 	    	if (e.getIsActive().equals("0"))
 	    		e.setIsActive("No");

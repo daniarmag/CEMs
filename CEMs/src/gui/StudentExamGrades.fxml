@@ -31,7 +31,7 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tzahi Bakal" />
+            <Text fx:id="nameTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Tzahi Bakal" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
@@ -40,7 +40,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="315731456" />
+            <Text fx:id="idTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="315731456" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Average:">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
@@ -49,7 +49,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="94.8" />
+            <Text fx:id="avgTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="94.8" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -91,7 +91,7 @@
             <Image url="@../images/ExamCopyLabel.png" />
          </image>
       </ImageView>
-      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+      <Button fx:id="goBackBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0">
                <image>

@@ -573,7 +573,7 @@ public class ClientMessageHandler
 	private static void studentExamArrayListMessageHandler(ArrayList<StudentExam> arrayList) 
 	{
 		studentExamGradesController.setArr(arrayList);
-		studentExamGradesController.updateExamTable(arrayList);
+		studentExamGradesController.updateExamTable();
 	}
 	
 	/**

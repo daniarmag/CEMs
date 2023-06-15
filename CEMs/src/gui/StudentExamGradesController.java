@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import client.ClientMessageHandler;
 import client.ClientUI;
+import control.AlertMessages;
 import control.UserController;
 import entities.Exam;
 import entities.StudentExam;
@@ -19,7 +20,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
+import javafx.util.converter.IntegerStringConverter;
 
 public class StudentExamGradesController implements Initializable {
 
@@ -27,36 +30,53 @@ public class StudentExamGradesController implements Initializable {
 	ArrayList<StudentExam> sExams = new ArrayList<>();
 	public static ArrayList<String> studentArray= new ArrayList<>();
 
-
 	   @FXML
-	    private TableColumn<?, ?> examTable;
+	    private Text avgTXT;
 
 	    @FXML
-	    private Button exitBtn;
+	    private Text idTXT;
 
 	    @FXML
-	    private TableColumn<?, ?> gradeTable;
+	    private Text nameTXT;
+    	
+	    @FXML
+    	private Button exitBtn;
+	    
+	    @FXML
+	    private Button goBackBtn;
+	    
+	   @FXML
+	    private TableColumn<StudentExam, String> examTable;
 
 	    @FXML
-	    private TableColumn<?, ?> noteTable;
+	    private TableColumn<StudentExam, Integer> gradeTable;
+
+	    @FXML
+	    private TableColumn<StudentExam, String> noteTable;
 
 	    @FXML
 	    private TableView<StudentExam> studentExamTable = new TableView<>();;
 
 	    @FXML
 	    private Text welcomeText;
-
+	
+    public static void start(User user) throws Exception 
+	{
+		u = user;
+		ScreenUtils.createNewStage("/gui/StudentExamGrades.fxml").show();
+	}
+	    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientMessageHandler.setStudentExamGradesController(this);
+		welcomeText.setText(u.getFirst_name()+"'s grades");
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		studentArray.add("load student grades");
 		studentArray.add(u.getUser_id());
 		ClientUI.chat.accept(studentArray);
+		colHandler();
 	}
-    @FXML
-    void enterExam(ActionEvent event) {
-
-    }
 
     @FXML
     void getCopy(ActionEvent event) {
@@ -74,23 +94,16 @@ public class StudentExamGradesController implements Initializable {
     void goBack(ActionEvent event) {
 		UserController.goBack(event, "/gui/StudentScreen.fxml");
     }
-    
-    public static void start(User user) throws Exception 
-	{
-		u = user;
-		ScreenUtils.createNewStage("/gui/StudentExamGrades.fxml").show();
-	}
 
 	/**
-	 * Sets the exam table with the values that are currently in the eArr,
-	 * changes the isActive and course_id values to more understandable values.
+	 * Sets the exam table with the values that are currently in the sExams,
 	 */
-	public void updateExamTable(ArrayList<StudentExam> arrayList) {
+	public void updateExamTable() {
 		examTable.setCellValueFactory(new PropertyValueFactory<>("exam_name"));
 		gradeTable.setCellValueFactory(new PropertyValueFactory<>("grade"));
 		noteTable.setCellValueFactory(new PropertyValueFactory<>("comment"));
-	    ObservableList<StudentExam> examObservableList = FXCollections.observableArrayList(sExams);
-	    studentExamTable.setItems(examObservableList);
+	    ObservableList<StudentExam> studentExamObservableList = FXCollections.observableArrayList(sExams);
+	    studentExamTable.setItems(studentExamObservableList);
 	}
 	
 	/**
@@ -101,5 +114,22 @@ public class StudentExamGradesController implements Initializable {
 	{
 		sExams = sArr;
 	}
-
+	
+	private void colHandler() 
+	{
+		//Set the cell factory for the qnumTable column to use TextFieldTableCell with an IntegerStringConverter.
+		gradeTable.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter() {
+		    @Override
+		    public Integer fromString(String value) 
+		    {
+		        try 
+		        {
+		            return super.fromString(value);
+		        }catch (NumberFormatException e) 
+		        {
+		            return null;
+		        }
+		    }
+		}));
+	}
 }
