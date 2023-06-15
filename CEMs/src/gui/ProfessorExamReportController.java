@@ -118,6 +118,11 @@ public class ProfessorExamReportController implements Initializable{
 	public void GenerateReport(ActionEvent event) {
 		currentEvent=event;
 		Object item=examTable.getSelectionModel().getSelectedItem();
+		if(item==null)
+		{
+			AlertMessages.makeAlert("You must chose before continue", "Report Allert");
+			return;
+		}
 		itemChosen=item;
 		ArrayList<String> request = new ArrayList<>();	
 		request.add("generate full exam report");

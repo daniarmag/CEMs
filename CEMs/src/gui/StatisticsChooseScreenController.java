@@ -213,6 +213,11 @@ public class StatisticsChooseScreenController implements Initializable {
 	private void GenerateRepo(ActionEvent e) {
 		event=e;
 		Object item=tableInfo.getSelectionModel().getSelectedItem();
+		if(item==null)
+		{
+			AlertMessages.makeAlert("You must chose before continue", "Report Allert");
+			return;
+		}
 		itemChosen=item;
 		Class<?> chooseClass=item.getClass();
 		ArrayList<String> request = new ArrayList<>();	

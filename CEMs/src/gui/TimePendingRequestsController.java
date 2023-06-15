@@ -97,11 +97,6 @@ public class TimePendingRequestsController implements Initializable
     	handleRequest("1");
     }
 
-    /**
-     * Disapproves a request - updates DB with -1
-     * @param event
-     */
-    @FXML
     void disApprove(ActionEvent event) 
     {
     	handleRequest("-1");
@@ -127,6 +122,7 @@ public class TimePendingRequestsController implements Initializable
     	}
     	else
     		AlertMessages.makeAlert("You must select a request", "Grant Approval");
+
     }
     
     /**
