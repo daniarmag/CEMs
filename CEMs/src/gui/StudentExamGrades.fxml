@@ -74,11 +74,11 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView id="questionTable" fx:id="questionTable" layoutX="311.0" layoutY="163.0" prefHeight="296.0" prefWidth="385.0">
+      <TableView id="questionTable" fx:id="studentExamTable" layoutX="311.0" layoutY="163.0" prefHeight="296.0" prefWidth="385.0">
          <columns>
-            <TableColumn id="examTable" fx:id="qnumTable" prefWidth="118.0" text="Exam Name" />
-            <TableColumn id="gradeTable" prefWidth="76.0" text="Grade" />
-            <TableColumn id="noteTable" fx:id="qtextTable" prefWidth="190.0" text="Professor Notes" />
+            <TableColumn id="examTable" fx:id="examTable" prefWidth="118.0" text="Exam Name" />
+            <TableColumn id="gradeTable" fx:id="gradeTable" prefWidth="76.0" text="Grade" />
+            <TableColumn id="noteTable" fx:id="noteTable" prefWidth="190.0" text="Professor Notes" />
          </columns>
       </TableView>
       <Button id="copyBtn" layoutX="443.0" layoutY="507.0" mnemonicParsing="false" onAction="#getCopy" prefHeight="45.0" prefWidth="122.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Get a Copy" textFill="WHITE">

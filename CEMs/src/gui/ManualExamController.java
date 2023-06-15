@@ -127,14 +127,23 @@ public class ManualExamController implements Initializable
     	else
     	{
     		ArrayList<String> request = new ArrayList<>();
+    		// Updates exam stats.
     		request.add("finished manual exam");
     		request.add(e.getExam_id());
     		request.add(String.valueOf(e.getTime()));
     		request.add(String.valueOf(e.getTime() - minutesLeft));
     		ClientUI.chat.accept(request);
     		request.clear();
+    		// Add a new row in student_manual_exam table
+    		request.add("add student manual exam");
+    		request.add(e.getExam_id());
+    		request.add(u.getUser_id());
+    		ClientUI.chat.accept(request);
+    		request.clear();
+    		// Uploads student's exam
     		request.add("upload exam");
     		request.add(e.getExam_id());
+    		request.add(u.getUser_id());
     		request.add(FileUploadTXT.getText().strip());
     		ClientUI.chat.accept(request);
     		UserController.goBack(event, "/gui/StudentScreen.fxml");

@@ -241,7 +241,7 @@ public class ServerMessageHandler
 					break;
 					
 				case "upload exam":
-					sqlController.uploadExamFile(arrayList.get(1), arrayList.get(2));
+					sqlController.uploadExamFile(arrayList.get(1), arrayList.get(2), arrayList.get(3));
 					client.sendToClient("exam uploaded");
 					break;
 					
@@ -287,6 +287,12 @@ public class ServerMessageHandler
 					updateStats(1, 2, arrayList, 2, 3);
 					handleFinishedExam();
 					client.sendToClient("exam submitted");
+					break;
+					
+				//Adds new row in student_manual_exam table.
+				case "add student manual exam":
+					sqlController.addStudentManualExam(arrayList.get(1), arrayList.get(2));
+					client.sendToClient("");
 					break;
 					
 				case "activate":

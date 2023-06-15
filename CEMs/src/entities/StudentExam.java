@@ -8,15 +8,18 @@ public class StudentExam implements Serializable,HaveID{
 	private int grade;
 	private String student_id;
 	private String exam_name;
+	private String comment;
 	
-	
-	
-	public StudentExam(String exam_id,int grade,String exam_name) {
+	public StudentExam(String exam_id, int grade,String exam_name) {
 		this.exam_id=exam_id;
 		this.grade=grade;
 		this.exam_name=exam_name;
 	}
-	
+	public StudentExam(String exam_name, String comment, int grade) {
+		this.exam_name=exam_name;
+		this.comment=comment;
+		this.grade=grade;
+	}
 	
 
 
@@ -48,7 +51,10 @@ public class StudentExam implements Serializable,HaveID{
 		return exam_name;
 	}
 	
-	
+	public String getComment() {
+		return comment;
+	}
+
 	
 	
 }

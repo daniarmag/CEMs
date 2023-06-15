@@ -1044,27 +1044,29 @@ public class MySQLController
 			}
 			examFile.initArray((int) blob.length());
 			examFile.setSize((int) blob.length());
+			System.out.println(examFile.getSize());
 			examFile.setMybytearray(blob.getBytes(1, examFile.getSize()));
-//			rs.close();
-//		    ps.close();
+			rs.close();
+		    ps.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return examFile;
 	}
 	
-	public void uploadExamFile(String examID, String examPath) {
+	public void uploadExamFile(String examID, String userID, String examPath) {
 		//ExamFile examFile = new ExamFile(examID);
 		try {
 		// Create a PreparedStatement for the SQL statement
-        PreparedStatement ps = conn.prepareStatement("UPDATE student_exam SET uploaded_exam_file  = ? "
-        		+ " WHERE exam_id = ?");
+        PreparedStatement ps = conn.prepareStatement("UPDATE student_manual_exam SET uploaded_file  = ? "
+        		+ " WHERE exam_id = ? AND student_id = ?");
         // Read the file
         File file = new File(examPath);
         FileInputStream inputStream = new FileInputStream(file);
         // Set the BLOB parameter
         ps.setBinaryStream(1, inputStream, (int) file.length());
         ps.setString(2, examID);
+        ps.setString(3, userID);
 		ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1130,7 +1132,7 @@ public class MySQLController
 	    {
 	    	PreparedStatement ps = conn.prepareStatement( "INSERT INTO exam_stats (exam_id, date, time, actual_time, " +
 										    			  "students_total, students_completed, students_uncompleted) " +
-										    			  "VALUES (?, ?, ?, ?, ?, ?, ?)" );
+										    			  "VALUES (?, ?, ?, ?, ?, ?, ?)");
 	       ps.setString(1, examStats.get(0));
 	       ps.setString(2, examStats.get(1));
 	       ps.setInt(3, Integer.parseInt(examStats.get(2)));
@@ -1185,11 +1187,12 @@ public class MySQLController
 		        ps.setString(4, examResult.getExam_id());
 		        ps.setString(5, examResult.getStudent_id());
 		        ps.executeUpdate();
-		    } 
+		    }
 		    catch (SQLException e) {e.printStackTrace();}
 	}
 	
 	/**
+<<<<<<< Upstream, based on branch 'master' of https://github.com/daniarmag/G9Repo.git
 	 * Sends an 'email' to a student.
 	 * @param id
 	 * @return
@@ -1252,6 +1255,7 @@ public class MySQLController
 		} catch (SQLException e) {e.printStackTrace();}
 		return isPendingRequest;
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Loads from the DB all the relevant requests.
@@ -1314,5 +1318,42 @@ public class MySQLController
 				hofId.add(rs.getString(1));
 		} catch (SQLException e) {e.printStackTrace();}
 		return hofId;
+=======
+	
+	/**
+	 * This method add a new row to student_manual_exam table
+	 * @param examID
+	 * @param StudentID
+	 */
+	public void addStudentManualExam(String examID, String StudentID) 
+	{
+		try 
+	    {
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO student_manual_exam (exam_id, student_id) VALUES (?, ?)");
+			ps.setString(1, examID);
+			ps.setString(2, StudentID);
+			ps.executeUpdate();
+	    } 
+	    catch (SQLException e){e.printStackTrace();}
+	}
+	
+	/**
+	 * This method add a new row to student_manual_exam table
+	 * @param examID
+	 * @param StudentID
+	 */
+	public void setStudentExamGrade(String StudentID) 
+	{
+		try 
+	    {
+			PreparedStatement ps = conn.prepareStatement("SELECT exam.exam_name, grade, student_exam.comment "
+					+ "FROM student_exam "
+					+ "JOIN exam ON student_exam.exam_id = exam.exam_id "
+					+ "WHERE student_id = ? AND isConfirmed = 1");
+			ps.setString(1, StudentID);
+			ps.executeUpdate();
+	    } 
+	    catch (SQLException e){e.printStackTrace();}
+>>>>>>> f46139f (.)
 	}
 }
