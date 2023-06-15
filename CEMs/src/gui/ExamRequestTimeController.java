@@ -21,6 +21,8 @@ import javafx.scene.text.Text;
 /*A class that represents professor's time extension request.*/
 public class ExamRequestTimeController implements Initializable
 {
+	private String hofId = "";
+	
 	private static ArrayList<String> sArr;
 	
 	private static User u;
@@ -100,7 +102,11 @@ public class ExamRequestTimeController implements Initializable
 			AlertMessages.makeAlert(errorMap.get(true), "Time Change");
 		    return;
 		}
-		ArrayList<String> request = constructRequest();
+		ArrayList<String> request = new ArrayList<>();
+		request.add("get head of dep id");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);
+		request = constructRequest();
 		ClientUI.chat.accept(request);
 		UserController.goBack(event, "/gui/ExamBankScreen.fxml");
     }
@@ -119,6 +125,7 @@ public class ExamRequestTimeController implements Initializable
 		request.add(u.get_fullName());
 		request.add(reason.getText());
 		request.add(sArr.get(1));
+		request.add(hofId);
 		return request;
     }
     
@@ -139,5 +146,13 @@ public class ExamRequestTimeController implements Initializable
 	    errorMap.put(reason.getText().isEmpty(), "A reason is required.");
 	    errorMap.put(timeToAdd.getText().isEmpty(), "Time to add is required.");
 	    return errorMap;
+	}
+	
+	/**
+	 * Setter.
+	 */
+	public void setHeadofDepId(String hofId)
+	{
+		this.hofId = hofId;
 	}
 }

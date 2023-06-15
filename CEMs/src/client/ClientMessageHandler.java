@@ -57,12 +57,17 @@ public class ClientMessageHandler
     //static guiMainController guiController;
 	static 
 	{
-		//guiController =new guiMainController();
 		studentController = new StudentScreenController();
-		headOfScreenController = new HeadOfDepScreenController();
-		//examController=new ExamController();
 		professorController = new ProfessorScreenController();
-		//manualExamController = new ManualExamController();
+		headOfScreenController = new HeadOfDepScreenController();
+	}
+	
+	/**
+	 * @param timePendingRequestsController the timePendingRequestsController to set
+	 */
+	public static void setHeadOfDepScreenController(HeadOfDepScreenController controller) 
+	{
+		headOfScreenController = controller;
 	}
 	
 	/**
@@ -425,6 +430,18 @@ public class ClientMessageHandler
 					}
 					AlertMessages.makeAlert("Exam has new time.", "Exam");
 				} catch (NullPointerException e) {e.printStackTrace();}
+				break;
+			
+			case "head of dep id to set":
+				examRequestTimeController.setHeadofDepId(arrayList.get(1));
+				break;
+				
+			case "send immediate approval to head of department":
+				if (headOfScreenController != null)
+				{
+					if(headOfScreenController.getId().equals(arrayList.get(1)))
+						AlertMessages.makeAlert("You have a new request pending.", "Alert");
+				}
 				break;
 		}
 	}

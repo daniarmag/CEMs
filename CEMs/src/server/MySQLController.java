@@ -1277,4 +1277,23 @@ public class MySQLController
 			ps.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();}
 	}
+
+	/**
+	 * @param id
+	 * @return  id of specific head of department
+	 */
+	public ArrayList<String> getHeadofDepId(String id) 
+	{
+		ArrayList<String> hofId = new ArrayList<>();
+		hofId.add("head of dep id to set");
+		try 
+		{
+			PreparedStatement ps = conn.prepareStatement("SELECT head_of_department_id FROM professor_department WHERE professor_id = ?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+				hofId.add(rs.getString(1));
+		} catch (SQLException e) {e.printStackTrace();}
+		return hofId;
+	}
 }

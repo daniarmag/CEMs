@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
 import entities.HeadOfDepartment;
@@ -18,7 +19,9 @@ import javafx.scene.text.Text;
 public class HeadOfDepScreenController implements Initializable
 {
 	private static StatisticsChooseScreenController 
+	
 	statisticsScreen=new StatisticsChooseScreenController();
+	
 	static HeadOfDepartment u ;
     @FXML
     private Text Alert;
@@ -60,6 +63,7 @@ public class HeadOfDepScreenController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
+		ClientMessageHandler.setHeadOfDepScreenController(this);
 		welcomeText.setText("Welcome back " + u.getFirst_name());
 		ClientUI.chat.accept("check for pending requests");
 	}
@@ -118,6 +122,12 @@ public class HeadOfDepScreenController implements Initializable
 	{
 			u.setArrUser(msg);
 	}
-}
 	
-
+	/**
+	 * @return hof id
+	 */
+	public String getId()
+	{
+		return u.getUser_id();
+	}
+}

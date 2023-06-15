@@ -334,6 +334,15 @@ public class ServerMessageHandler
 					arrayList.remove(0);
 					sqlController.requestTimeChange(arrayList);
 					client.sendToClient("request sent");
+					ArrayList<String> messageToHead = new ArrayList<>();
+					messageToHead.add("send immediate approval to head of department");
+					messageToHead.add(arrayList.get(7));
+					if (roleClientMap.get("head") != null)
+					{
+						//A message for each client of role "student".
+						for (ConnectionToClient c : roleClientMap.get("head"))
+							c.sendToClient(messageToHead);
+					}
 					break;
 					
 				case "load pending requests":
@@ -365,6 +374,10 @@ public class ServerMessageHandler
 								c.sendToClient(newTime);
 						}
 					}
+					break;
+					
+				case "get head of dep id":
+					client.sendToClient(sqlController.getHeadofDepId(arrayList.get(1)));
 					break;
 			}
 		} catch (IOException e) {}
