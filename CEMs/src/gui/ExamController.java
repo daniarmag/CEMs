@@ -32,7 +32,7 @@ import javafx.scene.text.Text;
  */
 public class ExamController implements Initializable
 {
-	Integer minutesLeft;
+	Integer minutesLeft, actualTime = 0;
 	
 	private boolean startedExamFlag = false;
 	
@@ -224,7 +224,7 @@ public class ExamController implements Initializable
 		finishedExam.add(wrongAnswers.toString().replaceAll(",$", ""));
 		finishedExam.add("0");
 		finishedExam.add(onGoingExam.getTime().toString());
-		finishedExam.add(String.valueOf(onGoingExam.getTime() - minutesLeft));
+		finishedExam.add(String.valueOf(actualTime));
 		return finishedExam;
 	}
 	
@@ -298,12 +298,13 @@ public class ExamController implements Initializable
 	}
 
 	/**
-	 * Adds time to the exam.
+	 * Sets exam time.
 	 * @param time
 	 */
-	void addTime(int time)
+	void setTime(int time)
 	{
-		minutesLeft += time;
+		minutesLeft = time;
+		onGoingExam.setTime(time);
 	}
 	    
 	/**
@@ -325,6 +326,7 @@ public class ExamController implements Initializable
 	        public void run()
 			{
 				minutesLeft--;
+				actualTime++;
 	            timerTXT.setText(minutesLeft.toString());
 	            if (minutesLeft == 0) 
 	            {

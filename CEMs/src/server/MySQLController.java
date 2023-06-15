@@ -1195,7 +1195,7 @@ public class MySQLController
 	 * Uploads the request to add time to the DB.
 	 * @param request
 	 */
-	public void requestTimeExtension(ArrayList<String> request)
+	public void requestTimeChange(ArrayList<String> request)
 	{
 		try 
 	    {
@@ -1216,7 +1216,7 @@ public class MySQLController
 	/**
 	 * @return true or false depending on whether there's any request for the HOF.
 	 */
-	public boolean checkForTimeExtensionRequests()
+	public boolean checkForTimeChangeRequests()
 	{
 		boolean isPendingRequest = false;
 		try 

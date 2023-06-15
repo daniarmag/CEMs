@@ -42,7 +42,7 @@
                   </ImageView>
                </children>
             </VBox>
-            <Text id="profTitle" fx:id="welcomeText" layoutX="305.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extend Time" textAlignment="CENTER">
+            <Text id="profTitle" fx:id="welcomeText" layoutX="305.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Time" textAlignment="CENTER">
                <font>
                   <Font name="Tahoma Bold" size="40.0" />
                </font>
@@ -72,7 +72,7 @@
                </font>
             </Text>
             <TextField id="txtAreaIP" fx:id="examName" editable="false" layoutX="355.0" layoutY="202.0" prefHeight="25.0" prefWidth="180.0" />
-            <Text layoutX="228.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time to add:" wrappingWidth="122.13671875">
+            <Text layoutX="228.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New time:" wrappingWidth="122.13671875">
                <font>
                   <Font size="16.5" />
                </font>

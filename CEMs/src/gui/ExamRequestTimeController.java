@@ -97,7 +97,7 @@ public class ExamRequestTimeController implements Initializable
     	HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			AlertMessages.makeAlert(errorMap.get(true), "Time Extension");
+			AlertMessages.makeAlert(errorMap.get(true), "Time Change");
 		    return;
 		}
 		ArrayList<String> request = constructRequest();

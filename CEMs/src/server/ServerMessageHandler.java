@@ -325,7 +325,7 @@ public class ServerMessageHandler
 					
 				case "request to add time":
 					arrayList.remove(0);
-					sqlController.requestTimeExtension(arrayList);
+					sqlController.requestTimeChange(arrayList);
 					client.sendToClient("request sent");
 					break;
 			}
@@ -423,8 +423,7 @@ public class ServerMessageHandler
 		    String dateString = currentDate.format(formatter);
 		    examStats.add(dateString);
 		    examStats.add(String.valueOf(onGoingExam[1]));
-		    //Actual time + minutes added.
-		    examStats.add(String.valueOf(onGoingExam[2]) + onGoingExam[3]);
+		    examStats.add(String.valueOf(onGoingExam[2]));
 		    examStats.add(String.valueOf(counterArray[0] + counterArray[1]));
 		    examStats.add(String.valueOf(counterArray[0]));
 		    examStats.add(String.valueOf(counterArray[1]));

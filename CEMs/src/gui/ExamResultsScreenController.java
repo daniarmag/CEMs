@@ -203,9 +203,11 @@ public class ExamResultsScreenController implements Initializable
      */
     public void checkForSuspects() 
     {
+    	//<wronganswer, student id list>
         Map<String, List<String>> suspectPairs = new HashMap<>();
         for (ExamResults e : arr) 
         {
+        	//Adds exam id to the wrong answers in-case there are exams with the same wrong answers.
             String wrongAnswers = e.getWrong_answers() + e.getExam_id();
             if (wrongAnswers != null && !wrongAnswers.isEmpty()) 
             {
