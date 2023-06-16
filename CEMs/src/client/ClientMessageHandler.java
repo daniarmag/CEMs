@@ -54,14 +54,13 @@ public class ClientMessageHandler
 	static StatisticsChooseScreenController statisticsScreen;
 	static ProfessorExamReportController professorExamReportController;
 	static TimePendingRequestsController timePendingRequestsController;
-    ///Check check check dont use 
-    //static guiMainController guiController;
 	static 
 	{
 		studentController = new StudentScreenController();
 		professorController = new ProfessorScreenController();
 		headOfScreenController = new HeadOfDepScreenController();
 	}
+	
 	
 	/**
 	 * @param timePendingRequestsController the timePendingRequestsController to set

@@ -3,7 +3,7 @@ package control;
 import javax.swing.JOptionPane;
 
 /**
- * Class that handles JOptionPane alerts
+ * Class that handles JOptionPane alerts used for Adapter Pattern Design
  */
 public class AlertMessages 
 {

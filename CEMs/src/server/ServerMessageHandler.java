@@ -26,6 +26,9 @@ public class ServerMessageHandler
 	//0 - finishedExam, 1 - unFinishedExam, 2 - totalStudents, 3 - time to add
 	static private Integer[] counterArray = {0, 0, 0, 0};
 	
+	static {
+		
+	}
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg

@@ -235,7 +235,6 @@ public class StatisticsChooseScreenController implements Initializable {
 	}
 	
 	
-	
 	/**check if the array is empty
 	 * @param arr
 	 */
