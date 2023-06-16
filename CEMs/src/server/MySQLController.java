@@ -991,8 +991,6 @@ public class MySQLController
 			examFile.initArray((int) blob.length());
 			examFile.setSize((int) blob.length());
 			examFile.setMybytearray(blob.getBytes(1, examFile.getSize()));
-			rs.close();
-		    ps.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

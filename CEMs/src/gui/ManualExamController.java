@@ -51,6 +51,9 @@ public class ManualExamController implements Initializable
     private TextField FileUploadTXT;
 
     @FXML
+    private Text durationTXT;
+
+    @FXML
     private Button SubmitBtn;
 
     @FXML
@@ -87,7 +90,7 @@ public class ManualExamController implements Initializable
 		ClientMessageHandler.setManualExamController(this);
 		welcomeText.setText(e.getExam_name());
 		SubmitBtn.setDisable(true);
-		TimerTXT.setText(minutesLeft.toString());
+		TimerTXT.setText(minutesLeft.toString() + " minutes");
 	}
     
     /** 
@@ -112,6 +115,7 @@ public class ManualExamController implements Initializable
 		request.add("load exam file");
 		request.add(e.getExam_id());
 		ClientUI.chat.accept(request);
+		durationTXT.setText("Time left:");
         SubmitBtn.setDisable(false);
         DownloadBtn.setDisable(true);
         startedExamFlag = true;

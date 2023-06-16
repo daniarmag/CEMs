@@ -70,7 +70,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="221.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left:">
+      <Text fx:id="durationTXT" layoutX="221.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration:">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font></Text>

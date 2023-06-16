@@ -61,6 +61,9 @@ public class ExamController implements Initializable
     @FXML
     private Text timerTXT;
     
+    @FXML
+    private Text durationTXT;
+    
 	@FXML
 	private ScrollPane scrollPane;
 	
@@ -100,6 +103,7 @@ public class ExamController implements Initializable
 		studentNotes.setText(onGoingExam.getExaminees_notes());
 		professorNotes.setText(onGoingExam.getProfessor_notes());
 		welcomeText.setText(onGoingExam.getExam_name());
+		timerTXT.setText(String.valueOf(onGoingExam.getTime()) + " minutes");
 		submitBtn.setDisable(true);
 		if (u.getRole().equals("professor"))
 			activateExam();
@@ -149,9 +153,10 @@ public class ExamController implements Initializable
 				activateExam();
 				startedExamFlag = true;
 				enterBtn.setDisable(true);
-				idTextField.setDisable(true);
-				savedEvent = event;
 				submitBtn.setDisable(false);
+				idTextField.setDisable(true);
+				durationTXT.setText("Time left:");
+				savedEvent = event;
 			}
 			else
 				AlertMessages.makeAlert("Wrong ID!", "Exam");	
