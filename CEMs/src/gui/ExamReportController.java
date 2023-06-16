@@ -27,13 +27,14 @@ import javafx.scene.text.Text;
 /**
  * Class that lets the professor view his exam statistics.
  */
-public class ProfessorExamReportController implements Initializable
+public class ExamReportController implements Initializable
 {
-	private static  ReportScreenController reportScreen=new ReportScreenController();
+	private static  ReportScreenController reportScreen = new ReportScreenController();
 	
     private static User u;
     
     private static ArrayList<?> arr;
+    
     @FXML
     private TableColumn<ExamTemplate, String> examIdCol;
 
@@ -85,7 +86,7 @@ public class ProfessorExamReportController implements Initializable
 	public static void start(User user) throws Exception 
 	{
 		u = user;
-		ScreenUtils.createNewStage("/gui/ProfessorExamReportScreen.fxml").show();
+		ScreenUtils.createNewStage("/gui/ExamReportScreen.fxml").show();
 	}
     
 	/**

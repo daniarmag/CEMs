@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
-
 import control.AlertMessages;
 import entities.Client;
 import javafx.fxml.FXML;
@@ -39,6 +38,9 @@ public class ServerScreenController implements Initializable {
 
 	@FXML
 	private Button disconnectBtn;
+	
+    @FXML
+    private Button importUsers;
 
 	@FXML
 	private Button exitBtn;
@@ -84,22 +86,22 @@ public class ServerScreenController implements Initializable {
 
 	/**
 	 * Initializes the JavaFX controller during application startup.
-	 * 
 	 * @param primaryStage The primary stage of the application.
 	 * @throws Exception
 	 */
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception 
+	{
 		ScreenUtils.createNewStage("/serverGui/ServerScreen.fxml").show();
 	}
 
 	/**
 	 * Initializes the GUI with the given logic.
-	 * 
 	 * @param location
 	 * @param resources
 	 */
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources) 
+	{
 		EchoServer.setServerScreenController(this);
 		try {
 			txtAreaIP.setText(InetAddress.getLocalHost().getHostAddress());
@@ -114,22 +116,22 @@ public class ServerScreenController implements Initializable {
 
 	/**
 	 * Exits from client GUI - disconnectes from DB aswell.
-	 * 
 	 * @param event
 	 */
 	@FXML
-	void exit(ActionEvent event) throws Exception {
+	void exit(ActionEvent event) throws Exception 
+	{
 		disconnect(event);
 		System.exit(0);
 	}
 
 	/**
 	 * Connects to the server.
-	 * 
 	 * @param event
 	 */
 	@FXML
-	void connect(ActionEvent event) {
+	void connect(ActionEvent event) 
+	{
 		connected = true;
 		username = txtAreaUsername.getText().trim();
 		password = getPassword();
@@ -143,6 +145,7 @@ public class ServerScreenController implements Initializable {
 				offCircle.setFill(Color.TRANSPARENT);
 				onCircle.setFill(Color.rgb(0, 202, 78));
 				connectBtn.setDisable(true);
+				importUsers.setDisable(false);
 				disconnectBtn.setDisable(false);
 			} else
 				AlertMessages.makeAlert("Incorrect username or password. Please try again.", "Server Area");
@@ -151,21 +154,22 @@ public class ServerScreenController implements Initializable {
 
 	/**
 	 * Disconnects from the server.
-	 * 
 	 * @param event
 	 * @throws Exception
 	 */
 	@FXML
-	void disconnect(ActionEvent event) throws Exception {
+	void disconnect(ActionEvent event) throws Exception 
+	{
 		connectedTable.getItems().clear();
-		try {
+		try 
+		{
 			ServerUI.getEs().sendToAllClients("abort");
-		} catch (Exception e) {
-		}
+		} catch (Exception e) {}
 		ServerMessageHandler.clearServerVars();
 		ServerUI.closeServer();
 		onCircle.setFill(Color.TRANSPARENT);
 		offCircle.setFill(Color.rgb(255, 96, 92));
+		importUsers.setDisable(true);
 		connectBtn.setDisable(false);
 		disconnectBtn.setDisable(true);
 		if (connected)
@@ -174,26 +178,33 @@ public class ServerScreenController implements Initializable {
 	}
 
 	
+	/**
+	 * This method imports users into users table from an external table.
+	 * @param event
+	 */
 	@FXML
 	void importUsers(ActionEvent event)
 	{
-		
+		sqlController.importExternalUsers();
+		AlertMessages.makeAlert("Users imported successfully", "Import Users");
 	}
 	
 
 	/**
 	 * Method that handles the checkbox of password visibility
-	 * 
 	 * @param event
 	 */
 	@FXML
-	void showPass(ActionEvent event) {
+	void showPass(ActionEvent event)
+	{
 		boolean isSelected = togglePassword.isSelected();
-		if (isSelected) {
+		if (isSelected) 
+		{
 			passwordField.setVisible(false);
 			passwordTextField.setText(passwordField.getText());
 			passwordTextField.setVisible(true);
-		} else {
+		} else 
+		{
 			passwordTextField.setVisible(false);
 			passwordField.setText(passwordTextField.getText());
 			passwordField.setVisible(true);
@@ -203,14 +214,16 @@ public class ServerScreenController implements Initializable {
 	/**
 	 * @return the updated password from text field or password field.
 	 */
-	String getPassword() {
+	String getPassword()
+	{
 		return togglePassword.isSelected() ? passwordTextField.getText().trim() : passwordField.getText().trim();
 	}
 
 	/*
 	 * Initializes the table.
 	 */
-	public void initializeTable() {
+	public void initializeTable() 
+	{
 		sqlController = MySQLController.getInstance();
 		passwordField.setText("123456");
 		passwordTextField.setText("123456");
@@ -226,7 +239,8 @@ public class ServerScreenController implements Initializable {
 	/*
 	 * Updates the table with the current list of clients.
 	 */
-	public void clientConnected() {
+	public void clientConnected() 
+	{
 		connectedTable.setItems(EchoServer.getClientsInfoList());
 		connectedTable.refresh();
 	}

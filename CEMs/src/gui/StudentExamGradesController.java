@@ -19,6 +19,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
+/**
+ * A class that represents statistics about students
+ */
 public class StudentExamGradesController implements Initializable 
 {
 	public static User u;

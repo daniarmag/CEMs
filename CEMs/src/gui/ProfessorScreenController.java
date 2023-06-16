@@ -159,7 +159,7 @@ public class ProfessorScreenController implements Initializable
 		UserController.hide(event);
 		try 
 		{
-			ProfessorExamReportController.start(u);	
+			ExamReportController.start(u);	
 		}catch(Exception e) {e.printStackTrace();}
 	}
     

@@ -18,6 +18,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * A class that represents the pending time change requests for the HOF.
+ */
 public class TimePendingRequestsController implements Initializable
 {
 	public static User u;

@@ -101,12 +101,12 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" layoutX="157.0" layoutY="96.0" prefHeight="202.0" prefWidth="143.0">
                <children>
-                  <TextField id="txtAreaIP" fx:id="txtAreaIP" style="-fx-background-radius: 15px;">
+                  <TextField id="txtAreaIP" fx:id="txtAreaIP" editable="false" style="-fx-background-radius: 15px;">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField id="txtAreaPort" fx:id="txtAreaPort" style="-fx-background-radius: 15px;">
+                  <TextField id="txtAreaPort" fx:id="txtAreaPort" editable="false" style="-fx-background-radius: 15px;">
                      <VBox.margin>
                         <Insets top="17.0" />
                      </VBox.margin>
@@ -159,7 +159,7 @@
                   <Insets top="5.0" />
                </padding>
             </CheckBox>
-            <Button id="connectBtn" fx:id="connectBtn1" layoutX="492.0" layoutY="327.0" mnemonicParsing="false" onAction="#connect" prefHeight="29.0" prefWidth="122.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Import Users" textFill="WHITE">
+            <Button id="connectBtn" fx:id="importUsers" disable="true" layoutX="492.0" layoutY="327.0" mnemonicParsing="false" onAction="#importUsers" prefHeight="29.0" prefWidth="122.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Import Users" textFill="WHITE">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font>

@@ -23,7 +23,7 @@ import gui.ExamResultsScreenController;
 import gui.HeadOfDepScreenController;
 import gui.LoginScreenController;
 import gui.ManualExamController;
-import gui.ProfessorExamReportController;
+import gui.ExamReportController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.TimePendingRequestsController;
@@ -52,7 +52,7 @@ public class ClientMessageHandler
     static HeadOfDepScreenController headOfScreenController;
     static ExamController examController;
 	static StatisticsChooseScreenController statisticsScreen;
-	static ProfessorExamReportController professorExamReportController;
+	static ExamReportController professorExamReportController;
 	static TimePendingRequestsController timePendingRequestsController;
 	static 
 	{
@@ -96,7 +96,7 @@ public class ClientMessageHandler
 	/**
 	 * @param examResultsScreenController the examCreationFirstController to set
 	 */
-	public static void setProfessorExamReportController(ProfessorExamReportController controller) 
+	public static void setProfessorExamReportController(ExamReportController controller) 
 	{
 		professorExamReportController = controller;
 	}

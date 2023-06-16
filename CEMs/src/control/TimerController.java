@@ -1,11 +1,6 @@
 package control;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class TimerController {

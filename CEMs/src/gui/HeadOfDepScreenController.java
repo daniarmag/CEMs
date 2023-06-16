@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 public class HeadOfDepScreenController implements Initializable
 {
 	private String path="/gui/HeadOfDepartmentScreen.fxml";
+	
 	private static StatisticsChooseScreenController 
 	
 	statisticsScreen = new StatisticsChooseScreenController();
@@ -92,19 +93,27 @@ public class HeadOfDepScreenController implements Initializable
 		UserController.logoutUser(u);
 	}
 
+    /**
+     * Method to let the head access all the exams in the DB.
+     * @param event
+     */
     @FXML
     void accessAllExams(ActionEvent event)
     {
     	UserController.hide(event);
     	try 
     	{
-			ProfessorExamReportController.start(u);
+			ExamReportController.start(u);
 		} catch (Exception e) {}
     }
     
-    
+    /**
+     * Method to let the head access all the questions in the DB.
+     * @param event
+     */
     @FXML
-    void accessAllQuestions(ActionEvent event) {
+    void accessAllQuestions(ActionEvent event)
+    {
         {
         	UserController.hide(event);
         	try 

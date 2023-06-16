@@ -37,9 +37,13 @@ public class QuestionBankScreenController implements Initializable
 	public static User u;
 	
 	public static boolean isValidRemoval = true;
+	
 	private static Map<Class<?>,String> map =new HashMap<>();
+	
 	private static Map<Class<?>,String> path =new HashMap<>();
-	static {
+	
+	static
+	{
 		map.put(Professor.class,"load professor questions");
 		map.put(HeadOfDepartment.class, "load all department questions");
 		path.put(HeadOfDepartment.class, "/gui/HeadOfDepartmentScreen.fxml");
@@ -91,7 +95,6 @@ public class QuestionBankScreenController implements Initializable
 		u = user;
 		if(user instanceof Professor)
 			teachingMap=(Map<String, ArrayList<String>>)((Professor<?, ?>)user).getMap();
-		
 		//teachingMap = (Map<String, ArrayList<String>>) map;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show());
 	}
@@ -117,7 +120,11 @@ public class QuestionBankScreenController implements Initializable
 		searchBar.setOnKeyReleased(event -> search(event));
 	}
 
-	private void initToHead() {
+	/**
+	 * If the user is an instance of head, different initialization
+	 */
+	private void initToHead() 
+	{
 		
 		addQstnBtn.setVisible(false);
 		deleteBtn.setVisible(false);

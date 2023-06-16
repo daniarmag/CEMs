@@ -1296,7 +1296,8 @@ public class MySQLController
 		try
 		{
 			Statement s = conn.createStatement();
-			s.executeQuery("INSERT INTO users (user_id, first_name, last_name, email, username, password, role, isLogged) " +
+			//This query inserts users into users table from an external DB table, and makes sure to not try to include existing users.
+			s.executeUpdate("INSERT INTO users (user_id, first_name, last_name, email, username, password, role, isLogged) " +
 					       "SELECT se.* " +
 					       "FROM simulation_external_users AS se " +
 					       "LEFT JOIN users AS u ON se.user_id = u.user_id " +
