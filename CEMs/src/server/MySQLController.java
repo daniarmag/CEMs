@@ -36,24 +36,24 @@ public class MySQLController
 {
 	
 	static Connection conn;
+	
 	private static volatile MySQLController INSTANCE;
 
-	
-	
 	/**
 	 * private constructor for Singleton DB
 	 */
-	private MySQLController() {
-	}
+	private MySQLController() {}
 	
 	/**
-	 * @return
+	 * @return instance of MYSQLController
 	 */
-	public static MySQLController getInstance() {
-		if(INSTANCE==null)
-			synchronized(MySQLController.class) {
-				if(INSTANCE==null)
-			INSTANCE=new MySQLController();
+	public static MySQLController getInstance() 
+	{
+		if (INSTANCE == null)
+			synchronized (MySQLController.class)
+			{
+				if (INSTANCE == null)
+					INSTANCE = new MySQLController();
 			}
 		return INSTANCE;
 	}
@@ -92,8 +92,6 @@ public class MySQLController
             System.out.println("VendorError: " + ex.getErrorCode());
             return false;
         }
-        
-        
    	}
 	
 	/**
@@ -127,8 +125,6 @@ public class MySQLController
 		return qArr;
 	}
 	
-	
-	
 	/**@author czmat
 	 * @param id
 	 * @return all questions in data base the professor from the 
@@ -161,12 +157,9 @@ public class MySQLController
 		return qArr;
 	}
 		
-	
-	
 	/**This method loads all the exams that the student can take.
 	 * @param id
 	 * @return an ArrayList of Exam objects
-
 	 */
 	public ArrayList<Exam>loadStudentExams()
 	{
@@ -260,7 +253,12 @@ public class MySQLController
 		return null ;
 	}
 	
-	private ExamStat examStatistics(String exam) {
+	/**
+	 * @param exam
+	 * @return exam statistics for exam with the given ID
+	 */
+	private ExamStat examStatistics(String exam)
+	{
 
 		ResultSet rs;
 		ExamStat stat;
@@ -304,25 +302,23 @@ public class MySQLController
 		
 	}
 	
-	
 	/**
 	 * the array is sorted so the median does not need any calculation
 	 * 
 	 * @param array
 	 * @return the median of all the grades - they came ordered from the database
 	 */
-	private double calMeddian(ArrayList<Number> array) {
-		if (array.size() % 2 == 0) {
+	private double calMeddian(ArrayList<Number> array)
+	{
+		if (array.size() % 2 == 0)
+		{
 			return ((array.get((int) ((array.size() / 2) - 1)).doubleValue()
 					+ array.get((int) (array.size() / 2)).doubleValue()) / 2);
-		} else
+		} 
+		else
 			return array.get((int) (array.size() / 2)).doubleValue();
 
 	}
-	
-	
-	
-	
 	
 	/**
 	 * @param exam
@@ -354,18 +350,11 @@ public class MySQLController
 			
 			rs=ps.executeQuery();
 			
-			while(rs.next()) {
+			while(rs.next()) 
 				dist.addToRange(rs.getString(1), rs.getInt(2));
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
+		}catch(SQLException e) {e.printStackTrace();}
 		return dist;
 	}
-	
-	
 	
 	/**
 	 * This method is responsible for updating question text and question number records in the database. 
@@ -458,7 +447,6 @@ public class MySQLController
 							break;
 						case "head":
 							newUser = new HeadOfDepartment(user_id,first_name,last_name,email,user_id,password,"head");
-						
 					}
 				}
 				else 
@@ -700,8 +688,6 @@ public class MySQLController
 		return arrayC;		
 	}
 	
-	
-	
 	/**
 	 * @param arr
 	 * @return all the exam of the student and his grades orderd by grade
@@ -731,7 +717,6 @@ public class MySQLController
 		return array;		
 	}
 	
-	
 	/**
 	 * @param id
 	 * @return the average of all the exams of this id of professor
@@ -753,9 +738,6 @@ public class MySQLController
 		}
 		return 0;
 	}
-	
-	
-	
 	
 	/**@author czmat
 	 * @param arr
@@ -793,10 +775,7 @@ public class MySQLController
 			}
 			
 			array.add(new ExamStatistics("average of all", null, AverageofExam(arr.get(2),arr.get(3)), 0, 0, 0));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	
+		} catch (SQLException e) {e.printStackTrace();}
 		return array;	
 		
 		
@@ -824,11 +803,6 @@ public class MySQLController
 		}
 		return 0;
 	}
-	
-	
-	
-	
-	
 	
 	/**
 	 * @return amount of exams in data base.
@@ -997,7 +971,14 @@ public class MySQLController
 			return examFile;
 	}
 	
-	public void uploadExamFile(String examID, String userID, String examPath) {
+	/**
+	 * Uploads a docx file to the DB
+	 * @param examID
+	 * @param userID
+	 * @param examPath
+	 */
+	public void uploadExamFile(String examID, String userID, String examPath) 
+	{
 		//ExamFile examFile = new ExamFile(examID);
 		try {
 		// Create a PreparedStatement for the SQL statement
@@ -1136,7 +1117,6 @@ public class MySQLController
 	}
 	
 	/**
-<<<<<<< Upstream, based on branch 'master' of https://github.com/daniarmag/G9Repo.git
 	 * Sends an 'email' to a student.
 	 * @param id
 	 * @return
@@ -1308,5 +1288,20 @@ public class MySQLController
 		return studentExamArr;
 	}
 
-	
+	/**
+	 * This method imports all the users manually into the DB.
+	 */
+	public void importExternalUsers()
+	{
+		try
+		{
+			Statement s = conn.createStatement();
+			s.executeQuery("INSERT INTO users (user_id, first_name, last_name, email, username, password, role, isLogged) " +
+					       "SELECT se.* " +
+					       "FROM simulation_external_users AS se " +
+					       "LEFT JOIN users AS u ON se.user_id = u.user_id " +
+					       "WHERE u.user_id IS NULL;");
+		}
+		catch (SQLException e) {e.printStackTrace();}
+	}
 }

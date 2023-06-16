@@ -177,6 +177,12 @@ public class ServerScreenController implements Initializable
 		connected = false;
 	}
 	
+	@FXML
+	void importUsers(ActionEvent event)
+	{
+		
+	}
+	
 	/**
 	 * Method that handles the checkbox of password visibility
 	 * @param event

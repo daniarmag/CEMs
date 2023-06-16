@@ -20,7 +20,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="serverGui.ServerScreenController">
    <children>
-      <Pane prefHeight="465.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" styleClass="background">
+      <Pane prefHeight="455.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" styleClass="background">
          <children>
             <HBox alignment="TOP_CENTER" layoutY="-1.0" prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #30BECC;">
                <children>
@@ -139,11 +139,11 @@
                   <TableColumn fx:id="statusCol" prefWidth="126.0" text="Status" />
               </columns>
             </TableView>
-            <Button id="connectBtn" fx:id="connectBtn" layoutX="40.0" layoutY="386.0" mnemonicParsing="false" onAction="#connect" prefHeight="45.0" prefWidth="103.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Connect" textFill="WHITE">
+            <Button id="connectBtn" fx:id="connectBtn" layoutX="14.0" layoutY="394.0" mnemonicParsing="false" onAction="#connect" prefHeight="29.0" prefWidth="122.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Connect" textFill="WHITE">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font></Button>
-            <Button id="disconnectBtn" fx:id="disconnectBtn" layoutX="181.0" layoutY="386.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="45.0" prefWidth="113.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Disconnect" textFill="WHITE">
+            <Button id="disconnectBtn" fx:id="disconnectBtn" layoutX="178.0" layoutY="394.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="29.0" prefWidth="122.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Disconnect" textFill="WHITE">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font></Button>
@@ -159,6 +159,11 @@
                   <Insets top="5.0" />
                </padding>
             </CheckBox>
+            <Button id="connectBtn" fx:id="connectBtn1" layoutX="492.0" layoutY="327.0" mnemonicParsing="false" onAction="#connect" prefHeight="29.0" prefWidth="122.0" style="-fx-background-radius: 30px; -fx-background-color: #30BECC;" text="Import Users" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>
