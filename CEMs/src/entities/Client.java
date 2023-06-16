@@ -2,7 +2,9 @@ package entities;
 
 import java.io.Serializable;
 
-/*Client class represents the client and hold his connection-information.*/
+/**
+ * Client class represents the client and hold his connection-information.
+ */
 @SuppressWarnings("serial")
 public class Client implements Serializable 
 {

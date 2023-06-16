@@ -35,6 +35,6 @@ public class TimerController {
             }
         };
         // Schedule the task to run every minute
-        timer.schedule(task, 0, 1500);
+        timer.schedule(task, 0, 500);
 		}
 }

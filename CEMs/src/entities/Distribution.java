@@ -30,15 +30,25 @@ public class Distribution implements Serializable{
 		dArr[5]=new Range("96-100",0);
 	}
 	
+	 /**
+      * Adds a value to the specified range.
+      * @param range the range string
+      * @param val   the value to add
+      */
 	public void addToRange(String range,int val) {
 		dArr[location.get(range)].setVal(val);
 	}
 	
-	 public Range[] RangeArray() {
+	 /**
+	  * @return array of range
+	  */
+	public Range[] RangeArray() {
 		 return dArr;
 	 }
 	
-	 
+    /**
+     * @return a string representation of the object
+     */ 
 	 @Override
 	public String toString() {
 		 StringBuilder string=new StringBuilder();
@@ -46,9 +56,7 @@ public class Distribution implements Serializable{
 			 string.append(dArr[i]+" ");
 		 return string.toString();
 	 }
-	 
-	 
-	 
+
 	public class Range implements Serializable{
 		private String range;
 		private int val;
@@ -58,18 +66,30 @@ public class Distribution implements Serializable{
 			this.val = val;
 		}
 
+		/**
+		 * @return the range string
+		 */
 		public String get_range() {
 			return range;
 		}
 
+		/**
+		 * @return the value
+		 */
 		public int get_val() {
 			return val;
 		}
 
+		/**
+		 * @param value to set
+		 */
 		public void setVal(int val) {
 			this.val = val;
 		}
 
+		/**
+	     * @return a string representation of the object
+	     */ 
 		@Override
 		public String toString() {
 			return range + " " + val;

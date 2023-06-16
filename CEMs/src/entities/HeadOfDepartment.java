@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+/**
+ * Represents a head of department.
+ */
 @SuppressWarnings("serial")
 public class HeadOfDepartment extends User {
 	private static ArrayList<?> studentArr=new ArrayList<>();
@@ -18,22 +21,31 @@ public class HeadOfDepartment extends User {
 		mapArrays.put("course",arr -> {setArrCourses(arr);});
 		}
 	
+	/**
+	 * @param user_id
+	 * @param first_name
+	 * @param last_name
+	 * @param email
+	 * @param username
+	 * @param password
+	 * @param role
+	 */
 	public HeadOfDepartment(String user_id, String first_name, String last_name, String email, String username,
 			String password, String role) {
 		super(user_id, first_name, last_name, email, username, password, role);
-		
 	}
 	
-	
+	/**
+	 * @param str
+	 * @return
+	 */
 	public ArrayList<?> getArray(String str)	{
 		return mapData.get(str);
 		
 	}
 	
 	/**
-	 * @author czmat
-	 * @param arr
-	 * this method load both arrays ( student and professor) according to the input.
+	 * 	@param arr the array containing user objects
 	 */
 	public void setArrUser(ArrayList<?> arr) {
 		
@@ -44,32 +56,29 @@ public class HeadOfDepartment extends User {
 		else
 			mapArrays.get("course").accept(arr);
 		}
-		
-	
-	
-	
-	
-	/**set the courses array
+
+	/**
+	 * set the courses array
 	 * @param arr
 	 */
 	private static void setArrCourses(ArrayList<?> arr) {
 		courseArr.clear();
 		HeadOfDepartment.courseArr=arr;
 		mapData.put("course", courseArr);
-		
 	}
 	
-	/**set arrapy of all professors
+	/**
+	 * set arrapy of all professors
 	 * @param arr
 	 */
 	private static  void setArrprofessor(ArrayList<?> arr) {
 		professorArr.clear();
 		HeadOfDepartment.professorArr=arr;
 		mapData.put("professor", arr);
-		
 	}
 	
-	/**set array for all studens
+	/**
+	 * set array for all studens
 	 * @param arr
 	 */
 	private static void setArrStudent(ArrayList<?> arr) {
@@ -77,6 +86,4 @@ public class HeadOfDepartment extends User {
 		HeadOfDepartment.studentArr=arr;
 		mapData.put("student", arr);
 	}
-	
-	
 }

@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * This class represents a professor-user
- * 
- * @author Daniel
- *
+ * Represents a professor-user
  */
 @SuppressWarnings("serial")
 public class Professor<T, E> extends User {

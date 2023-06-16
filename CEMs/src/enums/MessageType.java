@@ -1,7 +1,6 @@
 package enums;
 
 /**
- * @author Daniel
  * Enums for more readable switch-case statements.
  */
 public enum MessageType 

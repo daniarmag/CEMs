@@ -70,11 +70,11 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="221.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:">
+      <Text layoutX="221.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left:">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font></Text>
-      <Text fx:id="TimerTXT" layoutX="324.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="65.65234375">
+      <Text fx:id="TimerTXT" layoutX="306.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="88.79999999999995">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font></Text>

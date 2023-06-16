@@ -1,9 +1,7 @@
 package entities;
 
 /**
- * This class represents a student-user
- * @author Daniel
- *
+ * Represents a student-user
  */
 @SuppressWarnings("serial")
 public class Student extends User

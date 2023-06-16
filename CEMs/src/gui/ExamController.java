@@ -32,7 +32,7 @@ import javafx.scene.text.Text;
  */
 public class ExamController implements Initializable
 {
-	Integer minutesLeft, actualTime = 0;
+	Integer minutesLeft, secondsLeft = 1, actualTime = 0;
 	
 	private boolean startedExamFlag = false;
 	
@@ -315,24 +315,36 @@ public class ExamController implements Initializable
 	/**
 	 * Starts the timer for the exam.
 	 */
-	public void startCountdown() 
-	{
-		TimerTask task = new TimerTask() 
-		{
-			@Override
-	        public void run()
-			{
-				minutesLeft--;
-				actualTime++;
-	            timerTXT.setText(minutesLeft.toString());
-	            if (minutesLeft == 0) 
-	            {
-	            	timer.cancel();
-	            	autoSubmit("unfinished exam");
+	public void startCountdown() {
+	    TimerTask task = new TimerTask() {
+	        @Override
+	        public void run() {
+	            secondsLeft--;
+
+	            // Calculate hours, minutes, and seconds
+	            int hours = minutesLeft / 60;
+	            int minutes = minutesLeft % 60;
+	            int seconds = secondsLeft;
+
+	            // Update the timer display
+	            timerTXT.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+	            
+	            // Increment actualTime every minute
+	            if (secondsLeft == 0) {
+	                minutesLeft--;
+	                actualTime++;
+	                secondsLeft = 60;
 	            }
+	            if (minutesLeft == 0 && secondsLeft == 1) 
+	            {
+	            	secondsLeft--;
+	            	timerTXT.setText(String.format("%02d:%02d:%02d", hours, minutes, secondsLeft));
+	            	timer.cancel();
+		            autoSubmit("unfinished exam");
+		        }
 	        }
-		};
-		//Schedule the task to run every minute
-		timer.schedule(task, 0, 60000);
+	    };
+	    // Schedule the task to run every second
+	    timer.schedule(task, 0, 1000);
 	}
 }

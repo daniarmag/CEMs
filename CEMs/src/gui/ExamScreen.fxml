@@ -66,12 +66,12 @@
             <VBox fx:id="questionContainer" prefHeight="494.0" prefWidth="596.0" style="-fx-background-color: #FFFFFF;" />
          </content>
       </ScrollPane>
-      <Text layoutX="216.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutes left:">
+      <Text layoutX="216.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time left:">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="timerTXT" layoutX="315.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="59.65234375">
+      <Text fx:id="timerTXT" layoutX="300.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.20000000000005">
          <font>
             <Font name="Tahoma" size="18.0" />
          </font>

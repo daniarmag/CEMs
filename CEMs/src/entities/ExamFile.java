@@ -5,13 +5,13 @@ import java.io.Serializable;
 /**
  * Represents the exam file.
  */
+@SuppressWarnings("serial")
 public class ExamFile implements Serializable {
-	
 	private String fileName=null;	
 	private int size=0;
 	public  byte[] mybytearray;
 	
-	 /**
+	/**
      * Constructor for ExamFile object.
      * @param fileName the name of the exam file
      */
@@ -19,7 +19,7 @@ public class ExamFile implements Serializable {
 		this.fileName = fileName;
 	}
 	
-	 /**
+	/**
      * Initializes the byte array.
      * @param size the size of the byte array
      */
@@ -28,14 +28,14 @@ public class ExamFile implements Serializable {
 		mybytearray = new byte [size];	
 	}
 	
-	 /**
+	/**
      * @return the name of the exam file
      */
 	public String getFileName() {
 		return fileName;
 	}
 
-	 /**
+	/**
      * @return the size of the exam file
      */
 	public int getSize() {
@@ -64,7 +64,7 @@ public class ExamFile implements Serializable {
 		this.fileName = fileName;
 	}
 
-	   /**
+	/**
      * @param size the size of the exam file to set
      */
 	public void setSize(int size) {

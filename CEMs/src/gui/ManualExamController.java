@@ -37,7 +37,7 @@ public class ManualExamController implements Initializable
 	
 	public static Timer timer = new Timer();
 	
-	static Integer minutesLeft, actualTime = 0;;
+	static Integer minutesLeft, secondsLeft = 1, actualTime = 0;;
 	
 	boolean oneMinuteFlag = false;
 
@@ -86,8 +86,8 @@ public class ManualExamController implements Initializable
 	{
 		ClientMessageHandler.setManualExamController(this);
 		welcomeText.setText(e.getExam_name());
-       SubmitBtn.setDisable(true);
-       TimerTXT.setText(minutesLeft.toString());
+		SubmitBtn.setDisable(true);
+		TimerTXT.setText(minutesLeft.toString());
 	}
     
     /** 
@@ -198,33 +198,42 @@ public class ManualExamController implements Initializable
 	/**
 	 * Starts the timer for the exam.
 	 */
-	public void startCountdown() 
-	{
-		TimerTask task = new TimerTask() 
-		{
-			@Override
-			public void run() 
-			{
-				minutesLeft--;
-				actualTime++;
-				TimerTXT.setText(minutesLeft.toString());
-				if (minutesLeft == 0 && !oneMinuteFlag) 
-				{
-					oneMinuteFlag = true;
-					minutesLeft++;
-					TimerTXT.setText(minutesLeft.toString());
-					AlertMessages.makeAlert("Exam is over, you have one minute for submiting", "Exam is over");
-				} 
-				else if (oneMinuteFlag) 
-				{
-					disableFileUpload();
-					ClientUI.chat.accept("unfinished manual exam");
-					AlertMessages.makeAlert("Time is up!", "Exam");
-				}
-			}
-		};
-		// Schedule the task to run every minute
-		timer.schedule(task, 0, 60000);
+	public void startCountdown() {
+	    TimerTask task = new TimerTask() {
+	        @Override
+	        public void run() {
+	            secondsLeft--;
+
+	            // Calculate hours, minutes, and seconds
+	            int hours = minutesLeft / 60;
+	            int minutes = minutesLeft % 60;
+	            int seconds = secondsLeft;
+
+	            // Update the timer display
+	            TimerTXT.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+	            
+	            // Increment actualTime every minute
+	            if (secondsLeft == 0) {
+	                minutesLeft--;
+	                actualTime++;
+	                secondsLeft = 60;
+	            }
+	            if (minutesLeft == 0 && secondsLeft == 60 && !oneMinuteFlag) {
+	                oneMinuteFlag = true;
+	                minutesLeft = 1;
+	                //TimerTXT.setText(String.format("%02d:%02d:%02d", 0, 1, 0));
+	                AlertMessages.makeAlert("Exam is over, you have one minute for submitting", "Exam is over");
+	                secondsLeft = 1;
+	            } else if (minutesLeft == 0 && secondsLeft == 1 && oneMinuteFlag) {
+	                disableFileUpload();
+	                ClientUI.chat.accept("unfinished manual exam");
+	                AlertMessages.makeAlert("Time is up!", "Exam");
+	            }
+
+	        }
+	    };
+	    // Schedule the task to run every second
+	    timer.schedule(task, 0, 1000);
 	}
 	
 	/**

@@ -2,6 +2,9 @@ package entities;
 
 import java.io.Serializable;
 
+/**
+ * Represents a request for changing the time of an exam.
+ */
 @SuppressWarnings("serial")
 public class ExamTimeChange implements Serializable
 {
