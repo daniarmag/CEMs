@@ -41,7 +41,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Text id="profTitle" fx:id="welcomeText" layoutX="366.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Reports" textAlignment="CENTER">
+      <Text id="profTitle" fx:id="welcomeText" layoutX="345.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Reports" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
@@ -62,8 +62,8 @@
       </Button>
       <TableView fx:id="examTable" layoutX="260.0" layoutY="205.0" prefHeight="289.0" prefWidth="469.0">
          <columns>
-            <TableColumn fx:id="examNameCol" prefWidth="162.0" text="Exam Name" />
-            <TableColumn fx:id="examIdCol" prefWidth="149.0" text="Exam Id" />
+            <TableColumn fx:id="examIdCol" prefWidth="149.0" text="Exam Name" />
+            <TableColumn fx:id="examNameCol" prefWidth="162.0" text="Exam ID" />
             <TableColumn fx:id="examCourseCol" prefWidth="157.0" text="Course" />
          </columns>
       </TableView>

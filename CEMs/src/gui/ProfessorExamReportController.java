@@ -108,6 +108,7 @@ public class ProfessorExamReportController implements Initializable
 		{
 			faceImage.setImage(new Image("\\images\\manager.png"));
 			welcomeText.setText("Department Exams");
+			examCourseCol.setText("Professor Name");
 		}
 	}
 	
@@ -128,7 +129,10 @@ public class ProfessorExamReportController implements Initializable
 	@FXML
 	void goBack(ActionEvent event) 
 	{	
-		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
+		if (u.getRole().equals("professor"))
+			UserController.goBack(event, "/gui/ProfessorScreen.fxml");
+		else
+			UserController.goBack(event, "/gui/HeadOfDepartmentScreen.fxml");
 	}
 	
 	/**
@@ -215,13 +219,13 @@ public class ProfessorExamReportController implements Initializable
 	 */
 	void search(KeyEvent event)
 	{
-		 String searchText = searchBar.getText().toLowerCase();
-		    //Filter the question list based on the search text
-		    ArrayList<ExamTemplate> filteredList = new ArrayList<>();
-		    for (Object exam : arr)
-		        if (((ExamTemplate)exam).getCourse_id().contains(searchText))
-		            filteredList.add((ExamTemplate) exam);
-		    //Update the question table with the filtered list
-		    updateExamTable(filteredList);       
+		String searchText = searchBar.getText().toLowerCase();
+		// Filter the question list based on the search text
+		ArrayList<ExamTemplate> filteredList = new ArrayList<>();
+		for (Object exam : arr)
+			if (((ExamTemplate) exam).get_name().toLowerCase().contains(searchText))
+				filteredList.add((ExamTemplate) exam);
+		// Update the question table with the filtered list
+		updateExamTable(filteredList);     
 	 }
 }
