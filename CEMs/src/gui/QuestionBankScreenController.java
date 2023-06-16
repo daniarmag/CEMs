@@ -9,6 +9,8 @@ import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
+import entities.HeadOfDepartment;
+import entities.Professor;
 import entities.Question;
 import entities.User;
 import javafx.application.Platform;
@@ -72,10 +74,13 @@ public class QuestionBankScreenController implements Initializable
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static void start(User user, Map<?, ?> map) throws Exception 
+	public static void start(User user) throws Exception 
 	{
 		u = user;
-		teachingMap = (Map<String, ArrayList<String>>) map;
+		if(user instanceof Professor)
+			teachingMap=(Map<String, ArrayList<String>>)((Professor<?, ?>)user).getMap();
+		
+		//teachingMap = (Map<String, ArrayList<String>>) map;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show());
 	}
     
@@ -89,11 +94,21 @@ public class QuestionBankScreenController implements Initializable
 	{
 		ClientMessageHandler.setQuestionBankController(this);
 		ArrayList<String> request = new ArrayList<String>();
+		if(u instanceof Professor)
 		//A call to load all professor questions.
-		request.add("load professor questions");
+			request.add("load professor questions");
+		if(u instanceof HeadOfDepartment) {
+			request.add("load all department questions");
+			initToHead();
+		}
 		request.add(u.getUser_id());
 		ClientUI.chat.accept(request);
 		searchBar.setOnKeyReleased(event -> search(event));
+	}
+
+	private void initToHead() {
+		
+		
 	}
 
 	/**

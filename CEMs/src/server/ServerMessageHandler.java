@@ -184,6 +184,10 @@ public class ServerMessageHandler
 				case "load professor questions":
 					client.sendToClient(sqlController.loadProfessorQuestions(arrayList.get(1)));
 					break;
+					
+				case "load all department questions":
+					client.sendToClient(sqlController.loadHeadOfDepartmentQuestions(arrayList.get(1)));
+					break;
 				
 				case "load professor exams":
 					client.sendToClient(sqlController.loadProfessorExams(arrayList.get(1)));

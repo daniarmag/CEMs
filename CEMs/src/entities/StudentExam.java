@@ -10,6 +10,8 @@ public class StudentExam implements Serializable,HaveID{
 	private String exam_name;
 	private String comment;
 	
+	
+	
 	/**
 	 * @param exam_id
 	 * @param grade

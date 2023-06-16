@@ -9,6 +9,7 @@ import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
+import entities.Professor;
 import entities.Question;
 import entities.User;
 import javafx.collections.FXCollections;
@@ -61,10 +62,10 @@ public class ExamCreationFirstController implements Initializable
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static void start(User user, Map<?, ?> map) throws Exception 
+	public static void start(User user) throws Exception 
 	{
 		u = user;
-		teachingMap = (Map<String, ArrayList<String>>) map;
+		teachingMap = (Map<String, ArrayList<String>>)((Professor<?,?>)user).getMap();
 		ScreenUtils.createNewStage("/gui/ExamCreationFirst.fxml").show();
 	}
 	

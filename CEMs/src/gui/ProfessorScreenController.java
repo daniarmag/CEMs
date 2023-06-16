@@ -103,7 +103,7 @@ public class ProfessorScreenController implements Initializable
     	UserController.hide(event);
     	try 
     	{
-			QuestionBankScreenController.start(u, u.getMap());
+			QuestionBankScreenController.start(u);
 		} catch (Exception e) {e.printStackTrace();}
     }
     
@@ -117,7 +117,7 @@ public class ProfessorScreenController implements Initializable
     	UserController.hide(event);
     	try 
     	{
-    		ExamCreationFirstController.start(u, u.getMap());
+    		ExamCreationFirstController.start(u);
 		} catch (Exception e) {e.printStackTrace();}
     }
     

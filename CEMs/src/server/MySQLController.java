@@ -127,6 +127,42 @@ public class MySQLController
 		return qArr;
 	}
 	
+	
+	
+	/**@author czmat
+	 * @param id
+	 * @return all questions in data base the professor from the 
+	 * appropriate department 
+	 */
+	public ArrayList<Question> loadHeadOfDepartmentQuestions(String id){
+		
+		
+		ArrayList<Question> qArr = new ArrayList<Question>();
+		qArr.add(new Question("professor questions"));
+	    try
+		{
+	    	//loading all the questions from the table
+	    	PreparedStatement ps = conn.prepareStatement("SELECT * FROM cems.question WHERE professor_id IN"
+	    			+ " (SELECT p.professor_id FROM professor_department as p\r\n"
+	    			+ "WHERE p.head_of_department_id=?);");
+		    ps.setString(1, id);
+		    ResultSet rs = ps.executeQuery();
+			while (rs.next()) 
+			{
+				String s = rs.getString("subject_id") + " - " + rs.getString("subject_name");
+				Question q = new Question(rs.getString("question_number"), rs.getString("id"),
+				s, rs.getString("question_text"), rs.getString("professor_full_name"),
+				rs.getString("professor_id"), rs.getString("correct_answer"), 
+				new String[]{rs.getString("answer1"), rs.getString("answer2"), rs.getString("answer3"), rs.getString("answer4")});
+				qArr.add(q);
+			}
+		} 
+		catch (SQLException e) {e.printStackTrace();}
+		return qArr;
+	}
+		
+	
+	
 	/**This method loads all the exams that the student can take.
 	 * @param id
 	 * @return an ArrayList of Exam objects
