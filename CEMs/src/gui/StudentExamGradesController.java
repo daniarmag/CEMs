@@ -84,12 +84,6 @@ public class StudentExamGradesController implements Initializable
 		ClientUI.chat.accept(request);
 	}
 
-	@FXML
-	void getCopy(ActionEvent event) 
-	{
-
-	}
-
 	/**
 	 * Exits from client GUI - disconnects from DB aswell.
 	 * @param event
@@ -124,7 +118,6 @@ public class StudentExamGradesController implements Initializable
 
 	/**
 	 * Setter.
-	 * 
 	 * @param sArr
 	 */
 	public void setArr(ArrayList<ExamResults> sArr) 

@@ -171,9 +171,6 @@ public class ProfessorExamReportController implements Initializable
 			e.printStackTrace();
 		}
     }
-	
-    
-    
     
 	private void loadingColumns( String examId, String name, String course) 
 	{

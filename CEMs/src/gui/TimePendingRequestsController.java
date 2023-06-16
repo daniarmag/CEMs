@@ -98,9 +98,10 @@ public class TimePendingRequestsController implements Initializable
     }
 
     /**
-     * Disapproves a request - updates DB with 1
+     * Disapproves a request - updates DB with -1
      * @param event
      */
+    @FXML
     void disApprove(ActionEvent event) 
     {
     	handleRequest("-1");
