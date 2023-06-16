@@ -39,7 +39,7 @@ public class ManualExamController implements Initializable
 	
 	static Integer minutesLeft, secondsLeft = 1, actualTime = 0;;
 	
-	boolean oneMinuteFlag = false;
+	boolean oneMinuteFlag = false, startedExamFlag = false;
 
     @FXML
     private Button DeleteBtn;
@@ -114,6 +114,7 @@ public class ManualExamController implements Initializable
 		ClientUI.chat.accept(request);
         SubmitBtn.setDisable(false);
         DownloadBtn.setDisable(true);
+        startedExamFlag = true;
 		startCountdown();
     }
 
@@ -179,9 +180,20 @@ public class ManualExamController implements Initializable
 				("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
 		if (res == JOptionPane.YES_OPTION)
 		{
+			if(startedExamFlag) 
+				constructRequestForUnfinished();
 			UserController.goBack(event, "/gui/StudentScreen.fxml");
-			ClientUI.chat.accept("unfinished manual exam");
 		}
+	}
+	
+	public void constructRequestForUnfinished()
+	{
+		ArrayList<String> finishedExam = new ArrayList<>();
+		finishedExam.add("unfinished manual exam");
+		finishedExam.add(e.getExam_id());
+		finishedExam.add(e.getTime().toString());
+		finishedExam.add(String.valueOf(actualTime));
+		ClientUI.chat.accept(finishedExam);
 	}
 	
 	/**
@@ -226,7 +238,7 @@ public class ManualExamController implements Initializable
 	                secondsLeft = 1;
 	            } else if (minutesLeft == 0 && secondsLeft == 1 && oneMinuteFlag) {
 	                disableFileUpload();
-	                ClientUI.chat.accept("unfinished manual exam");
+	                constructRequestForUnfinished();
 	                AlertMessages.makeAlert("Time is up!", "Exam");
 	            }
 
@@ -257,10 +269,7 @@ public class ManualExamController implements Initializable
 			Desktop desktop = Desktop.getDesktop();
 			desktop.open(newFile);
 		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+		catch (Exception e) {}
 	}
 	
 	/**

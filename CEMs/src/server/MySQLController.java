@@ -312,7 +312,6 @@ public class MySQLController
 	 * @return the median of all the grades - they came ordered from the database
 	 */
 	private double calMeddian(ArrayList<Number> array) {
-		System.out.println(array);
 		if (array.size() % 2 == 0) {
 			return ((array.get((int) ((array.size() / 2) - 1)).doubleValue()
 					+ array.get((int) (array.size() / 2)).doubleValue()) / 2);
@@ -991,7 +990,6 @@ public class MySQLController
 			}
 			examFile.initArray((int) blob.length());
 			examFile.setSize((int) blob.length());
-			System.out.println(examFile.getSize());
 			examFile.setMybytearray(blob.getBytes(1, examFile.getSize()));
 			rs.close();
 		    ps.close();
