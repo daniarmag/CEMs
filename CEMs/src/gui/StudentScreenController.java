@@ -21,8 +21,14 @@ public class StudentScreenController implements Initializable
 	public static User u;
 
 	ArrayList<String> courses = new ArrayList<>();
-
+    
 	@FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
+	
+    @FXML
 	private Button exitBtn;
 
 	@FXML
@@ -60,6 +66,8 @@ public class StudentScreenController implements Initializable
 	{
 		ClientMessageHandler.setStudentScreenController(this);
 		welcomeText.setText("Welcome back " + u.getFirst_name());
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		ArrayList<String> request = new ArrayList<String>();
 		request.add("load student courses");
 		request.add(u.getUser_id());

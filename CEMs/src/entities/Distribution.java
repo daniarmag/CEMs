@@ -4,11 +4,17 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a distribution of values within specified ranges.
+ */
 @SuppressWarnings("serial")
 public class Distribution implements Serializable{
 	private Map<String,Integer> location=new HashMap<>();
 	private Range[] dArr=new Range[6]; 
 	
+	 /**
+     * Constructs a new Distribution object.
+     */
 	public Distribution() {
 		
 		location.put("0-54",0);
@@ -21,6 +27,9 @@ public class Distribution implements Serializable{
 		
 	}
 	
+	/**
+	 * Initializes range
+	 */
 	private void initArr() {
 		dArr[0]=new Range("0-54",0);
 		dArr[1]=new Range("55-65",0);

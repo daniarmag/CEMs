@@ -41,6 +41,12 @@ public class ManualExamController implements Initializable
 	
 	boolean oneMinuteFlag = false, startedExamFlag = false;
 
+	@FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
+    
     @FXML
     private Button DeleteBtn;
 
@@ -91,6 +97,8 @@ public class ManualExamController implements Initializable
 		welcomeText.setText(e.getExam_name());
 		SubmitBtn.setDisable(true);
 		TimerTXT.setText(minutesLeft.toString() + " minutes");
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 	}
     
     /** 

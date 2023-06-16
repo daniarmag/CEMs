@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 /*A GUI for choosing an exam to take.*/
 public class StudentExamScreenController implements Initializable 
@@ -34,6 +35,12 @@ public class StudentExamScreenController implements Initializable
 
 	public static User u;
 
+	@FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
+    
 	@FXML
 	private TableColumn<?, ?> activeTable;
 
@@ -83,6 +90,8 @@ public class StudentExamScreenController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		ClientMessageHandler.setStudentExamController(this);
 		ClientUI.chat.accept("load student exams");
 	}
