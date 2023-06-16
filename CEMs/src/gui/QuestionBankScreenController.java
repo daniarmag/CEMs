@@ -25,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
 /*A GUI for the question bank*/
@@ -49,6 +51,11 @@ public class QuestionBankScreenController implements Initializable
 		path.put(HeadOfDepartment.class, "/gui/HeadOfDepartmentScreen.fxml");
 		path.put(Professor.class, "/gui/ProfessorScreen.fxml");
 	}
+	@FXML
+	private ImageView manageQuestionLabel;
+	
+    @FXML
+    private ImageView faceImage;
 	
 	@FXML
 	private Button exitBtn;
@@ -129,6 +136,8 @@ public class QuestionBankScreenController implements Initializable
 		addQstnBtn.setVisible(false);
 		deleteBtn.setVisible(false);
 		editBtn.setVisible(false);
+		faceImage.setImage(new Image("\\images\\manager.png"));
+		manageQuestionLabel.setImage(new Image("\\images\\AccessAllQuestionsLabel.png"));
 	}
 
 	/**

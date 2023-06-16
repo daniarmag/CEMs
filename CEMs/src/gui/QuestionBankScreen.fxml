@@ -28,7 +28,7 @@
                   <Insets right="140.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <ImageView fitHeight="180.0" fitWidth="180.0">
+            <ImageView fx:id="faceImage" fitHeight="180.0" fitWidth="180.0">
                <image>
                   <Image url="@../images/ProfessorLogo.png" />
                </image>
@@ -83,7 +83,7 @@
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="205.0" layoutY="6.0">
+      <ImageView fx:id="manageQuestionLabel" fitHeight="60.0" fitWidth="330.0" layoutX="205.0" layoutY="6.0">
          <image>
             <Image url="@../images/ManageQuestionsLabel.png" />
          </image>

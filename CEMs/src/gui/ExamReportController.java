@@ -108,6 +108,7 @@ public class ExamReportController implements Initializable
 		if (u.getRole().equals("head"))
 		{
 			faceImage.setImage(new Image("\\images\\manager.png"));
+			labelImage.setImage(new Image("\\images\\AccessAllExamsLabel.png"));
 			welcomeText.setText("Department Exams");
 			examCourseCol.setText("Professor Name");
 		}
