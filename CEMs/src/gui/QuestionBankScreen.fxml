@@ -66,12 +66,12 @@
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="updateBtn" layoutX="449.0" layoutY="549.0" mnemonicParsing="false" onAction="#editQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Edit question" textFill="WHITE">
+      <Button fx:id="editBtn" layoutX="449.0" layoutY="549.0" mnemonicParsing="false" onAction="#editQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Edit question" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="updateBtn1" layoutX="681.0" layoutY="549.0" mnemonicParsing="false" onAction="#deleteQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete question" textFill="WHITE">
+      <Button fx:id="deleteBtn" layoutX="681.0" layoutY="549.0" mnemonicParsing="false" onAction="#deleteQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete question" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
@@ -82,7 +82,7 @@
          </image>
       </ImageView>
       <TextField fx:id="searchBar" layoutX="220.0" layoutY="158.0" promptText="Search by subject..." style="-fx-background-radius: 15px;" />
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="942.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="937.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/exitBtn.png" />
          </image>

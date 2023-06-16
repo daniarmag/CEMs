@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
  */
 public class HeadOfDepScreenController implements Initializable
 {
+	private String path="/gui/HeadOfDepartmentScreen.fxml";
 	private static StatisticsChooseScreenController 
 	
 	statisticsScreen = new StatisticsChooseScreenController();
@@ -55,7 +56,7 @@ public class HeadOfDepScreenController implements Initializable
 	public void start(User user) 
 	{
 		u = (HeadOfDepartment) user;
-		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/HeadOfDepartmentScreen.fxml").show());
+		Platform.runLater(()-> ScreenUtils.createNewStage(path).show());
 	}
     
 	/**
@@ -99,6 +100,19 @@ public class HeadOfDepScreenController implements Initializable
     	{
 			ProfessorExamReportController.start(u);
 		} catch (Exception e) {}
+    }
+    
+    
+    @FXML
+    void accessAllQuestions(ActionEvent event) {
+        {
+        	UserController.hide(event);
+        	try 
+        	{
+    			QuestionBankScreenController.start(u);
+    		} catch (Exception e) {}
+        }
+        
     }
     
     /** navigate to a screen where the user can chose which statistics he wants

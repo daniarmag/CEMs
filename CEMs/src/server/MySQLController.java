@@ -142,9 +142,9 @@ public class MySQLController
 	    try
 		{
 	    	//loading all the questions from the table
-	    	PreparedStatement ps = conn.prepareStatement("SELECT * FROM cems.question WHERE professor_id IN"
+	    	PreparedStatement ps = conn.prepareStatement("SELECT q.*,s.subject_name FROM  question as q, subject as s WHERE professor_id IN"
 	    			+ " (SELECT p.professor_id FROM professor_department as p\r\n"
-	    			+ "WHERE p.head_of_department_id=?);");
+	    			+ "WHERE p.head_of_department_id=?) AND q.subject_id=s.subject_id;");
 		    ps.setString(1, id);
 		    ResultSet rs = ps.executeQuery();
 			while (rs.next()) 

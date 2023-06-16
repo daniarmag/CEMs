@@ -27,23 +27,23 @@ public class ProfessorScreenController implements Initializable
     @FXML
     private Button checkResBtn;
 
-    @FXML
-    private Button createExamBtn;
+	@FXML
+	private Button createExamBtn;
 
-    @FXML
-    private Button manageQstBtn;
+	@FXML
+	private Button manageQstBtn;
 
-    @FXML
-    private Button exitBtn;
+	@FXML
+	private Button exitBtn;
 
-    @FXML
-    private Button logoutBtn;
+	@FXML
+	private Button logoutBtn;
 
-    @FXML
-    private Button viewReportBtn;
+	@FXML
+	private Button viewReportBtn;
 
-    @FXML
-    private Text welcomeText;
+	@FXML
+	private Text welcomeText;
 	
 	/**
 	 * Initializes the JavaFX controller during application startup.
@@ -131,7 +131,7 @@ public class ProfessorScreenController implements Initializable
     	UserController.hide(event);
     	try 
     	{
-    		ExamBankScreenController.start(u, u.getMap());
+    		ExamBankScreenController.start(u);
 		} catch (Exception e) {e.printStackTrace();}
     }
     

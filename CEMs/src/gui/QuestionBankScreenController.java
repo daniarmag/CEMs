@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import client.ClientMessageHandler;
@@ -36,14 +37,25 @@ public class QuestionBankScreenController implements Initializable
 	public static User u;
 	
 	public static boolean isValidRemoval = true;
+	private static Map<Class<?>,String> map =new HashMap<>();
+	private static Map<Class<?>,String> path =new HashMap<>();
+	static {
+		map.put(Professor.class,"load professor questions");
+		map.put(HeadOfDepartment.class, "load all department questions");
+		path.put(HeadOfDepartment.class, "/gui/HeadOfDepartmentScreen.fxml");
+		path.put(Professor.class, "/gui/ProfessorScreen.fxml");
+	}
 	
 	@FXML
 	private Button exitBtn;
 
-	@FXML
-	private Button updateBtn;
-	
-	@FXML
+    @FXML
+    private Button deleteBtn;
+
+    @FXML
+    private Button editBtn;
+
+    @FXML
     private Button addQstnBtn;
 	
 	@FXML
@@ -94,13 +106,12 @@ public class QuestionBankScreenController implements Initializable
 	{
 		ClientMessageHandler.setQuestionBankController(this);
 		ArrayList<String> request = new ArrayList<String>();
-		if(u instanceof Professor)
-		//A call to load all professor questions.
-			request.add("load professor questions");
-		if(u instanceof HeadOfDepartment) {
-			request.add("load all department questions");
+
+		System.out.println(map.get(u.getClass()));
+		request.add(map.get(u.getClass()));
+		if(u instanceof HeadOfDepartment)
 			initToHead();
-		}
+		
 		request.add(u.getUser_id());
 		ClientUI.chat.accept(request);
 		searchBar.setOnKeyReleased(event -> search(event));
@@ -108,7 +119,9 @@ public class QuestionBankScreenController implements Initializable
 
 	private void initToHead() {
 		
-		
+		addQstnBtn.setVisible(false);
+		deleteBtn.setVisible(false);
+		editBtn.setVisible(false);
 	}
 
 	/**
@@ -128,7 +141,7 @@ public class QuestionBankScreenController implements Initializable
 	@FXML
 	void goBack(ActionEvent event) 
 	{	
-		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
+		UserController.goBack(event,path.get(u.getClass()));
 	}
 	
     /**

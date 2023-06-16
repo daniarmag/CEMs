@@ -174,7 +174,8 @@ public class StatisticsChooseScreenController implements Initializable {
 			String name=item.getFirst_name();
 			String lastName =item.getLast_name();
 			String Id =item.getUser_id();
-			if (Id.equals(searchField)||name.equals(searchField) || lastName.equals(searchField) || searchField.equals(name +" " +lastName)) 
+			if (Id.equals(searchField)||name.equals(searchField) || 
+					lastName.equals(searchField) || searchField.equals(name +" " +lastName)) 
 			{
 				((TableView<User>) tableInfo).getSelectionModel().select(item);
 				((TableView<User>) tableInfo).scrollTo(item);
