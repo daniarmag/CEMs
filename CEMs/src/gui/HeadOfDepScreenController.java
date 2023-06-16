@@ -86,7 +86,7 @@ public class HeadOfDepScreenController implements Initializable
      */
     @FXML
     void logout(ActionEvent event)
-{
+    {
     	UserController.close(event);
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);

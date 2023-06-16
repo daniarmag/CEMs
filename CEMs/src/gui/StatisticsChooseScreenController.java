@@ -232,9 +232,6 @@ public class StatisticsChooseScreenController implements Initializable {
 			request.add(((Course)item).get_id());
 		}
 		ClientUI.chat.accept(request);
-		
-		
-		
 	}
 	
 	

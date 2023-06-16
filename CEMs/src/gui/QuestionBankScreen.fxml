@@ -51,7 +51,14 @@
             <Image url="@../images/Logo.png" />
          </image>
       </ImageView>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="746.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER" />
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="900.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitBtn.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <TableView fx:id="questionTable" layoutX="220.0" layoutY="199.0" prefHeight="310.0" prefWidth="745.0">
         <columns>
           <TableColumn fx:id="qnumTable" prefWidth="141.0" text="Question Number" />
@@ -82,10 +89,5 @@
          </image>
       </ImageView>
       <TextField fx:id="searchBar" layoutX="220.0" layoutY="158.0" promptText="Search by subject..." style="-fx-background-radius: 15px;" />
-      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="937.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/exitBtn.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
