@@ -329,7 +329,7 @@ public class ServerMessageHandler
 					break;
 					
 				case "send all exams to professor":
-					client.sendToClient(sqlController.loadProfessorExams_toReport(arrayList.get(1)));
+					client.sendToClient(sqlController.loadProfessorExams_toReport(arrayList.get(1), arrayList.remove(2)));
 					break;
 					
 				case "generate full exam report":
@@ -338,7 +338,6 @@ public class ServerMessageHandler
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
-					//System.out.println(sqlController.professorExamStat(arrayList.get(1)));
 					break;
 					
 				case "request to add time":

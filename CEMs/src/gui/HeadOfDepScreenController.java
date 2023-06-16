@@ -91,6 +91,15 @@ public class HeadOfDepScreenController implements Initializable
 		UserController.logoutUser(u);
 	}
 
+    @FXML
+    void accessAllExams(ActionEvent event)
+    {
+    	UserController.hide(event);
+    	try 
+    	{
+			ProfessorExamReportController.start(u);
+		} catch (Exception e) {}
+    }
     
     /** navigate to a screen where the user can chose which statistics he wants
      * @param event
@@ -101,7 +110,6 @@ public class HeadOfDepScreenController implements Initializable
     	UserController.hide(event);
     	statisticsScreen.start(u);
     }
-    
     
     /**
      * Starts time pending requests screen

@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
@@ -96,12 +97,18 @@ public class ProfessorExamReportController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		ClientMessageHandler.setProfessorExamReportController(this);
+		searchBar.setOnKeyReleased(event -> search(event));
 		ArrayList<String> arr = new ArrayList<>(); 
 		String request = "send all exams to professor";
 		arr.add(request);
 		arr.add(u.getUser_id());
-		searchBar.setOnKeyReleased(event -> search(event));
+		arr.add(u.getRole());
 		ClientUI.chat.accept(arr);
+		if (u.getRole().equals("head"))
+		{
+			faceImage.setImage(new Image("\\images\\manager.png"));
+			welcomeText.setText("Department Exams");
+		}
 	}
 	
 	/**
@@ -131,19 +138,29 @@ public class ProfessorExamReportController implements Initializable
 	@FXML
 	public void GenerateReport(ActionEvent event) 
 	{
-		currentEvent=event;
-		Object item = examTable.getSelectionModel().getSelectedItem();
-		if(item == null)
-		{
-			AlertMessages.makeAlert("You must chose before continue", "Report Allert");
-			return;
-		}
-		itemChosen=item;
-		ArrayList<String> request = new ArrayList<>();	
-		request.add("generate full exam report");
-		request.add(((ExamTemplate)item).get_id());
-		ClientUI.chat.accept(request);
+	    currentEvent = event;
+	    Object selectedExam = examTable.getSelectionModel().getSelectedItem();
+	    if (selectedExam instanceof ExamTemplate)
+	    {
+	    	itemChosen = selectedExam;
+	        ExamTemplate exam = (ExamTemplate) selectedExam;
+	        if (u.getRole().equals("head"))
+	        {
+	            if (!exam.getIsActive().equals("-1"))
+	            {
+	                AlertMessages.makeAlert("This exam has not been activated yet", "View Report");
+	                return;
+	            }
+	        }
+	        ArrayList<String> request = new ArrayList<>();    
+	        request.add("generate full exam report");
+	        request.add(exam.get_id());
+	        ClientUI.chat.accept(request);
+	    }
+	    else
+	        AlertMessages.makeAlert("You must choose an exam to view report", "View Report");        
 	}
+
     
     /**loading the table with the data of all the exams 
      * @param array

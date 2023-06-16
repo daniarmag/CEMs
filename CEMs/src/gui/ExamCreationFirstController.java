@@ -202,7 +202,6 @@ public class ExamCreationFirstController implements Initializable
 	private HashMap<Boolean, String> createErrorMap() 
 	{
 	    HashMap<Boolean, String> errorMap = new HashMap<>();
-	    
 	    errorMap.put(questionTable.getSelectionModel().getSelectedItems().isEmpty(), "Question(s) is required");
 	    errorMap.put(courseMenu.getText().isEmpty(), "Course is required");
 	    errorMap.put(subjectMenu.getText().isEmpty(), "Subject is required.");

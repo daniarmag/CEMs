@@ -39,17 +39,17 @@
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="283.0" mnemonicParsing="false" onAction="#grantApproval" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Grant Approval " textFill="WHITE">
+      <Button fx:id="manageQstBtn" alignment="CENTER" layoutX="349.0" layoutY="347.0" mnemonicParsing="false" onAction="#grantApproval" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Grant Approval " textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="197.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Access All Data" textFill="WHITE">
+      <Button fx:id="createExamBtn" alignment="CENTER" layoutX="349.0" layoutY="189.0" mnemonicParsing="false" onAction="#accessAllExams" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Access All Exams" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="368.0" mnemonicParsing="false" onAction="#openStatistics" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Statistics " textFill="WHITE">
+      <Button fx:id="checkResBtn" alignment="CENTER" layoutX="349.0" layoutY="429.0" mnemonicParsing="false" onAction="#openStatistics" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Statistics " textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="20.0" />
          </font>
@@ -77,5 +77,10 @@
             <Font name="Times New Roman Bold" size="24.0" />
          </font>
       </Text>
+      <Button fx:id="createExamBtn1" alignment="CENTER" layoutX="349.0" layoutY="267.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="283.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Access All Questions" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

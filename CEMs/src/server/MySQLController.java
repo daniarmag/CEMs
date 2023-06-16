@@ -1,12 +1,7 @@
 package server;
 
-import java.awt.Desktop;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -101,96 +96,6 @@ public class MySQLController
         
    	}
 	
-	
-	/**
-	 * @param file
-	 * method in construction DO NOT touch ;)
-	 */
-	private void SendingFileToDataBase(File file) {
-		String sql = "INSERT INTO your_table (file_data) VALUES (?)";
-		byte[] fileBytes;
-		try (PreparedStatement statement = conn.prepareStatement(sql);) {
-
-			try {
-				fileBytes = Files.readAllBytes(file.toPath());
-				statement.setBytes(1, fileBytes);
-				statement.executeUpdate();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			System.out.println("File sent to database successfully.");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-	//this method should sent the path of the exam to the client
-		// notice that this is only a prototype for the function but those are the
-		//function needed /
-		@SuppressWarnings("unused")
-		private void openBLOB() throws SQLException {
-			Statement st=conn.createStatement();
-			ResultSet r=st.executeQuery("SELECT q.physical_exam FROM physical_exam as q WHERE idphysical_exam=\"cdc\"");
-			//ResultSet r=st.executeQuery("SELECT q.exam_path FROM  physical_exam as q");
-			try {
-			while(r.next()) {
-				String path=r.getString(1);
-				File file=new File(path);
-				  try {
-				    	Desktop desktop= Desktop.getDesktop();	
-				    	desktop.open(file);
-				    	
-				    }catch(Exception e) {
-				    	e.printStackTrace();
-				    }
-			}}catch(SQLException e) {e.printStackTrace();}
-		}
-	
-	//this method  a Blob
-	// notice that this is only a prototype for the function but those are the
-	//function needed /
-	@SuppressWarnings("unused")
-	private void openBLOB2() throws SQLException {
-		Statement st=conn.createStatement();
-		ResultSet r=st.executeQuery("SELECT q.physical_exam FROM  physical_exam as q");
-		try {
-			Blob blob=null;
-		while(r.next()) {
-			 	blob = r.getBlob(1);
-		}
-			byte[] bufferout = null;
-
-			bufferout = blob.getBytes(1, (int)blob.length());
-			File output = null;
-			String outputFileName = "C:\\Test\\output.txt";
-			try {
-				output = new File(outputFileName);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			FileOutputStream fos = null;
-			try {
-				fos = new FileOutputStream(output);
-				fos.write(bufferout);
-				fos.close();
-				fos.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-            
-			  try {
-			    	Desktop desktop= Desktop.getDesktop();	
-			    	desktop.open(output);
-			    }catch(Exception e) {
-			    	e.printStackTrace();
-			    }
-		}catch(SQLException e) {e.printStackTrace();}
-	}
-	
 	/**
 	 * This method, loadQuestions, retrieves a list of questions from a database table
 	 * @return an ArrayList of Question objects
@@ -249,68 +154,73 @@ public class MySQLController
 		return eArr;
 	}
 	
-	
-	
-	
-	
 	/**
 	 * @param exam
 	 * @return the exams of the prefessor which student already took and have grades.
 	 */
-	public ArrayList<?> loadProfessorExams_toReport(String id){
+	public ArrayList<?> loadProfessorExams_toReport(String id, String role)
+	{
 		ResultSet rs;
+		PreparedStatement ps;
 		ArrayList<ExamTemplate> arr=new ArrayList<>();
 		try {
-			PreparedStatement ps = conn.prepareStatement("SELECT distinct e.exam_name,e.exam_id,e.course_id FROM exam as e , student_exam as se \r\n"
-					+ "WHERE e.professor_id=? AND se.exam_id=e.exam_id;");
-			ps.setString(1, id);
-			rs=ps.executeQuery();
-			while(rs.next()) {
-				arr.add(new ExamTemplate(rs.getString(1),rs.getString(2),rs.getString(3)));
+			if (role.equals("professor"))
+			{
+				ps = conn.prepareStatement("SELECT distinct e.exam_name,e.exam_id,e.course_id " +
+										   "FROM exam as e , student_exam as se \r\n" +
+					     				   "WHERE e.professor_id = ? AND se.exam_id=e.exam_id;");
 			}
-			if(arr.isEmpty()) {
+			//In case it is a head of department - get all exams.
+			else
+			{
+				ps = conn.prepareStatement("SELECT DISTINCT e.exam_name, e.exam_id, e.professor_full_name, e.isActive " +
+										   "FROM exam AS e " +
+										   "WHERE e.professor_id IN (SELECT p.professor_id " +
+										   "FROM professor_department AS p " +
+										   "WHERE p.head_of_department_id = ?)");
+			}
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()) 
+			{
+				ExamTemplate e = new ExamTemplate(rs.getString(1),rs.getString(2),rs.getString(3));
+				//So the head can't access exams that were not activated.
+				if (role.equals("head"))
+					e.setIsActive(rs.getString(4));
+				arr.add(e);
+			}
+				
+			if(arr.isEmpty()) 
+			{
 				arr.add(new ExamTemplate("empty", "", ""));
 				return arr;
-			}
-					
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
+			}	
+		}catch(SQLException e) {e.printStackTrace();}
 		return arr;
 	}
-	
-
-	
-	
 	
 	/**
 	 * @param exam
 	 * @return statistics on exam of professor average max min histogram fails ... 
 	 */
-	public ExamProfessorReport  professorExamStat(String exam) {
+	public ExamProfessorReport  professorExamStat(String exam) 
+	{
 		ResultSet rs;
 		ExamProfessorReport examRep;
-		try {
-			
+		try 
+		{
 			Statement st = conn.createStatement();
-			rs=st.executeQuery("SELECT round(AVG(grade),2) as average ,max(grade) as max ,min(grade) AS min,\r\n"
-					+ "round((SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\" AND grade<55)/\r\n"
-					+ "(SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\")*100,2) as fails\r\n"
-					+ "				FROM student_exam WHERE exam_id=\""+exam+"\";");
-			
-		
+			rs=st.executeQuery("SELECT round(AVG(grade),2) as average ,max(grade) as max ,min(grade) AS min,\r\n" +
+							   "round((SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\" AND grade<55)/\r\n" +
+							   "(SELECT count(*) FROM student_exam WHERE exam_id=\""+exam+"\")*100,2) as fails\r\n" +
+					           "FROM student_exam WHERE exam_id=\""+exam+"\";");
 			rs.next();
 			examRep=new ExamProfessorReport(exam,"", rs.getDouble(1), rs.getInt(2), rs.getInt(3), rs.getDouble(4));
 			examRep.setMedian(medianExam(exam));
 			examRep.setDistribution(ExamHistogramResult(exam));
 			examRep.setStat(examStatistics(exam));
-			
-			
-			//System.out.println(examRep);
 			return examRep;
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
+		}catch(SQLException e) {e.printStackTrace();}
 		return null ;
 	}
 	
@@ -477,6 +387,7 @@ public class MySQLController
 	 * @param loginInfo
 	 * @return user object or null.
 	 */
+	@SuppressWarnings("rawtypes")
 	public  User verifyLogin(ArrayList<String> loginInfo)
 	{
 		String username = loginInfo.get(1);
@@ -1365,4 +1276,5 @@ public class MySQLController
 		return studentExamArr;
 	}
 
+	
 }
