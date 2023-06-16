@@ -41,15 +41,6 @@
                </VBox.margin>
             </Text>
             <Text fx:id="idTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="315731456" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Average:">
-               <font>
-                  <Font name="Tahoma Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <Text fx:id="avgTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="94.8" />
          </children>
          <opaqueInsets>
             <Insets />

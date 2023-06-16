@@ -59,14 +59,14 @@
                <children>
                   <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0">
+                        <ImageView fitHeight="32.0" fitWidth="32.0">
                            <image>
                               <Image url="@../images/Back%20Logo.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <VBox.margin>
-                        <Insets right="140.0" />
+                        <Insets right="140.0" top="8.0" />
                      </VBox.margin>
                   </Button>
                   <ImageView fitHeight="175.0" fitWidth="175.0">

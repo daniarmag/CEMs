@@ -1,7 +1,6 @@
 package client;
 
 import java.util.ArrayList;
-
 import java.util.Map;
 import control.AlertMessages;
 import entities.Course;
@@ -258,9 +257,6 @@ public class ClientMessageHandler
 			
 			case EXAM_TIME_CHANGE_ARRAY_LIST:
 				examTimeChangeArrayListHandler((ArrayList<ExamTimeChange>)msg);
-				
-			case STUDENT_EXAM:
-				studentExamArrayListMessageHandler((ArrayList<StudentExam>)msg) ;
 				break;
 		}
 	}
@@ -302,8 +298,6 @@ public class ClientMessageHandler
 					return MessageType.EXAM_TEMPLATE;
 				else if (firstElement instanceof ExamTimeChange)
 					return MessageType.EXAM_TIME_CHANGE_ARRAY_LIST;
-				else if (firstElement instanceof StudentExam)
-					return MessageType.STUDENT_EXAM;
 			}
 		} 
 		else if (msg instanceof Map)
@@ -561,19 +555,20 @@ public class ClientMessageHandler
 	 */
 	private static void examResultsArrayListMessageHandler(ArrayList<ExamResults> arrayList) 
 	{
-		examResultsScreenController.setArr(arrayList);
-		examResultsScreenController.updateExamTable(arrayList);
-		examResultsScreenController.checkForSuspects();
-	}
-	
-	/**
-	 * Handles client messages of type StudentExam
-	 * @param arrayList
-	 */
-	private static void studentExamArrayListMessageHandler(ArrayList<StudentExam> arrayList) 
-	{
-		studentExamGradesController.setArr(arrayList);
-		studentExamGradesController.updateExamTable();
+		String messageType = arrayList.remove(0).getComment();
+		switch (messageType) 
+		{
+			case "student grades":
+				studentExamGradesController.setArr(arrayList);
+				studentExamGradesController.updateExamTable();
+				break;
+			
+			case "pending exams":
+				examResultsScreenController.setArr(arrayList);
+				examResultsScreenController.updateExamTable(arrayList);
+				examResultsScreenController.checkForSuspects();
+				break;
+		}
 	}
 	
 	/**

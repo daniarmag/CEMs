@@ -17,6 +17,15 @@ public class ExamResults implements Serializable
 	public String wrong_answers = "";
 
 	/**
+	 * fake object
+	 * @param comment
+	 */
+	public ExamResults(String comment)
+	{
+		this.comment = comment;
+	}
+	
+	/**
 	 * @param exam_id
 	 * @param student_id
 	 * @param grade

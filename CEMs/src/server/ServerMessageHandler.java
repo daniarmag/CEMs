@@ -10,7 +10,6 @@ import java.util.Map;
 import entities.Exam;
 import entities.ExamResults;
 import entities.Question;
-import entities.StudentExam;
 import entities.User;
 import enums.MessageType;
 import ocsf.server.ConnectionToClient;

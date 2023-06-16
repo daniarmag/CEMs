@@ -23,14 +23,14 @@
          <children>
             <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0">
+                  <ImageView fitHeight="32.0" fitWidth="32.0">
                      <image>
                         <Image url="@../images/Back%20Logo.png" />
                      </image>
                   </ImageView>
                </graphic>
                <VBox.margin>
-                  <Insets right="150.0" />
+                  <Insets right="150.0" top="8.0" />
                </VBox.margin>
             </Button>
             <ImageView fx:id="faceImage" fitHeight="141.0" fitWidth="133.0">
@@ -64,17 +64,12 @@
                   <Font name="Tahoma" size="18.0" />
                </font>
             </Text>
-            <ImageView fitHeight="100.0" fitWidth="80.0">
-               <image>
-                  <Image url="@../images/Logo.png" />
-               </image>
-            </ImageView>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="914.0" layoutY="23.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="931.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>

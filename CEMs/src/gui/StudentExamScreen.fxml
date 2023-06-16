@@ -82,14 +82,14 @@
       </Text>
       <Button fx:id="goBackBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
          <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0">
+            <ImageView fitHeight="32.0" fitWidth="32.0">
                <image>
                   <Image url="@../images/Back%20Logo.png" />
                </image>
             </ImageView>
          </graphic>
          <padding>
-            <Insets right="130.0" />
+            <Insets left="5.0" right="130.0" top="5.0" />
          </padding>
       </Button>
    </children>

@@ -69,9 +69,9 @@
                   <TableColumn fx:id="reasonCol" prefWidth="141.0" text="Reason" />
                </columns>
             </TableView>
-            <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="204.0" layoutY="13.0">
+            <ImageView fitHeight="60.0" fitWidth="330.0" layoutX="218.0" layoutY="14.0">
                <image>
-                  <Image url="@../images/CheckResultsLabel.png" />
+                  <Image url="@../images/GrantApprovalLabel.png" />
                </image>
             </ImageView>
             <Button layoutX="316.0" layoutY="521.0" mnemonicParsing="false" onAction="#approve" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Approve" textFill="WHITE">

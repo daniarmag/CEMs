@@ -97,6 +97,10 @@ public class TimePendingRequestsController implements Initializable
     	handleRequest("1");
     }
 
+    /**
+     * Disapproves a request - updates DB with 1
+     * @param event
+     */
     void disApprove(ActionEvent event) 
     {
     	handleRequest("-1");

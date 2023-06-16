@@ -23,6 +23,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Class that represents an exam bank and the operations that a professor can do on them.
+ */
 public class ExamBankScreenController implements Initializable
 {
 	public ArrayList<Exam> eArr = new ArrayList<>();

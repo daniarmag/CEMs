@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class HostSelectionScreenController implements Initializable 
 {
 	public static int DEFAULT_PORT = 5555;
+	
 	@FXML
 	private Button connectToServerBtn;
 

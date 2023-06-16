@@ -19,8 +19,6 @@ import javafx.scene.text.Text;
 /*A GUI for the professor main menu.*/
 public class ProfessorScreenController implements Initializable 
 {
-	
-	
 	public static Professor<?, ?> u;
 	
 	@FXML
@@ -152,6 +150,20 @@ public class ProfessorScreenController implements Initializable
     }
     
 	/**
+	 * Starts professor view report screen.
+	 * @param event
+	 */
+	@FXML
+	public void viewReport(ActionEvent event) 
+	{
+		UserController.hide(event);
+		try 
+		{
+			ProfessorExamReportController.start(u);	
+		}catch(Exception e) {e.printStackTrace();}
+	}
+    
+	/**
 	 * Setter.
 	 * @param map
 	 */
@@ -159,20 +171,4 @@ public class ProfessorScreenController implements Initializable
 	{
 		u.setMap(map);
 	}
-	
-	
-	
-	@FXML
-	public void viewReport(ActionEvent event) {
-		UserController.hide(event);
-		try {
-		 ProfessorExamReportController.start(u);	
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-
-	
-	
 }

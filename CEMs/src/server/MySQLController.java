@@ -1152,6 +1152,7 @@ public class MySQLController
 	public ArrayList<ExamResults> getProfessorPendingExams(String string)
 	{
 		ArrayList<ExamResults> examResultsArr = new ArrayList<>();
+		examResultsArr.add(new ExamResults("pending exams"));
 		try 
 		{
 			PreparedStatement ps = conn.prepareStatement("SELECT e.exam_name, se.exam_id, se.student_id, se.grade, se.wrong_answer " +
@@ -1341,24 +1342,22 @@ public class MySQLController
 	 * @param StudentID
 	 * @return
 	 */
-	public ArrayList<StudentExam> setStudentExamGrade(String StudentID) 
+	public ArrayList<ExamResults> setStudentExamGrade(String StudentID) 
 	{
-		ArrayList<StudentExam> studentExamArr = new ArrayList<>();
+		ArrayList<ExamResults> studentExamArr = new ArrayList<>();
+		studentExamArr.add(new ExamResults("student grades"));
 		try
 	    {
-			PreparedStatement ps = conn.prepareStatement("SELECT exam.exam_name, student_exam.grade, student_exam.comment "
-					+ "FROM student_exam "
-					+ "JOIN exam ON student_exam.exam_id = exam.exam_id "
-					+ "WHERE student_exam.isConfirmed = 1 AND student_id = ?");
+			PreparedStatement ps = conn.prepareStatement("SELECT exam.exam_name, exam. exam_id, student_exam.grade, student_exam.comment " +
+													     "FROM student_exam " +
+													     "JOIN exam ON student_exam.exam_id = exam.exam_id " +
+													     "WHERE student_exam.isConfirmed = 1 AND student_id = ?");
 			ps.setString(1, StudentID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 			{
-				StudentExam e = new StudentExam(null, rs.getString(1), rs.getInt(2), rs.getString(3));
-				System.out.println(rs.getString(1));
-				System.out.println(rs.getInt(2));
-				System.out.println(rs.getString(3));
-				System.out.println(studentExamArr);
+				ExamResults e = new ExamResults(rs.getString(1), rs.getString(2), StudentID, rs.getInt(3));
+				e.setComment(rs.getString((4)));
 				studentExamArr.add(e);
 			}	   
 		} 

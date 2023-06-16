@@ -16,11 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+/**
+ * Class that represents the main screen of the head of department.
+ */
 public class HeadOfDepScreenController implements Initializable
 {
 	private static StatisticsChooseScreenController 
 	
-	statisticsScreen=new StatisticsChooseScreenController();
+	statisticsScreen = new StatisticsChooseScreenController();
 	
 	static HeadOfDepartment u ;
     @FXML

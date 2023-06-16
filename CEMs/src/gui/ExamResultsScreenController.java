@@ -29,6 +29,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.util.converter.IntegerStringConverter;
 
+/**
+ * Class that lets the professor confirm automatically checked exams.
+ */
 public class ExamResultsScreenController implements Initializable
 {
 	public static User u;

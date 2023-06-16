@@ -26,6 +26,9 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * Class that represents the manual exam.
+ */
 public class ManualExamController implements Initializable
 {
 	public static User u;
@@ -61,7 +64,6 @@ public class ManualExamController implements Initializable
     
     /**
      * Starts the manual exam for the given user and exam.
-     *
      * @param user The User object
      * @param exam The Exam object
      * @throws Exception If an error occurs.
@@ -154,7 +156,6 @@ public class ManualExamController implements Initializable
     /**
      * Event handler for the UploadBtn button.
      * Opens a file chooser dialog to select a Word file (.docx) and displays the selected file path in a text field.
-     *
      * @param event The action event triggered by clicking the UploadBtn button.
      */
     @FXML

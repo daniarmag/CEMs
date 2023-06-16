@@ -3,17 +3,12 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
-import entities.Course;
-import entities.Exam;
 import entities.ExamTemplate;
-import entities.HaveID;
 import entities.User;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,10 +23,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
-public class ProfessorExamReportController implements Initializable{
+/**
+ * Class that lets the professor view his exam statistics.
+ */
+public class ProfessorExamReportController implements Initializable
+{
 	private static  ReportScreenController reportScreen=new ReportScreenController();
+	
+    private static User u;
     
-    private static User user;
     private static ArrayList<?> arr;
     @FXML
     private TableColumn<ExamTemplate, String> examIdCol;
@@ -44,7 +44,6 @@ public class ProfessorExamReportController implements Initializable{
     
     @FXML
     private TableView<ExamTemplate> examTable;
-
 
     @FXML
     private Button exitBtn;
@@ -77,24 +76,80 @@ public class ProfessorExamReportController implements Initializable{
     
     private static ActionEvent currentEvent;
 
-    public static void start(User u) {
-    	try {
-    	user=u;
-			Platform.runLater(
-					() -> ScreenUtils.createNewStage("/gui/ProfessorExamReportScreen.fxml").show());
-    	
-    	}catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    }
+    /**
+	 * Initializes the JavaFX controller during application startup.
+	 * @param user
+	 * @throws Exception
+	 */
+	public static void start(User user) throws Exception 
+	{
+		u = user;
+		ScreenUtils.createNewStage("/gui/ProfessorExamReportScreen.fxml").show();
+	}
     
-    
-    
+	/**
+	 * Initializes the GUI with the given logic.
+	 * @param location
+	 * @param resources
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) 
+	{
+		ClientMessageHandler.setProfessorExamReportController(this);
+		ArrayList<String> arr = new ArrayList<>(); 
+		String request = "send all exams to professor";
+		arr.add(request);
+		arr.add(u.getUser_id());
+		searchBar.setOnKeyReleased(event -> search(event));
+		ClientUI.chat.accept(arr);
+	}
+	
+	/**
+	 * Disconnects from the server and closes GUI window.
+	 * @param event
+	 */
+	@FXML
+	void exit(ActionEvent event) 
+	{
+		UserController.userExit(u);
+	}
+
+	/**
+	 * Goes back to professor main screen.
+	 * @param event
+	 */
+	@FXML
+	void goBack(ActionEvent event) 
+	{	
+		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
+	}
+	
+	/**
+	 * Generates a report for the chosen exam.
+	 * @param event
+	 */
+	@FXML
+	public void GenerateReport(ActionEvent event) 
+	{
+		currentEvent=event;
+		Object item = examTable.getSelectionModel().getSelectedItem();
+		if(item == null)
+		{
+			AlertMessages.makeAlert("You must chose before continue", "Report Allert");
+			return;
+		}
+		itemChosen=item;
+		ArrayList<String> request = new ArrayList<>();	
+		request.add("generate full exam report");
+		request.add(((ExamTemplate)item).get_id());
+		ClientUI.chat.accept(request);
+	}
     
     /**loading the table with the data of all the exams 
      * @param array
      */
-    public void loadTable(ArrayList<ExamTemplate> array) {
+    public void loadTable(ArrayList<ExamTemplate> array) 
+    {
     	arr=array;
     	examTable.getItems().clear();
 		loadingColumns( "_name","_id", "course_id");
@@ -108,7 +163,8 @@ public class ProfessorExamReportController implements Initializable{
 	 */
 	public void updateExamTable(ArrayList<ExamTemplate> arrayList) 
 	{
-		try {
+		try
+		{
 	    ObservableList<ExamTemplate> examObservableList = FXCollections.observableArrayList(arrayList);
 	    examTable.setItems(examObservableList);
 		}catch(Exception e) {
@@ -119,41 +175,23 @@ public class ProfessorExamReportController implements Initializable{
     
     
     
-	private void loadingColumns( String examId, String name, String course) {
-		try {
-		examIdCol.setCellValueFactory(new PropertyValueFactory<>(examId));
-		examNameCol.setCellValueFactory(new PropertyValueFactory<>(name));
-		examCourseCol.setCellValueFactory(new PropertyValueFactory<>(course));		
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-	}
-	
-	
-	
-	@FXML
-	public void GenerateReport(ActionEvent event) {
-		currentEvent=event;
-		Object item=examTable.getSelectionModel().getSelectedItem();
-		if(item==null)
+	private void loadingColumns( String examId, String name, String course) 
+	{
+		try 
 		{
-			AlertMessages.makeAlert("You must chose before continue", "Report Allert");
-			return;
-		}
-		itemChosen=item;
-		ArrayList<String> request = new ArrayList<>();	
-		request.add("generate full exam report");
-		request.add(((ExamTemplate)item).get_id());
-		ClientUI.chat.accept(request);
+			examIdCol.setCellValueFactory(new PropertyValueFactory<>(examId));
+			examNameCol.setCellValueFactory(new PropertyValueFactory<>(name));
+			examCourseCol.setCellValueFactory(new PropertyValueFactory<>(course));		
+		}catch(Exception e) {e.printStackTrace();}
 	}
 	
-	
-	public void openRep(Object obj) {
-		try {
+	public void openRep(Object obj) 
+	{
+		try 
+		{
 			UserController.hide(currentEvent);
 		}catch(Exception e) {e.printStackTrace();}
-		System.out.println(obj.toString());
-		reportScreen.start(currentEvent,obj,itemChosen,user);
+		reportScreen.start(currentEvent,obj,itemChosen,u);
 	}
 	
 	
@@ -172,45 +210,4 @@ public class ProfessorExamReportController implements Initializable{
 		    //Update the question table with the filtered list
 		    updateExamTable(filteredList);       
 	 }
-
-	
-
-
-	/**
-	 * Disconnects from the server and closes GUI window.
-	 * @param event
-	 */
-	@FXML
-	void exit(ActionEvent event) 
-	{
-		UserController.userExit(user);
-	}
-
-	/**
-	 * Goes back to professor main screen.
-	 * @param event
-	 */
-	@FXML
-	void goBack(ActionEvent event) 
-	{	
-		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
-	}
- 
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		ClientMessageHandler.setProfessorExamReportController(this);
-		ArrayList<String> arr=new ArrayList<>(); 
-		String request="send all exams to professor";
-		arr.add(request);
-		arr.add(user.getUser_id());
-		searchBar.setOnKeyReleased(event -> search(event));
-		ClientUI.chat.accept(arr);
-		
-	}
-	
-	
-	
-	
-	
 }
