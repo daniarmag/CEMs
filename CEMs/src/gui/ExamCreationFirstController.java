@@ -24,6 +24,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 /*A GUI for the for the first screen of exam creation.*/
 public class ExamCreationFirstController implements Initializable
@@ -33,6 +34,12 @@ public class ExamCreationFirstController implements Initializable
     public static Map<String, ArrayList<String>> teachingMap;
     
     public static ArrayList<Question> questionArr;
+    
+	@FXML
+	private Text idTXT;
+
+	@FXML
+    private Text nameTXT;
 	
     @FXML
     private Button exitBtn;
@@ -78,6 +85,8 @@ public class ExamCreationFirstController implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{  
 		ClientMessageHandler.setExamCreationFirstController(this);
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		questionTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		for (String s : teachingMap.keySet())
 		{

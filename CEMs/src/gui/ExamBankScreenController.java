@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 
 /**
  * Class that represents an exam bank and the operations that a professor can do on them.
@@ -46,6 +47,12 @@ public class ExamBankScreenController implements Initializable
     @FXML
     private Button goBackBtn;
 
+	@FXML
+	private Text idTXT;
+
+	@FXML
+    private Text nameTXT;
+	
     @FXML
     private TextField searchBar;
     
@@ -81,6 +88,8 @@ public class ExamBankScreenController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		ClientMessageHandler.setExamBankScreenController(this);
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		ArrayList<String> request = new ArrayList<String>();
 		//A call to load all professor questions.
 		request.add("load professor exams");

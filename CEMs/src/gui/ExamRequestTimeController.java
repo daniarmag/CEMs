@@ -41,6 +41,12 @@ public class ExamRequestTimeController implements Initializable
 
     @FXML
     private Text welcomeText;
+    
+    @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
 
     /**
    	 * Initializes the JavaFX controller during application startup.
@@ -66,6 +72,8 @@ public class ExamRequestTimeController implements Initializable
 		ClientMessageHandler.setExamRequestTimeController(this);
 		//Sets exam name.
 		examName.setText(sArr.get(1));
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 	}
 	
 	/**

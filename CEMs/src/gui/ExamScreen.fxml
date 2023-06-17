@@ -17,7 +17,7 @@
    <children>
       <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="-3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="673.0" prefWidth="204.0" style="-fx-background-color: #30BECC;">
          <children>
-            <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30px;" text="Quit test" textAlignment="CENTER" textFill="RED" VBox.vgrow="NEVER">
+            <Button fx:id="quitTestBtn" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #FFFFFF; -fx-background-radius: 30px;" text="Quit test" textAlignment="CENTER" textFill="RED" VBox.vgrow="NEVER">
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
@@ -33,6 +33,18 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="nameTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Tzahi Bakal" visible="false" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="idTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="315731456" visible="false" />
             <TextField fx:id="idTextField" prefHeight="35.0" prefWidth="113.0" promptText="Enter your ID..." style="-fx-background-radius: 15px;">
                <VBox.margin>
                   <Insets top="20.0" />

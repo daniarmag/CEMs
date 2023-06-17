@@ -74,6 +74,12 @@ public class ExamReportController implements Initializable
     @FXML
     private Text welcomeText;
     
+    @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
+    
     private Object itemChosen;
     
     private static ActionEvent currentEvent;
@@ -98,6 +104,8 @@ public class ExamReportController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		ClientMessageHandler.setProfessorExamReportController(this);
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		searchBar.setOnKeyReleased(event -> search(event));
 		ArrayList<String> arr = new ArrayList<>(); 
 		String request = "send all exams to professor";

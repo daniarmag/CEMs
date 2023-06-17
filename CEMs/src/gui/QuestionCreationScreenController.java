@@ -23,6 +23,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 
 /*A GUI for question creation.*/
 public class QuestionCreationScreenController implements Initializable 
@@ -34,6 +35,12 @@ public class QuestionCreationScreenController implements Initializable
     ArrayList<String> subjectsArr, coursesArr;
     
     public static Map<String, ArrayList<String>> teachingMap;
+    
+    @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
     
 	@FXML
 	private TextField aAnswerText;
@@ -103,6 +110,8 @@ public class QuestionCreationScreenController implements Initializable
 	    bRadio.setToggleGroup(toggleGroup);
 	    cRadio.setToggleGroup(toggleGroup);
 	    dRadio.setToggleGroup(toggleGroup);
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 	    //Populating subjectmenu.
 	    for (String s : teachingMap.keySet())
 		{

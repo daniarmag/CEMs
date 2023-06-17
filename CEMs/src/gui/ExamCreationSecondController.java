@@ -44,6 +44,12 @@ public class ExamCreationSecondController implements Initializable
     
     @FXML
     private Text totalScoreText;
+    
+	@FXML
+	private Text idTXT;
+
+	@FXML
+    private Text nameTXT;
 
     @FXML
     private TextField minutesTextField;
@@ -94,6 +100,8 @@ public class ExamCreationSecondController implements Initializable
 	{
 		ClientMessageHandler.setExamCreationSecondController(this);
 		newExam.setProfessor_full_name(u.getFirst_name() + " " + u.getLast_name());
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		examAuthorText.setText(newExam.getProfessor_full_name());
 		questionIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));

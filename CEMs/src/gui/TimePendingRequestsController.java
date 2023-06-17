@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 /**
  * A class that represents the pending time change requests for the HOF.
@@ -26,6 +27,12 @@ public class TimePendingRequestsController implements Initializable
 	public static User u;
 	
 	public ArrayList<ExamTimeChange> arr = new ArrayList<>();
+	
+    @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
 	
     @FXML
     private TableView<ExamTimeChange> pendingRequestsTable;
@@ -63,6 +70,8 @@ public class TimePendingRequestsController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		ClientMessageHandler.setTimePendingRequestsController(this);
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		ArrayList<String> request = new ArrayList<>();
 		request.add("load pending requests");
 		request.add(u.getUser_id());

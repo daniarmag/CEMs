@@ -35,9 +35,21 @@
                   <Image url="@../images/QuestionMark.png" />
                </image>
                <VBox.margin>
-                  <Insets top="60.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="nameTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Tzahi Bakal" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="idTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="315731456" />
          </children>
          <opaqueInsets>
             <Insets />

@@ -9,6 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
+/*
+ * This class is responsible for some common user activities.
+ */
 public class UserController 
 {
 	/**

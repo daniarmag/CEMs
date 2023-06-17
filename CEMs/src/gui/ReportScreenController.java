@@ -26,7 +26,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-
 /**
  * A class that represents all the reports that the head can view
  */
@@ -50,18 +49,10 @@ public class ReportScreenController implements Initializable
 
 	@FXML
 	private Text TextOfName;
+	
 	@FXML
 	private Text average;
-
-	@FXML
-	private BarChart<String, Number> barChart;
-
-	@FXML
-	private Button exitBtn;
-
-	@FXML
-	private ImageView faceImage;
-
+	
 	@FXML
 	private Text highest;
 
@@ -69,23 +60,11 @@ public class ReportScreenController implements Initializable
 	private Text id;
 
 	@FXML
-	private ImageView locationScreen;
-
-	@FXML
 	private Text lowest;
 
 	@FXML
 	private Text median;
-
-	@FXML
-	private Button goBackBtn;
-
-	@FXML
-	private CategoryAxis axisX;
-
-	@FXML
-	private NumberAxis axisY;
-
+	
 	@FXML
 	private Text name;
 
@@ -125,6 +104,27 @@ public class ReportScreenController implements Initializable
 	@FXML
 	private Text uncompleted;
 
+	@FXML
+	private Button goBackBtn;
+
+	@FXML
+	private CategoryAxis axisX;
+
+	@FXML
+	private NumberAxis axisY;
+	
+	@FXML
+	private BarChart<String, Number> barChart;
+
+	@FXML
+	private Button exitBtn;
+
+	@FXML
+	private ImageView faceImage;
+
+	@FXML
+	private ImageView locationScreen;
+
 	/*
 	 * start the report and set the important info
 	 * @param e
@@ -140,7 +140,6 @@ public class ReportScreenController implements Initializable
 				array = (ArrayList<?>) data;
 			else
 				exam = (ExamProfessorReport) data;
-
 			ReportScreenController.user = user;// the user of this screen
 			backScreen = e;// the previous screen so we can back to it
 			object = obj;// the object that was chosen in the previous screen
@@ -155,26 +154,32 @@ public class ReportScreenController implements Initializable
 	{
 		String id;
 		String name;
-		if (object instanceof User) 
+		if (object instanceof User)
 		{
 			name = ((User) object).get_fullName();
 			id = ((User) object).getUser_id();
-
 			if (((User) object).getRole().equals("student"))
 				InitStudent(commonInit(name, id));
 			else
 				InitProfessorCourse(commonInit(name, id), "\\images\\ProfessorLogo.png",
 						"\\images\\ProfessorLabel.png");
-
-		} else if (object instanceof Course) {
+		} 
+		else if (object instanceof Course) 
+		{
 			name = ((Course) object).getCourse_name();
 			id = ((Course) object).get_id();
 			InitProfessorCourse(commonInit(name, id), "\\images\\ReportLogo.png", "\\images\\CourseLabel.png");
-		} else {
+		} 
+		else 
+		{
 			name = ((ExamTemplate) object).get_name();
 			id = ((ExamTemplate) object).get_id();
-			InitProfessorExamReport(commonInit(name, id), "\\images\\ProfessorLogo.png",
-					"\\images\\ProfessorLabel.png");
+			if (user.getRole().equals("professor"))
+				InitProfessorExamReport(commonInit(name, id), "\\images\\ProfessorLogo.png",
+						"\\images\\ExamStatisticsLabel.png"); // CHANGE WHEN GUY IS DONE
+			else
+				InitProfessorExamReport(commonInit(name, id), "\\images\\manager.png",
+						"\\images\\ExamStatisticsLabel.png"); // CHANGE WHEN GUY IS DONE
 		}
 	}
 	

@@ -64,6 +64,12 @@ public class QuestionEditScreenController implements Initializable
     
     @FXML
     private Text questionIdText;
+    
+    @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
 
 	/**
 	 * Initializes the JavaFX controller during application startup.
@@ -91,6 +97,8 @@ public class QuestionEditScreenController implements Initializable
 	    bRadio.setToggleGroup(toggleGroup);
 	    cRadio.setToggleGroup(toggleGroup);
 	    dRadio.setToggleGroup(toggleGroup);
+	    nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		questionTextArea.setText(editQuestion.getQuestionText());
 		questionIdText.setText("Edit question " + editQuestion.getId());
 		aAnswerText.setText(editQuestion.getAnswers()[0]);

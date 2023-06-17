@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 
 /*A GUI for the question bank*/
 public class QuestionBankScreenController implements Initializable
@@ -73,6 +74,12 @@ public class QuestionBankScreenController implements Initializable
 	private TextField searchBar;
 
     @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
+    
+    @FXML
     private TableColumn<Question, String> authorTable;
 
     @FXML
@@ -116,12 +123,11 @@ public class QuestionBankScreenController implements Initializable
 	{
 		ClientMessageHandler.setQuestionBankController(this);
 		ArrayList<String> request = new ArrayList<String>();
-
-		System.out.println(map.get(u.getClass()));
 		request.add(map.get(u.getClass()));
 		if(u instanceof HeadOfDepartment)
 			initToHead();
-		
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		request.add(u.getUser_id());
 		ClientUI.chat.accept(request);
 		searchBar.setOnKeyReleased(event -> search(event));

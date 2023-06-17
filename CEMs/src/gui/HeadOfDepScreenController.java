@@ -3,7 +3,6 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.UserController;
@@ -28,9 +27,19 @@ public class HeadOfDepScreenController implements Initializable
 	statisticsScreen = new StatisticsChooseScreenController();
 	
 	static HeadOfDepartment u ;
+	
     @FXML
     private Text Alert;
+    
+    @FXML
+    private Text idTXT;
 
+    @FXML
+    private Text nameTXT;
+
+    @FXML
+    private Text welcomeText;
+    
     @FXML
     private Button checkResBtn;
 
@@ -46,8 +55,7 @@ public class HeadOfDepScreenController implements Initializable
     @FXML
     private Button manageQstBtn;
 
-    @FXML
-    private Text welcomeText;
+
     
     /**
   	 * Initializes the JavaFX controller during application startup.
@@ -70,6 +78,8 @@ public class HeadOfDepScreenController implements Initializable
 	{
 		ClientMessageHandler.setHeadOfDepScreenController(this);
 		welcomeText.setText("Welcome back " + u.getFirst_name());
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		ClientUI.chat.accept("check for pending requests");
 	}
 	

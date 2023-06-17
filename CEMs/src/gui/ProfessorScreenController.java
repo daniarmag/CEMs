@@ -45,6 +45,12 @@ public class ProfessorScreenController implements Initializable
 	@FXML
 	private Text welcomeText;
 	
+	@FXML
+	private Text idTXT;
+
+	@FXML
+    private Text nameTXT;
+	
 	/**
 	 * Initializes the JavaFX controller during application startup.
 	 * @param user
@@ -66,6 +72,8 @@ public class ProfessorScreenController implements Initializable
 	{
 		ClientMessageHandler.setProfessorController(this);
 		welcomeText.setText("Welcome back " + u.getFirst_name());
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		ArrayList<String> request = new ArrayList<String>();
 		request.add("load teaching map");
 		request.add(u.getUser_id());

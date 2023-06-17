@@ -45,6 +45,12 @@ public class ExamController implements Initializable
 	public static ActionEvent savedEvent;
 	
 	public static Timer timer = new Timer();
+	
+    @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
 
     @FXML
     private Text welcomeText;
@@ -78,6 +84,9 @@ public class ExamController implements Initializable
     
     @FXML
     private Button enterBtn;
+    
+    @FXML
+    private Button quitTestBtn;
    
     /**
    	 * Initializes the JavaFX controller during application startup.
@@ -106,7 +115,10 @@ public class ExamController implements Initializable
 		timerTXT.setText(String.valueOf(onGoingExam.getTime()) + " minutes");
 		submitBtn.setDisable(true);
 		if (u.getRole().equals("professor"))
+		{
 			activateExam();
+			quitTestBtn.setText("Exit Preview");
+		}
 		else 
 		{
 			ClientMessageHandler.setExamController(this);
@@ -155,6 +167,10 @@ public class ExamController implements Initializable
 				enterBtn.setDisable(true);
 				submitBtn.setDisable(false);
 				idTextField.setDisable(true);
+				nameTXT.setVisible(true);
+				nameTXT.setText(u.get_fullName());
+				idTXT.setVisible(true);
+				idTXT.setText(u.getUser_id());
 				durationTXT.setText("Time left:");
 				savedEvent = event;
 			}

@@ -37,6 +37,18 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="nameTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Tzahi Bakal" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="idTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="315731456" />
             <ImageView fitHeight="50.0" fitWidth="50.0">
                <image>
                   <Image url="@../images/QuestionMark.png" />
@@ -53,7 +65,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Set score and comments for each picked question." textAlignment="CENTER" wrappingWidth="161.89990234375">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Set score for each picked question." textAlignment="CENTER" wrappingWidth="161.89990234375">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font>

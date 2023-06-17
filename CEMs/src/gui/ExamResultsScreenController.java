@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
@@ -27,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.util.converter.IntegerStringConverter;
 
 /**
@@ -37,6 +36,12 @@ public class ExamResultsScreenController implements Initializable
 	public static User u;
 	
 	public ArrayList<ExamResults> arr = new ArrayList<>();
+	
+    @FXML
+    private Text idTXT;
+
+    @FXML
+    private Text nameTXT;
 	
     @FXML
     private TextField searchBar;
@@ -80,6 +85,8 @@ public class ExamResultsScreenController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		ClientMessageHandler.setExamResultsScreenController(this);
+		nameTXT.setText(u.get_fullName());
+		idTXT.setText(u.getUser_id());
 		ArrayList<String> request = new ArrayList<>();
 		request.add("load pending exams");
 		request.add(u.getUser_id());
