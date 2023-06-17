@@ -191,13 +191,15 @@ public class MySQLController
 	{
 		ResultSet rs;
 		PreparedStatement ps;
-		ArrayList<ExamTemplate> arr=new ArrayList<>();
+		ArrayList<ExamTemplate> arr = new ArrayList<>();
 		try {
 			if (role.equals("professor"))
 			{
-				ps = conn.prepareStatement("SELECT distinct e.exam_name,e.exam_id,e.course_id " +
-										   "FROM exam as e , student_exam as se \r\n" +
-					     				   "WHERE e.professor_id = ? AND se.exam_id=e.exam_id;");
+				ps = conn.prepareStatement("SELECT DISTINCT e.exam_name, e.exam_id, e.course_id " +
+										   "FROM exam AS e, student_exam AS se " +
+										   "WHERE e.professor_id = ? " +
+										   "AND se.exam_id = e.exam_id " +
+										   "AND e.isActive = -1;");
 			}
 			//In case it is a head of department - get all exams.
 			else
@@ -217,12 +219,6 @@ public class MySQLController
 				if (role.equals("head"))
 					e.setIsActive(rs.getString(4));
 				arr.add(e);
-			}
-				
-			if(arr.isEmpty()) 
-			{
-				arr.add(new ExamTemplate("empty", "", ""));
-				return arr;
 			}	
 		}catch(SQLException e) {e.printStackTrace();}
 		return arr;

@@ -149,7 +149,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="failesLabel" layoutX="234.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fails:" visible="false">
+      <Text fx:id="failesLabel" layoutX="234.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fails percentage:" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
@@ -159,7 +159,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="dateLabel" layoutX="646.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" visible="false">
+      <Text fx:id="dateLabel" layoutX="620.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
@@ -169,7 +169,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="timelabel" layoutX="646.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" visible="false">
+      <Text fx:id="timelabel" layoutX="620.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
@@ -179,7 +179,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="totalStudentLabel" layoutX="646.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total st:" visible="false">
+      <Text fx:id="totalStudentLabel" layoutX="620.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total students:" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
@@ -189,7 +189,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="uncompleteLabel" layoutX="646.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="St uncompleted:" visible="false">
+      <Text fx:id="uncompleteLabel" layoutX="620.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total uncompleted:" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
@@ -199,7 +199,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="completeLabel" layoutX="646.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="St completed:" visible="false">
+      <Text fx:id="completeLabel" layoutX="620.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tota completed:" visible="false">
          <font>
             <Font name="Tahoma Bold" size="14.0" />
          </font>
