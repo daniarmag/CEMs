@@ -169,10 +169,7 @@ public class ServerMessageHandler
 				    {
 				    	ArrayList<ConnectionToClient> clients = roleClientMap.get(user.getRole());
 				    	if (clients == null) 
-				    	{
 							clients = new ArrayList<>();
-							roleClientMap.put(user.getRole(), clients);
-						}
 				    	clients.add(client);
 				    	roleClientMap.put(user.getRole(), clients);
 						client.sendToClient(user);
@@ -449,7 +446,10 @@ public class ServerMessageHandler
 	}
 	
 	/**
-	 * Removes the client from client
+	 * Removes the client from clientRoleList after the client logs out
+	 * so a message won't be sent to a "logged out" client when handling
+	 * time changes or exam shut-downs.
+	 * @param client
 	 */
 	public static void logout(ConnectionToClient client) 
 	{
