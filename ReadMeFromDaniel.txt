@@ -15,3 +15,13 @@ Manual + Computerized are now functional
 Professor can preview his exam before submitting them (same GUI like computerized exam but different permissions)
 Added exam bank which handles exam activation and deactiovation (which are already fully functional) and request for time extension TBD.
 When the professor disables an exam, the exam will be closed in the students prespective.
+
+******************************************************************
+13-17.6
+Completed many more screen for all kinds of roles
+Added the ability to change time for (hof) - this changes time in real time
+A pop up message will be received in hof screen if there's a pending time request change
+Added javadoc to all parts of code
+Fixed GUI stuff - like wrong sizes, added Ids and names for professors and hofs
+Changed to password field in login
+Added courses names in report table of professor
