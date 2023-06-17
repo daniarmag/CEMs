@@ -155,9 +155,9 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="719.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press enter to save score">
+      <Text layoutX="698.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press enter to save score">
          <font>
-            <Font name="Tahoma" size="10.0" />
+            <Font name="Tahoma" size="12.0" />
          </font>
       </Text>
       <TextField fx:id="examNameTextField" layoutX="421.0" layoutY="159.0" prefHeight="31.0" prefWidth="170.0" promptText="Insert exam name">

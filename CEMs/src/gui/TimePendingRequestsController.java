@@ -137,6 +137,8 @@ public class TimePendingRequestsController implements Initializable
     	ExamTimeChange selectedRequest = pendingRequestsTable.getSelectionModel().getSelectedItem();
     	if (selectedRequest != null)
     	{
+    		if (answer.equals("1"))
+    			pendingRequestsTable.getItems().remove(selectedRequest);
     		ArrayList<String> request = new ArrayList<>();
     		request.add("request answered");
     		request.add(answer);

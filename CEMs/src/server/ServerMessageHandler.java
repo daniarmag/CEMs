@@ -182,6 +182,7 @@ public class ServerMessageHandler
 				case "logout":
 					sqlController.logout(arrayList.get(1));
 					client.sendToClient("logged out");
+					logout(client);
 					break;
 					
 				case "load professor questions":
@@ -355,7 +356,7 @@ public class ServerMessageHandler
 					messageToHead.add(arrayList.get(7));
 					if (roleClientMap.get("head") != null)
 					{
-						//A message for each client of role "student".
+						//A message for each client of role "head".
 						for (ConnectionToClient c : roleClientMap.get("head"))
 							c.sendToClient(messageToHead);
 					}
@@ -446,6 +447,21 @@ public class ServerMessageHandler
 			client.sendToClient(message);
 		} catch (IOException e) {}
 	}
+	
+	/**
+	 * Removes the client from client
+	 */
+	public static void logout(ConnectionToClient client) 
+	{
+	    for (String key : roleClientMap.keySet()) 
+	    {
+	        ArrayList<ConnectionToClient> clients = roleClientMap.get(key);
+	        if (clients != null) 
+	        	if (clients.contains(client))
+					roleClientMap.get(key).remove(client);
+	    }
+	}
+
 	
 	/**
 	 * Resets the map AND the counters when the server disconnects. 

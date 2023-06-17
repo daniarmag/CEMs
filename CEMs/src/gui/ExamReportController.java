@@ -169,7 +169,7 @@ public class ExamReportController implements Initializable
 	        {
 	            if (!exam.getIsActive().equals("-1"))
 	            {
-	                AlertMessages.makeAlert("This exam has not been activated yet", "View Report");
+	                AlertMessages.makeAlert("This exam has no statistics", "View Report");
 	                return;
 	            }
 	        }

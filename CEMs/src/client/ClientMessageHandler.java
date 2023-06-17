@@ -340,8 +340,11 @@ public class ClientMessageHandler
 				break;
 				
 			case "abort":
-				AlertMessages.makeAlert("Server disconnected.","Disconnected");
-				System.exit(0);
+				Platform.runLater(() -> 
+				{
+					AlertMessages.makeAlert("Server disconnected.","Disconnected");
+					System.exit(0);
+				});
 				break;
 				
 			case "already logged":

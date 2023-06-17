@@ -81,10 +81,7 @@ public class StudentExamGradesController implements Initializable
 		welcomeText.setText(u.getFirst_name() + "'s grades");
 		nameTXT.setText(u.get_fullName());
 		idTXT.setText(u.getUser_id());
-		ArrayList<String> request = new ArrayList<>();
-		request.add("load student grades");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);
+		constructRequest();
 	}
 
 	/**
@@ -106,6 +103,28 @@ public class StudentExamGradesController implements Initializable
 	{
 		UserController.goBack(event, "/gui/StudentScreen.fxml");
 	}
+	
+	/**
+	 * Refreshes the exam table
+	 * @param event
+	 */
+	@FXML
+	void refresh(ActionEvent event) 
+	{
+		constructRequest();
+		studentExamTable.refresh();
+	}
+	
+	 /**
+     * A request to load requests. Used in initialization and refresh.
+     */
+    private void constructRequest()
+    {
+    	ArrayList<String> request = new ArrayList<>();
+		request.add("load student grades");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);
+    }
 
 	/**
 	 * Sets the exam table with the values that are currently in the sExams,
