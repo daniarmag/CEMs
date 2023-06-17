@@ -33,9 +33,9 @@ public class ManualExamController implements Initializable
 {
 	public static User u;
 	
-	public static Exam e;
+	public static Exam onGoingExam;
 	
-	public static Timer timer = new Timer();
+	public static Timer timer;
 	
 	static Integer minutesLeft, secondsLeft = 1, actualTime = 0;;
 	
@@ -80,8 +80,8 @@ public class ManualExamController implements Initializable
     public static void start(User user, Exam exam) throws Exception 
 	{
 		u = user;
-		e = exam;
-		minutesLeft = e.getTime();
+		onGoingExam = exam;
+		minutesLeft = onGoingExam.getTime();
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/ManualExam.fxml").show());
 	}
     
@@ -94,7 +94,7 @@ public class ManualExamController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{
 		ClientMessageHandler.setManualExamController(this);
-		welcomeText.setText(e.getExam_name());
+		welcomeText.setText(onGoingExam.getExam_name());
 		SubmitBtn.setDisable(true);
 		TimerTXT.setText(minutesLeft.toString() + " minutes");
 		nameTXT.setText(u.get_fullName());
@@ -121,7 +121,7 @@ public class ManualExamController implements Initializable
     	ArrayList<String> request = new ArrayList<String>();
     	//Loads the exam file from the DB.
 		request.add("load exam file");
-		request.add(e.getExam_id());
+		request.add(onGoingExam.getExam_id());
 		ClientUI.chat.accept(request);
 		durationTXT.setText("Time left:");
         SubmitBtn.setDisable(false);
@@ -144,20 +144,20 @@ public class ManualExamController implements Initializable
     		ArrayList<String> request = new ArrayList<>();
     		// Updates exam stats.
     		request.add("finished manual exam");
-    		request.add(e.getExam_id());
-    		request.add(String.valueOf(e.getTime()));
-    		request.add(String.valueOf(e.getTime() - minutesLeft));
+    		request.add(onGoingExam.getExam_id());
+    		request.add(String.valueOf(onGoingExam.getTime()));
+    		request.add(String.valueOf(onGoingExam.getTime() - minutesLeft));
     		ClientUI.chat.accept(request);
     		request.clear();
     		// Add a new row in student_manual_exam table
     		request.add("add student manual exam");
-    		request.add(e.getExam_id());
+    		request.add(onGoingExam.getExam_id());
     		request.add(u.getUser_id());
     		ClientUI.chat.accept(request);
     		request.clear();
     		// Uploads student's exam
     		request.add("upload exam");
-    		request.add(e.getExam_id());
+    		request.add(onGoingExam.getExam_id());
     		request.add(u.getUser_id());
     		request.add(FileUploadTXT.getText().strip());
     		ClientUI.chat.accept(request);
@@ -198,12 +198,15 @@ public class ManualExamController implements Initializable
 		}
 	}
 	
+	/**
+	 * Constructs a request array to send to the client
+	 */
 	public void constructRequestForUnfinished()
 	{
 		ArrayList<String> finishedExam = new ArrayList<>();
 		finishedExam.add("unfinished manual exam");
-		finishedExam.add(e.getExam_id());
-		finishedExam.add(e.getTime().toString());
+		finishedExam.add(onGoingExam.getExam_id());
+		finishedExam.add(onGoingExam.getTime().toString());
 		finishedExam.add(String.valueOf(actualTime));
 		ClientUI.chat.accept(finishedExam);
 	}
@@ -215,17 +218,21 @@ public class ManualExamController implements Initializable
 	public void setTime(int time)
 	{
 		minutesLeft = time;
-		e.setTime(time);
+		onGoingExam.setTime(time);
 		TimerTXT.setText(String.valueOf(time));
 	}
 	
 	/**
 	 * Starts the timer for the exam.
 	 */
-	public void startCountdown() {
-	    TimerTask task = new TimerTask() {
+	public void startCountdown()
+	{
+		timer = new Timer();
+	    TimerTask task = new TimerTask() 
+	    {
 	        @Override
-	        public void run() {
+	        public void run() 
+	        {
 	            secondsLeft--;
 
 	            // Calculate hours, minutes, and seconds
@@ -237,18 +244,21 @@ public class ManualExamController implements Initializable
 	            TimerTXT.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
 	            
 	            // Increment actualTime every minute
-	            if (secondsLeft == 0) {
+	            if (secondsLeft == 0) 
+	            {
 	                minutesLeft--;
 	                actualTime++;
 	                secondsLeft = 60;
 	            }
-	            if (minutesLeft == 0 && secondsLeft == 60 && !oneMinuteFlag) {
+	            if (minutesLeft == 0 && secondsLeft == 60 && !oneMinuteFlag) 
+	            {
 	                oneMinuteFlag = true;
 	                minutesLeft = 1;
 	                //TimerTXT.setText(String.format("%02d:%02d:%02d", 0, 1, 0));
 	                AlertMessages.makeAlert("Exam is over, you have one minute for submitting", "Exam is over");
 	                secondsLeft = 1;
-	            } else if (minutesLeft == 0 && secondsLeft == 1 && oneMinuteFlag) {
+	            } else if (minutesLeft == 0 && secondsLeft == 1 && oneMinuteFlag)
+	            {
 	                disableFileUpload();
 	                constructRequestForUnfinished();
 	                AlertMessages.makeAlert("Time is up!", "Exam");
@@ -289,6 +299,7 @@ public class ManualExamController implements Initializable
 	 */
 	public void disableFileUpload()
 	{
+		startedExamFlag = false;
 		UploadBtn.setDisable(true);
 		SubmitBtn.setDisable(true);
 		FileUploadTXT.setDisable(true);
@@ -297,10 +308,10 @@ public class ManualExamController implements Initializable
 	}
 	
 	/**
-	 * @return exam id
+     * @return the onGoingExam
 	 */
-	public String getExamId() 
+	public Exam getOnGoingExam() 
 	{
-		return e.getExam_id();
+		return onGoingExam;
 	}
 }

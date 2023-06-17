@@ -75,7 +75,3 @@ public class ExamStatistics implements Serializable,HaveID{
 		return fails;
 	}
 }
-	
-	
-	
-	

@@ -58,7 +58,7 @@
             <Font name="Tahoma Bold" size="42.0" />
          </font>
       </Text>
-      <Button fx:id="submitBtn" layoutX="596.0" layoutY="541.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Submit" textFill="WHITE">
+      <Button fx:id="submitBtn" layoutX="447.0" layoutY="541.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Submit" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
@@ -110,7 +110,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="100.0" fitWidth="75.0" layoutX="711.0" layoutY="485.0">
+      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="711.0" layoutY="485.0">
          <image>
             <Image url="@../images/Logo.png" />
          </image>

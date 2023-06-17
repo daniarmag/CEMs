@@ -20,7 +20,7 @@ import gui.ExamCreationFirstController;
 import gui.ExamCreationSecondController;
 import gui.ExamRequestTimeController;
 import gui.ExamResultsScreenController;
-import gui.HeadOfDepScreenController;
+import gui.HeadOfDepartmentScreenController;
 import gui.LoginScreenController;
 import gui.ManualExamController;
 import gui.ExamReportController;
@@ -28,12 +28,15 @@ import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.TimePendingRequestsController;
 import gui.ExamBankScreenController;
-import gui.ExamController;
+import gui.ComputerizedExamController;
 import gui.StatisticsChooseScreenController;
 import gui.StudentExamGradesController;
 import gui.QuestionBankScreenController;
 import gui.StudentExamScreenController;
 
+/**
+ * A class that handles the messages that clients receive from the server.
+ */
 public class ClientMessageHandler 
 {
 	static StudentScreenController studentController;
@@ -49,8 +52,8 @@ public class ClientMessageHandler
     static StudentExamGradesController studentExamGradesController;
     static StudentExamScreenController studentExamScreenController;
     static ManualExamController manualExamController;
-    static HeadOfDepScreenController headOfScreenController;
-    static ExamController examController;
+    static HeadOfDepartmentScreenController headOfDepartmentScreenController;
+    static ComputerizedExamController computerizedExamController;
 	static StatisticsChooseScreenController statisticsScreen;
 	static ExamReportController professorExamReportController;
 	static TimePendingRequestsController timePendingRequestsController;
@@ -58,16 +61,16 @@ public class ClientMessageHandler
 	{
 		studentController = new StudentScreenController();
 		professorController = new ProfessorScreenController();
-		headOfScreenController = new HeadOfDepScreenController();
+		headOfDepartmentScreenController = new HeadOfDepartmentScreenController();
 	}
 	
 	
 	/**
-	 * @param timePendingRequestsController the timePendingRequestsController to set
+	 * @param headOfDepartmentScreenController the headOfDepartmentScreenController to set
 	 */
-	public static void setHeadOfDepScreenController(HeadOfDepScreenController controller) 
+	public static void setHeadOfDepScreenController(HeadOfDepartmentScreenController controller) 
 	{
-		headOfScreenController = controller;
+		headOfDepartmentScreenController = controller;
 	}
 	
 	/**
@@ -133,20 +136,33 @@ public class ClientMessageHandler
 		examBankScreenController = controller;
 	}
 
+	/**
+	 * @param controller the statisticsScreen to set
+	 */
 	public static void setStatisticsChooseScreen(StatisticsChooseScreenController controller)
 	{
 		statisticsScreen = controller;
 	}
 	
+	/**
+	 * @param controller the questionBankScreenController to set
+	 */
 	public static void setQuestionBankController(QuestionBankScreenController controller)
 	{
 		questionBankScreenController = controller;
 	}
 	
+	/**
+	 * @param controller the questionCreationScreenController to set
+	 */
 	public static void setCreateQuestionScreenController(QuestionCreationScreenController controller)
 	{
 		questionCreationScreenController = controller;
 	}
+	
+	/** 
+	 * @param controller the studentExamScreenController to set
+	 */
 	public static void setStudentExamController(StudentExamScreenController controller)
 	{
 		studentExamScreenController = controller;
@@ -177,11 +193,11 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param examController the examController to set
+	 * @param computerizedExamController the computerizedExamController to set
 	 */
-	public static void setExamController(ExamController controller) 
+	public static void setExamController(ComputerizedExamController controller) 
 	{
-			examController = controller;
+			computerizedExamController = controller;
 	}
 		
 	/**
@@ -217,12 +233,12 @@ public class ClientMessageHandler
 				break;
 				
 			case USER_ARRAY_LIST:
-				headOfScreenController.setUserArr((ArrayList<?>)msg);
+				headOfDepartmentScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData(((ArrayList<User>)msg).get(0).getRole());
 				break;
 				
 			case COURSE_ARRAY_LIST:
-				headOfScreenController.setUserArr((ArrayList<?>)msg);
+				headOfDepartmentScreenController.setUserArr((ArrayList<?>)msg);
 				statisticsScreen.showData("course");
 				break;
 				
@@ -370,6 +386,7 @@ public class ClientMessageHandler
 			
 			case "You have pending time change requests":
 				AlertMessages.makeAlert("You have pending time change approvals", "Alert");
+				break;
 				
 			case "exam uploaded":
 				break;
@@ -379,7 +396,6 @@ public class ClientMessageHandler
 	/**
 	 * Handles server messages that are an array list with String elements.
 	 * @param arrayList
-	 * @param client
 	 */
 	public static void stringArrayListMessageHandler(ArrayList<String> arrayList) 
 	{
@@ -404,18 +420,18 @@ public class ClientMessageHandler
 				{
 					if (manualExamController != null) 
 					{
-						if (manualExamController.getExamId().equals(arrayList.get(1))) 
+						if (arrayList.get(1).equals(manualExamController.getOnGoingExam().getExam_id()))
 						{
 							AlertMessages.makeAlert("Exam has been terminated.", "Exam");
 							manualExamController.disableFileUpload();
 						}
 					}
-					if (examController != null) 
+					if (computerizedExamController != null) 
 					{
-						if (arrayList.get(1).equals(examController.getOnGoingExam().getExam_id())) 
+						if (arrayList.get(1).equals(computerizedExamController.getOnGoingExam().getExam_id()))
 						{
 							AlertMessages.makeAlert("Exam has been terminated.", "Exam");
-							examController.closeWindow();
+							computerizedExamController.closeWindow();
 						}
 					}
 				} catch (NullPointerException e) {e.printStackTrace();}
@@ -431,13 +447,13 @@ public class ClientMessageHandler
 				{
 					if (manualExamController != null) 
 					{
-						if (manualExamController.getExamId().equals(arrayList.get(1))) 
+						if (arrayList.get(1).equals(manualExamController.getOnGoingExam().getExam_id())) 
 							manualExamController.setTime(Integer.parseInt(arrayList.get(2)));
 					}
-					if (examController != null) 
+					if (computerizedExamController != null) 
 					{
-						if (arrayList.get(1).equals(examController.getOnGoingExam().getExam_id())) 
-							examController.setTime(Integer.parseInt(arrayList.get(2)));
+						if (arrayList.get(1).equals(computerizedExamController.getOnGoingExam().getExam_id())) 
+							computerizedExamController.setTime(Integer.parseInt(arrayList.get(2)));
 					}
 					AlertMessages.makeAlert("Exam has new time.", "Exam");
 				} catch (NullPointerException e) {e.printStackTrace();}
@@ -448,9 +464,9 @@ public class ClientMessageHandler
 				break;
 				
 			case "send immediate approval to head of department":
-				if (headOfScreenController != null)
+				if (headOfDepartmentScreenController != null)
 				{
-					if(headOfScreenController.getId().equals(arrayList.get(1)))
+					if(headOfDepartmentScreenController.getId().equals(arrayList.get(1)))
 						AlertMessages.makeAlert("You have a new request pending.", "Alert");
 				}
 				break;
@@ -522,8 +538,7 @@ public class ClientMessageHandler
 				studentController.start(user);
 				break;
 			case "head":
-				headOfScreenController.start(user);			
-				//examcontroller.start();
+				headOfDepartmentScreenController.start(user);			
 				break;
 			}	
 		} 

@@ -131,7 +131,7 @@ public class StudentExamScreenController implements Initializable
 			try 
 			{
 				UserController.hide(event);
-				ExamController.start(selectedExam, u);
+				ComputerizedExamController.start(selectedExam, u);
 			} catch (Exception e) {e.printStackTrace();}
 		}
 	}

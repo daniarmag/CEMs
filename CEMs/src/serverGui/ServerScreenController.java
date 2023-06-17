@@ -26,11 +26,15 @@ import server.ServerMessageHandler;
 import server.ServerUI;
 
 /*A GUI for server area.*/
-public class ServerScreenController implements Initializable {
+public class ServerScreenController implements Initializable 
+{
 	String dbName = "jdbc:mysql://localhost/cems?serverTimezone=IST", port = Integer.toString(ServerUI.DEFAULT_PORT),
 			username, password;
+	
 	public static int clientCnt = 0;
+	
 	private static MySQLController sqlController;
+	
 	boolean connected = false;
 
 	@FXML
@@ -193,7 +197,6 @@ public class ServerScreenController implements Initializable {
 			System.out.println("Error in loading users");
 		}
 	}
-	
 
 	/**
 	 * Method that handles the checkbox of password visibility

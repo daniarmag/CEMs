@@ -98,7 +98,7 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
-      <BarChart fx:id="barChart" layoutX="226.0" layoutY="306.0" legendVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="378.0" prefWidth="741.0">
+      <BarChart fx:id="barChart" layoutX="226.0" layoutY="269.0" legendVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="343.0" prefWidth="741.0">
         <xAxis>
           <CategoryAxis fx:id="axisX" side="BOTTOM">
                <tickLabelFont>
@@ -209,5 +209,10 @@
             <Font name="Tahoma" size="14.0" />
          </font>
       </Text>
+      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="887.0" layoutY="606.0">
+         <image>
+            <Image url="@../images/Logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

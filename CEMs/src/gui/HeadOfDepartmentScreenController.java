@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 /**
  * Class that represents the main screen of the head of department.
  */
-public class HeadOfDepScreenController implements Initializable
+public class HeadOfDepartmentScreenController implements Initializable
 {
 	private String path="/gui/HeadOfDepartmentScreen.fxml";
 	
@@ -55,8 +55,6 @@ public class HeadOfDepScreenController implements Initializable
     @FXML
     private Button manageQstBtn;
 
-
-    
     /**
   	 * Initializes the JavaFX controller during application startup.
   	 * @param user
@@ -98,6 +96,7 @@ public class HeadOfDepScreenController implements Initializable
     @FXML
     void logout(ActionEvent event)
     {
+    	u.resetArrays();
     	UserController.close(event);
 		ScreenUtils.createNewStage("/gui/LoginScreen.fxml").show();
 		UserController.logoutUser(u);

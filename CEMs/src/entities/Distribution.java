@@ -8,14 +8,17 @@ import java.util.Map;
  * Represents a distribution of values within specified ranges.
  */
 @SuppressWarnings("serial")
-public class Distribution implements Serializable{
+public class Distribution implements Serializable
+{
 	private Map<String,Integer> location=new HashMap<>();
+	
 	private Range[] dArr=new Range[6]; 
 	
-	 /**
-     * Constructs a new Distribution object.
-     */
-	public Distribution() {
+	/**
+	 * Constructs a new Distribution object.
+	 */
+	public Distribution() 
+	{
 		
 		location.put("0-54",0);
 		location.put("55-65",1);
@@ -30,7 +33,8 @@ public class Distribution implements Serializable{
 	/**
 	 * Initializes range
 	 */
-	private void initArr() {
+	private void initArr() 
+	{
 		dArr[0]=new Range("0-54",0);
 		dArr[1]=new Range("55-65",0);
 		dArr[2]=new Range("66-75",0);
@@ -44,14 +48,16 @@ public class Distribution implements Serializable{
       * @param range the range string
       * @param val   the value to add
       */
-	public void addToRange(String range,int val) {
+	public void addToRange(String range,int val) 
+	{
 		dArr[location.get(range)].setVal(val);
 	}
 	
 	 /**
 	  * @return array of range
 	  */
-	public Range[] RangeArray() {
+	public Range[] RangeArray() 
+	{
 		 return dArr;
 	 }
 	
@@ -66,11 +72,17 @@ public class Distribution implements Serializable{
 		 return string.toString();
 	 }
 
-	public class Range implements Serializable{
+	public class Range implements Serializable
+	{
 		private String range;
 		private int val;
 
-		public Range(String range, int val) {
+		/**
+		 * @param range
+		 * @param val
+		 */
+		public Range(String range, int val) 
+		{
 			this.range = range;
 			this.val = val;
 		}

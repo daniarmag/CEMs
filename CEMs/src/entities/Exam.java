@@ -276,15 +276,4 @@ public class Exam implements Serializable
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	@Override
-	public String toString() {
-		return "Exam [exam_number=" + exam_number + ", subject_id=" + subject_id + ", course_id=" + course_id
-				+ ", exam_id=" + exam_id + ", num_questions=" + num_questions + ", time=" + time + ", examinees_notes="
-				+ examinees_notes + ", professor_notes=" + professor_notes + ", professor_full_name="
-				+ professor_full_name + ", professor_id=" + professor_id + ", password=" + password + ", isActive="
-				+ isActive + ", type=" + type + ", exam_name=" + exam_name + ", examQuestions=" + examQuestions + "]";
-	}
-	
-	
 }

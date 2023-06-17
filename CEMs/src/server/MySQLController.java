@@ -640,7 +640,7 @@ public class MySQLController
 	}
 
 	
-	/**@author czmat
+	/**
 	 * @param role
 	 * @return the function receives   professor request and load all the 
 	 * Appropriate professors belongs to the department 
@@ -666,10 +666,9 @@ public class MySQLController
 	
 	
 	
-	/**@author czmat
+	/**
 	 * the function return all the courses in the system 
 	 * @return
-	 * 
 	 */
 	public ArrayList<Course> getAllCourses(String id){
 		ArrayList<Course> arrayC=new ArrayList<>();
@@ -739,7 +738,7 @@ public class MySQLController
 		return 0;
 	}
 	
-	/**@author czmat
+	/**
 	 * @param arr
 	 * @return all the exam of the professor and his grades ordered by grade average
 	 * or the course grades 
@@ -947,7 +946,6 @@ public class MySQLController
 	
 	/**
 	 * Creates an examFile with the specified exam ID for opening the exam.
-	 *
 	 * @param examID the ID of the exam file to open
 	 * @return the ExamFile object
 	 */
@@ -999,7 +997,6 @@ public class MySQLController
 
 	/**
 	 * This method loads the questions of specified exam and returns an ArrayList of Question objects.
-	 *
 	 * @param examID the ID of the exam to retrieve questions for
 	 * @return an ArrayList of Question objects representing the exam questions
 	 */

@@ -134,7 +134,8 @@ public class ReportScreenController implements Initializable
 	 */
 	public void start(ActionEvent e, Object data, Object obj, User user)
 	{
-		try {
+		try 
+		{
 			Platform.runLater(() -> ScreenUtils.createNewStage("/gui/ReportScreen.fxml").show());
 			if (data instanceof ArrayList)
 				array = (ArrayList<?>) data;
@@ -176,10 +177,10 @@ public class ReportScreenController implements Initializable
 			id = ((ExamTemplate) object).get_id();
 			if (user.getRole().equals("professor"))
 				InitProfessorExamReport(commonInit(name, id), "\\images\\ProfessorLogo.png",
-						"\\images\\ExamStatisticsLabel.png"); // CHANGE WHEN GUY IS DONE
+						"\\images\\ExamStatisticsLabel.png");
 			else
 				InitProfessorExamReport(commonInit(name, id), "\\images\\manager.png",
-						"\\images\\ExamStatisticsLabel.png"); // CHANGE WHEN GUY IS DONE
+						"\\images\\AccessExamStatsLabel.png"); 
 		}
 	}
 	

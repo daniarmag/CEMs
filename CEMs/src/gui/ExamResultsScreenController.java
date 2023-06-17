@@ -218,9 +218,10 @@ public class ExamResultsScreenController implements Initializable
         for (ExamResults e : arr) 
         {
         	//Adds exam id to the wrong answers in-case there are exams with the same wrong answers.
-            String wrongAnswers = e.getWrong_answers() + e.getExam_id();
+            String wrongAnswers = e.getWrong_answers();
             if (wrongAnswers != null && !wrongAnswers.isEmpty()) 
             {
+            	wrongAnswers += e.getExam_id();
             	//If the key wrong answer is already in the map, join the student to the suspect list in the map
             	if (suspectPairs.containsKey(wrongAnswers)) 
             	    suspectPairs.get(wrongAnswers).add(e.getStudent_id());

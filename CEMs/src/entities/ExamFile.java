@@ -6,9 +6,12 @@ import java.io.Serializable;
  * Represents the exam file.
  */
 @SuppressWarnings("serial")
-public class ExamFile implements Serializable {
+public class ExamFile implements Serializable 
+{
 	private String fileName=null;	
+	
 	private int size=0;
+	
 	public  byte[] mybytearray;
 	
 	/**

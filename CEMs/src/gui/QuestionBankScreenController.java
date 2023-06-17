@@ -35,7 +35,6 @@ public class QuestionBankScreenController implements Initializable
 {
 	public ArrayList<Question> qArr = new ArrayList<>();
 	
-	
 	public static User u;
 	
 	public static boolean isValidRemoval = true;
@@ -53,6 +52,7 @@ public class QuestionBankScreenController implements Initializable
 		path.put(HeadOfDepartment.class, "/gui/HeadOfDepartmentScreen.fxml");
 		path.put(Professor.class, "/gui/ProfessorScreen.fxml");
 	}
+	
 	@FXML
 	private ImageView manageQuestionLabel;
 	

@@ -27,6 +27,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * A class that will be used for all statistics (exams, courses, professor and students)
+ */
 public class StatisticsChooseScreenController implements Initializable
 {
 	private static ReportScreenController reportScreen = new ReportScreenController();
@@ -85,7 +88,6 @@ public class StatisticsChooseScreenController implements Initializable
 	{
 		user = (HeadOfDepartment) u;
 		Platform.runLater(() -> ScreenUtils.createNewStage("/gui/StatisticsChoosingScreen.fxml").show());
-
 	}
 	
 	/**
@@ -135,16 +137,15 @@ public class StatisticsChooseScreenController implements Initializable
 	{
 
 		String buttonPressed = ((Button) event.getSource()).getAccessibleText();
-		try {
+		try 
+		{
 			ArrayList<String> action = requsetMap.get(buttonPressed);
 			ArrayList<?> arr = user.getArray(buttonPressed);
 			if (arr == null) {
 				ClientUI.chat.accept(action);
 			} else
 				showData(buttonPressed);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {e.printStackTrace();}
 	}
 	
 	/**
@@ -252,16 +253,15 @@ public class StatisticsChooseScreenController implements Initializable
 	 */
 	private void loadingColumns(String col_3, String propertyCol1, String propertyCol2, String propertyCol3) 
 	{
-		try {
+		try 
+		{
 			Platform.runLater(() -> col1.setText("ID"));
 			Platform.runLater(() -> col2.setText("Name"));
 			Platform.runLater(() -> col3.setText(col_3));
 			col1.setCellValueFactory(new PropertyValueFactory<>(propertyCol1));
 			col2.setCellValueFactory(new PropertyValueFactory<>(propertyCol2));
 			col3.setCellValueFactory(new PropertyValueFactory<>(propertyCol3));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {e.printStackTrace();}
 	}
 
 	/**
@@ -313,16 +313,15 @@ public class StatisticsChooseScreenController implements Initializable
 	public void openRep(Object arr)
 	{
 
-		if (((ArrayList<HaveID>) arr).get(0).get_id().equals("empty")) {
+		if (((ArrayList<HaveID>) arr).get(0).get_id().equals("empty")) 
+		{
 			AlertMessages.makeAlert("There is no data for this choice", "Report alert");
 			return;
 		}
-
-		try {
+		try 
+		{
 			UserController.hide(event);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {e.printStackTrace();}
 		reportScreen.start(event, arr, itemChosen, user);
 
 	}

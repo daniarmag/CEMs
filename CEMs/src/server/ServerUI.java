@@ -7,9 +7,12 @@ import javafx.stage.Stage;
 import serverGui.ServerScreenController;
 
 
-public class ServerUI extends Application {
+public class ServerUI extends Application 
+{
 	final public static int DEFAULT_PORT = 5555;
+	
 	static EchoServer es;
+	
 	static MySQLController sqlController;
 	
 	/**

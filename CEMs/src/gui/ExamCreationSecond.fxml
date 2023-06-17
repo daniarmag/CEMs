@@ -75,7 +75,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Text id="profTitle" layoutX="397.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an exam" textAlignment="CENTER">
+      <Text id="profTitle" layoutX="365.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an exam" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Bold" size="42.0" />
          </font>
@@ -95,17 +95,12 @@
             <Font name="Tahoma" size="15.0" />
          </font>
       </TextField>
-      <Text fx:id="examAuthorText" layoutX="221.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exam author:">
-         <font>
-            <Font name="Tahoma" size="15.0" />
-         </font>
-      </Text>
       <Text fx:id="examAuthorText" layoutX="333.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="Tahoma" size="15.0" />
          </font>
       </Text>
-      <ImageView fitHeight="60.0" fitWidth="280.0" layoutX="204.0" layoutY="4.0">
+      <ImageView fitHeight="75.0" fitWidth="330.0" layoutX="204.0" layoutY="4.0">
          <image>
             <Image url="@../images/ExamMenuLogo.png" />
          </image>

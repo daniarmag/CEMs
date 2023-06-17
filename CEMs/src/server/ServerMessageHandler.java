@@ -14,6 +14,10 @@ import entities.User;
 import enums.MessageType;
 import ocsf.server.ConnectionToClient;
 
+
+/**
+ * This class represents the handling of all the messages that the server receives from clients.
+ */
 public class ServerMessageHandler 
 {
 	static private MySQLController sqlController = MySQLController.getInstance(); 
@@ -21,14 +25,11 @@ public class ServerMessageHandler
 	static private Map<String, ArrayList<ConnectionToClient>> roleClientMap = new HashMap<>();
 	
 	//0 - exam_id 1 - time 2 - actualTime
-	static private String[] onGoingExam = {"0", "0", "0"};
+	static private String[] onGoingExamTime = {"0", "0", "0"};
 	
 	//0 - finishedExam, 1 - unFinishedExam, 2 - totalStudents, 3 - time to add
 	static private Integer[] counterArray = {0, 0, 0, 0};
-	
-	static {
-		
-	}
+
 	/**
 	 * Finds out the type of the message and then initiates the appropriate method.
 	 * @param msg
@@ -142,7 +143,6 @@ public class ServerMessageHandler
 					client.sendToClient(msg);
 					break;
 			}
-			
 		} catch (IOException e) {}
 	}
 
@@ -158,7 +158,7 @@ public class ServerMessageHandler
 		{
 			switch (messageType) 
 			{
-				case "login": 				
+				case "login": 		
 					User user = sqlController.verifyLogin(arrayList);
 					if (user == null) 
 						client.sendToClient("incorrect login");
@@ -259,7 +259,6 @@ public class ServerMessageHandler
 							arrayList.add("ex.course_id");
 							client.sendToClient(sqlController.getAllprofessor_courseExams(arrayList));
 						}
-					//
 					break;
 					
 				//Info about indexes is next to the declaration.
@@ -267,7 +266,7 @@ public class ServerMessageHandler
 					updateStats(0, 2, arrayList, 7, 8);
 					arrayList.remove(0);
 					sqlController.uploadFinishedExam(arrayList);
-					handleFinishedExam();
+					handleFinishedExam(client);
 					client.sendToClient("exam submitted");
 					break;
 					
@@ -275,20 +274,20 @@ public class ServerMessageHandler
 					updateStats(1, 2, arrayList, 7, 8);
 					arrayList.remove(0);
 					sqlController.uploadFinishedExam(arrayList);
-					handleFinishedExam();
+					handleFinishedExam(client);
 					client.sendToClient("exam submitted");
 					break;
 					
 				//Info about indexes is next to the declaration.
 				case "finished manual exam":
 					updateStats(0, 2, arrayList, 2, 3);
-					handleFinishedExam();
+					handleFinishedExam(client);
 					client.sendToClient("exam submitted");
 					break;
 					
 				case "unfinished manual exam":
 					updateStats(1, 2, arrayList, 2, 3);
-					handleFinishedExam();
+					handleFinishedExam(client);
 					client.sendToClient("exam submitted");
 					break;
 					
@@ -304,6 +303,7 @@ public class ServerMessageHandler
 					break;
 					
 				case "deactivate":
+					emptyCounters();
 					sqlController.updateExamStatus(arrayList.get(1), false);
 					ArrayList<String> answer = new ArrayList<>();
 					answer.add("selected exam is now inactive");
@@ -340,11 +340,10 @@ public class ServerMessageHandler
 					break;
 					
 				case "generate full exam report":
-					try {
-					client.sendToClient(sqlController.professorExamStat(arrayList.get(1)));
-					}catch(Exception e) {
-						e.printStackTrace();
-					}
+					try 
+					{
+						client.sendToClient(sqlController.professorExamStat(arrayList.get(1)));
+					}catch(Exception e) {e.printStackTrace();}
 					break;
 					
 				case "request to add time":
@@ -449,12 +448,20 @@ public class ServerMessageHandler
 	}
 	
 	/**
-	 * Resets the map when the server disconnects. 
+	 * Resets the map AND the counters when the server disconnects. 
 	 */
 	public static void clearServerVars()
 	{
 		roleClientMap = new HashMap<>();
-		Arrays.fill(onGoingExam, "0");
+		emptyCounters();
+	}
+	
+	/**
+	 * Resets the counters when the server disconnects. 
+	 */
+	public static void emptyCounters()
+	{
+		Arrays.fill(onGoingExamTime, "0");
 		Arrays.fill(counterArray, 0);
 	}
 	
@@ -473,35 +480,42 @@ public class ServerMessageHandler
 		{
 			counterArray[statusExam]++;
 			counterArray[studentCounter]--;
-			onGoingExam[0] = arrayList.get(1);
-			onGoingExam[1] = arrayList.get(time);
-			onGoingExam[2] = String.valueOf(Math.max(
-					Integer.parseInt(onGoingExam[2]), Integer.parseInt(arrayList.get(actualTime)))); 
+			onGoingExamTime[0] = arrayList.get(1);
+			onGoingExamTime[1] = arrayList.get(time);
+			onGoingExamTime[2] = String.valueOf(Math.max(
+					Integer.parseInt(onGoingExamTime[2]), Integer.parseInt(arrayList.get(actualTime)))); 
 		}
 		catch(Exception e) {e.printStackTrace();}
-		
 	}
 	
 	/**
 	 * Checking if the exam is finished, if it was - updating its statistics in the DB.
 	 */
-	public static void handleFinishedExam()
+	public static void handleFinishedExam(ConnectionToClient client)
 	{
+		//Removing the specific student from roleClientMap
+	    roleClientMap.get("student").remove(client);
 		if (counterArray[2] == 0)
 		{
-			sqlController.updateExamStatus(onGoingExam[0], false);
+			sqlController.updateExamStatus(onGoingExamTime[0], false);
 			ArrayList<String> examStats = new ArrayList<>();
-			examStats.add(onGoingExam[0]);
+			examStats.add(onGoingExamTime[0]);
 			LocalDate currentDate = LocalDate.now();
 		    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		    String dateString = currentDate.format(formatter);
 		    examStats.add(dateString);
-		    examStats.add(String.valueOf(onGoingExam[1]));
-		    examStats.add(String.valueOf(onGoingExam[2]));
+		    //Exam time
+		    examStats.add(String.valueOf(onGoingExamTime[1]));
+		    //Actual time
+		    examStats.add(String.valueOf(onGoingExamTime[2]));
+		    //Total amount of students
 		    examStats.add(String.valueOf(counterArray[0] + counterArray[1]));
+		    //Amount of students that finished the exam
 		    examStats.add(String.valueOf(counterArray[0]));
+		    //Amount of students that didn't finish the exam
 		    examStats.add(String.valueOf(counterArray[1]));
 		    sqlController.addExamStats(examStats);
+		    clearServerVars();
 		}
 	}
 }

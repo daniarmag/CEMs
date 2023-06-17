@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatisticsChooseScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StatisticsChooseScreenController">
    <children>
-      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
+      <Pane prefHeight="600.0" prefWidth="840.0" style="-fx-background-color: #ffffff;">
          <children>
             <VBox fx:id="choosingVbox" layoutX="234.0" layoutY="235.0" prefHeight="173.0" prefWidth="230.0">
                <children>
@@ -79,9 +79,9 @@
                   </ImageView>
                </children>
             </VBox>
-            <Button fx:id="generateReportBtn" layoutX="501.0" layoutY="523.0" mnemonicParsing="false" onAction="#GenerateRepo" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Generate report" textFill="WHITE">
+            <Button fx:id="generateReportBtn" layoutX="520.0" layoutY="524.0" mnemonicParsing="false" onAction="#GenerateRepo" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30PX;" text="Generate report" textFill="WHITE">
                <font>
-                  <Font name="Tahoma Bold" size="22.0" />
+                  <Font name="Tahoma Bold" size="18.0" />
                </font>
             </Button>
             <ImageView fitHeight="60.0" fitWidth="300.0" layoutX="201.0" layoutY="7.0">
@@ -89,12 +89,12 @@
                   <Image url="@../images/StatisticsLabel.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="75.0" layoutX="719.0" layoutY="494.0">
+            <ImageView fitHeight="100.0" fitWidth="75.0" layoutX="757.0" layoutY="494.0">
                <image>
                   <Image url="@../images/Logo.png" />
                </image>
             </ImageView>
-            <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="738.0" layoutY="7.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="48.0" prefWidth="56.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+            <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="776.0" layoutY="7.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="48.0" prefWidth="56.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
                <padding>
                   <Insets left="40.0" right="30.0" top="10.0" />
                </padding>

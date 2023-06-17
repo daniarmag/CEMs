@@ -58,12 +58,12 @@
             <Font name="Tahoma Bold" size="42.0" />
          </font>
       </Text>
-      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="914.0" layoutY="516.0">
+      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="900.0" layoutY="517.0">
          <image>
             <Image url="@../images/Logo.png" />
          </image>
       </ImageView>
-      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="900.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="947.0" layoutY="18.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="900.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -80,17 +80,17 @@
             <TableColumn fx:id="authorTable" prefWidth="121.0" text="Author" />
         </columns>
       </TableView>
-      <Button fx:id="addQstnBtn" layoutX="219.0" layoutY="549.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Add question" textFill="WHITE">
+      <Button fx:id="addQstnBtn" layoutX="279.0" layoutY="550.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="35.0" prefWidth="167.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Add question" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="editBtn" layoutX="449.0" layoutY="549.0" mnemonicParsing="false" onAction="#editQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Edit question" textFill="WHITE">
+      <Button fx:id="editBtn" layoutX="500.0" layoutY="550.0" mnemonicParsing="false" onAction="#editQuestion" prefHeight="35.0" prefWidth="167.0" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Edit question" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="deleteBtn" layoutX="681.0" layoutY="549.0" mnemonicParsing="false" onAction="#deleteQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete question" textFill="WHITE">
+      <Button fx:id="deleteBtn" layoutX="717.0" layoutY="549.0" mnemonicParsing="false" onAction="#deleteQuestion" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Delete question" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="18.0" />
          </font>

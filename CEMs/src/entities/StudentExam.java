@@ -3,15 +3,18 @@ package entities;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class StudentExam implements Serializable,HaveID{
+public class StudentExam implements Serializable,HaveID
+{
 	private String exam_id;
+	
 	private int grade;
+	
 	private String student_id;
+	
 	private String exam_name;
+	
 	private String comment;
-	
-	
-	
+
 	/**
 	 * @param exam_id
 	 * @param grade

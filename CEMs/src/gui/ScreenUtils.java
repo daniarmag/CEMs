@@ -46,7 +46,4 @@ public class ScreenUtils
         catch(IOException e) {e.printStackTrace();}
         return primaryStage;
     }
-
 }
-
-

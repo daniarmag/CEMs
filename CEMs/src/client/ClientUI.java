@@ -40,7 +40,7 @@ public class ClientUI extends Application
 	 * Initializing an instance of a client.
 	 * @param host
 	 * @param port
-	 * @return
+	 * @return true or false
 	 * @throws IOException
 	 */
 	public static boolean connect(String host, int port) throws IOException

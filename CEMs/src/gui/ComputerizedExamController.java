@@ -30,7 +30,7 @@ import javafx.scene.text.Text;
 /**
  * Class that represents the computerized exam.
  */
-public class ExamController implements Initializable
+public class ComputerizedExamController implements Initializable
 {
 	Integer minutesLeft, secondsLeft = 1, actualTime = 0;
 	
@@ -44,7 +44,7 @@ public class ExamController implements Initializable
 	
 	public static ActionEvent savedEvent;
 	
-	public static Timer timer = new Timer();
+	public static Timer timer;
 	
     @FXML
     private Text idTXT;
@@ -98,7 +98,7 @@ public class ExamController implements Initializable
     {
     	onGoingExam = exam;
     	u = user;
-    	Platform.runLater(()->ScreenUtils.createNewStage("/gui/ExamScreen.fxml").show());
+    	Platform.runLater(()->ScreenUtils.createNewStage("/gui/ComputerizedExam.fxml").show());
     }
     
     /**
@@ -341,10 +341,14 @@ public class ExamController implements Initializable
 	/**
 	 * Starts the timer for the exam.
 	 */
-	public void startCountdown() {
-	    TimerTask task = new TimerTask() {
+	public void startCountdown() 
+	{
+		timer = new Timer();
+	    TimerTask task = new TimerTask() 
+	    {
 	        @Override
-	        public void run() {
+	        public void run() 
+	        {
 	            secondsLeft--;
 
 	            // Calculate hours, minutes, and seconds
@@ -356,7 +360,8 @@ public class ExamController implements Initializable
 	            timerTXT.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
 	            
 	            // Increment actualTime every minute
-	            if (secondsLeft == 0) {
+	            if (secondsLeft == 0)
+	            {
 	                minutesLeft--;
 	                actualTime++;
 	                secondsLeft = 60;

@@ -18,7 +18,7 @@
                   <Image url="@../images/StudentLogo.png" />
                </image>
                <VBox.margin>
-                  <Insets top="55.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </ImageView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
@@ -48,7 +48,7 @@
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets top="220.0" />
+                  <Insets top="230.0" />
                </VBox.margin>
             </Button>
          </children>

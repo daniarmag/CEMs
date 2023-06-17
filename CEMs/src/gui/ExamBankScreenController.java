@@ -120,7 +120,6 @@ public class ExamBankScreenController implements Initializable
 		UserController.goBack(event, "/gui/ProfessorScreen.fxml");
 	}
  
-
     /**
      * Sends a request to HOF to get time extension for the exam.
      * @param event
@@ -150,7 +149,6 @@ public class ExamBankScreenController implements Initializable
     	  else 
               AlertMessages.makeAlert("Select an exam for time change.", "Change Time");
     }
-    
     
 	/**
 	 * Activates the exam via handleExamStatus

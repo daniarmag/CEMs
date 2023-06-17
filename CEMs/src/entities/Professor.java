@@ -28,6 +28,10 @@ public class Professor<T, E> extends User {
 	}
 
 	
+	/**
+	 * @param user_id
+	 * @param arr
+	 */
 	public Professor(String user_id ,ArrayList<ExamStatistics>arr) {
 		super(user_id,null,null,null,null,null,"professor");
 		exams_array=arr;
@@ -36,11 +40,20 @@ public class Professor<T, E> extends User {
 	
 	
 	
-	public void setExamArray(ArrayList<ExamStatistics> arr) {
+	/**
+	 * Setter
+	 * @param arr
+	 */
+	public void setExamArray(ArrayList<ExamStatistics> arr) 
+	{
 		exams_array=arr;
 	}
 	
-	public ArrayList<ExamStatistics> getExamArray() {
+	/**
+	 * @return exams_array
+	 */
+	public ArrayList<ExamStatistics> getExamArray() 
+	{
 		return exams_array;
 	}
 	

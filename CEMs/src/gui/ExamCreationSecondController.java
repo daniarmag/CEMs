@@ -120,7 +120,6 @@ public class ExamCreationSecondController implements Initializable
 		UserController.userExit(u);
 	}
 	
-	
 	/**
 	 * Goes back to professor main screen only if the user pressed yes.
 	 * @param event
@@ -172,10 +171,9 @@ public class ExamCreationSecondController implements Initializable
 		try 
 		{
 			buildExam();
-			ExamController.start(newExam, u);
+			ComputerizedExamController.start(newExam, u);
 		} catch (Exception e) {e.printStackTrace();}
 	}
-	
 	
 	/**
 	 * This method builds the exam from the information within the controller.
@@ -195,7 +193,6 @@ public class ExamCreationSecondController implements Initializable
 		newExam.setExam_name(examNameTextField.getText());
 		newExam.setExamQuestions(questionList);
 	}
-	
 	
 	/**
 	 * Finds out how many exams there to get the correct exam number.

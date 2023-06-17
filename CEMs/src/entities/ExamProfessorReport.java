@@ -6,11 +6,14 @@ import java.io.Serializable;
  * Represents exam professor report
  */
 @SuppressWarnings("serial")
-public class ExamProfessorReport extends ExamStatistics implements Serializable{
-	
+public class ExamProfessorReport extends ExamStatistics implements Serializable
+{
 	private String course_id;
+	
 	private Distribution dist;	
+	
 	private double median;
+	
 	private ExamStat statistics;
 	
 	/**
@@ -73,14 +76,4 @@ public class ExamProfessorReport extends ExamStatistics implements Serializable{
 	public void setStat(ExamStat stat) {
 		statistics=stat;
 	}
-
-	@Override
-	public String toString() {
-		return "ExamProfessorReport [course_id=" + course_id + ", dist=" + dist + ", median=" + median + ", statistics="
-				+ statistics + ", get_id()=" + get_id() + ", getGrade()=" + getGrade() + ", getMax_grade()="
-				+ getMax_grade() + ", getMin_grade()=" + getMin_grade() + ", getFails()=" + getFails() + "]";
-	}
-
-
-	
 }

@@ -63,6 +63,15 @@ public class ExamTemplate implements Serializable,HaveID{
 		return isActive;
 	}
 
+	
+	/**
+	 * @param course_id the course_id to set
+	 */
+	public void setCourse_id(String course_id) 
+	{
+		this.course_id = course_id;
+	}
+
 	/**
 	 * @param author the author to set
 	 */

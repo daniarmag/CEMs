@@ -2,12 +2,14 @@ package gui;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
 import control.UserController;
 import entities.ExamTemplate;
+import entities.Professor;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +31,9 @@ import javafx.scene.text.Text;
  */
 public class ExamReportController implements Initializable
 {
-	private static  ReportScreenController reportScreen = new ReportScreenController();
+	private static ReportScreenController reportScreen = new ReportScreenController();
+	
+	public static Map<String, ArrayList<String>> teachingMap;
 	
     private static User u;
     
@@ -89,9 +93,12 @@ public class ExamReportController implements Initializable
 	 * @param user
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	public static void start(User user) throws Exception 
 	{
 		u = user;
+		if (u.getRole().equals("professor"))
+			teachingMap = (Map<String, ArrayList<String>>)((Professor<?,?>)user).getMap();
 		ScreenUtils.createNewStage("/gui/ExamReportScreen.fxml").show();
 	}
     
@@ -175,13 +182,35 @@ public class ExamReportController implements Initializable
 	        AlertMessages.makeAlert("You must choose an exam to view report", "View Report");        
 	}
 
-    
+	/**
+	 * Using the professor map to set the names for courses for better user experience
+	 * @param array
+	 */
+	private void setCourseStringsFromMap(ArrayList<ExamTemplate> array) 
+	{
+	    ArrayList<String> allProfessorCourses = new ArrayList<>();
+	    for (ArrayList<String> courses : teachingMap.values()) 
+	        allProfessorCourses.addAll(courses);
+	    for (ExamTemplate exam : array) 
+	    {
+	        String courseString = exam.getCourse_id();
+	        for (String subcategory : allProfessorCourses) 
+	            if (subcategory.startsWith(courseString)) 
+	                exam.setCourse_id(subcategory);
+	    }
+	}
+
+
+
+
     /**loading the table with the data of all the exams 
      * @param array
      */
     public void loadTable(ArrayList<ExamTemplate> array) 
     {
-    	arr=array;
+    	if (u.getRole().equals("professor"))
+    		setCourseStringsFromMap(array);
+    	arr = array;
     	examTable.getItems().clear();
 		loadingColumns( "_name","_id", "course_id");
 		updateExamTable(array);
@@ -196,11 +225,9 @@ public class ExamReportController implements Initializable
 	{
 		try
 		{
-	    ObservableList<ExamTemplate> examObservableList = FXCollections.observableArrayList(arrayList);
-	    examTable.setItems(examObservableList);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		    ObservableList<ExamTemplate> examObservableList = FXCollections.observableArrayList(arrayList);
+		    examTable.setItems(examObservableList);
+		}catch(Exception e) {e.printStackTrace();}
     }
     
 	private void loadingColumns( String examId, String name, String course) 
@@ -213,6 +240,10 @@ public class ExamReportController implements Initializable
 		}catch(Exception e) {e.printStackTrace();}
 	}
 	
+	/**
+	 * Opens the report screen with for the selected exam
+	 * @param obj
+	 */
 	public void openRep(Object obj) 
 	{
 		try 
@@ -230,12 +261,12 @@ public class ExamReportController implements Initializable
 	void search(KeyEvent event)
 	{
 		String searchText = searchBar.getText().toLowerCase();
-		// Filter the question list based on the search text
+		//Filter the question list based on the search text
 		ArrayList<ExamTemplate> filteredList = new ArrayList<>();
 		for (Object exam : arr)
 			if (((ExamTemplate) exam).get_name().toLowerCase().contains(searchText))
 				filteredList.add((ExamTemplate) exam);
-		// Update the question table with the filtered list
+		//Update the question table with the filtered list
 		updateExamTable(filteredList);     
 	 }
 }
