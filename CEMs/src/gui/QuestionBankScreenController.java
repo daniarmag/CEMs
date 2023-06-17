@@ -35,18 +35,19 @@ public class QuestionBankScreenController implements Initializable
 {
 	public ArrayList<Question> qArr = new ArrayList<>();
 	
-	public static Map<String, ArrayList<String>> teachingMap;
 	
 	public static User u;
 	
 	public static boolean isValidRemoval = true;
 	
-	private static Map<Class<?>,String> map =new HashMap<>();
+	private static Map<Class<?>,String> map;
 	
-	private static Map<Class<?>,String> path =new HashMap<>();
+	private static Map<Class<?>,String> path;
 	
 	static
 	{
+		map =new HashMap<>();
+		path =new HashMap<>();
 		map.put(Professor.class,"load professor questions");
 		map.put(HeadOfDepartment.class, "load all department questions");
 		path.put(HeadOfDepartment.class, "/gui/HeadOfDepartmentScreen.fxml");
@@ -103,13 +104,9 @@ public class QuestionBankScreenController implements Initializable
 	 * @param map
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	public static void start(User user) throws Exception 
 	{
 		u = user;
-		if(user instanceof Professor)
-			teachingMap=(Map<String, ArrayList<String>>)((Professor<?, ?>)user).getMap();
-		//teachingMap = (Map<String, ArrayList<String>>) map;
 		Platform.runLater(()-> ScreenUtils.createNewStage("/gui/QuestionBankScreen.fxml").show());
 	}
     
@@ -200,7 +197,7 @@ public class QuestionBankScreenController implements Initializable
     	UserController.hide(event);
     	try 
     	{
-			QuestionCreationScreenController.start(u, teachingMap);
+			QuestionCreationScreenController.start(u);
 		} catch (Exception e) {}
     }
     

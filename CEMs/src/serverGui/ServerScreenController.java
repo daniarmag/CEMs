@@ -185,8 +185,13 @@ public class ServerScreenController implements Initializable {
 	@FXML
 	void importUsers(ActionEvent event)
 	{
+		try {
 		sqlController.importExternalUsers();
 		AlertMessages.makeAlert("Users imported successfully", "Import Users");
+		}catch(Exception  e) {
+			e.printStackTrace();
+			System.out.println("Error in loading users");
+		}
 	}
 	
 

@@ -219,7 +219,7 @@ public class ReportScreenController implements Initializable
 		}
 
 		setHiddenFiedls();
-		initializeFields("\\images\\ProfessorLogo.png", "\\images\\ProfessorLabel.png", exam.getMedian(),
+		initializeFields(image, path, exam.getMedian(),
 				String.valueOf(exam.getGrade()), String.valueOf(exam.getMax_grade()),
 				String.valueOf(exam.getMin_grade()));
 		axisY.setUpperBound(20);

@@ -11,6 +11,7 @@ import control.AlertMessages;
 import control.UserController;
 import entities.Question;
 import entities.User;
+import entities.Professor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -87,10 +88,11 @@ public class QuestionCreationScreenController implements Initializable
 	 * @param map
 	 * @throws Exception
 	 */
-	public static void start(User user, Map<String, ArrayList<String>> map) throws Exception 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void start(User user) throws Exception 
 	{
 		u = user;
-		teachingMap =  map;
+		teachingMap = ((Professor)user).getMap();
 		ScreenUtils.createNewStage("/gui/QuestionCreationScreen.fxml").show();
 	}
 
