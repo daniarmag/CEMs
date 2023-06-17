@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="573.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TimePendingRequestsController">
    <children>
-      <AnchorPane prefHeight="573.0" prefWidth="744.0" style="-fx-background-color: #FFFFFF;">
+      <AnchorPane prefHeight="573.0" prefWidth="769.0" style="-fx-background-color: #FFFFFF;">
          <children>
             <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="573.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
                <children>
@@ -59,12 +59,12 @@
                   <Font name="Times New Roman Bold" size="42.0" />
                </font>
             </Text>
-            <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="650.0" layoutY="456.0">
+            <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="675.0" layoutY="456.0">
                <image>
                   <Image url="@../images/Logo.png" />
                </image>
             </ImageView>
-            <Button id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+            <Button id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="719.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -100,6 +100,18 @@
                <font>
                   <Font name="Tahoma Bold" size="18.0" />
                </font>
+            </Button>
+            <Button fx:id="refreshBtn" layoutX="696.0" layoutY="175.0" mnemonicParsing="false" onAction="#refresh" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 30px; -fx-background-color: WHITE;" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/refresh-button.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
       </AnchorPane>

@@ -27,6 +27,7 @@ import gui.ExamReportController;
 import gui.ProfessorScreenController;
 import gui.StudentScreenController;
 import gui.TimePendingRequestsController;
+import javafx.application.Platform;
 import gui.ExamBankScreenController;
 import gui.ComputerizedExamController;
 import gui.StatisticsChooseScreenController;
@@ -580,7 +581,7 @@ public class ClientMessageHandler
 			case "pending exams":
 				examResultsScreenController.setArr(arrayList);
 				examResultsScreenController.updateExamTable(arrayList);
-				examResultsScreenController.checkForSuspects();
+				Platform.runLater(() -> examResultsScreenController.checkForSuspects());
 				break;
 		}
 	}

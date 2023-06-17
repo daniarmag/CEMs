@@ -72,10 +72,7 @@ public class TimePendingRequestsController implements Initializable
 		ClientMessageHandler.setTimePendingRequestsController(this);
 		nameTXT.setText(u.get_fullName());
 		idTXT.setText(u.getUser_id());
-		ArrayList<String> request = new ArrayList<>();
-		request.add("load pending requests");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);
+		constructRequest();
 	}
 	
 	/** 
@@ -119,6 +116,17 @@ public class TimePendingRequestsController implements Initializable
     	handleRequest("-1");
     }
     
+	/**
+	 * Refreshes the exam table
+	 * @param event
+	 */
+	@FXML
+	void refresh(ActionEvent event) 
+	{
+		constructRequest();
+		pendingRequestsTable.refresh();
+	}
+	
     /**
 	 * Depending by button that was clicked, handling the request
 	 * to approve or disapprove the exam.
@@ -140,6 +148,17 @@ public class TimePendingRequestsController implements Initializable
     	else
     		AlertMessages.makeAlert("You must select a request", "Grant Approval");
 
+    }
+    
+    /**
+     * A request to load requests. Used in initialization and refresh.
+     */
+    private void constructRequest()
+    {
+		ArrayList<String> request = new ArrayList<>();
+		request.add("load pending requests");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);
     }
     
     /**

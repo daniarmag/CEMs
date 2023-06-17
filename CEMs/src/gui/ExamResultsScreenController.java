@@ -87,10 +87,7 @@ public class ExamResultsScreenController implements Initializable
 		ClientMessageHandler.setExamResultsScreenController(this);
 		nameTXT.setText(u.get_fullName());
 		idTXT.setText(u.getUser_id());
-		ArrayList<String> request = new ArrayList<>();
-		request.add("load pending exams");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);
+		constructRequest();
 		searchBar.setOnKeyReleased(event -> search(event));
 		colHandler();
 	}
@@ -142,6 +139,29 @@ public class ExamResultsScreenController implements Initializable
         }
         else 
        	 AlertMessages.makeAlert("Select an exam to approve.", "Approve Exam");
+    }
+    
+    /**
+	 * Refreshes the exam table
+	 * @param event
+	 */
+	@FXML
+	void refresh(ActionEvent event) 
+	{
+		constructRequest();
+		examResultsTable.refresh();
+		suspectListView.refresh();
+	}
+	
+	/**
+     * A request to load requests. Used in initialization and refresh.
+     */
+    private void constructRequest()
+    {
+		ArrayList<String> request = new ArrayList<>();
+		request.add("load pending exams");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);
     }
     
     /**
@@ -213,6 +233,7 @@ public class ExamResultsScreenController implements Initializable
      */
     public void checkForSuspects() 
     {
+    	suspectListView.getItems().clear();
     	//<wronganswer, student id list>
         Map<String, List<String>> suspectPairs = new HashMap<>();
         for (ExamResults e : arr) 

@@ -90,14 +90,8 @@ public class ExamBankScreenController implements Initializable
 		ClientMessageHandler.setExamBankScreenController(this);
 		nameTXT.setText(u.get_fullName());
 		idTXT.setText(u.getUser_id());
-		ArrayList<String> request = new ArrayList<String>();
-		//A call to load all professor questions.
-		request.add("load professor exams");
-		request.add(u.getUser_id());
-		ClientUI.chat.accept(request);
+		constructRequest();
 		searchBar.setOnKeyReleased(event -> search(event));
-	    for (Exam e : examTable.getItems()) 
-	        e.setIsActive(e.getIsActive().equals("0") ? "No" : "Yes");
 	}
 
 	/**
@@ -170,6 +164,31 @@ public class ExamBankScreenController implements Initializable
 	    handleExamStatus(false);
 	}
 
+	/**
+	 * Refreshes the exam table
+	 * @param event
+	 */
+	@FXML
+	void refresh(ActionEvent event) 
+	{
+		constructRequest();
+		examTable.refresh();
+	}
+	
+	/**
+     * A request to load requests. Used in initialization and refresh.
+     */
+    private void constructRequest()
+    {
+    	ArrayList<String> request = new ArrayList<String>();
+		//A call to load all professor questions.
+		request.add("load professor exams");
+		request.add(u.getUser_id());
+		ClientUI.chat.accept(request);
+	    for (Exam e : examTable.getItems()) 
+	        e.setIsActive(e.getIsActive().equals("0") ? "No" : "Yes");
+    }
+    
 	/**
 	 * Depending by button that was clicked, handling the request
 	 * to activate or deactivate the exam.
