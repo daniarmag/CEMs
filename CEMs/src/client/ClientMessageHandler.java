@@ -65,7 +65,6 @@ public class ClientMessageHandler
 		headOfDepartmentScreenController = new HeadOfDepartmentScreenController();
 	}
 	
-	
 	/**
 	 * @param headOfDepartmentScreenController the headOfDepartmentScreenController to set
 	 */
