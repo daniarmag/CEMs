@@ -25,3 +25,10 @@ Added javadoc to all parts of code
 Fixed GUI stuff - like wrong sizes, added Ids and names for professors and hofs
 Changed to password field in login
 Added courses names in report table of professor
+
+******************************************************************
+18.6
+Added refresh button for a few tables (ones that made sense)
+Fixed remaining GUI stuff
+Seperated the project into 2 (client and server projects)
+A lot of bug fixes - seems to run smoothly allround now
