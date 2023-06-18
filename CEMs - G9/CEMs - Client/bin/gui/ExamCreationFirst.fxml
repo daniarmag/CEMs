@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="621.0" prefWidth="737.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ExamCreationFirstController">
+   <children>
+      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="621.0" prefWidth="201.0" style="-fx-background-color: #30BECC;">
+         <children>
+            <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #30BECC;">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0">
+                     <image>
+                        <Image url="@../images/Back%20Logo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets right="140.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <ImageView fitHeight="180.0" fitWidth="180.0">
+               <image>
+                  <Image url="@../images/exam_icon_182959.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Text>
+            <Text fx:id="nameTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Tzahi Bakal" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Text>
+            <Text fx:id="idTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="315731456" />
+            <ImageView fitHeight="50.0" fitWidth="50.0">
+               <image>
+                  <Image url="@../images/QuestionMark.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="90.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose questions for your new exam" textAlignment="CENTER" wrappingWidth="161.89990234375">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Text id="profTitle" layoutX="331.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an exam" textAlignment="CENTER">
+         <font>
+            <Font name="Times New Roman Bold" size="42.0" />
+         </font>
+      </Text>
+      <Text layoutX="249.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subject:" wrappingWidth="66.0166015625">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Text>
+      <MenuButton fx:id="subjectMenu" layoutX="322.0" layoutY="166.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" style="-fx-background-radius: 15px;">
+         <font>
+            <Font name="Tahoma" size="15.0" />
+         </font>
+      </MenuButton>
+      <Button layoutX="647.0" layoutY="550.0" mnemonicParsing="false" onAction="#next" style="-fx-background-color: #30BECC; -fx-background-radius: 30px;" text="Next" textFill="WHITE">
+         <font>
+            <Font name="Tahoma Bold" size="18.0" />
+         </font>
+      </Button>
+      <Text layoutX="497.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course:" wrappingWidth="66.0166015625">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Text>
+      <MenuButton fx:id="courseMenu" layoutX="564.0" layoutY="165.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" style="-fx-background-radius: 15px;">
+         <font>
+            <Font name="Tahoma" size="15.0" />
+         </font>
+      </MenuButton>
+      <TableView fx:id="questionTable" layoutX="249.0" layoutY="243.0" prefHeight="273.0" prefWidth="465.0">
+        <columns>
+          <TableColumn fx:id="tableViewQusetionId" prefWidth="129.0" text="Question ID" />
+          <TableColumn fx:id="tableViewQusetionText" prefWidth="334.0" text="Question " />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="75.0" fitWidth="330.0" layoutX="204.0" layoutY="5.0">
+         <image>
+            <Image url="@../images/ExamMenuLogo.png" />
+         </image>
+      </ImageView>
+      <Button id="exitBtn" fx:id="exitBtn" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="47.0" prefWidth="48.0" style="-fx-background-radius: 30px; -fx-background-color: white;" textAlignment="CENTER">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitBtn.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </Button>
+      <Text layoutX="249.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ctrl to select multiple questions">
+         <font>
+            <Font name="Tahoma" size="12.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
