@@ -449,7 +449,7 @@ CREATE TABLE `subject` (
 
 LOCK TABLES `subject` WRITE;
 /*!40000 ALTER TABLE `subject` DISABLE KEYS */;
-INSERT INTO `subject` VALUES ('01','Mathematics','319003935'),('02','Computer Science','319003935'),('03','Physics',NULL),('04','Chemistry',NULL),('05','Biology',NULL),('06','Electricity','319003935');
+INSERT INTO `subject` VALUES ('01','Mathematics','319003935'),('02','Computer Science','319003935'),('03','Physics','398765432'),('04','Chemistry','319003935'),('05','Biology','319003935'),('06','Electricity','319003935');
 /*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 UNLOCK TABLES;
 
