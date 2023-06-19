@@ -155,8 +155,8 @@ public class MySQLController
 		return qArr;
 	}
 		
-	/**This method loads all the exams that the student can take.
-	 * @param id
+	/**
+	 * This method loads all the exams that the student can take.
 	 * @return an ArrayList of Exam objects
 	 */
 	public ArrayList<Exam>loadStudentExams()
@@ -182,8 +182,9 @@ public class MySQLController
 	}
 	
 	/**
-	 * @param exam
-	 * @return the exams of the prefessor which student already took and have grades.
+	 * @param id
+	 * @param role
+	 * @return the exams of the professor which student already took and have grades.
 	 */
 	public ArrayList<?> loadProfessorExams_toReport(String id, String role)
 	{
@@ -635,8 +636,8 @@ public class MySQLController
 
 	
 	/**
-	 * @param role
-	 * @return the function receives   professor request and load all the 
+	 * @param id
+	 * @return the function receives professor request and load all the 
 	 * Appropriate professors belongs to the department 
 	 */
 	public ArrayList<?> getAllProffesors(String id){
@@ -822,7 +823,7 @@ public class MySQLController
 	/**
 	 * this method adds the question that were assigned to an exam and adds it to 
 	 * exam_question table in DB.
-	 * @param courses
+	 * @param questionInExams
 	 */
 	public void addExamQuestions(ArrayList<String> questionInExams)
 	{
@@ -872,10 +873,9 @@ public class MySQLController
 		    catch (SQLException e){e.printStackTrace();}
 	}
 	
-	/** This method loads courses and their names.
-	 * @param id
+	/** 
+	 * This method loads courses and their names.
 	 * @return an ArrayList of String objects
-
 	 */
 	public ArrayList<String> getStudentCourses(){
         ArrayList<String> courses = new ArrayList<>();

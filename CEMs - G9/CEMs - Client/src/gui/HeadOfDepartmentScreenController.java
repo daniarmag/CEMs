@@ -58,7 +58,6 @@ public class HeadOfDepartmentScreenController implements Initializable
     /**
   	 * Initializes the JavaFX controller during application startup.
   	 * @param user
-  	 * @throws Exception
   	 */
 	public void start(User user) 
 	{

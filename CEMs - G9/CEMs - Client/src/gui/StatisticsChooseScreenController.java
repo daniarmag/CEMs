@@ -88,8 +88,7 @@ public class StatisticsChooseScreenController implements Initializable
 	
 	/**
 	 * Initializes the JavaFX controller during application startup.
-	 * @param user
-	 * @throws Exception
+	 * @param u user
 	 */
 	public void start(User u)
 	{

@@ -14,8 +14,7 @@ public class ScreenUtils
 {
     /**
      * Enables the dragging functionality for a window.
-     * @param node         The Node representing the window content.
-     * @param primaryStage The primary Stage of the window.
+     * @param fxmlFilePath
      */
     public static Stage createNewStage(String fxmlFilePath) 
     {

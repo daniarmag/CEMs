@@ -31,7 +31,7 @@ public class EchoServer extends AbstractServer
 	/**
 	 * Sets the correct instance of serverScreenController.
 	 * 
-	 * @paramserverScreenController
+	 * @param serverScreenController
 	 */
 	public static void setServerScreenController(ServerScreenController serverScreenController) 
 	{
@@ -39,7 +39,7 @@ public class EchoServer extends AbstractServer
 	}
 
 	/**
-	 * @returns the list of clients.
+	 * @return the list of clients.
 	 */
 	public static ObservableList<Client> getClientsInfoList() 
     {

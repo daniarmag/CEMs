@@ -103,7 +103,6 @@ public class QuestionBankScreenController implements Initializable
     /**
 	 * Initializes the JavaFX controller during application startup.
 	 * @param user
-	 * @param map
 	 * @throws Exception
 	 */
 	public static void start(User user) throws Exception 
@@ -269,7 +268,7 @@ public class QuestionBankScreenController implements Initializable
     
     /**
      * Setter.
-     * @param flag
+     * @param removalFlag
      */
     public void setRemovalFlag (boolean removalFlag)
     {

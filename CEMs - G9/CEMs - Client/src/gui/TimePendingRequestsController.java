@@ -177,7 +177,7 @@ public class TimePendingRequestsController implements Initializable
     
     /**
      * Setter.
-     * @param qArr
+     * @param arr
      */
     public void setArr (ArrayList<ExamTimeChange> arr)
     {

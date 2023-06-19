@@ -67,7 +67,6 @@ public class ExamCreationFirstController implements Initializable
     /**
 	 * Initializes the JavaFX controller during application startup.
 	 * @param user
-	 * @param map
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")

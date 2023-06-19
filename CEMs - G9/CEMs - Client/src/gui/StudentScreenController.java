@@ -48,7 +48,6 @@ public class StudentScreenController implements Initializable
 	/**
 	 * Initializes the JavaFX controller during application startup.
 	 * 
-	 * @param primaryStage The primary stage of the application.
 	 * @param user
 	 * @throws Exception
 	 */

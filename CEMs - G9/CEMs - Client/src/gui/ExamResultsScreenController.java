@@ -271,7 +271,7 @@ public class ExamResultsScreenController implements Initializable
 
 	/**
      * Setter.
-     * @param qArr
+     * @param arr array
      */
     public void setArr (ArrayList<ExamResults> arr)
     {
