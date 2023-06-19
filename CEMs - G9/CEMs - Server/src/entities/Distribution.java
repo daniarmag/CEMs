@@ -65,7 +65,8 @@ public class Distribution implements Serializable
      * @return a string representation of the object
      */ 
 	 @Override
-	public String toString() {
+	public String toString()
+	 {
 		 StringBuilder string=new StringBuilder();
 		 for(int i=0;i<dArr.length;i++)
 			 string.append(dArr[i]+" ");
