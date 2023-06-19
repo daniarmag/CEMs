@@ -10,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-/*A GUI for the login screen.*/
+/**
+ * A GUI for the login screen.
+ */
 public class LoginScreenController
 {
 	private static ActionEvent e;

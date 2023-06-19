@@ -19,7 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
-/*A GUI for editing questions.*/
+/**
+ * A GUI for editing question.
+ */
 public class QuestionEditScreenController implements Initializable
 {
 	public static User u;

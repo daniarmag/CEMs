@@ -2,8 +2,12 @@ package entities;
 
 import java.io.Serializable;
 
+/**
+ * A class that represents an exam specifically for exam report screen class
+ */
 @SuppressWarnings("serial")
-public class ExamTemplate implements Serializable,HaveID{
+public class ExamTemplate implements Serializable,HaveID
+{
 	private String exam_id;
 	private String exam_name;
 	private String course_id;

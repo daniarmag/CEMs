@@ -30,7 +30,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
-/*A GUI for the question bank*/
+/**
+ * A GUI for the question bank.
+ */
 public class QuestionBankScreenController implements Initializable
 {
 	public ArrayList<Question> qArr = new ArrayList<>();

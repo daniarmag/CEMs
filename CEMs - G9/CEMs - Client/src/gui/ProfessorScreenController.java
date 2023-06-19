@@ -16,7 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-/*A GUI for the professor main menu.*/
+/**
+ * A GUI for the professor main menu.
+ */
 public class ProfessorScreenController implements Initializable 
 {
 	public static Professor<?, ?> u;

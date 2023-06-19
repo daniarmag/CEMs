@@ -2,6 +2,9 @@ package entities;
 
 import java.io.Serializable;
 
+/**
+ * A class that represents an exam of a student for statistics
+ */
 @SuppressWarnings("serial")
 public class StudentExam implements Serializable,HaveID
 {

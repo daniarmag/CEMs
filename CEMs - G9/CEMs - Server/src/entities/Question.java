@@ -21,7 +21,7 @@ public class Question implements Serializable
 	
 	/**
 	 * Question for object passing.
-	 * @param author
+	 * @param questionText
 	 */
 	public Question(String questionText)
 	{
@@ -174,7 +174,7 @@ public class Question implements Serializable
 	/**
      * Sets the name of the course.
      *
-     * @param courseName The name of the course.
+     * @param course The name of the course.
      */
 	public void setCourse(String course) 
 	{
@@ -206,7 +206,7 @@ public class Question implements Serializable
 	}
 
 	/**
-	 * @param authorName
+	 * @param author
 	 */
 	public void setAuthor(String author) 
 	{

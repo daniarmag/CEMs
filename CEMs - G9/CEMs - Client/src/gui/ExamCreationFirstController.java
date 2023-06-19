@@ -26,7 +26,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
-/*A GUI for the for the first screen of exam creation.*/
+/**
+ * A GUI for the for the first screen of exam creation.
+ */
 public class ExamCreationFirstController implements Initializable
 {
 	public static User u;

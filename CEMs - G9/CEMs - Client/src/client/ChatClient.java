@@ -5,6 +5,9 @@ import common.ChatIF;
 
 import java.io.*;
 
+/**
+ * A class that handles the communication of client-server from client side
+ */
 public class ChatClient extends AbstractClient
 {
 	
@@ -27,8 +30,8 @@ public class ChatClient extends AbstractClient
 	 * @param host     The server to connect to.
 	 * @param port     The port number to connect on.
 	 * @param clientUI The interface type variable.
+	 * @throws IOException
 	 */
-
 	public ChatClient(String host, int port, ChatIF clientUI) throws IOException
 	{
 		super(host, port); // Call the superclass constructor
@@ -50,10 +53,8 @@ public class ChatClient extends AbstractClient
 
 	/**
 	 * This method handles all data coming from the UI
-	 *
-	 * @param message The message from the UI.
+	 * @param msg The message from the UI.
 	 */
-
 	public void handleMessageFromClientUI(Object msg) 
 	{
 		try 

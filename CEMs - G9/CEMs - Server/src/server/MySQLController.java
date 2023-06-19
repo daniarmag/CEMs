@@ -29,8 +29,7 @@ import entities.StudentExam;
 import entities.User;
 
 /**
- * @author Daniel
- *
+ * A class that handles all the queries and the connection to the database.
  */
 public class MySQLController 
 {

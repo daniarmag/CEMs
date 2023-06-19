@@ -18,7 +18,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-/*A class that represents professor's time extension request.*/
+/**
+ * A class that represents professor's time extension request.
+ */
 public class ExamRequestTimeController implements Initializable
 {
 	private String hofId = "";

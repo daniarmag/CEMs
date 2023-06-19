@@ -25,7 +25,9 @@ import server.MySQLController;
 import server.ServerMessageHandler;
 import server.ServerUI;
 
-/*A GUI for server area.*/
+/**
+ * A GUI for server area.
+ */
 public class ServerScreenController implements Initializable 
 {
 	String dbName = "jdbc:mysql://localhost/cems?serverTimezone=IST", port = Integer.toString(ServerUI.DEFAULT_PORT),

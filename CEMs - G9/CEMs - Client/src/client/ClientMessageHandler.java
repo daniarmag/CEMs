@@ -67,7 +67,7 @@ public class ClientMessageHandler
 	
 	
 	/**
-	 * @param headOfDepartmentScreenController the headOfDepartmentScreenController to set
+	 * @param controller the headOfDepartmentScreenController to set
 	 */
 	public static void setHeadOfDepScreenController(HeadOfDepartmentScreenController controller) 
 	{
@@ -75,7 +75,7 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param timePendingRequestsController the timePendingRequestsController to set
+	 * @param controller the timePendingRequestsController to set
 	 */
 	public static void setTimePendingRequestsController(TimePendingRequestsController controller) 
 	{
@@ -83,7 +83,7 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param examRequestTimeController the examRequestTimeController to set
+	 * @param controller the examRequestTimeController to set
 	 */
 	public static void setExamRequestTimeController(ExamRequestTimeController controller) 
 	{
@@ -91,14 +91,14 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param examResultsScreenController the examCreationFirstController to set
+	 * @param controller the examCreationFirstController to set
 	 */
 	public static void setExamResultsScreenController(ExamResultsScreenController controller) 
 	{
 		examResultsScreenController = controller;
 	}
 	/**
-	 * @param examResultsScreenController the examCreationFirstController to set
+	 * @param controller the examCreationFirstController to set
 	 */
 	public static void setProfessorExamReportController(ExamReportController controller) 
 	{
@@ -106,7 +106,7 @@ public class ClientMessageHandler
 	}
 
 	/**
-	 * @param examCreationFirstController the examCreationFirstController to set
+	 * @param controller the examCreationFirstController to set
 	 */
 	public static void setExamCreationFirstController(ExamCreationFirstController controller) 
 	{
@@ -114,7 +114,7 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param examCreationFirstController the examCreationFirstController to set
+	 * @param controller the examCreationFirstController to set
 	 */
 	public static void setExamCreationSecondController(ExamCreationSecondController controller) 
 	{
@@ -122,7 +122,7 @@ public class ClientMessageHandler
 	}
 
 	/**
-	 * @param professorController the professorController to set
+	 * @param controller the professorController to set
 	 */
 	public static void setProfessorController(ProfessorScreenController controller) 
 	{
@@ -130,7 +130,7 @@ public class ClientMessageHandler
 	}
 
 	/**
-	 * @param examBankScreenController the examBankScreenController to set
+	 * @param controller the examBankScreenController to set
 	 */
 	public static void setExamBankScreenController(ExamBankScreenController controller) 
 	{
@@ -170,7 +170,7 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param studentScreenController the studentScreenController to set
+	 * @param controller the studentScreenController to set
 	 */
 	public static void setStudentScreenController(StudentScreenController controller) 
 	{
@@ -178,7 +178,7 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param studentExamGradesController the studentExamGradesController to set
+	 * @param controller the studentExamGradesController to set
 	 */
 	public static void setStudentExamGradesController(StudentExamGradesController controller)
 	{
@@ -186,7 +186,7 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param ManualExamController the manualExamController to set
+	 * @param controller the manualExamController to set
 	 */
 	public static void setManualExamController(ManualExamController controller) 
 	{
@@ -194,7 +194,7 @@ public class ClientMessageHandler
 	}
 	
 	/**
-	 * @param computerizedExamController the computerizedExamController to set
+	 * @param controller the computerizedExamController to set
 	 */
 	public static void setExamController(ComputerizedExamController controller) 
 	{
@@ -426,7 +426,6 @@ public class ClientMessageHandler
 							manualExamController.disableFileUpload();
 							AlertMessages.makeAlertNoPlatform("Exam has been terminated.", "Exam");
 						}
-												
 					}
 					if (computerizedExamController != null) 
 					{
@@ -436,11 +435,9 @@ public class ClientMessageHandler
 							AlertMessages.makeAlertNoPlatform("Exam has been terminated.", "Exam");
 						}
 					}
-					
 				} catch (NullPointerException e) {e.printStackTrace();}
 				break;
 			
-				
 			case "send email to user":
 				AlertMessages.makeAlert(arrayList.get(2) + arrayList.get(1), "Simulation");
 				break;

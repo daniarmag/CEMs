@@ -2,6 +2,9 @@ package entities;
 
 import java.io.Serializable;
 
+/**
+ * A class that represents the user
+ */
 @SuppressWarnings("serial")
 public class User implements Serializable 
 {

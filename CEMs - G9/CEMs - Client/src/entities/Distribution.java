@@ -102,7 +102,7 @@ public class Distribution implements Serializable
 		}
 
 		/**
-		 * @param value to set
+		 * @param val to set
 		 */
 		public void setVal(int val) {
 			this.val = val;

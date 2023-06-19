@@ -12,7 +12,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
-/*This class is responsible for loading questions to the computerized exam screen.*/
+/**
+ * This class is responsible for loading questions to the computerized exam screen.
+ */
 public class QuestionTemplateController implements Initializable
 {
     @FXML

@@ -27,7 +27,7 @@ public class Exam implements Serializable
 	
 	/**
 	 * Exam for object passing.
-	 * @param author
+	 * @param exam_name
 	 */
 	public Exam(String exam_name)
 	{

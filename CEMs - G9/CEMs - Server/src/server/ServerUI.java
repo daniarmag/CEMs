@@ -1,12 +1,13 @@
 package server;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import serverGui.ServerScreenController;
 
-
+/**
+ * A main class for server-side
+ */
 public class ServerUI extends Application 
 {
 	final public static int DEFAULT_PORT = 5555;

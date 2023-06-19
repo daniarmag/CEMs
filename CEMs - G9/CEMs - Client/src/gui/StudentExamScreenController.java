@@ -24,7 +24,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
-/*A GUI for choosing an exam to take.*/
+/**
+ * A GUI for choosing an exam to take.
+ */
 public class StudentExamScreenController implements Initializable 
 {
 	public ArrayList<Exam> eArr = new ArrayList<>();

@@ -26,7 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 
-/*A GUI for question creation.*/
+/**
+ * A GUI for question creation.
+ */
 public class QuestionCreationScreenController implements Initializable 
 {
 	public static User u;

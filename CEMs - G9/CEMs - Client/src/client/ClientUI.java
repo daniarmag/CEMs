@@ -2,13 +2,12 @@ package client;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 import gui.HostSelectionScreenController;
 
-
-
+/**
+ * This is the main class of client side
+ */
 public class ClientUI extends Application 
 {
 	public static ClientController chat;

@@ -26,7 +26,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
 
-/*A GUI for the for the second screen of exam creation.*/
+/**
+ * A GUI for the for the first screen of exam creation.
+ */
 public class ExamCreationSecondController implements Initializable
 {
 	public static Professor<?, ?> u;
