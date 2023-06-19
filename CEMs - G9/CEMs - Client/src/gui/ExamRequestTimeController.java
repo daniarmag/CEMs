@@ -143,15 +143,15 @@ public class ExamRequestTimeController implements Initializable
 	private HashMap<Boolean, String> createErrorMap() 
 	{
 	    HashMap<Boolean, String> errorMap = new HashMap<>();
+	    boolean isWrongTime = false;
 	    try 
 	    {
 	    	Integer.parseInt(timeToAdd.getText());
+	    	if(Integer.parseInt(timeToAdd.getText()) < 1) isWrongTime = true;
 	    } 
-	    catch (NumberFormatException e) 
-	    {
-	        errorMap.put(true, "Time to add must be an integer.");
-	    }
+	    catch (NumberFormatException e){isWrongTime = true;}
 	    errorMap.put(reason.getText().isEmpty(), "A reason is required.");
+	    errorMap.put(isWrongTime, "Changed time must be a positive integer.");
 	    errorMap.put(timeToAdd.getText().isEmpty(), "Time to add is required.");
 	    return errorMap;
 	}

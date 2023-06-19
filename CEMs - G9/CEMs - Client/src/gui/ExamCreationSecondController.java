@@ -40,9 +40,6 @@ public class ExamCreationSecondController implements Initializable
 	public boolean isInvalidScore = false;
 
     @FXML
-    private Text examAuthorText;
-    
-    @FXML
     private Text totalScoreText;
     
 	@FXML
@@ -102,7 +99,6 @@ public class ExamCreationSecondController implements Initializable
 		newExam.setProfessor_full_name(u.getFirst_name() + " " + u.getLast_name());
 		nameTXT.setText(u.get_fullName());
 		idTXT.setText(u.getUser_id());
-		examAuthorText.setText(newExam.getProfessor_full_name());
 		questionIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
 		ObservableList<Question> questionObservableList = FXCollections.observableArrayList(questionList);
@@ -111,7 +107,7 @@ public class ExamCreationSecondController implements Initializable
 	}	
 	
 	/**
-	 * Exits from client GUI - disconnectes from DB aswell.
+	 * Exits from client GUI - disconnects from DB aswell.
 	 * @param event
 	 */
 	@FXML
@@ -139,11 +135,11 @@ public class ExamCreationSecondController implements Initializable
 	@FXML
 	void submit(ActionEvent event)
 	{
-	    HashMap<Boolean, String> errorMap = createErrorMap();
+		HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
 			AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
-		    return;
+			return;
 		}
 		buildExam();
 		ClientUI.chat.accept(newExam);
@@ -165,7 +161,7 @@ public class ExamCreationSecondController implements Initializable
 		HashMap<Boolean, String> errorMap = createErrorMap();
 		if (errorMap.containsKey(true))
 		{
-			 AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
+			AlertMessages.makeAlert(errorMap.get(true), "Exam Creation");
 			return;
 		}
 		try 
@@ -278,14 +274,16 @@ public class ExamCreationSecondController implements Initializable
 	    try 
 	    {
 	    	Integer.parseInt(minutesTextField.getText());
+	    	if (Integer.parseInt(minutesTextField.getText()) < 1) isWrongTime = true;
 		} catch (NumberFormatException e) {isWrongTime = true;}
 	    errorMap.put(Integer.parseInt(totalScoreText.getText()) != 100, "Total score must be 100.");
 	    errorMap.put(isInvalidScore, "Invalid score value. Scores must be integers between 0 and 100.");
 	    errorMap.put(isScoreEmpty, "Score for each question is required.");
 	    errorMap.put(passwordTextField.getText().isEmpty(), "Password is required");
 	    errorMap.put(passwordTextField.getText().trim().length() != 4, "Password must be 4 digits long.");
-	    errorMap.put(isWrongTime, "Time must be an integer.");
+	    errorMap.put(isWrongTime, "Time must be a positive integer.");
 	    errorMap.put(minutesTextField.getText().isEmpty(), "Time is required.");
+	    errorMap.put(examNameTextField.getText().isEmpty(), "Exam name is required.");
 	    return errorMap;
 	}
 }
