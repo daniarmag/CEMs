@@ -31,6 +31,8 @@ public class ScreenUtils
 	        //Removes windows default window buttons.
 	        primaryStage.initStyle(StageStyle.UNDECORATED);
 	        
+	        primaryStage.setTitle("Server Application");
+	        
 	        //Both lambda expressions are to enable dragging mode with undecorated window style.
 	        scene.setOnMousePressed(event -> {
 	            xOffset[0] = primaryStage.getX() - event.getScreenX();
