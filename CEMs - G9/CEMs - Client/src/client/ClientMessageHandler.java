@@ -65,7 +65,6 @@ public class ClientMessageHandler
 		headOfDepartmentScreenController = new HeadOfDepartmentScreenController();
 	}
 	
-	
 	/**
 	 * @param controller the headOfDepartmentScreenController to set
 	 */
@@ -340,8 +339,12 @@ public class ClientMessageHandler
 				break;
 				
 			case "abort":
-				AlertMessages.makeAlertNoPlatform("Server disconnected.","Disconnected");
-				Platform.runLater(() -> System.exit(0));
+				
+				Platform.runLater(() -> 
+				{
+					AlertMessages.makeAlertNoPlatform("Server disconnected.","Disconnected");
+					System.exit(0);
+				});
 				break;
 				
 			case "already logged":

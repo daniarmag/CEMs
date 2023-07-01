@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
@@ -183,19 +182,18 @@ public class ManualExamController implements Initializable
 	@FXML
 	public void exit(ActionEvent event)
 	{
-		int res = AlertMessages.makeDecisionAlert
-				("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
-		if (res == JOptionPane.YES_OPTION)
+		boolean res = AlertMessages.makeDecisionAlert("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
+		if (res) 
 		{
-			if(startedExamFlag) 
-				endExam("finished manual exam");
-			UserController.goBack(event, "/gui/StudentScreen.fxml");
+		    if (startedExamFlag) 
+		        endExam("finished manual exam");
+		    UserController.goBack(event, "/gui/StudentScreen.fxml");
 		}
 	}
 	
 	/**
 	 * Constructs a request array to send to the client
-	 * Also resets the static vars.
+	 * Also resets the static variables.
 	 * @param str
 	 */
 	public void endExam(String str)

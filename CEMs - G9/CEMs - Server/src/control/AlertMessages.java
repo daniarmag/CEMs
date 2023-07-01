@@ -1,13 +1,12 @@
 package control;
 
-import javax.swing.JOptionPane;
+import javafx.scene.control.Alert;
 
 /**
  * Class that handles JOptionPane alerts used for Adapter Pattern Design
  */
 public class AlertMessages 
 {
-
 	/**
 	 * makes an information alert
 	 * @param message
@@ -15,18 +14,21 @@ public class AlertMessages
 	 */
 	public static void makeAlert(String message,String title) 
 	{
-		JOptionPane.showMessageDialog(null, message, title,JOptionPane.INFORMATION_MESSAGE);
-	}
-	
+		
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		localAlertMaker(alert, message, title);
+		alert.showAndWait();
+	} 
 	
 	/**
-	 * makes a decision alert
+	 * @param alert
 	 * @param message
 	 * @param title
-	 * @return YES/NO (integers)
 	 */
-	public static int makeDecisionAlert(String message,String title) 
+	public static void localAlertMaker(Alert alert, String message, String title)
 	{
-		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
 	}
 }

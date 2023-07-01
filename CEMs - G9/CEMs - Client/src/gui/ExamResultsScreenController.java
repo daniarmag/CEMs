@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
@@ -129,8 +128,8 @@ public class ExamResultsScreenController implements Initializable
 		//Condition to make sure that a question to delete was indeed selected.
         if (selectedExam != null) 
         {
-        	int res = AlertMessages.makeDecisionAlert("Ready to submit? Make sure you pressed enter to save changes!", "Approve Exam");
-        	if (res == JOptionPane.YES_OPTION)
+        	boolean res = AlertMessages.makeDecisionAlert("Ready to submit? Make sure you pressed enter to save changes!", "Approve Exam");
+    		if (res) 
 			{
 	        	selectedExam.setIsConfirmed("1");
 	        	ClientUI.chat.accept(selectedExam);

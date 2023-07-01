@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.swing.JOptionPane;
 import client.ClientMessageHandler;
 import client.ClientUI;
 import control.AlertMessages;
@@ -138,9 +137,8 @@ public class ComputerizedExamController implements Initializable
 			UserController.hide(event);
 		else
 		{
-			int res = AlertMessages.makeDecisionAlert
-					("Are you sure you want to exit the exam? All progress will be lost.", "Exit Exam");
-			if (res == JOptionPane.YES_OPTION)
+			boolean res = AlertMessages.makeDecisionAlert("Are you sure you want to exit the exam?", "Exit Exam");
+			if (res)
 			{
 				if(startedExamFlag)
 					autoSubmit("finished exam");
@@ -186,11 +184,10 @@ public class ComputerizedExamController implements Initializable
 	@FXML
 	public void submit(ActionEvent event)
 	{
-		if(!isAnyAnswerEmpty())
+		if (!isAnyAnswerEmpty()) 
 		{
-			int res = AlertMessages.makeDecisionAlert
-					("Are you sure you are ready to submit?", "Submit Exam");
-			if (res == JOptionPane.YES_OPTION)
+			boolean res = AlertMessages.makeDecisionAlert("Are you sure you are ready to submit?", "Submit Exam");
+			if (res)
 			{
 				ArrayList<String> request = buildFinishedExam("finished exam");
 				ClientUI.chat.accept(request);

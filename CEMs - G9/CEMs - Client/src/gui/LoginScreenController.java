@@ -37,7 +37,6 @@ public class LoginScreenController
     @FXML
     void Login(ActionEvent event) throws IOException 
     {
-    	//FXMLLoader loader = new FXMLLoader();
     	ArrayList<String> info =  new ArrayList<>();
     	info.add("login");
     	info.add(txtLoginUsername.getText().trim());

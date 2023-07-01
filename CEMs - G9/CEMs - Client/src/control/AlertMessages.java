@@ -1,7 +1,9 @@
 package control;
 
-import javax.swing.JOptionPane;
+import java.util.Optional;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * Class that handles JOptionPane alerts used for Adapter Pattern Design
@@ -15,7 +17,7 @@ public class AlertMessages
 	 */
 	public static void makeAlert(String message,String title) 
 	{
-		Platform.runLater(() ->JOptionPane.showMessageDialog(null, message, title,JOptionPane.INFORMATION_MESSAGE));
+		Platform.runLater(() -> makeAlertNoPlatform(message, title));
 	}
 	
 	/**
@@ -25,17 +27,39 @@ public class AlertMessages
 	 */
 	public static void makeAlertNoPlatform(String message,String title) 
 	{
-		JOptionPane.showMessageDialog(null, message, title,JOptionPane.INFORMATION_MESSAGE);
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		localAlertMaker(alert, message, title);
+		alert.showAndWait();
 	} 
 	
 	/**
 	 * makes a decision alert
 	 * @param message
 	 * @param title
-	 * @return YES/NO (integers)
+	 * @return YES/NO (booleans)
 	 */
-	public static int makeDecisionAlert(String message,String title) 
+	public static boolean makeDecisionAlert(String message,String title) 
 	{
-		return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        localAlertMaker(alert, message, title);
+        // Add buttons for "Yes" and "No"
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        // Show the confirmation alert and wait for user input
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == buttonTypeYes;
+	}
+	
+	/**
+	 * @param alert
+	 * @param message
+	 * @param title
+	 */
+	public static void localAlertMaker(Alert alert, String message, String title)
+	{
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
 	}
 }
